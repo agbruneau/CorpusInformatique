@@ -1,12 +1,8 @@
-# Étude d'opportunité — Retrait de Microsoft Host Integration Server (HIS)
+---
+lang: fr
+---
 
-| Métadonnée | Valeur |
-|------------|--------|
-| **Classification** | Confidentiel — Usage interne |
-| **Version** | 1.0 |
-| **Date** | 2026-02-09 |
-| **Auteur** | Architecture de domaine — Interopérabilité & Modernisation |
-| **Statut** | Soumis pour approbation |
+# Étude d'opportunité — Retrait de Microsoft Host Integration Server (HIS)
 
 ---
 
