@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrait de Microsoft Host Integration Server (HIS) — Presentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            overflow-y: scroll;
+            font-size: 16px;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* ========== PROGRESS BAR ========== */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4a90d9, #9b59b6);
+            z-index: 1000;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        /* ========== SLIDE COUNTER ========== */
+        #slide-counter {
+            position: fixed;
+            bottom: 24px;
+            right: 32px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: rgba(224, 224, 224, 0.6);
+            z-index: 1000;
+            background: rgba(26, 26, 46, 0.8);
+            padding: 6px 14px;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(74, 144, 217, 0.2);
+        }
+
+        /* ========== SLIDES ========== */
+        .slide {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 80px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlide 0.6s ease forwards;
+        }
+        @keyframes fadeInSlide {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* ========== TYPOGRAPHY ========== */
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4a90d9, #9b59b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4a90d9, #9b59b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1em;
+            line-height: 1.3;
+        }
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #4a90d9;
+            margin-bottom: 0.6em;
+        }
+        p { margin-bottom: 0.8em; font-size: 1.05rem; }
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(224, 224, 224, 0.7);
+            font-weight: 300;
+        }
+        .label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(224, 224, 224, 0.5);
+        }
+
+        /* ========== ACCENT ELEMENTS ========== */
+        .accent-line {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #4a90d9, #9b59b6);
+            border-radius: 2px;
+            margin-bottom: 1.5em;
+        }
+        .gradient-border {
+            border: 2px solid transparent;
+            background-image: linear-gradient(#1a1a2e, #1a1a2e), linear-gradient(135deg, #4a90d9, #9b59b6);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            border-radius: 12px;
+        }
+
+        /* ========== CARDS ========== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 1.5em;
+        }
+        .card {
+            background: rgba(74, 144, 217, 0.08);
+            border: 1px solid rgba(74, 144, 217, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(74, 144, 217, 0.15);
+        }
+        .card .big-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4a90d9, #9b59b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+        .card .card-label {
+            font-size: 0.85rem;
+            color: rgba(224, 224, 224, 0.6);
+            margin-top: 6px;
+        }
+
+        /* ========== RISK CARDS ========== */
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 1em;
+        }
+        .risk-card {
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .risk-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+        }
+        .risk-critical { background: rgba(192, 57, 43, 0.15); border: 1px solid rgba(192, 57, 43, 0.3); }
+        .risk-critical::before { background: #c0392b; }
+        .risk-moderate { background: rgba(243, 156, 18, 0.12); border: 1px solid rgba(243, 156, 18, 0.3); }
+        .risk-moderate::before { background: #f39c12; }
+        .risk-id {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+        }
+        .risk-critical .risk-id { color: #e74c3c; }
+        .risk-moderate .risk-id { color: #f39c12; }
+        .risk-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 6px; }
+        .risk-desc { font-size: 0.8rem; color: rgba(224, 224, 224, 0.7); line-height: 1.5; }
+
+        /* ========== TABLES ========== */
+        .styled-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 1em;
+            font-size: 0.9rem;
+        }
+        .styled-table th {
+            background: rgba(74, 144, 217, 0.2);
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #e0e0e0;
+            border-bottom: 2px solid rgba(74, 144, 217, 0.3);
+        }
+        .styled-table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid rgba(224, 224, 224, 0.08);
+            color: rgba(224, 224, 224, 0.85);
+        }
+        .styled-table tr:last-child td { border-bottom: none; }
+        .styled-table tr:hover td { background: rgba(74, 144, 217, 0.05); }
+        .styled-table .highlight-col {
+            background: rgba(74, 144, 217, 0.1);
+            font-weight: 600;
+        }
+
+        /* ========== VERDICT BADGES ========== */
+        .badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .badge-red { background: rgba(231, 76, 60, 0.2); color: #e74c3c; border: 1px solid rgba(231, 76, 60, 0.3); }
+        .badge-yellow { background: rgba(243, 156, 18, 0.2); color: #f39c12; border: 1px solid rgba(243, 156, 18, 0.3); }
+        .badge-green { background: rgba(46, 204, 113, 0.2); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.3); }
+
+        /* ========== OPTION CARDS ========== */
+        .option-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 1em;
+        }
+        .option-letter {
+            font-size: 2rem;
+            font-weight: 800;
+            width: 54px;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .option-a .option-letter { background: rgba(231, 76, 60, 0.2); color: #e74c3c; }
+        .option-b .option-letter { background: rgba(243, 156, 18, 0.2); color: #f39c12; }
+        .option-c .option-letter { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 1em;
+        }
+        .pros, .cons {
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 0.88rem;
+        }
+        .pros { background: rgba(46, 204, 113, 0.08); border: 1px solid rgba(46, 204, 113, 0.2); }
+        .cons { background: rgba(231, 76, 60, 0.08); border: 1px solid rgba(231, 76, 60, 0.2); }
+        .pros h4 { color: #2ecc71; margin-bottom: 8px; font-size: 0.85rem; }
+        .cons h4 { color: #e74c3c; margin-bottom: 8px; font-size: 0.85rem; }
+        .pros li, .cons li { margin-bottom: 4px; margin-left: 16px; color: rgba(224, 224, 224, 0.8); }
+
+        /* ========== TWO COLUMN ========== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 1em;
+        }
+        .col-box {
+            padding: 24px;
+            border-radius: 12px;
+        }
+        .col-before {
+            background: rgba(192, 57, 43, 0.1);
+            border: 1px solid rgba(192, 57, 43, 0.25);
+        }
+        .col-after {
+            background: rgba(46, 204, 113, 0.1);
+            border: 1px solid rgba(46, 204, 113, 0.25);
+        }
+        .col-before h3 { color: #e74c3c; }
+        .col-after h3 { color: #2ecc71; }
+        .col-box li {
+            margin-left: 16px;
+            margin-bottom: 8px;
+            font-size: 0.92rem;
+            color: rgba(224, 224, 224, 0.85);
+        }
+
+        /* ========== TIMELINE (Slide 17) ========== */
+        .timeline-container {
+            position: relative;
+            margin: 2em 0;
+            padding: 0;
+        }
+        .timeline-track {
+            display: flex;
+            align-items: stretch;
+            position: relative;
+            width: 100%;
+        }
+        .timeline-track::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4a90d9, #9b59b6);
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+        .timeline-phase {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 0 6px;
+        }
+        .timeline-phase:nth-child(odd) .phase-card { margin-bottom: 60px; }
+        .timeline-phase:nth-child(even) .phase-card { margin-top: 60px; }
+        .phase-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4a90d9, #9b59b6);
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            border: 3px solid #1a1a2e;
+        }
+        .phase-card {
+            background: rgba(74, 144, 217, 0.1);
+            border: 1px solid rgba(74, 144, 217, 0.25);
+            border-radius: 10px;
+            padding: 12px 10px;
+            font-size: 0.78rem;
+        }
+        .phase-card .phase-num {
+            font-weight: 800;
+            font-size: 0.7rem;
+            color: #9b59b6;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        .phase-card .phase-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin: 4px 0;
+            color: #e0e0e0;
+        }
+        .phase-card .phase-duration {
+            color: #4a90d9;
+            font-weight: 600;
+            font-size: 0.78rem;
+        }
+        .phase-card .phase-ti {
+            color: rgba(224, 224, 224, 0.5);
+            font-size: 0.72rem;
+            margin-top: 2px;
+        }
+        .timeline-dates {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            font-size: 0.78rem;
+            color: rgba(224, 224, 224, 0.5);
+        }
+
+        /* ========== CHART CONTAINER ========== */
+        .chart-container {
+            position: relative;
+            margin: 1.5em auto;
+            max-width: 800px;
+            max-height: 380px;
+        }
+        .chart-container canvas {
+            max-height: 380px;
+        }
+
+        /* ========== MERMAID ========== */
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            margin: 1em 0;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            max-height: 420px;
+        }
+
+        /* ========== BULLET LIST ========== */
+        .bullet-list {
+            list-style: none;
+            padding: 0;
+        }
+        .bullet-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            color: rgba(224, 224, 224, 0.85);
+        }
+        .bullet-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4a90d9, #9b59b6);
+        }
+
+        /* ========== CALL TO ACTION ========== */
+        .cta-box {
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.15), rgba(155, 89, 182, 0.15));
+            border: 2px solid rgba(74, 144, 217, 0.3);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            margin-top: 2em;
+        }
+        .cta-box h3 {
+            font-size: 1.4rem;
+            color: #e0e0e0;
+            margin-bottom: 8px;
+        }
+
+        /* ========== METADATA GRID ========== */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 1.5em;
+        }
+        .meta-item {
+            background: rgba(74, 144, 217, 0.06);
+            border: 1px solid rgba(74, 144, 217, 0.15);
+            border-radius: 8px;
+            padding: 12px 16px;
+        }
+        .meta-item .meta-key {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(224, 224, 224, 0.45);
+        }
+        .meta-item .meta-val {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #e0e0e0;
+            margin-top: 2px;
+        }
+
+        /* ========== STAT ROW ========== */
+        .stat-row {
+            display: flex;
+            gap: 24px;
+            margin: 1.5em 0;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+        }
+        .stat-item .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4a90d9, #9b59b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-item .stat-label {
+            font-size: 0.75rem;
+            color: rgba(224, 224, 224, 0.5);
+            margin-top: 2px;
+        }
+
+        /* ========== RECOMMENDED HIGHLIGHT ========== */
+        .recommended-glow {
+            box-shadow: 0 0 30px rgba(46, 204, 113, 0.15);
+            border: 2px solid rgba(46, 204, 113, 0.3) !important;
+        }
+
+        /* ========== PRINT STYLES ========== */
+        @media print {
+            html { scroll-snap-type: none; }
+            .slide {
+                min-height: auto;
+                page-break-after: always;
+                padding: 40px;
+            }
+            body { background: white; color: #222; }
+            #progress-bar, #slide-counter { display: none; }
+            h1, h2 {
+                -webkit-text-fill-color: #333;
+                color: #333;
+            }
+            .card, .risk-card, .col-box, .meta-item, .phase-card {
+                border: 1px solid #ccc;
+                background: #f9f9f9;
+            }
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            .slide { padding: 40px 24px; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            .two-col, .pros-cons { grid-template-columns: 1fr; }
+            .card-grid { grid-template-columns: repeat(2, 1fr); }
+            .risk-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .slide { padding: 30px 16px; }
+            .card-grid { grid-template-columns: 1fr; }
+            .meta-grid { grid-template-columns: 1fr; }
+            .stat-row { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="slide-counter">1 / 18</div>
+
+<!-- ===================== SLIDE 1: TITLE ===================== -->
+<section class="slide" id="slide-1">
+    <div class="slide-content" style="text-align: center;">
+        <div class="label" style="margin-bottom: 1em;">Etude d'opportunite</div>
+        <h1 style="font-size: 3.2rem;">Retrait de Microsoft<br>Host Integration Server</h1>
+        <div class="accent-line" style="margin: 1em auto;"></div>
+        <p class="subtitle" style="max-width: 600px; margin: 0 auto 2em;">Analyse strategique, financiere et architecturale pour l'elimination de la dependance HIS</p>
+        <div class="meta-grid" style="max-width: 600px; margin: 0 auto;">
+            <div class="meta-item">
+                <div class="meta-key">Classification</div>
+                <div class="meta-val">Confidentiel -- Usage interne</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-key">Date</div>
+                <div class="meta-val">2026-02-09</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-key">Auteur</div>
+                <div class="meta-val">Architecture de domaine -- Interoperabilite &amp; Modernisation</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-key">Statut</div>
+                <div class="meta-val">Soumis pour approbation</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 2: PROBLEMATIQUE ===================== -->
+<section class="slide" id="slide-2">
+    <div class="slide-content">
+        <h2>Problematique</h2>
+        <div class="accent-line"></div>
+        <p style="font-size: 1.15rem; max-width: 900px;">
+            Microsoft Host Integration Server (HIS) est une couche middleware obsolete qui cree un
+            <strong>couplage fournisseur fort</strong> avec l'ecosysteme Microsoft pour
+            <strong>100 % des flux d'integration Mainframe</strong>.
+        </p>
+        <div style="display: flex; align-items: center; gap: 16px; margin: 1.5em 0;">
+            <div style="background: rgba(231, 76, 60, 0.15); border: 2px solid rgba(231, 76, 60, 0.4); border-radius: 12px; padding: 16px 28px; display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 2rem;">&#x1F534;</span>
+                <div>
+                    <div style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #e74c3c;">Niveau de risque</div>
+                    <div style="font-size: 1.5rem; font-weight: 800; color: #e74c3c;">Critique</div>
+                </div>
+            </div>
+            <div style="flex: 1; font-size: 0.9rem; color: rgba(224, 224, 224, 0.7);">
+                3 risques sur 5 classes critiques: penurie de competences SNA, escalade des couts de licence, obsolescence de la plateforme.
+            </div>
+        </div>
+        <div class="stat-row">
+            <div class="stat-item">
+                <div class="stat-value">1 850 K$</div>
+                <div class="stat-label">Cout annuel HIS (CAD)</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">11 410 K$</div>
+                <div class="stat-label">Cout de l'inaction sur 5 ans</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">27</div>
+                <div class="stat-label">Applications dependantes</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">0 %</div>
+                <div class="stat-label">Alternatives a HIS en place</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 3: VENDOR LOCK-IN ===================== -->
+<section class="slide" id="slide-3">
+    <div class="slide-content">
+        <h2>Quantification du Vendor Lock-in</h2>
+        <div class="accent-line"></div>
+        <p class="subtitle">100 % des flux d'integration Mainframe concentres sur un fournisseur unique</p>
+        <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="card">
+                <div class="big-number">6</div>
+                <div class="card-label">Serveurs HIS en production</div>
+            </div>
+            <div class="card">
+                <div class="big-number">45</div>
+                <div class="card-label">Assemblages Transaction Integrator</div>
+            </div>
+            <div class="card">
+                <div class="big-number">12</div>
+                <div class="card-label">Pools LU (sessions SNA)</div>
+            </div>
+            <div class="card">
+                <div class="big-number">23+4</div>
+                <div class="card-label">Applications dependantes (.NET + Java)</div>
+            </div>
+            <div class="card">
+                <div class="big-number">52</div>
+                <div class="card-label">Programmes Mainframe exposes</div>
+            </div>
+            <div class="card">
+                <div class="big-number">8</div>
+                <div class="card-label">Liens de donnees DB2 (Data Links)</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 4: ALIGNEMENT STRATEGIQUE ===================== -->
+<section class="slide" id="slide-4">
+    <div class="slide-content">
+        <h2>Alignement Strategique</h2>
+        <div class="accent-line"></div>
+        <div class="card-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="card gradient-border">
+                <h3>Cloud-First</h3>
+                <ul class="bullet-list">
+                    <li>Objectif: 80 % des workloads en cloud d'ici 2027</li>
+                    <li>HIS bloque la migration de 27 applications</li>
+                    <li>Elimination de 6 serveurs on-premise</li>
+                    <li>Protocole SNA incompatible avec Azure VNet / AWS VPC</li>
+                </ul>
+            </div>
+            <div class="card gradient-border">
+                <h3>API-First</h3>
+                <ul class="bullet-list">
+                    <li>100 % des services Mainframe exposes via REST/JSON d'ici 2027</li>
+                    <li>45 integrations point-a-point remplacees par 45 endpoints API catalogues</li>
+                    <li>OpenAPI 3.1, portail developpeur, gouvernance centralisee</li>
+                    <li>Elimination des protocoles proprietaires (SNA, DCOM)</li>
+                </ul>
+            </div>
+            <div class="card gradient-border">
+                <h3>Conformite DORA</h3>
+                <ul class="bullet-list">
+                    <li>Art. 28: Reduction de la concentration fournisseur TIC</li>
+                    <li>Art. 28(8): Strategie de sortie documentee obligatoire</li>
+                    <li>Art. 26: Tests de resilience des chaines critiques</li>
+                    <li>HIS = dependance critique non substituable</li>
+                </ul>
+            </div>
+            <div class="card gradient-border">
+                <h3>BSIF / OSFI B-13</h3>
+                <ul class="bullet-list">
+                    <li>Inventaire des dependances technologiques (S4.3)</li>
+                    <li>Risque de concentration fournisseur unique (S4.4)</li>
+                    <li>Plans de contingence pour dependances critiques (S4.5)</li>
+                    <li>Situation actuelle: Non conforme</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 5: ARCHITECTURE AS-IS ===================== -->
+<section class="slide" id="slide-5">
+    <div class="slide-content">
+        <h2>Architecture As-Is</h2>
+        <div class="accent-line"></div>
+        <p class="subtitle" style="margin-bottom: 1em;">HIS comme intermediaire obligatoire -- 3 sauts, 2 protocoles, ~45 ms de latence</p>
+        <div class="mermaid">
+graph TB
+    subgraph "Applications Distribuees"
+        A1["23 Apps .NET<br/>(COM+ / DCOM)"]
+        A2["4 Apps Java<br/>(JCA / TCP)"]
+    end
+    subgraph "Couche Intermediaire -- Microsoft HIS"
+        HIS1["SNA Gateway<br/>6 serveurs Windows"]
+        HIS2["Transaction Integrator<br/>45 TI assemblies"]
+        HIS3["Data Links<br/>8 Linked Servers DB2"]
+    end
+    subgraph "Mainframe z/OS"
+        MF1["VTAM / SNA"]
+        MF2["CICS TS / IMS"]
+        MF4["52 programmes COBOL/PL1"]
+    end
+    A1 -->|"DCOM / TCP"| HIS2
+    A2 -->|"TCP"| HIS1
+    HIS2 -->|"SNA LU6.2"| HIS1
+    HIS1 -->|"SNA / APPN"| MF1
+    MF1 -->|"APPC"| MF2
+    MF2 --- MF4
+    HIS3 -->|"DRDA"| MF2
+    style HIS1 fill:#c0392b,stroke:#922b21,color:#fff
+    style HIS2 fill:#c0392b,stroke:#922b21,color:#fff
+    style HIS3 fill:#c0392b,stroke:#922b21,color:#fff
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 6: INVENTAIRE HIS ===================== -->
+<section class="slide" id="slide-6">
+    <div class="slide-content">
+        <h2>Inventaire HIS</h2>
+        <div class="accent-line"></div>
+        <div class="card-grid" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="card" style="text-align: center;">
+                <div class="big-number">6</div>
+                <div class="card-label">Serveurs HIS</div>
+                <div style="font-size: 0.75rem; color: rgba(224,224,224,0.45); margin-top: 6px;">HIS 2020 CU4 (5)<br/>HIS 2016 CU10 (1)</div>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div class="big-number">45</div>
+                <div class="card-label">Assemblages TI</div>
+                <div style="font-size: 0.75rem; color: rgba(224,224,224,0.45); margin-top: 6px;">28 CICS (.NET/WCF)<br/>17 IMS (COM+)</div>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div class="big-number">12</div>
+                <div class="card-label">Pools LU</div>
+                <div style="font-size: 0.75rem; color: rgba(224,224,224,0.45); margin-top: 6px;">8 CICS (LU 6.2)<br/>2 IMS (LU 6.2)<br/>2 Ecran/Impression</div>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div class="big-number">8</div>
+                <div class="card-label">Liens DB2</div>
+                <div style="font-size: 0.75rem; color: rgba(224,224,224,0.45); margin-top: 6px;">Linked Servers<br/>OLE DB / DRDA</div>
+            </div>
+        </div>
+        <div style="margin-top: 1.5em;">
+            <h3>Serveurs critiques</h3>
+            <table class="styled-table">
+                <thead><tr><th>Serveur</th><th>Role</th><th>Criticite</th></tr></thead>
+                <tbody>
+                    <tr><td>SRV-HIS-01</td><td>Passerelle SNA principale -- 8/12 pools LU</td><td><span class="badge badge-red">Critique</span></td></tr>
+                    <tr><td>SRV-HIS-02</td><td>Transaction Integrator -- 28 TI CICS</td><td><span class="badge badge-red">Critique</span></td></tr>
+                    <tr><td>SRV-HIS-04</td><td>Data Links DB2 -- SPOF pour 8 Linked Servers</td><td><span class="badge badge-red">Critique</span></td></tr>
+                    <tr><td>SRV-HIS-06</td><td>Emulation 3270 + Print -- HIS 2016 (fin support 2025)</td><td><span class="badge badge-yellow">Moyenne</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 7: REGISTRE DE RISQUES ===================== -->
+<section class="slide" id="slide-7">
+    <div class="slide-content">
+        <h2>Registre de Risques</h2>
+        <div class="accent-line"></div>
+        <p class="subtitle">3 risques critiques sur 5 -- le statu quo est une exposition croissante</p>
+        <div class="risk-grid">
+            <div class="risk-card risk-critical">
+                <div class="risk-id">R-01 -- Competences</div>
+                <div class="risk-title">Penurie critique SNA/HIS</div>
+                <div class="risk-desc">Le bassin de talents SNA se reduit de ~5 %/an. Delai moyen de recrutement >180 jours. 3 departs a la retraite prevus en 4 ans.</div>
+            </div>
+            <div class="risk-card risk-critical">
+                <div class="risk-id">R-02 -- Financier</div>
+                <div class="risk-title">Escalade des couts de licence</div>
+                <div class="risk-desc">Modele per-core en hausse de 10-20 % par cycle. TCO croissant sans valeur ajoutee fonctionnelle. 1 850 K$/an actuel.</div>
+            </div>
+            <div class="risk-card risk-moderate">
+                <div class="risk-id">R-03 -- Securite</div>
+                <div class="risk-title">Surface d'attaque non corrigeable</div>
+                <div class="risk-desc">SNA/LU6.2 sans TLS 1.3 natif. Donnees sensibles en transit sur un canal insuffisamment chiffre. CVE-2020-1569.</div>
+            </div>
+            <div class="risk-card risk-critical">
+                <div class="risk-id">R-04 -- Obsolescence</div>
+                <div class="risk-title">Desinvestissement Microsoft</div>
+                <div class="risk-desc">Aucune evolution fonctionnelle majeure prevue. Microsoft oriente ses clients vers Azure Logic Apps et API Management.</div>
+            </div>
+            <div class="risk-card risk-moderate">
+                <div class="risk-id">R-05 -- Operationnel</div>
+                <div class="risk-title">Point de defaillance unique (SPOF)</div>
+                <div class="risk-desc">HIS = goulet d'etranglement logique. Une panne affecte simultanement 52 programmes et 27 applications.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 8: COUT DE L'INACTION ===================== -->
+<section class="slide" id="slide-8">
+    <div class="slide-content">
+        <h2>Cout de l'Inaction -- Projection sur 5 ans</h2>
+        <div class="accent-line"></div>
+        <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap;">
+            <div class="chart-container" style="flex: 2; min-width: 400px;">
+                <canvas id="costChart"></canvas>
+            </div>
+            <div style="flex: 1; min-width: 200px;">
+                <div class="card" style="margin-bottom: 12px; text-align: center;">
+                    <div class="big-number" style="font-size: 2rem;">11 410 K$</div>
+                    <div class="card-label">Cout cumule statu quo (5 ans)</div>
+                </div>
+                <div class="card" style="margin-bottom: 12px; text-align: center;">
+                    <div class="big-number" style="font-size: 2rem; background: linear-gradient(135deg, #2ecc71, #27ae60); -webkit-background-clip: text;">5 300 K$</div>
+                    <div class="card-label">Cout cumule Option C (5 ans)</div>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <div class="big-number" style="font-size: 2rem;">6 110 K$</div>
+                    <div class="card-label">Economie totale (54 %)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 9: OPTION A ===================== -->
+<section class="slide" id="slide-9">
+    <div class="slide-content option-a">
+        <div class="option-header">
+            <div class="option-letter">A</div>
+            <div>
+                <h2 style="margin-bottom: 0;">Option A -- Containment</h2>
+                <p class="subtitle" style="margin: 0;">Virtualisation / Conteneurisation de HIS</p>
+            </div>
+        </div>
+        <div class="accent-line"></div>
+        <p>Encapsuler les 6 serveurs HIS dans des VMs Azure ou des conteneurs Windows (AKS). Prolonger la duree de vie sans modifier l'architecture sous-jacente.</p>
+        <div class="stat-row">
+            <div class="stat-item"><div class="stat-value">~350 K$</div><div class="stat-label">CAPEX</div></div>
+            <div class="stat-item"><div class="stat-value">~1 850 K$</div><div class="stat-label">OPEX/an (inchange)</div></div>
+            <div class="stat-item"><div class="stat-value">Faible</div><div class="stat-label">Complexite</div></div>
+            <div class="stat-item"><div class="stat-value">Nulle</div><div class="stat-label">Reduction lock-in</div></div>
+        </div>
+        <div class="pros-cons">
+            <div class="pros">
+                <h4>Avantages</h4>
+                <ul>
+                    <li>Complexite faible -- lift-and-shift</li>
+                    <li>Risque de migration minimal</li>
+                    <li>Utile comme mesure transitoire (dual-run)</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h4>Inconvenients</h4>
+                <ul>
+                    <li>Aucune reduction du Vendor Lock-in</li>
+                    <li>SNA/LU6.2 integralement conserve</li>
+                    <li>OPEX inchange -- 1 850 K$/an</li>
+                    <li>Aucun alignement strategique</li>
+                </ul>
+            </div>
+        </div>
+        <div style="margin-top: 1em; text-align: right;">
+            <span class="badge badge-red">Non recommandee -- transitoire uniquement</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 10: OPTION B ===================== -->
+<section class="slide" id="slide-10">
+    <div class="slide-content option-b">
+        <div class="option-header">
+            <div class="option-letter">B</div>
+            <div>
+                <h2 style="margin-bottom: 0;">Option B -- COTS</h2>
+                <p class="subtitle" style="margin: 0;">Remplacement par connecteurs tiers (IBM CTG, Micro Focus, Software AG)</p>
+            </div>
+        </div>
+        <div class="accent-line"></div>
+        <p>Remplacer HIS par un connecteur commercial tiers. Elimine SNA mais introduit une nouvelle dependance fournisseur.</p>
+        <div class="stat-row">
+            <div class="stat-item"><div class="stat-value">~2 000 K$</div><div class="stat-label">CAPEX</div></div>
+            <div class="stat-item"><div class="stat-value">~800 K$</div><div class="stat-label">OPEX/an</div></div>
+            <div class="stat-item"><div class="stat-value">~25 ms</div><div class="stat-label">Latence (vs 45 ms)</div></div>
+            <div class="stat-item"><div class="stat-value">Partielle</div><div class="stat-label">Reduction lock-in</div></div>
+        </div>
+        <div class="pros-cons">
+            <div class="pros">
+                <h4>Avantages</h4>
+                <ul>
+                    <li>Elimination de SNA/LU6.2</li>
+                    <li>Reduction partielle du lock-in Microsoft</li>
+                    <li>Amelioration de la latence (~25 ms)</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h4>Inconvenients</h4>
+                <ul>
+                    <li>Substitution d'un lock-in par un autre</li>
+                    <li>Integrations point-a-point conservees</li>
+                    <li>Non conforme API-First (pas de REST/OpenAPI)</li>
+                    <li>OPEX significatif maintenu</li>
+                </ul>
+            </div>
+        </div>
+        <div style="margin-top: 1em; text-align: right;">
+            <span class="badge badge-yellow">Acceptable sous conditions</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 11: OPTION C (RECOMMANDEE) ===================== -->
+<section class="slide" id="slide-11">
+    <div class="slide-content option-c">
+        <div class="option-header">
+            <div class="option-letter">C</div>
+            <div>
+                <h2 style="margin-bottom: 0;">Option C -- Refonte REST/JSON directe</h2>
+                <p class="subtitle" style="margin: 0;">Appels directs vers z/OS Connect EE -- Recommandee</p>
+            </div>
+        </div>
+        <div class="accent-line"></div>
+        <div class="stat-row">
+            <div class="stat-item"><div class="stat-value">3 200 K$</div><div class="stat-label">CAPEX</div></div>
+            <div class="stat-item"><div class="stat-value">420 K$</div><div class="stat-label">OPEX/an (-77 %)</div></div>
+            <div class="stat-item"><div class="stat-value">~12 ms</div><div class="stat-label">Latence (-73 %)</div></div>
+            <div class="stat-item"><div class="stat-value">Totale</div><div class="stat-label">Reduction lock-in</div></div>
+        </div>
+        <div class="mermaid">
+graph LR
+    APP[".NET 8 / Java 21<br/>27 applications"] -->|"HTTPS/TLS 1.3<br/>REST/JSON"| APIM["Azure APIM<br/>Gouvernance API"]
+    APIM -->|"HTTPS/mTLS"| ZOS["z/OS Connect EE<br/>45 SARs"]
+    ZOS -->|"SAR mapping"| CICS["CICS TS / IMS<br/>52 programmes"]
+        </div>
+        <div class="pros-cons">
+            <div class="pros">
+                <h4>Avantages</h4>
+                <ul>
+                    <li>Elimination totale du Vendor Lock-in</li>
+                    <li>Protocoles ouverts: HTTPS, REST, JSON, Kafka</li>
+                    <li>ROI ~38 % a 3 ans, ~142 % a 5 ans</li>
+                    <li>Alignement total Cloud-First + API-First</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h4>Points d'attention</h4>
+                <ul>
+                    <li>Complexite elevee (22 mois)</li>
+                    <li>CAPEX plus eleve (3 200 K$)</li>
+                    <li>Risque de regression (mitigeable par dual-run)</li>
+                </ul>
+            </div>
+        </div>
+        <div style="margin-top: 1em; text-align: right;">
+            <span class="badge badge-green" style="font-size: 0.95rem; padding: 6px 20px;">RECOMMANDEE</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 12: COMPARAISON 3 SCENARIOS ===================== -->
+<section class="slide" id="slide-12">
+    <div class="slide-content">
+        <h2>Comparaison des 3 Scenarios</h2>
+        <div class="accent-line"></div>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Critere</th>
+                    <th>Option A (Containment)</th>
+                    <th>Option B (COTS)</th>
+                    <th class="highlight-col">Option C (Refonte)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Complexite</strong></td>
+                    <td>Faible</td>
+                    <td>Moyenne</td>
+                    <td class="highlight-col">Elevee</td>
+                </tr>
+                <tr>
+                    <td><strong>Reduction Vendor Lock-in</strong></td>
+                    <td>Nulle</td>
+                    <td>Partielle (substitution)</td>
+                    <td class="highlight-col"><strong>Totale</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Impact latence</strong></td>
+                    <td>Neutre (~45 ms)</td>
+                    <td>Ameliore (~25 ms)</td>
+                    <td class="highlight-col"><strong>~12 ms (-73 %)</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>CAPEX</strong></td>
+                    <td>~350 K$</td>
+                    <td>~1 800-2 200 K$</td>
+                    <td class="highlight-col"><strong>3 200 K$</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>OPEX annuel</strong></td>
+                    <td>~1 850 K$ (inchange)</td>
+                    <td>~700-900 K$</td>
+                    <td class="highlight-col"><strong>420 K$ (-77 %)</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Duree de migration</strong></td>
+                    <td>3-6 mois</td>
+                    <td>12-18 mois</td>
+                    <td class="highlight-col"><strong>22 mois</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Alignement strategique</strong></td>
+                    <td>Aucun</td>
+                    <td>Partiel</td>
+                    <td class="highlight-col"><strong>Total (Cloud + API)</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Horizon de vie</strong></td>
+                    <td>12-18 mois</td>
+                    <td>5-7 ans</td>
+                    <td class="highlight-col"><strong>10+ ans</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Recommandation</strong></td>
+                    <td><span class="badge badge-red">Transitoire</span></td>
+                    <td><span class="badge badge-yellow">Sous conditions</span></td>
+                    <td class="highlight-col"><span class="badge badge-green">RECOMMANDEE</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 13: VUE FINANCIERE ROI ===================== -->
+<section class="slide" id="slide-13">
+    <div class="slide-content">
+        <h2>Vue Financiere -- ROI</h2>
+        <div class="accent-line"></div>
+        <div style="display: flex; gap: 32px; align-items: center; flex-wrap: wrap;">
+            <div class="chart-container" style="flex: 1.5; min-width: 350px;">
+                <canvas id="roiChart"></canvas>
+            </div>
+            <div style="flex: 1; min-width: 250px;">
+                <div class="card" style="margin-bottom: 16px;">
+                    <div class="label">Investissement Initial (CAPEX)</div>
+                    <div style="font-size: 2rem; font-weight: 800; color: #e74c3c; margin-top: 4px;">3 200 K$ CAD</div>
+                </div>
+                <div class="card" style="margin-bottom: 16px;">
+                    <div class="label">Economie Annuelle Nette</div>
+                    <div style="font-size: 2rem; font-weight: 800; color: #2ecc71; margin-top: 4px;">1 430 K$ CAD</div>
+                    <div style="font-size: 0.8rem; color: rgba(224,224,224,0.5);">1 850 K$ (HIS) - 420 K$ (cible) = -77 %</div>
+                </div>
+                <div class="card" style="margin-bottom: 16px;">
+                    <div class="label">ROI a 3 ans</div>
+                    <div style="font-size: 2rem; font-weight: 800; color: #4a90d9; margin-top: 4px;">~38 %</div>
+                </div>
+                <div class="card">
+                    <div class="label">ROI a 5 ans</div>
+                    <div style="font-size: 2rem; font-weight: 800; color: #9b59b6; margin-top: 4px;">~142 %</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 14: CASH FLOW ===================== -->
+<section class="slide" id="slide-14">
+    <div class="slide-content">
+        <h2>Projection des Flux de Tresorerie</h2>
+        <div class="accent-line"></div>
+        <p class="subtitle">Point d'equilibre atteint au mois ~27 (debut annee 3)</p>
+        <div class="chart-container" style="max-width: 900px;">
+            <canvas id="cashFlowChart"></canvas>
+        </div>
+        <div class="stat-row" style="margin-top: 1em;">
+            <div class="stat-item"><div class="stat-value">~27 mois</div><div class="stat-label">Point d'equilibre</div></div>
+            <div class="stat-item"><div class="stat-value">+455 K$</div><div class="stat-label">Solde cumule a 3 ans</div></div>
+            <div class="stat-item"><div class="stat-value">+3 485 K$</div><div class="stat-label">Benefice net a 5 ans</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 15: ARCHITECTURE CIBLE TO-BE ===================== -->
+<section class="slide" id="slide-15">
+    <div class="slide-content">
+        <h2>Architecture Cible (To-Be)</h2>
+        <div class="accent-line"></div>
+        <p class="subtitle">Elimination totale de HIS -- protocoles ouverts, gouvernance API centralisee</p>
+        <div class="mermaid">
+graph LR
+    subgraph "Applications"
+        DOTNET["23 Apps .NET 8"]
+        JAVA["4 Apps Java 21"]
+    end
+    subgraph "Gouvernance Azure"
+        APIM["Azure APIM<br/>OAuth 2.0 / JWT"]
+        KAFKA["Event Hubs / Kafka<br/>CDC Streaming"]
+    end
+    subgraph "Mainframe z/OS"
+        ZC["z/OS Connect EE v3<br/>REST/JSON Gateway"]
+        CICS["CICS TS 6.1"]
+        IMS["IMS TM 15.4"]
+        DB2["DB2 z/OS"]
+        CDC["CDC Agent"]
+    end
+    DOTNET -->|"HTTPS/TLS 1.3"| APIM
+    JAVA -->|"HTTPS/TLS 1.3"| APIM
+    APIM -->|"HTTPS/mTLS"| ZC
+    ZC -->|"SAR"| CICS
+    ZC -->|"SAR"| IMS
+    DB2 --- CDC
+    CDC -->|"CDC Events"| KAFKA
+    KAFKA -->|"Sink"| SQLSRV["SQL Server"]
+    style APIM fill:#1a5276,stroke:#2471a3,color:#fff
+    style ZC fill:#27ae60,stroke:#1e8449,color:#fff
+    style KAFKA fill:#8e44ad,stroke:#7d3c98,color:#fff
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 16: AVANT / APRES ===================== -->
+<section class="slide" id="slide-16">
+    <div class="slide-content">
+        <h2>Avant / Apres -- Cote a Cote</h2>
+        <div class="accent-line"></div>
+        <div class="two-col">
+            <div class="col-box col-before">
+                <h3>Avant (HIS)</h3>
+                <ul>
+                    <li><strong>Protocole:</strong> SNA / LU6.2</li>
+                    <li><strong>Transport:</strong> DCOM + SNA/APPN</li>
+                    <li><strong>Chiffrement:</strong> Aucun (SNA)</li>
+                    <li><strong>Format:</strong> COMMAREA binaire (EBCDIC)</li>
+                    <li><strong>Latence:</strong> ~45 ms (3 sauts)</li>
+                    <li><strong>Intermediaires:</strong> 6 serveurs HIS</li>
+                    <li><strong>Contrat:</strong> .tim proprietaire</li>
+                    <li><strong>Authentification:</strong> Credential mapping RACF</li>
+                    <li><strong>OPEX:</strong> 1 850 K$ CAD/an</li>
+                    <li><strong>Conformite DORA:</strong> Non conforme</li>
+                </ul>
+            </div>
+            <div class="col-box col-after">
+                <h3>Apres (z/OS Connect)</h3>
+                <ul>
+                    <li><strong>Protocole:</strong> REST / JSON</li>
+                    <li><strong>Transport:</strong> HTTPS / TLS 1.3</li>
+                    <li><strong>Chiffrement:</strong> TLS 1.3 mTLS bout en bout</li>
+                    <li><strong>Format:</strong> JSON (UTF-8) / Protobuf</li>
+                    <li><strong>Latence:</strong> ~12 ms (1 saut, -73 %)</li>
+                    <li><strong>Intermediaires:</strong> 0 serveurs Microsoft</li>
+                    <li><strong>Contrat:</strong> OpenAPI 3.1 standard</li>
+                    <li><strong>Authentification:</strong> OAuth 2.0 / JWT + mTLS</li>
+                    <li><strong>OPEX:</strong> 420 K$ CAD/an (-77 %)</li>
+                    <li><strong>Conformite DORA:</strong> Conforme</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 17: TIMELINE ===================== -->
+<section class="slide" id="slide-17">
+    <div class="slide-content">
+        <h2>Timeline de Migration -- 22 Mois</h2>
+        <div class="accent-line"></div>
+        <p class="subtitle">6 phases sequentielles, migration progressive par domaine fonctionnel, zero Big Bang</p>
+        <div class="timeline-container">
+            <div class="timeline-track">
+                <div class="timeline-phase">
+                    <div class="phase-card">
+                        <div class="phase-num">Phase 1</div>
+                        <div class="phase-name">Consultation de comptes</div>
+                        <div class="phase-duration">3 mois</div>
+                        <div class="phase-ti">8 TI assemblies</div>
+                    </div>
+                    <div class="phase-dot"></div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="phase-dot"></div>
+                    <div class="phase-card">
+                        <div class="phase-num">Phase 2</div>
+                        <div class="phase-name">Paiements domestiques</div>
+                        <div class="phase-duration">4 mois</div>
+                        <div class="phase-ti">12 TI assemblies</div>
+                    </div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="phase-card">
+                        <div class="phase-num">Phase 3</div>
+                        <div class="phase-name">Paiements internationaux</div>
+                        <div class="phase-duration">4 mois</div>
+                        <div class="phase-ti">15 TI assemblies</div>
+                    </div>
+                    <div class="phase-dot"></div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="phase-dot"></div>
+                    <div class="phase-card">
+                        <div class="phase-num">Phase 4</div>
+                        <div class="phase-name">Gestion des prets</div>
+                        <div class="phase-duration">3 mois</div>
+                        <div class="phase-ti">6 TI assemblies</div>
+                    </div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="phase-card">
+                        <div class="phase-num">Phase 5</div>
+                        <div class="phase-name">Reporting reglementaire</div>
+                        <div class="phase-duration">2 mois</div>
+                        <div class="phase-ti">4 TI assemblies</div>
+                    </div>
+                    <div class="phase-dot"></div>
+                </div>
+                <div class="timeline-phase">
+                    <div class="phase-dot"></div>
+                    <div class="phase-card" style="background: rgba(46, 204, 113, 0.15); border-color: rgba(46, 204, 113, 0.3);">
+                        <div class="phase-num" style="color: #2ecc71;">Phase 6</div>
+                        <div class="phase-name">Decommissionnement HIS</div>
+                        <div class="phase-duration" style="color: #2ecc71;">2 mois</div>
+                        <div class="phase-ti">6 serveurs retires</div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-dates">
+                <span>Avr 2026</span>
+                <span>Sep 2026</span>
+                <span>Jan 2027</span>
+                <span>Mai 2027</span>
+                <span>Aout 2027</span>
+                <span>Jan 2028</span>
+            </div>
+        </div>
+        <div style="margin-top: 1em; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+            <div class="card" style="text-align: center; padding: 12px 20px;">
+                <div style="font-size: 1.5rem; font-weight: 800; color: #4a90d9;">45</div>
+                <div class="card-label">TI assemblies migres</div>
+            </div>
+            <div class="card" style="text-align: center; padding: 12px 20px;">
+                <div style="font-size: 1.5rem; font-weight: 800; color: #9b59b6;">22 mois</div>
+                <div class="card-label">Duree totale</div>
+            </div>
+            <div class="card" style="text-align: center; padding: 12px 20px;">
+                <div style="font-size: 1.5rem; font-weight: 800; color: #2ecc71;">0</div>
+                <div class="card-label">Big Bang</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SLIDE 18: RECOMMANDATION ===================== -->
+<section class="slide" id="slide-18">
+    <div class="slide-content" style="text-align: center;">
+        <h2>Recommandation &amp; Prochaines Etapes</h2>
+        <div class="accent-line" style="margin: 0.5em auto 1.5em;"></div>
+
+        <div class="cta-box recommended-glow" style="max-width: 700px; margin: 0 auto 2em;">
+            <div style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #2ecc71; margin-bottom: 8px;">Recommandation unanime de l'equipe d'architecture</div>
+            <h3 style="font-size: 1.6rem; margin-bottom: 4px;">Option C -- Refonte REST/JSON directe</h3>
+            <p style="color: rgba(224,224,224,0.7); font-size: 0.95rem;">via z/OS Connect EE, Azure APIM et architecture evenementielle</p>
+            <div class="stat-row" style="justify-content: center; margin-top: 1em;">
+                <div class="stat-item"><div class="stat-value">3 200 K$</div><div class="stat-label">CAPEX</div></div>
+                <div class="stat-item"><div class="stat-value">-77 %</div><div class="stat-label">Reduction OPEX</div></div>
+                <div class="stat-item"><div class="stat-value">~142 %</div><div class="stat-label">ROI a 5 ans</div></div>
+                <div class="stat-item"><div class="stat-value">22 mois</div><div class="stat-label">Duree</div></div>
+            </div>
+        </div>
+
+        <div style="text-align: left; max-width: 700px; margin: 0 auto;">
+            <h3>Prochaines etapes</h3>
+            <ul class="bullet-list">
+                <li><strong>Approbation budgetaire</strong> -- CAPEX 3 200 K$ CAD par le comite directeur</li>
+                <li><strong>Mobilisation des equipes</strong> -- Constitution de l'equipe projet (chef de programme, architecte, equipes mainframe et applicatives)</li>
+                <li><strong>Deploiement z/OS Connect EE</strong> -- Infrastructure et configuration mTLS sur la LPAR cible</li>
+                <li><strong>Mise en place Kafka CDC</strong> -- Azure Event Hubs et connecteurs CDC pour les 8 flux DB2</li>
+                <li><strong>Lancement Phase 1</strong> -- Consultation de comptes (8 TI assemblies, 3 mois, lecture seule)</li>
+                <li><strong>Gouvernance</strong> -- Comite de suivi mensuel, criteres Go/No-Go par phase, rollback &lt; 30 min</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== JAVASCRIPT ===================== -->
+<script>
+    // Mermaid initialization
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'dark',
+        themeVariables: {
+            primaryColor: '#4a90d9',
+            primaryTextColor: '#e0e0e0',
+            primaryBorderColor: '#6c63ff',
+            lineColor: '#e0e0e0',
+            secondaryColor: '#9b59b6',
+            tertiaryColor: '#1a1a2e'
+        },
+        flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true,
+            curve: 'basis'
+        }
+    });
+
+    // Slide navigation and progress tracking
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const progressBar = document.getElementById('progress-bar');
+        const slideCounter = document.getElementById('slide-counter');
+
+        function updateProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            progressBar.style.width = progress + '%';
+
+            // Determine current slide
+            let currentSlide = 1;
+            slides.forEach((slide, index) => {
+                const rect = slide.getBoundingClientRect();
+                if (rect.top <= window.innerHeight / 2) {
+                    currentSlide = index + 1;
+                }
+            });
+            slideCounter.textContent = currentSlide + ' / ' + totalSlides;
+        }
+
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        updateProgress();
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            const keys = ['ArrowDown', 'ArrowRight', 'Space', 'PageDown'];
+            const keysUp = ['ArrowUp', 'ArrowLeft', 'PageUp'];
+
+            let currentSlideIndex = 0;
+            slides.forEach((slide, index) => {
+                const rect = slide.getBoundingClientRect();
+                if (rect.top <= window.innerHeight / 2) {
+                    currentSlideIndex = index;
+                }
+            });
+
+            if (keys.includes(e.code) || keys.includes(e.key)) {
+                e.preventDefault();
+                const next = Math.min(currentSlideIndex + 1, totalSlides - 1);
+                slides[next].scrollIntoView({ behavior: 'smooth' });
+            } else if (keysUp.includes(e.code) || keysUp.includes(e.key)) {
+                e.preventDefault();
+                const prev = Math.max(currentSlideIndex - 1, 0);
+                slides[prev].scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // ========== Chart.js Charts ==========
+
+        // Chart defaults for dark theme
+        Chart.defaults.color = 'rgba(224, 224, 224, 0.7)';
+        Chart.defaults.borderColor = 'rgba(224, 224, 224, 0.1)';
+
+        // SLIDE 8: Cost of Inaction Bar Chart
+        const costCtx = document.getElementById('costChart');
+        if (costCtx) {
+            new Chart(costCtx.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['An 1', 'An 2', 'An 3', 'An 4', 'An 5'],
+                    datasets: [
+                        {
+                            label: 'Statu Quo (K$ CAD)',
+                            data: [1850, 2042, 2257, 2497, 2764],
+                            backgroundColor: 'rgba(231, 76, 60, 0.6)',
+                            borderColor: 'rgba(231, 76, 60, 0.9)',
+                            borderWidth: 1,
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'OPEX Cible (K$ CAD)',
+                            data: [420, 420, 420, 420, 420],
+                            backgroundColor: 'rgba(46, 204, 113, 0.6)',
+                            borderColor: 'rgba(46, 204, 113, 0.9)',
+                            borderWidth: 1,
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { usePointStyle: true, padding: 16, font: { family: 'Inter', size: 12 } }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Cout annuel: Statu Quo vs Architecture Cible',
+                            font: { family: 'Inter', size: 14, weight: '600' },
+                            padding: { bottom: 16 }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(224, 224, 224, 0.06)' },
+                            ticks: { callback: function(v) { return v + ' K$'; }, font: { family: 'Inter' } }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: 'Inter' } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // SLIDE 13: ROI Chart (horizontal bar)
+        const roiCtx = document.getElementById('roiChart');
+        if (roiCtx) {
+            new Chart(roiCtx.getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['CAPEX (Investissement)', 'Economies nettes a 5 ans'],
+                    datasets: [{
+                        data: [3200, 4550],
+                        backgroundColor: [
+                            'rgba(231, 76, 60, 0.7)',
+                            'rgba(46, 204, 113, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(231, 76, 60, 1)',
+                            'rgba(46, 204, 113, 1)'
+                        ],
+                        borderWidth: 2,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    cutout: '55%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { usePointStyle: true, padding: 16, font: { family: 'Inter', size: 12 } }
+                        },
+                        title: {
+                            display: true,
+                            text: 'CAPEX vs Economies Nettes (K$ CAD, 5 ans)',
+                            font: { family: 'Inter', size: 14, weight: '600' },
+                            padding: { bottom: 12 }
+                        }
+                    }
+                }
+            });
+        }
+
+        // SLIDE 14: Cash Flow Line Chart
+        const cfCtx = document.getElementById('cashFlowChart');
+        if (cfCtx) {
+            new Chart(cfCtx.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: ['A0 (Invest.)', 'A1', 'A2', 'A3', 'A4', 'A5'],
+                    datasets: [
+                        {
+                            label: 'Solde cumule (K$ CAD)',
+                            data: [-3200, -2540, -1045, 455, 1965, 3485],
+                            borderColor: '#4a90d9',
+                            backgroundColor: 'rgba(74, 144, 217, 0.1)',
+                            fill: true,
+                            tension: 0.3,
+                            borderWidth: 3,
+                            pointRadius: 6,
+                            pointBackgroundColor: function(context) {
+                                const val = context.dataset.data[context.dataIndex];
+                                return val >= 0 ? '#2ecc71' : '#e74c3c';
+                            },
+                            pointBorderColor: '#1a1a2e',
+                            pointBorderWidth: 2
+                        },
+                        {
+                            label: 'Break-even',
+                            data: [0, 0, 0, 0, 0, 0],
+                            borderColor: 'rgba(224, 224, 224, 0.3)',
+                            borderDash: [8, 4],
+                            borderWidth: 1,
+                            pointRadius: 0,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: { usePointStyle: true, padding: 16, font: { family: 'Inter', size: 12 } }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Flux de tresorerie cumules -- Point d\'equilibre ~27 mois',
+                            font: { family: 'Inter', size: 14, weight: '600' },
+                            padding: { bottom: 16 }
+                        },
+                        annotation: {}
+                    },
+                    scales: {
+                        y: {
+                            grid: { color: 'rgba(224, 224, 224, 0.06)' },
+                            ticks: { callback: function(v) { return v + ' K$'; }, font: { family: 'Inter' } }
+                        },
+                        x: {
+                            grid: { color: 'rgba(224, 224, 224, 0.06)' },
+                            ticks: { font: { family: 'Inter' } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Fade-in animation on scroll for slides
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.15 });
+
+        slides.forEach(slide => {
+            slide.style.opacity = '0';
+            slide.style.transform = 'translateY(20px)';
+            slide.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(slide);
+        });
+    });
+</script>
+
+</body>
+</html>
