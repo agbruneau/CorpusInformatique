@@ -1,0 +1,33 @@
+name: Deploy MkDocs to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Setup docs directory
+        run: |
+          mkdir -p docs
+          ln -s "../I - Science et Génie Informatique" "docs/I - Science et Génie Informatique"
+          ln -s "../II - Interopérabilité" "docs/II - Interopérabilité"
+          ln -s "../III - Entreprise Agentique" "docs/III - Entreprise Agentique"
+          ln -s ../README.md docs/README.md
+
+      - name: Deploy to GitHub Pages
+        run: mkdocs gh-deploy --force --clean --verbose

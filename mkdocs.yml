@@ -1,0 +1,274 @@
+site_name: Corpus Informatique
+site_description: Corpus éducatif et référentiel en science informatique, interopérabilité et entreprise agentique
+site_author: Antoine-Guillaume Bruneau
+site_url: https://agbruneau.github.io/CorpusInformatique/
+repo_url: https://github.com/agbruneau/CorpusInformatique
+repo_name: agbruneau/CorpusInformatique
+
+docs_dir: docs
+
+theme:
+  name: material
+  language: fr
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Passer au mode sombre
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Passer au mode clair
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search:
+      lang: fr
+
+markdown_extensions:
+  - tables
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.mark
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - toc:
+      permalink: true
+
+extra_javascript:
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/agbruneau/CorpusInformatique
+
+not_in_nav: |
+  CLAUDE.md
+  plan.md
+
+nav:
+  - Accueil: README.md
+
+  - "I - Science et Génie Informatique":
+    - "Volume I - Fondations théoriques":
+      - "I.1 - Fondements logiques et raisonnement": "I - Science et Génie Informatique/Chapitre_I.1_Fondements_Logiques_Raisonnement.md"
+      - "I.2 - Structures discrètes et combinatoire": "I - Science et Génie Informatique/Chapitre_I.2_Structures_Discretes_Combinatoire.md"
+      - "I.3 - Théorie des graphes": "I - Science et Génie Informatique/Chapitre_I.3_Theorie_Graphes.md"
+      - "I.4 - Langages formels et automates": "I - Science et Génie Informatique/Chapitre_I.4_Langages_Formels_Automates.md"
+      - "I.5 - Calculabilité et décidabilité": "I - Science et Génie Informatique/Chapitre_I.5_Calculabilite_Decidabilite.md"
+      - "I.6 - Théorie de la complexité": "I - Science et Génie Informatique/Chapitre_I.6_Theorie_Complexite.md"
+    - "Volume II - Architecture et ingénierie matérielle":
+      - "I.7 - Systèmes numériques et données": "I - Science et Génie Informatique/Chapitre_I.7_Systemes_Numeriques_Donnees.md"
+      - "I.8 - Circuits combinatoires": "I - Science et Génie Informatique/Chapitre_I.8_Circuits_Combinatoires.md"
+      - "I.9 - Circuits séquentiels": "I - Science et Génie Informatique/Chapitre_I.9_Circuits_Sequentiels.md"
+      - "I.10 - Conception système HDL": "I - Science et Génie Informatique/Chapitre_I.10_Conception_Systeme_HDL.md"
+      - "I.11 - Architecture ISA": "I - Science et Génie Informatique/Chapitre_I.11_Architecture_ISA.md"
+      - "I.12 - Conception CPU": "I - Science et Génie Informatique/Chapitre_I.12_Conception_CPU.md"
+      - "I.13 - Parallélisme ILP": "I - Science et Génie Informatique/Chapitre_I.13_Parallelisme_ILP.md"
+      - "I.14 - Hiérarchie mémoire et stockage": "I - Science et Génie Informatique/Chapitre_I.14_Hierarchie_Memoire_Stockage.md"
+      - "I.15 - Systèmes I/O accélérés": "I - Science et Génie Informatique/Chapitre_I.15_Systemes_IO_Accelere.md"
+    - "Volume III - Systèmes logiciels et méthodologies":
+      - "I.16 - Systèmes d'exploitation": "I - Science et Génie Informatique/Chapitre_I.16_Systemes_Exploitation_OS.md"
+      - "I.17 - Gestion de la concurrence": "I - Science et Génie Informatique/Chapitre_I.17_Gestion_Concurrence.md"
+      - "I.18 - Gestion mémoire et fichiers": "I - Science et Génie Informatique/Chapitre_I.18_Gestion_Memoire_Fichiers.md"
+      - "I.19 - Conception des langages": "I - Science et Génie Informatique/Chapitre_I.19_Conception_Langages.md"
+      - "I.20 - Compilation et interprétation": "I - Science et Génie Informatique/Chapitre_I.20_Compilation_Interpretation.md"
+      - "I.21 - Environnements et virtualisation": "I - Science et Génie Informatique/Chapitre_I.21_Environnements_Virtualisation.md"
+      - "I.22 - Structures de données fondamentales": "I - Science et Génie Informatique/Chapitre_I.22_Structures_Donnees_Fondamentales.md"
+      - "I.23 - Structures de données avancées": "I - Science et Génie Informatique/Chapitre_I.23_Structures_Donnees_Avancees.md"
+      - "I.24 - Conception et analyse d'algorithmes": "I - Science et Génie Informatique/Chapitre_I.24_Conception_Analyse_Algorithmes.md"
+      - "I.25 - Algorithmes de graphes avancés": "I - Science et Génie Informatique/Chapitre_I.25_Algorithmes_Graphes_Avances.md"
+      - "I.26 - Processus de développement": "I - Science et Génie Informatique/Chapitre_I.26_Processus_Developpement.md"
+      - "I.27 - Architecture logicielle": "I - Science et Génie Informatique/Chapitre_I.27_Architecture_Logicielle.md"
+      - "I.28 - Qualité, test et maintenance": "I - Science et Génie Informatique/Chapitre_I.28_Qualite_Test_Maintenance.md"
+      - "I.29 - DevOps et SRE": "I - Science et Génie Informatique/Chapitre_I.29_DevOps_SRE.md"
+    - "Volume IV - Données, réseaux et sécurité":
+      - "I.30 - SGBD fondements": "I - Science et Génie Informatique/Chapitre_I.30_SGBD_Fondements.md"
+      - "I.31 - SGBD implémentation et transactions": "I - Science et Génie Informatique/Chapitre_I.31_SGBD_Implementation_Transactions.md"
+      - "I.32 - Données modernes et Big Data": "I - Science et Génie Informatique/Chapitre_I.32_Donnees_Modernes_BigData.md"
+      - "I.33 - Fondements des réseaux": "I - Science et Génie Informatique/Chapitre_I.33_Fondements_Reseaux.md"
+      - "I.34 - Protocoles et internetworking": "I - Science et Génie Informatique/Chapitre_I.34_Protocoles_Internetworking.md"
+      - "I.35 - Systèmes distribués": "I - Science et Génie Informatique/Chapitre_I.35_Systemes_Distribues.md"
+      - "I.36 - Cloud et infrastructures": "I - Science et Génie Informatique/Chapitre_I.36_Cloud_Infrastructures.md"
+      - "I.37 - Fondements de la sécurité": "I - Science et Génie Informatique/Chapitre_I.37_Fondements_Securite.md"
+      - "I.38 - Cryptographie appliquée": "I - Science et Génie Informatique/Chapitre_I.38_Cryptographie_Appliquee.md"
+      - "I.39 - Sécurité des réseaux": "I - Science et Génie Informatique/Chapitre_I.39_Securite_Reseaux.md"
+      - "I.40 - Sécurité des systèmes": "I - Science et Génie Informatique/Chapitre_I.40_Securite_Systemes.md"
+    - "Volume V - Intelligence artificielle":
+      - "I.41 - Fondements de l'IA": "I - Science et Génie Informatique/Chapitre_I.41_Fondements_IA.md"
+      - "I.42 - Connaissance et raisonnement": "I - Science et Génie Informatique/Chapitre_I.42_Connaissance_Raisonnement.md"
+      - "I.43 - ML fondements": "I - Science et Génie Informatique/Chapitre_I.43_ML_Fondements.md"
+      - "I.44 - Deep Learning": "I - Science et Génie Informatique/Chapitre_I.44_DeepLearning.md"
+      - "I.45 - Reinforcement Learning": "I - Science et Génie Informatique/Chapitre_I.45_Reinforcement_Learning.md"
+      - "I.46 - TALN / NLP": "I - Science et Génie Informatique/Chapitre_I.46_TALN_NLP.md"
+      - "I.47 - Vision par ordinateur": "I - Science et Génie Informatique/Chapitre_I.47_Vision_Ordinateur.md"
+      - "I.48 - Infographie et visualisation": "I - Science et Génie Informatique/Chapitre_I.48_Infographie_Visualisation.md"
+      - "I.49 - IHM / HCI": "I - Science et Génie Informatique/Chapitre_I.49_IHM_HCI.md"
+      - "I.50 - Robotique et IoT": "I - Science et Génie Informatique/Chapitre_I.50_Robotique_IoT.md"
+    - "Volume VI - Technologies avant-garde":
+      - "I.51 - Informatique quantique": "I - Science et Génie Informatique/Chapitre_I.51_Informatique_Quantique.md"
+      - "I.52 - Algorithmes et cryptographie quantiques": "I - Science et Génie Informatique/Chapitre_I.52_Algorithmes_Cryptographie_Quantiques.md"
+      - "I.53 - HPC et exascale": "I - Science et Génie Informatique/Chapitre_I.53_HPC_Exascale.md"
+      - "I.54 - Architectures post-Moore": "I - Science et Génie Informatique/Chapitre_I.54_Architectures_Post_Moore.md"
+      - "I.55 - Modèles fondateurs IA": "I - Science et Génie Informatique/Chapitre_I.55_Modeles_Fondateurs_IA.md"
+      - "I.56 - AGI, alignement et sécurité": "I - Science et Génie Informatique/Chapitre_I.56_AGI_Alignement_Securite.md"
+      - "I.57 - Sciences computationnelles": "I - Science et Génie Informatique/Chapitre_I.57_Sciences_Computationnelles.md"
+      - "I.58 - Systèmes cyber-physiques et jumeaux": "I - Science et Génie Informatique/Chapitre_I.58_CyberPhysiques_Jumeaux.md"
+      - "I.59 - Web3 et décentralisé": "I - Science et Génie Informatique/Chapitre_I.59_Web3_Decentralise.md"
+      - "I.60 - Synthèse et frontières": "I - Science et Génie Informatique/Chapitre_I.60_Synthese_Frontieres.md"
+    - "Volume VII - Architecture cognitivo-quantique":
+      - "I.61 - Introduction à l'informatique": "I - Science et Génie Informatique/Chapitre_I.61_Introduction_Informatique.md"
+      - "I.62 - Convergence AGI-quantique": "I - Science et Génie Informatique/Chapitre_I.62_Convergence_AGI_Quantique.md"
+      - "I.63 - Évolution IA-quantique": "I - Science et Génie Informatique/Chapitre_I.63_Evolution_IA_Quantique.md"
+      - "I.64 - Réseaux neuronaux quantiques": "I - Science et Génie Informatique/Chapitre_I.64_Reseaux_Neuronaux_Quantiques.md"
+      - "I.65 - Algorithmes évolutionnaires quantiques": "I - Science et Génie Informatique/Chapitre_I.65_Algorithmes_Evolutionnaires_Quantiques.md"
+      - "I.66 - Renforcement quantique": "I - Science et Génie Informatique/Chapitre_I.66_Renforcement_Quantique.md"
+      - "I.67 - Architectures hybrides": "I - Science et Génie Informatique/Chapitre_I.67_Architectures_Hybrides.md"
+      - "I.68 - SVM quantiques": "I - Science et Génie Informatique/Chapitre_I.68_SVM_Quantiques.md"
+      - "I.69 - Codage de données quantiques": "I - Science et Génie Informatique/Chapitre_I.69_Codage_Donnees_Quantiques.md"
+      - "I.70 - Scalabilité et correction d'erreurs": "I - Science et Génie Informatique/Chapitre_I.70_Scalabilite_Correction_Erreurs.md"
+      - "I.71 - TALN quantique": "I - Science et Génie Informatique/Chapitre_I.71_TALN_Quantique.md"
+      - "I.72 - Sécurité et confidentialité": "I - Science et Génie Informatique/Chapitre_I.72_Securite_Confidentialite.md"
+      - "I.73 - Éthique et réglementaire": "I - Science et Génie Informatique/Chapitre_I.73_Ethique_Reglementaire.md"
+      - "I.74 - Implémentation matérielle": "I - Science et Génie Informatique/Chapitre_I.74_Implementation_Materielle.md"
+      - "I.75 - Middleware et software": "I - Science et Génie Informatique/Chapitre_I.75_Middleware_Software.md"
+      - "I.76 - Études de cas": "I - Science et Génie Informatique/Chapitre_I.76_Etudes_Cas.md"
+      - "I.77 - Durabilité et énergie": "I - Science et Génie Informatique/Chapitre_I.77_Durabilite_Energie.md"
+      - "I.78 - Métriques et bancs d'essai": "I - Science et Génie Informatique/Chapitre_I.78_Metriques_Bancs.md"
+      - "I.79 - Perspectives d'avenir": "I - Science et Génie Informatique/Chapitre_I.79_Perspectives_Avenir.md"
+    - "Annexes":
+      - "I.80 - Infrastructure et centres de données IA": "I - Science et Génie Informatique/Chapitre_I.80_Infrastructure_Centres_Donnees_IA.md"
+      - "I.81 - Architecture cognitivo-quantique": "I - Science et Génie Informatique/Chapitre_I.81_Architecture_Cognitivo_Quantique.md"
+
+  - "II - Interopérabilité":
+    - "II.1 - Introduction et problématique": "II - Interopérabilité/Chapitre_II.1_Introduction_Problematique.md"
+    - "II.2 - Fondements théoriques": "II - Interopérabilité/Chapitre_II.2_Fondements_Theoriques.md"
+    - "II.3 - Intégration des applications": "II - Interopérabilité/Chapitre_II.3_Integration_Applications.md"
+    - "II.4 - Intégration des données": "II - Interopérabilité/Chapitre_II.4_Integration_Donnees.md"
+    - "II.5 - Intégration des événements": "II - Interopérabilité/Chapitre_II.5_Integration_Evenements.md"
+    - "II.6 - Standards et contrats": "II - Interopérabilité/Chapitre_II.6_Standards_Contrats.md"
+    - "II.7 - Résilience et observabilité": "II - Interopérabilité/Chapitre_II.7_Resilience_Observabilite.md"
+    - "II.8 - Collaboration et automatisation": "II - Interopérabilité/Chapitre_II.8_Collaboration_Automatisation.md"
+    - "II.9 - Architecture de référence": "II - Interopérabilité/Chapitre_II.9_Architecture_Reference.md"
+    - "II.10 - Order-to-Cash": "II - Interopérabilité/Chapitre_II.10_Order_to_Cash.md"
+    - "II.11 - Entreprise agentique": "II - Interopérabilité/Chapitre_II.11_Entreprise_Agentique.md"
+    - "Annexes": "II - Interopérabilité/Chapitre_II.A_Annexes.md"
+
+  - "III - Entreprise Agentique":
+    - "Volume I - Fondations de l'Entreprise Agentique":
+      - "I.1 - Crise d'intégration systémique": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.1_Crise_Integration_Systemique.md"
+      - "I.2 - Fondements et dimensions de l'interopérabilité": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.2_Fondements_Dimensions_Interoperabilite.md"
+      - "I.3 - Cadres de référence, standards et maturité": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.3_Cadres_Reference_Standards_Maturite.md"
+      - "I.4 - Principes d'architecture réactive": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.4_Principes_Architecture_Reactive.md"
+      - "I.5 - Écosystème API": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.5_Ecosysteme_API.md"
+      - "I.6 - Architecture événements (EDA)": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.6_Architecture_Evenements_EDA.md"
+      - "I.7 - Contrats de données": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.7_Contrats_Donnees.md"
+      - "I.8 - Conception et implémentation de l'observabilité": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.8_Conception_Implementation_Observabilite.md"
+      - "I.9 - Études de cas architecturales": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.9_Etudes_Cas_Architecturales.md"
+      - "I.10 - Limites de l'interopérabilité sémantique": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.10_Limites_Interoperabilite_Semantique.md"
+      - "I.11 - IA moteur d'interopérabilité": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.11_IA_Moteur_Interoperabilite.md"
+      - "I.12 - Définition de l'interopérabilité cognitivo-adaptative": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.12_Definition_Interoperabilite_Cognitivo_Adaptative.md"
+      - "I.13 - Ère IA agentique et modèle du travailleur numérique": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.13_Ere_IA_Agentique_Modele_Travailleur_Numerique.md"
+      - "I.14 - Maillage agentique": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.14_Maillage_Agentique.md"
+      - "I.15 - Ingénierie des systèmes cognitifs et protocoles d'interaction": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.15_Ingenierie_Systemes_Cognitifs_Protocoles_Interaction.md"
+      - "I.16 - Modèle opérationnel de symbiose humain-agent": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.16_Modele_Operationnel_Symbiose_Humain_Agent.md"
+      - "I.17 - Gouvernance constitutionnelle et alignement IA": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.17_Gouvernance_Constitutionnelle_Alignement_IA.md"
+      - "I.18 - AgentOps : industrialisation et sécurisation": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.18_AgentOps_Industrialisation_Securisation.md"
+      - "I.19 - Architecte des intentions : rôle sociotechnique": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.19_Architecte_Intentions_Role_Sociotechnique.md"
+      - "I.20 - Cockpit du berger d'intention": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.20_Cockpit_Berger_Intention.md"
+      - "I.21 - Feuille de route de la transformation agentique": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.21_Feuille_Route_Transformation_Agentique.md"
+      - "I.22 - Gestion stratégique du portefeuille applicatif (APM cognitif)": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.22_Gestion_Strategique_Portefeuille_Applicatif_APM_Cognitif.md"
+      - "I.23 - Patrons de modernisation et agentification": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.23_Patrons_Modernisation_Agentification.md"
+      - "I.24 - Industrialisation et ingénierie de plateforme": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.24_Industrialisation_Ingenierie_Plateforme.md"
+      - "I.25 - Économie cognitive et diplomatie algorithmique": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.25_Economie_Cognitive_Diplomatie_Algorithmique.md"
+      - "I.26 - Gestion des risques systémiques et superalignement": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.26_Gestion_Risques_Systemiques_Superalignement.md"
+      - "I.27 - Prospective : agent auto-architecturant et AGI d'entreprise": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.27_Prospective_Agent_Auto_Architecturant_AGI_Entreprise.md"
+      - "I.28 - Conclusion : architecture intentionnelle et sagesse collective": "III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.28_Conclusion_Architecture_Intentionnelle_Sagesse_Collective.md"
+
+    - "Volume II - Infrastructure Agentique":
+      - "II.1 - Ingénierie de plateforme": "III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.1_Ingenierie_Plateforme.md"
+      - "II.2 - Fondamentaux Apache Kafka et Confluent": "III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md"
+      - "II.3 - Conception et modélisation des flux d'événements": "III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.3_Conception_Modelisation_Flux_Evenements.md"
+      - "II.4 - Contrats de données et gouvernance sémantique": "III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.4_Contrats_Donnees_Gouvernance_Semantique.md"
+      - "II.5 - Flux temps réel": "III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.5_Flux_Temps_Reel.md"
+      - "II.6 - Google Cloud et Vertex AI": "III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.6_Google_Cloud_Vertex_AI.md"
+      - "II.7 - Ingénierie de contexte et RAG": "III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.7_Ingenierie_Contexte_RAG.md"
+      - "II.8 - Intégration backbone événementiel et couche cognitive": "III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.8_Integration_Backbone_Evenementiel_Couche_Cognitive.md"
+      - "II.9 - Patrons architecturaux avancés (AEM)": "III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.9_Patrons_Architecturaux_Avances_AEM.md"
+      - "II.10 - Pipelines CI/CD et déploiement d'agents": "III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.10_Pipelines_CI_CD_Deploiement_Agents.md"
+      - "II.11 - Observabilité comportementale et monitoring": "III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.11_Observabilite_Comportementale_Monitoring.md"
+      - "II.12 - Tests, évaluation et simulation de systèmes multi-agents": "III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.12_Tests_Evaluation_Simulation_Systemes_Multi_Agents.md"
+      - "II.13 - Paysage des menaces et sécurité des systèmes agentiques": "III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.13_Paysage_Menaces_Securite_Systemes_Agentiques.md"
+      - "II.14 - Sécurisation de l'infrastructure": "III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.14_Securisation_Infrastructure.md"
+      - "II.15 - Conformité réglementaire et gestion de la confidentialité": "III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.15_Conformite_Reglementaire_Gestion_Confidentialite.md"
+
+    - "Volume III - Apache Kafka : Guide de l'Architecte":
+      - "III.1 - Découvrir Kafka": "III - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.1_Decouvrir_Kafka.md"
+      - "III.2 - Architecture du cluster Kafka": "III - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.2_Architecture_Cluster_Kafka.md"
+      - "III.3 - Clients Kafka en production": "III - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.3_Clients_Kafka_Production.md"
+      - "III.4 - Applications consommatrices": "III - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.4_Applications_Consommatrices.md"
+      - "III.5 - Cas d'utilisation Kafka": "III - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.5_Cas_Utilisation_Kafka.md"
+      - "III.6 - Contrats de données": "III - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.6_Contrats_Donnees.md"
+      - "III.7 - Patrons d'interaction Kafka": "III - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.7_Patrons_Interaction_Kafka.md"
+      - "III.8 - Conception d'application streaming": "III - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.8_Conception_Application_Streaming.md"
+      - "III.9 - Gestion Kafka en entreprise": "III - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.9_Gestion_Kafka_Entreprise.md"
+      - "III.10 - Organisation d'un projet Kafka": "III - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.10_Organisation_Projet_Kafka.md"
+      - "III.11 - Opérer Kafka": "III - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.11_Operer_Kafka.md"
+      - "III.12 - L'avenir de Kafka": "III - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.12_Avenir_Kafka.md"
+
+    - "Volume IV - Apache Iceberg et Lakehouse":
+      - "IV.1 - Le monde Lakehouse et Iceberg": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.1_Monde_Lakehouse_Iceberg.md"
+      - "IV.2 - Anatomie technique": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.2_Anatomie_Technique.md"
+      - "IV.3 - Mise en pratique": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.3_Mise_Pratique.md"
+      - "IV.4 - Préparer le passage à Iceberg": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.4_Preparer_Passage_Iceberg.md"
+      - "IV.5 - Sélection de la couche de stockage": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.5_Selection_Couche_Stockage.md"
+      - "IV.6 - Architecture de la couche d'ingestion": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.6_Architecture_Couche_Ingestion.md"
+      - "IV.7 - Implémentation de la couche catalogue": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.7_Implementation_Couche_Catalogue.md"
+      - "IV.8 - Conception de la couche de fédération": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.8_Conception_Couche_Federation.md"
+      - "IV.9 - Comprendre la couche de consommation": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.9_Comprendre_Couche_Consommation.md"
+      - "IV.10 - Maintenir le Lakehouse en production": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.10_Maintenir_Lakehouse_Production.md"
+      - "IV.11 - Opérationnaliser Apache Iceberg": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.11_Operationnaliser_Apache_Iceberg.md"
+      - "IV.12 - Évolution du streaming Lakehouse": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.12_Evolution_Streaming_Lakehouse.md"
+      - "IV.13 - Sécurité, gouvernance et conformité": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.13_Securite_Gouvernance_Conformite.md"
+      - "IV.14 - Intégration Microsoft Fabric et Power BI": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.14_Integration_Microsoft_Fabric_PowerBI.md"
+      - "IV.15 - Contexte canadien et études de cas": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.15_Contexte_Canadien_Etudes_Cas.md"
+      - "IV.16 - Conclusion et perspectives 2026-2030": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.16_Conclusion_Perspectives_2026_2030.md"
+      - "Annexe A - Spécification Apache Iceberg": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.Annexe_A_Specification_Apache_Iceberg.md"
+      - "Annexe B - Glossaire": "III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.Annexe_B_Glossaire.md"
+
+    - "Volume V - Développeur Renaissance":
+      - "V.0 - Introduction": "III - Entreprise Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.0_Introduction.md"
+      - "V.1 - Convergence des âges d'or": "III - Entreprise Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.1_Convergence_Ages_Or.md"
+      - "V.2 - Curiosité appliquée": "III - Entreprise Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.2_Curiosite_Appliquee.md"
+      - "V.3 - Pensée systémique": "III - Entreprise Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.3_Pensee_Systemique.md"
+      - "V.4 - Nouvelle communication": "III - Entreprise Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.4_Nouvelle_Communication.md"
+      - "V.5 - Impératif qualité et responsabilité": "III - Entreprise Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.5_Imperatif_Qualite_Responsabilite.md"
+      - "V.6 - Capital humain et profil polymathe": "III - Entreprise Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.6_Capital_Humain_Profil_Polymathe.md"
+      - "V.7 - L'art de bâtir le futur": "III - Entreprise Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.7_Art_Batir_Futur.md"
+      - "V.8 - Bibliothèque du développeur Renaissance": "III - Entreprise Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.8_Bibliotheque_Developpeur_Renaissance.md"
+      - "V.9 - Mandat": "III - Entreprise Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.9_Mandat.md"
+      - "V.10 - Spec-Driven Development": "III - Entreprise Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.10_Spec_Driven_Development.md"
