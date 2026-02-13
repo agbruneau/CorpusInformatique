@@ -1,5 +1,3 @@
-Dans un monde interconnecté et centré sur l\'information, le quatrième volume traite des piliers de l\'infrastructure numérique moderne. La **Gestion des Données** couvre les systèmes de bases de données relationnelles (SQL), les principes de transaction (ACID), ainsi que les écosystèmes modernes NoSQL et Big Data. Les **Réseaux et Systèmes Distribués** détaillent les protocoles (TCP/IP) qui régissent l\'Internet, les principes des systèmes répartis (consensus, tolérance aux pannes) et l\'architecture du Cloud Computing. Face aux menaces croissantes, la **Cybersécurité et la Cryptographie** occupent une place centrale, examinant les techniques de protection des données, la sécurité des protocoles et la conception de logiciels résilients.
-
 # Chapitre I.30 : Systèmes de Gestion de Bases de Données (SGBD) - Fondements
 
 ## Introduction Générale au Chapitre
@@ -52,50 +50,50 @@ Pour appréhender le modèle relationnel dans toute sa rigueur, il est impérati
 
 #### Définitions Formelles
 
-> **Domaine :** Le concept le plus fondamental est celui de domaine. Un domaine, noté D, est un ensemble de valeurs **atomiques**, c\'est-à-dire indivisibles du point de vue du modèle. Chaque domaine est associé à un nom et à un type de données (par exemple, entier, chaîne de caractères, date). Plus important encore, un domaine porte une sémantique : il définit l\'ensemble des valeurs possibles et licites pour un attribut donné. Par exemple, le domaine\
+> **Domaine :** Le concept le plus fondamental est celui de domaine. Un domaine, noté D, est un ensemble de valeurs **atomiques**, c\'est-à-dire indivisibles du point de vue du modèle. Chaque domaine est associé à un nom et à un type de données (par exemple, entier, chaîne de caractères, date). Plus important encore, un domaine porte une sémantique : il définit l\'ensemble des valeurs possibles et licites pour un attribut donné. Par exemple, le domaine
 > COULEURS_PRIMAIRES pourrait être défini en extension comme {\"Rouge\", \"Vert\", \"Bleu\"}, tandis que le domaine POURCENTAGE pourrait être défini en intention comme l\'ensemble des nombres réels p tels que 0≤p≤100. La notion de domaine est cruciale pour l\'intégrité des données : deux attributs ne peuvent être comparés de manière significative que s\'ils sont définis sur le même domaine.
 >
-> **Attribut :** Un attribut est un nom qui désigne le rôle joué par un domaine dans le contexte d\'une relation. Par exemple, dans une relation décrivant des personnes, le domaine des chaînes de caractères pourrait être utilisé pour les attributs\
+> **Attribut :** Un attribut est un nom qui désigne le rôle joué par un domaine dans le contexte d\'une relation. Par exemple, dans une relation décrivant des personnes, le domaine des chaînes de caractères pourrait être utilisé pour les attributs
 > NomDeFamille et Prénom. Bien qu\'ils partagent le même type de données, les noms des attributs spécifient leur rôle sémantique distinct. Dans la représentation tabulaire, les attributs correspondent aux en-têtes de colonnes.
 >
-> **Schéma de Relation :** Un schéma de relation est la structure ou le plan d\'une relation. Il est défini par un nom, disons R, et une liste d\'attributs {A1​,A2​,...,An​}. On le note formellement\
-> R(A1​,A2​,...,An​). Chaque attribut Ai​ est associé à un domaine, noté dom(Ai​). Le schéma représente l\'**intention** de la relation, c\'est-à-dire la structure et la sémantique des données qu\'elle est destinée à contenir. Par exemple, un schéma\
+> **Schéma de Relation :** Un schéma de relation est la structure ou le plan d\'une relation. Il est défini par un nom, disons R, et une liste d\'attributs {A1,A2,...,An}. On le note formellement
+> R(A1,A2,...,An). Chaque attribut Ai est associé à un domaine, noté dom(Ai). Le schéma représente l\'**intention** de la relation, c\'est-à-dire la structure et la sémantique des données qu\'elle est destinée à contenir. Par exemple, un schéma
 > ÉTUDIANT(Matricule, Nom, Prénom, DateNaissance) définit la structure des informations que nous souhaitons stocker sur les étudiants.
 >
-> **Tuple (n-uplet) :** Un tuple (ou n-uplet) est une liste ordonnée de n valeurs ⟨v1​,v2​,...,vn​⟩, où chaque valeur vi​ est un élément du domaine de l\'attribut correspondant Ai​, c\'est-à-dire vi​∈dom(Ai​). Un tuple est donc un élément du produit cartésien des domaines des attributs du schéma :\
-> dom(A1​)×dom(A2​)×⋯×dom(An​). Dans la représentation tabulaire, un tuple correspond à une ligne ou un enregistrement. Par exemple,\
+> **Tuple (n-uplet) :** Un tuple (ou n-uplet) est une liste ordonnée de n valeurs ⟨v1,v2,...,vn⟩, où chaque valeur vi est un élément du domaine de l\'attribut correspondant Ai, c\'est-à-dire vi∈dom(Ai). Un tuple est donc un élément du produit cartésien des domaines des attributs du schéma :
+> dom(A1)×dom(A2)×⋯×dom(An). Dans la représentation tabulaire, un tuple correspond à une ligne ou un enregistrement. Par exemple,
 > ⟨'12345','Tremblay','Jean','2002-05-10'⟩ est un tuple valide pour le schéma ÉTUDIANT défini précédemment.
 >
-> **Relation :** C\'est ici que réside le cœur de la définition formelle. Une relation r sur un schéma R(A1​,...,An​) est un **ensemble fini de tuples** conformes à ce schéma. La relation est une instance ou une\
-> **extension** du schéma à un moment donné. Le fait qu\'une relation soit un\
+> **Relation :** C\'est ici que réside le cœur de la définition formelle. Une relation r sur un schéma R(A1,...,An) est un **ensemble fini de tuples** conformes à ce schéma. La relation est une instance ou une
+> **extension** du schéma à un moment donné. Le fait qu\'une relation soit un
 > *ensemble* au sens mathématique a deux conséquences fondamentales et non négociables :
 
 **Absence de tuples dupliqués :** Un ensemble ne peut contenir deux fois le même élément. Par conséquent, chaque tuple dans une relation doit être unique.
 
 **Absence d\'ordre intrinsèque :** Les éléments d\'un ensemble ne sont pas ordonnés. Il n\'y a donc pas de \"premier\" ou de \"dernier\" tuple dans une relation. L\'ordre dans lequel les tuples sont affichés est purement une question de présentation et n\'a aucune signification sémantique dans le modèle lui-même.
 
-> **Arity (Degré) et Cardinalité :** Deux métriques simples décrivent la taille d\'une relation. L\'**arité** (ou le degré) d\'une relation est le nombre de ses attributs (le nombre de colonnes). La\
+> **Arity (Degré) et Cardinalité :** Deux métriques simples décrivent la taille d\'une relation. L\'**arité** (ou le degré) d\'une relation est le nombre de ses attributs (le nombre de colonnes). La
 > **cardinalité** d\'une relation est le nombre de tuples qu\'elle contient (le nombre de lignes) à un instant donné. Une relation d\'arité 1 est dite unaire, d\'arité 2 binaire, etc.
 
 #### L\'Arsenal des Clés : Le Gardien de l\'Intégrité
 
 Si chaque tuple au sein d\'une relation doit être unique, le modèle doit fournir un mécanisme formel pour garantir cette unicité. Ce mécanisme repose sur le concept de clé. Les clés ne sont pas de simples \"identifiants\" ; elles sont des contraintes d\'intégrité fondamentales qui structurent la base de données et garantissent sa cohérence.
 
-> **Superclé :** Une superclé est un sous-ensemble d\'attributs S d\'un schéma de relation R qui possède la propriété d\'unicité. Formellement, pour toute instance valide r de R, il n\'existe pas deux tuples distincts t1​ et t2​ dans r tels que la projection de t1​ sur les attributs de S soit égale à la projection de t2​ sur ces mêmes attributs, c\'est-à-dire t1​=t2​. Par exemple, dans notre relation\
+> **Superclé :** Une superclé est un sous-ensemble d\'attributs S d\'un schéma de relation R qui possède la propriété d\'unicité. Formellement, pour toute instance valide r de R, il n\'existe pas deux tuples distincts t1 et t2 dans r tels que la projection de t1 sur les attributs de S soit égale à la projection de t2 sur ces mêmes attributs, c\'est-à-dire t1=t2. Par exemple, dans notre relation
 > ÉTUDIANT, l\'ensemble {Matricule} est une superclé. L\'ensemble {Matricule, Nom} est également une superclé, car si les matricules sont uniques, la combinaison du matricule et du nom le sera aussi. L\'ensemble de tous les attributs d\'une relation est toujours une superclé triviale.
 >
-> **Clé Candidate :** Une clé candidate est une superclé qui possède la propriété de **minimalité** (ou irréductibilité). Une superclé\
-> K est une clé candidate si aucun de ses sous-ensembles propres n\'est également une superclé. En d\'autres termes, on ne peut retirer aucun attribut de K sans perdre la propriété d\'unicité. Dans l\'exemple ÉTUDIANT, {Matricule} est une clé candidate. {Matricule, Nom} n\'est pas une clé candidate car on peut en retirer Nom et l\'ensemble restant, {Matricule}, est toujours une superclé. Une relation peut posséder plusieurs clés candidates. Si, par exemple, les étudiants avaient aussi un numéro d\'assurance sociale unique, alors\
+> **Clé Candidate :** Une clé candidate est une superclé qui possède la propriété de **minimalité** (ou irréductibilité). Une superclé
+> K est une clé candidate si aucun de ses sous-ensembles propres n\'est également une superclé. En d\'autres termes, on ne peut retirer aucun attribut de K sans perdre la propriété d\'unicité. Dans l\'exemple ÉTUDIANT, {Matricule} est une clé candidate. {Matricule, Nom} n\'est pas une clé candidate car on peut en retirer Nom et l\'ensemble restant, {Matricule}, est toujours une superclé. Une relation peut posséder plusieurs clés candidates. Si, par exemple, les étudiants avaient aussi un numéro d\'assurance sociale unique, alors
 > {NumAssuranceSociale} serait une autre clé candidate.
 >
-> **Clé Primaire :** Une clé primaire est une clé candidate qui a été choisie par le concepteur de la base de données pour servir d\'identifiant principal et unique pour les tuples de la relation. Ce choix est une décision de conception. La clé primaire est soumise à une contrainte d\'intégrité fondamentale appelée\
+> **Clé Primaire :** Une clé primaire est une clé candidate qui a été choisie par le concepteur de la base de données pour servir d\'identifiant principal et unique pour les tuples de la relation. Ce choix est une décision de conception. La clé primaire est soumise à une contrainte d\'intégrité fondamentale appelée
 > **intégrité d\'entité** : aucun attribut participant à la clé primaire ne peut avoir une valeur nulle (NULL). Cela garantit que chaque tuple est identifiable sans ambiguïté. Dans une représentation de schéma, la clé primaire est conventionnellement soulignée. Par exemple : ÉTUDIANT(Matricule, Nom, Prénom).
 >
-> **Clé Alternative :** Une clé alternative est simplement une clé candidate qui n\'a pas été désignée comme clé primaire. Bien qu\'elle ne soit pas l\'identifiant principal, elle conserve ses propriétés d\'unicité et de minimalité, et peut être utilisée pour des recherches ou pour définir des contraintes d\'unicité (\
+> **Clé Alternative :** Une clé alternative est simplement une clé candidate qui n\'a pas été désignée comme clé primaire. Bien qu\'elle ne soit pas l\'identifiant principal, elle conserve ses propriétés d\'unicité et de minimalité, et peut être utilisée pour des recherches ou pour définir des contraintes d\'unicité (
 > UNIQUE en SQL).
 >
-> **Clé Étrangère :** Si les clés primaires garantissent l\'unicité au sein d\'une relation, les clés étrangères sont le mécanisme fondamental qui permet de créer et de maintenir des liens logiques *entre* les relations. Un ensemble d\'attributs FK dans une relation R1​ est une clé étrangère s\'il référence une clé candidate (généralement la clé primaire) PK d\'une relation R2​ (où R1​ et R2​ peuvent être la même relation). Cette contrainte, appelée\
-> **intégrité référentielle**, impose que pour chaque tuple de R1​, la valeur de FK doit soit correspondre à une valeur existante de PK dans un tuple de R2​, soit être entièrement nulle. Elle garantit qu\'une relation ne peut pas faire référence à un tuple qui n\'existe pas, prévenant ainsi les \"références orphelines\" et assurant la cohérence globale de la base de données. Par exemple, si nous avons une relation INSCRIPTION(NumCours, MatriculeÉtudiant), l\'attribut MatriculeÉtudiant serait une clé étrangère référençant la clé primaire Matricule de la table ÉTUDIANT.
+> **Clé Étrangère :** Si les clés primaires garantissent l\'unicité au sein d\'une relation, les clés étrangères sont le mécanisme fondamental qui permet de créer et de maintenir des liens logiques *entre* les relations. Un ensemble d\'attributs FK dans une relation R1 est une clé étrangère s\'il référence une clé candidate (généralement la clé primaire) PK d\'une relation R2 (où R1 et R2 peuvent être la même relation). Cette contrainte, appelée
+> **intégrité référentielle**, impose que pour chaque tuple de R1, la valeur de FK doit soit correspondre à une valeur existante de PK dans un tuple de R2, soit être entièrement nulle. Elle garantit qu\'une relation ne peut pas faire référence à un tuple qui n\'existe pas, prévenant ainsi les \"références orphelines\" et assurant la cohérence globale de la base de données. Par exemple, si nous avons une relation INSCRIPTION(NumCours, MatriculeÉtudiant), l\'attribut MatriculeÉtudiant serait une clé étrangère référençant la clé primaire Matricule de la table ÉTUDIANT.
 
 Ensemble, ces concepts forment le vocabulaire de base du modèle relationnel. Ils fournissent un cadre rigoureux pour décrire la structure des données et les contraintes qui les régissent, indépendamment de toute considération d\'implémentation physique. C\'est sur cette fondation solide que reposent les langages formels d\'interrogation.
 
@@ -115,19 +113,19 @@ L\'algèbre relationnelle repose sur un ensemble d\'opérateurs fondamentaux, do
 
 > **Sélection (σ) :** La sélection est un opérateur unaire qui agit comme un filtre horizontal sur une relation. Il sélectionne les tuples qui satisfont un prédicat (une condition logique) donné.
 
-**Notation formelle :** σP​(R)
+**Notation formelle :** σP(R)
 
-**Sémantique :** L\'expression σP​(R) produit une nouvelle relation ayant le même schéma que la relation R, mais ne contenant que les tuples de R pour lesquels le prédicat P est vrai. Le prédicat P est une formule booléenne composée de termes de la forme attribut op valeur ou attribut1 op attribut2, où op est un opérateur de comparaison (tel que =,=,\<,≤,\>,≥), et ces termes peuvent être combinés par les connecteurs logiques ∧ (ET), ∨ (OU) et ¬ (NON).
+**Sémantique :** L\'expression σP(R) produit une nouvelle relation ayant le même schéma que la relation R, mais ne contenant que les tuples de R pour lesquels le prédicat P est vrai. Le prédicat P est une formule booléenne composée de termes de la forme attribut op valeur ou attribut1 op attribut2, où op est un opérateur de comparaison (tel que =,=,\<,≤,\>,≥), et ces termes peuvent être combinés par les connecteurs logiques ∧ (ET), ∨ (OU) et ¬ (NON).
 
-**Exemple :** Pour trouver tous les étudiants inscrits en \'Informatique\' dans une relation ÉTUDIANT(Matricule, Nom, Programme), la requête serait : σProgramme='Informatique'​(EˊTUDIANT).
+**Exemple :** Pour trouver tous les étudiants inscrits en \'Informatique\' dans une relation ÉTUDIANT(Matricule, Nom, Programme), la requête serait : σProgramme='Informatique'(EˊTUDIANT).
 
 > **Projection (π) :** La projection est un opérateur unaire qui agit comme un filtre vertical. Il sélectionne certaines colonnes (attributs) d\'une relation et élimine les autres.
 
-**Notation formelle :** πA1​,A2​,...,Ak​​(R)
+**Notation formelle :** πA1,A2,...,Ak(R)
 
-**Sémantique :** L\'expression πA1​,...,Ak​​(R) produit une nouvelle relation dont le schéma ne contient que les attributs A1​,...,Ak​. Pour chaque tuple de la relation R en entrée, un nouveau tuple est construit en ne conservant que les valeurs des attributs spécifiés. Puisque le résultat est une relation (et donc un ensemble), tous les tuples dupliqués qui pourraient résulter de cette opération sont automatiquement éliminés.
+**Sémantique :** L\'expression πA1,...,Ak(R) produit une nouvelle relation dont le schéma ne contient que les attributs A1,...,Ak. Pour chaque tuple de la relation R en entrée, un nouveau tuple est construit en ne conservant que les valeurs des attributs spécifiés. Puisque le résultat est une relation (et donc un ensemble), tous les tuples dupliqués qui pourraient résulter de cette opération sont automatiquement éliminés.
 
-**Exemple :** Pour obtenir la liste des noms et programmes de tous les étudiants, la requête serait : πNom, Programme​(EˊTUDIANT). Si plusieurs étudiants nommés \'Dupont\' sont dans le programme \'Informatique\', une seule ligne (\'Dupont\', \'Informatique\') apparaîtra dans le résultat.
+**Exemple :** Pour obtenir la liste des noms et programmes de tous les étudiants, la requête serait : πNom, Programme(EˊTUDIANT). Si plusieurs étudiants nommés \'Dupont\' sont dans le programme \'Informatique\', une seule ligne (\'Dupont\', \'Informatique\') apparaîtra dans le résultat.
 
 > **Union (∪) :** L\'union est un opérateur binaire directement issu de la théorie des ensembles. Il combine les tuples de deux relations.
 
@@ -149,16 +147,16 @@ L\'algèbre relationnelle repose sur un ensemble d\'opérateurs fondamentaux, do
 
 **Notation formelle :** R×S
 
-**Sémantique :** L\'expression R×S produit une nouvelle relation dont le schéma est la concaténation des schémas de R et S. Chaque tuple de la relation résultante est formé en concaténant un tuple de R avec un tuple de S. Si R a une cardinalité de cR​ et une arité de aR​, et S a une cardinalité de cS​ et une arité de aS​, alors R×S aura une cardinalité de cR​×cS​ et une arité de aR​+aS​. Si des noms d\'attributs sont communs à\
+**Sémantique :** L\'expression R×S produit une nouvelle relation dont le schéma est la concaténation des schémas de R et S. Chaque tuple de la relation résultante est formé en concaténant un tuple de R avec un tuple de S. Si R a une cardinalité de cR et une arité de aR, et S a une cardinalité de cS et une arité de aS, alors R×S aura une cardinalité de cR×cS et une arité de aR+aS. Si des noms d\'attributs sont communs à
 R et S, ils doivent être renommés pour éviter toute ambiguïté.
 
 **Exemple :** Soit ÉTUDIANT(Matricule, Nom) et COURS(Code, Titre). La requête ÉTUDIANT \\times COURS produirait une grande relation où chaque étudiant est associé à chaque cours existant, qu\'il y soit inscrit ou non.
 
 > **Renommage (ρ) :** Le renommage est un opérateur unaire qui ne modifie pas les données d\'une relation, mais seulement son schéma (le nom de la relation ou les noms de ses attributs).
 
-**Notation formelle :** ρS(B1​,...,Bn​)​(R)
+**Notation formelle :** ρS(B1,...,Bn)(R)
 
-**Sémantique :** Cette expression prend la relation R et produit une relation identique en contenu, mais dont le nom est désormais S et les attributs sont renommés B1​,...,Bn​ dans l\'ordre. Le renommage est essentiel pour plusieurs raisons, notamment pour résoudre les conflits de noms dans les produits cartésiens ou pour effectuer des opérations sur une relation avec elle-même (auto-jointure).
+**Sémantique :** Cette expression prend la relation R et produit une relation identique en contenu, mais dont le nom est désormais S et les attributs sont renommés B1,...,Bn dans l\'ordre. Le renommage est essentiel pour plusieurs raisons, notamment pour résoudre les conflits de noms dans les produits cartésiens ou pour effectuer des opérations sur une relation avec elle-même (auto-jointure).
 
 **Exemple :** Pour comparer les salaires des employés avec ceux de leurs superviseurs dans une relation EMPLOYÉ(EmpID, Nom, Salaire, SupID), on pourrait effectuer un produit cartésien de la relation avec elle-même. Le renommage est alors indispensable : \$\\text{EMPLOYÉ} \\times \\rho\_{\\text{SUPERVISEUR}(\\text{EmpID_Sup}, \\text{Nom_Sup}, \\text{Salaire_Sup}, \\text{SupID_Sup})}(\\text{EMPLOYÉ})\$.
 
@@ -178,27 +176,28 @@ Pour des raisons de commodité et d\'efficacité d\'expression, d\'autres opéra
 
 > **Jointure (⋈) :** La jointure est sans doute l\'opération la plus importante et la plus utilisée en pratique. C\'est une variante du produit cartésien qui est sémantiquement plus significative. Elle combine les tuples de deux relations sur la base d\'une condition de jointure.
 
-**Thêta-jointure (R⋈P​S) :** C\'est la forme la plus générale. Elle est équivalente à un produit cartésien suivi d\'une sélection.
+**Thêta-jointure (R⋈PS) :** C\'est la forme la plus générale. Elle est équivalente à un produit cartésien suivi d\'une sélection.
 
-**Dérivation :** R⋈P​S=σP​(R×S). Le prédicat\
+**Dérivation :** R⋈PS=σP(R×S). Le prédicat
 P compare des attributs de R et de S.
 
 **Équi-jointure :** C\'est une thêta-jointure où le prédicat P ne contient que des comparaisons d\'égalité (=). C\'est le type de jointure le plus courant.
 
 **Jointure Naturelle (R⋈S) :** C\'est le cas le plus spécifique et le plus \"intelligent\". Elle effectue une équi-jointure sur tous les attributs qui ont le même nom dans les deux relations, puis projette le résultat pour éliminer les colonnes d\'attributs dupliquées.
 
-**Exemple :** Soient les relations ÉTUDIANT(Matricule, Nom) et INSCRIPTION(NumCours, Matricule). La jointure naturelle ÉTUDIANT \\bowtie INSCRIPTION produira une relation (Matricule, Nom, NumCours) en associant chaque étudiant à ses inscriptions sur la base de l\'attribut commun Matricule. C\'est une manière beaucoup plus concise et efficace d\'exprimer ce qui nécessiterait un produit cartésien, une sélection et une projection : πMatricule, Nom, NumCours​(σEˊTUDIANT.Matricule=INSCRIPTION.Matricule​(EˊTUDIANT×INSCRIPTION)).
+**Exemple :** Soient les relations ÉTUDIANT(Matricule, Nom) et INSCRIPTION(NumCours, Matricule). La jointure naturelle ÉTUDIANT \\bowtie INSCRIPTION produira une relation (Matricule, Nom, NumCours) en associant chaque étudiant à ses inscriptions sur la base de l\'attribut commun Matricule. C\'est une manière beaucoup plus concise et efficace d\'exprimer ce qui nécessiterait un produit cartésien, une sélection et une projection : πMatricule, Nom, NumCours(σEˊTUDIANT.Matricule=INSCRIPTION.Matricule(EˊTUDIANT×INSCRIPTION)).
 
 Le tableau suivant résume les opérateurs fondamentaux et dérivés de l\'algèbre relationnelle et établit un premier lien avec leur implémentation en SQL.
 
 **Table 30.1 : Résumé des Opérateurs de l\'Algèbre Relationnelle**
 
-  -------------------- ---------------- ------------------------------------------------------------------------------ --------------------------------------
+---
+
   Opérateur            Notation LaTeX   Description Sémantique                                                         Équivalent SQL (Conceptuel)
 
-  Sélection            σP​(R)            Filtre les tuples d\'une relation R selon un prédicat P.                       WHERE
+  Sélection            σP(R)            Filtre les tuples d\'une relation R selon un prédicat P.                       WHERE
 
-  Projection           πA1​,...,Ak​​(R)    Sélectionne les colonnes A1​,...,Ak​ de R et élimine les doublons.               SELECT DISTINCT
+  Projection           πA1,...,Ak(R)    Sélectionne les colonnes A1,...,Ak de R et élimine les doublons.               SELECT DISTINCT
 
   Union                R∪S              Combine les tuples de deux relations compatibles, en éliminant les doublons.   UNION
 
@@ -206,12 +205,13 @@ Le tableau suivant résume les opérateurs fondamentaux et dérivés de l\'algè
 
   Produit Cartésien    R×S              Combine chaque tuple de R avec chaque tuple de S.                              FROM R, S ou CROSS JOIN
 
-  Renommage            ρS​(R)            Renomme une relation ou ses attributs.                                         AS (alias)
+  Renommage            ρS(R)            Renomme une relation ou ses attributs.                                         AS (alias)
 
   Jointure Naturelle   R⋈S              Combine les tuples de R et S sur les attributs communs.                        NATURAL JOIN ou INNER JOIN\... USING
 
-  Équi-jointure        R⋈R.A=S.B​S       Combine les tuples de R et S si R.A=S.B.                                       INNER JOIN\... ON
-  -------------------- ---------------- ------------------------------------------------------------------------------ --------------------------------------
+  Équi-jointure        R⋈R.A=S.BS       Combine les tuples de R et S si R.A=S.B.                                       INNER JOIN\... ON
+
+---
 
 #### Le Calcul Relationnel : Une Approche Déclarative
 
@@ -227,7 +227,7 @@ Il existe deux variantes principales du calcul relationnel : le calcul relationn
 
 Dans le CRT, les variables représentent des tuples entiers d\'une relation.
 
-> **Forme générale :** Une requête en CRT s\'écrit sous la forme {t∣Φ(t)}, qui se lit \"l\'ensemble de tous les tuples t tels que la formule Φ(t) est vraie\". La variable\
+> **Forme générale :** Une requête en CRT s\'écrit sous la forme {t∣Φ(t)}, qui se lit \"l\'ensemble de tous les tuples t tels que la formule Φ(t) est vraie\". La variable
 > t est appelée une variable de tuple libre. La partie à gauche du \| spécifie les attributs à retourner, souvent des projections de la variable de tuple (ex: {t.Nom,t.Preˊnom∣...}).
 >
 > **Formules :** La formule Φ(t) est construite à partir d\'atomes, de connecteurs logiques et de quantificateurs.
@@ -242,28 +242,28 @@ s.A op u.B, où s et u sont des variables de tuples, A et B des attributs, et 
 
 **Construction de formules complexes :** Les atomes peuvent être combinés à l\'aide des connecteurs logiques ∧ (ET), ∨ (OU), et ¬ (NON). De plus, on peut utiliser les quantificateurs existentiel (∃) et universel (∀) pour lier des variables de tuple. Par exemple, (∃s)(R(s)∧...) signifie \"il existe un tuple s dans la relation R tel que\...\".
 
-> Exemple : Pour trouver le nom de tous les étudiants inscrits au cours \'CS101\', la requête en CRT serait :\
-> {s.Nom∣EˊTUDIANT(s)∧(∃i)(INSCRIPTION(i)∧i.Matricule=s.Matricule∧i.CodeCours='CS101')}\
+> Exemple : Pour trouver le nom de tous les étudiants inscrits au cours \'CS101\', la requête en CRT serait :
+> {s.Nom∣EˊTUDIANT(s)∧(∃i)(INSCRIPTION(i)∧i.Matricule=s.Matricule∧i.CodeCours='CS101')}
 > Cette requête se lit : \"Retourner l\'attribut Nom de tous les tuples s tels que s est un tuple de la relation ÉTUDIANT et il existe un tuple i dans la relation INSCRIPTION tel que le matricule de i est égal au matricule de s et le code de cours de i est \'CS101\'\".
 
 ##### Calcul Relationnel de Domaines (CRD)
 
 Dans le CRD, les variables ne représentent pas des tuples entiers, mais des valeurs issues des domaines des attributs.
 
-> **Forme générale :** Une requête en CRD s\'écrit sous la forme {⟨x1​,x2​,...,xn​⟩∣Φ(x1​,x2​,...,xn​)}, qui se lit \"l\'ensemble de tous les tuples ⟨x1​,...,xn​⟩ tels que la formule Φ est vraie pour les valeurs de domaine x1​,...,xn​\".
+> **Forme générale :** Une requête en CRD s\'écrit sous la forme {⟨x1,x2,...,xn⟩∣Φ(x1,x2,...,xn)}, qui se lit \"l\'ensemble de tous les tuples ⟨x1,...,xn⟩ tels que la formule Φ est vraie pour les valeurs de domaine x1,...,xn\".
 >
 > **Formules :** La formule Φ est construite de manière similaire au CRT, mais avec des atomes différents.
 
 **Atomes :** Les expressions atomiques peuvent être  :
 
-R(v1​,...,vk​), où R est une relation d\'arité k et chaque vi​ est soit une variable de domaine, soit une constante. Cet atome est vrai si le tuple ⟨v1​,...,vk​⟩ est dans la relation R.
+R(v1,...,vk), où R est une relation d\'arité k et chaque vi est soit une variable de domaine, soit une constante. Cet atome est vrai si le tuple ⟨v1,...,vk⟩ est dans la relation R.
 
 x op c, où x est une variable de domaine, c une constante et op un opérateur de comparaison.
 
 x op y, où x et y sont des variables de domaine.
 
-> Exemple : La même requête pour trouver le nom des étudiants inscrits au cours \'CS101\' s\'écrirait en CRD comme suit :\
-> {⟨n⟩∣(∃m,p,dn)(EˊTUDIANT(⟨m,n,p,dn⟩)∧(∃cc,me)(INSCRIPTION(⟨cc,me⟩)∧m=me∧cc='CS101'))}\
+> Exemple : La même requête pour trouver le nom des étudiants inscrits au cours \'CS101\' s\'écrirait en CRD comme suit :
+> {⟨n⟩∣(∃m,p,dn)(EˊTUDIANT(⟨m,n,p,dn⟩)∧(∃cc,me)(INSCRIPTION(⟨cc,me⟩)∧m=me∧cc='CS101'))}
 > Cette requête se lit : \"Retourner les tuples à une seule valeur ⟨n⟩ (le nom) tels qu\'il existe un matricule m, un prénom p et une date de naissance dn pour lesquels le tuple ⟨m,n,p,dn⟩ est dans ÉTUDIANT, et il existe un code de cours cc et un matricule d\'étudiant me pour lesquels le tuple ⟨cc,me⟩ est dans INSCRIPTION, avec la condition que les matricules m et me sont égaux et que le code de cours cc est \'CS101\'\".
 
 ##### Le Théorème de Codd et son Importance
@@ -300,10 +300,10 @@ Proposé par Peter Chen en 1976, le modèle Entité-Association (E-A) est un mod
 
 Le modèle E-A repose sur un petit nombre de concepts fondamentaux, représentés par des symboles graphiques distincts.
 
-> **Entité et Type d\'Entité :** Une **entité** est un \"objet\" du monde réel, concret (un étudiant, une voiture) ou abstrait (un cours, une commande), qui peut être distingué de manière unique des autres objets. Un\
+> **Entité et Type d\'Entité :** Une **entité** est un \"objet\" du monde réel, concret (un étudiant, une voiture) ou abstrait (un cours, une commande), qui peut être distingué de manière unique des autres objets. Un
 > **type d\'entité** est un ensemble d\'entités qui partagent les mêmes propriétés. Par exemple, \'Jean Tremblay\' est une occurrence (une entité) du type d\'entité ÉTUDIANT. Dans un diagramme E-A, un type d\'entité est généralement représenté par un rectangle contenant son nom.
 >
-> **Attributs :** Les attributs sont les propriétés ou les caractéristiques qui décrivent un type d\'entité. Par exemple, les attributs du type d\'entité\
+> **Attributs :** Les attributs sont les propriétés ou les caractéristiques qui décrivent un type d\'entité. Par exemple, les attributs du type d\'entité
 > ÉTUDIANT pourraient être Matricule, Nom et DateDeNaissance. Les attributs sont souvent représentés par des ovales reliés au rectangle de leur entité. Le modèle E-A permet une classification fine des attributs :
 
 **Attributs simples vs. composites :** Un attribut simple est atomique (ex: Âge). Un attribut composite peut être décomposé en sous-parties ayant leur propre signification (ex: l\'attribut Adresse peut être composé des attributs simples Numéro, Rue, Ville, CodePostal).
@@ -312,10 +312,10 @@ Le modèle E-A repose sur un petit nombre de concepts fondamentaux, représenté
 
 **Attributs dérivés :** Un attribut dérivé est un attribut dont la valeur peut être calculée ou déduite à partir d\'un autre attribut (ex: l\'attribut Âge peut être dérivé de l\'attribut DateDeNaissance). Il est souvent représenté par un ovale en pointillé.
 
-> **Identifiant (Clé) :** Un identifiant (ou clé) est un ensemble d\'un ou plusieurs attributs dont les valeurs identifient de manière unique chaque occurrence d\'un type d\'entité. Par exemple,\
+> **Identifiant (Clé) :** Un identifiant (ou clé) est un ensemble d\'un ou plusieurs attributs dont les valeurs identifient de manière unique chaque occurrence d\'un type d\'entité. Par exemple,
 > Matricule est un identifiant pour ÉTUDIANT. L\'attribut formant l\'identifiant est généralement souligné dans le diagramme.
 >
-> **Association et Type d\'Association :** Une **association** est un lien sémantique qui existe entre une ou plusieurs entités. Un **type d\'association** est une classification d\'associations similaires entre un ou plusieurs types d\'entités. Par exemple,\
+> **Association et Type d\'Association :** Une **association** est un lien sémantique qui existe entre une ou plusieurs entités. Un **type d\'association** est une classification d\'associations similaires entre un ou plusieurs types d\'entités. Par exemple,
 > INSCRIT_À est un type d\'association qui relie les types d\'entités ÉTUDIANT et COURS. Un type d\'association est représenté par un losange reliant les rectangles des entités participantes. Le **degré** d\'une association est le nombre de types d\'entités qui y participent. Les associations binaires (degré 2) sont les plus courantes, mais des associations ternaires (degré 3) ou plus sont possibles. Une **association récursive** est une association où un même type d\'entité participe plusieurs fois, dans des rôles différents (ex: un type d\'entité EMPLOYÉ peut être lié à lui-même par l\'association SUPERVISE, où un employé joue le rôle de \"superviseur\" et un autre celui de \"supervisé\").
 >
 > **Cardinalités :** Les cardinalités (ou multiplicités) sont des contraintes qui spécifient le nombre d\'occurrences d\'une association auxquelles une entité peut participer. C\'est l\'un des aspects les plus cruciaux de la modélisation E-A. Pour chaque participation d\'un type d\'entité E à une association A, on spécifie une paire de valeurs (min, max)  :
@@ -346,8 +346,8 @@ Une fois le modèle conceptuel E-A validé, l\'étape suivante consiste à le tr
 
 **Exemple :** Le type d\'entité PROFESSEUR(NumProf, Nom, Bureau) devient la relation PROFESSEUR(NumProf, Nom, Bureau).
 
-> Étape 2 : Mapper les Associations Binaires\
-> Le traitement d\'une association binaire entre deux entités E1​ et E2​ dépend de sa cardinalité maximale.
+> Étape 2 : Mapper les Associations Binaires
+> Le traitement d\'une association binaire entre deux entités E1 et E2 dépend de sa cardinalité maximale.
 
 **Cas 1 : Association Un-à-plusieurs (1:N)**
 
@@ -389,7 +389,8 @@ Le tableau suivant synthétise cet algorithme, fournissant un guide de référen
 
 **Table 30.2 : Algorithme de Mapping E-A vers Relationnel**
 
-  ------------------------- -------------------------------------------------------------------------------------------------------------- -------------------------------------------------
+---
+
   Concept E-A               Règle de Traduction                                                                                            Exemple de Schéma Relationnel
 
   **Entité Forte**          Devient une table. L\'identifiant devient la clé primaire.                                                     Entité(ID_Entité, Attribut1,\...)
@@ -403,7 +404,8 @@ Le tableau suivant synthétise cet algorithme, fournissant un guide de référen
   **Attribut Multivalué**   Création d\'une nouvelle table. La clé primaire est la composition de la clé de l\'entité et de l\'attribut.   Entité_Attribut(ID_Entité_FK, Attribut)
 
   **Entité Faible**         Devient une table. La clé primaire est la composition de la clé de l\'entité forte et du discriminateur.       Entité_Faible(ID_Forte_FK, Discriminateur,\...)
-  ------------------------- -------------------------------------------------------------------------------------------------------------- -------------------------------------------------
+
+---
 
 Ce processus de traduction, bien que systématique, peut produire un schéma relationnel qui, tout en étant une représentation fidèle du modèle conceptuel, n\'est pas encore optimal. Il peut contenir des redondances et être sujet à des anomalies. C\'est là qu\'intervient la normalisation.
 
@@ -433,7 +435,7 @@ La normalisation vise précisément à décomposer cette \"grosse\" relation en 
 
 L\'outil formel pour analyser la structure d\'une relation et identifier ces problèmes est la **dépendance fonctionnelle (DF)**.
 
-> **Définition Formelle :** Soit R un schéma de relation avec un ensemble d\'attributs U. Soient X et Y deux sous-ensembles de U. On dit qu\'il existe une dépendance fonctionnelle de X vers Y, notée X→Y, si et seulement si pour toute instance valide de R, chaque fois que deux tuples ont la même valeur pour l\'ensemble d\'attributs X, ils doivent nécessairement avoir la même valeur pour l\'ensemble d\'attributs Y. Autrement dit, la valeur de\
+> **Définition Formelle :** Soit R un schéma de relation avec un ensemble d\'attributs U. Soient X et Y deux sous-ensembles de U. On dit qu\'il existe une dépendance fonctionnelle de X vers Y, notée X→Y, si et seulement si pour toute instance valide de R, chaque fois que deux tuples ont la même valeur pour l\'ensemble d\'attributs X, ils doivent nécessairement avoir la même valeur pour l\'ensemble d\'attributs Y. Autrement dit, la valeur de
 > X détermine de manière unique la valeur de Y.
 
 Dans notre exemple INSCRIPTION_BRUTE, nous avons les DFs suivantes :
@@ -460,7 +462,7 @@ NumProf \\to NomProf (un numéro de professeur identifie un seul nom).
 
 Initialiser X+ avec les attributs de X.
 
-Répéter tant que X+ change : Pour chaque DF A→B dans l\'ensemble des DFs données, si A est un sous-ensemble de X+, alors ajouter les attributs de B à X+.\
+Répéter tant que X+ change : Pour chaque DF A→B dans l\'ensemble des DFs données, si A est un sous-ensemble de X+, alors ajouter les attributs de B à X+.
 Cet algorithme est fondamental pour la conception. Il permet notamment de vérifier si un ensemble d\'attributs K est une superclé (en vérifiant si K+ contient tous les attributs de la relation) et de trouver toutes les clés candidates.
 
 #### Le Processus de Décomposition à travers les Formes Normales
@@ -477,7 +479,7 @@ La normalisation est un processus itératif qui consiste à vérifier si une rel
 
 > **Prérequis :** La relation doit être en 1NF.
 >
-> **Définition :** Une relation est en deuxième forme normale (2NF) si tout attribut n\'appartenant à aucune clé candidate (attribut non-clé) est **pleinement fonctionnellement dépendant** de chaque clé candidate. Une dépendance\
+> **Définition :** Une relation est en deuxième forme normale (2NF) si tout attribut n\'appartenant à aucune clé candidate (attribut non-clé) est **pleinement fonctionnellement dépendant** de chaque clé candidate. Une dépendance
 > K→A est \"pleine\" si on ne peut retirer aucun attribut de K sans que la dépendance ne soit plus valide. Si un attribut non-clé ne dépend que d\'une *partie* d\'une clé candidate composite, on parle de **dépendance partielle**.
 >
 > **Problème résolu :** La 2NF élimine les dépendances partielles, qui sont une source majeure de redondance.
@@ -486,14 +488,14 @@ La normalisation est un processus itératif qui consiste à vérifier si une rel
 
 La DF Matricule \\to NomÉtudiant est une dépendance partielle, car NomÉtudiant (attribut non-clé) dépend de Matricule, qui n\'est qu\'une partie de la clé primaire.
 
-La DF CodeCours \\to {TitreCours, NumProf, NomProf} est aussi une dépendance partielle.\
+La DF CodeCours \\to {TitreCours, NumProf, NomProf} est aussi une dépendance partielle.
 Pour passer en 2NF, on décompose la relation en extrayant les dépendances partielles dans de nouvelles relations :
 
 ÉTUDIANT(Matricule, NomÉtudiant)
 
 COURS_PROF(CodeCours, TitreCours, NumProf, NomProf)
 
-INSCRIPTION(Matricule, CodeCours) (conserve le lien N:M)\
+INSCRIPTION(Matricule, CodeCours) (conserve le lien N:M)
 Cette décomposition est dite \"sans perte d\'information\" car on peut reconstituer la relation originale en effectuant des jointures naturelles entre les nouvelles relations.
 
 ##### Troisième Forme Normale (3NF)
@@ -508,12 +510,12 @@ Cette décomposition est dite \"sans perte d\'information\" car on peut reconsti
 
 Nous avons les DFs CodeCours \\to NumProf et NumProf \\to NomProf.
 
-Puisque CodeCours est la clé, NumProf est un attribut non-clé. Et NomProf est un attribut non-clé qui dépend de NumProf. C\'est une dépendance transitive : CodeCours \\to NumProf \\to NomProf.\
+Puisque CodeCours est la clé, NumProf est un attribut non-clé. Et NomProf est un attribut non-clé qui dépend de NumProf. C\'est une dépendance transitive : CodeCours \\to NumProf \\to NomProf.
 Pour passer en 3NF, on décompose à nouveau :
 
 COURS(CodeCours, TitreCours, NumProf)
 
-PROFESSEUR(NumProf, NomProf)\
+PROFESSEUR(NumProf, NomProf)
 Notre schéma final, entièrement en 3NF, est donc composé de quatre relations : ÉTUDIANT(Matricule, NomÉtudiant), PROFESSEUR(NumProf, NomProf), COURS(CodeCours, TitreCours, NumProf) et INSCRIPTION(Matricule, CodeCours). Toutes les anomalies initiales ont été résolues.
 
 ##### Forme Normale de Boyce-Codd (BCNF)
@@ -536,7 +538,7 @@ Nous avons donc les DFs : {Étudiant, Cours} \\to Professeur et Professeur \\to 
 
 Les clés candidates sont {Étudiant, Cours} et {Étudiant, Professeur}. La relation est en 3NF (tous les attributs sont premiers).
 
-Cependant, la DF Professeur \\to Cours viole la BCNF, car Professeur n\'est pas une superclé.\
+Cependant, la DF Professeur \\to Cours viole la BCNF, car Professeur n\'est pas une superclé.
 Pour passer en BCNF, on décompose en :
 
 PROF_COURS(Professeur, Cours)
@@ -547,7 +549,8 @@ Le tableau suivant résume la hiérarchie des formes normales.
 
 **Table 30.3 : Synthèse des Formes Normales**
 
-  -------------------- --------------------------------------------------------------------------------------------- --------------------------------------------------------------------
+---
+
   Forme Normale        Condition Requise                                                                             Anomalie Éliminée
 
   **1NF**              Tous les attributs doivent être atomiques.                                                    Groupes répétitifs, attributs non-atomiques.
@@ -557,7 +560,8 @@ Le tableau suivant résume la hiérarchie des formes normales.
   **3NF**              Être en 2NF et aucun attribut non-clé ne doit dépendre transitivement d\'une clé candidate.   Dépendances transitives.
 
   **BCNF**             Pour toute DF non-triviale X→Y, X doit être une superclé.                                     Redondances restantes dues aux clés candidates qui se chevauchent.
-  -------------------- --------------------------------------------------------------------------------------------- --------------------------------------------------------------------
+
+---
 
 En pratique, atteindre la 3NF est généralement considéré comme un objectif standard pour une bonne conception de base de données, offrant un excellent compromis entre l\'élimination de la redondance et la complexité du schéma. La BCNF est l\'idéal théorique, recherché lorsque la rigueur est primordiale.
 
@@ -595,64 +599,64 @@ CHECK : Permet de spécifier une contrainte de domaine personnalisée, c\'est-à
 
 > SQL
 
-CREATE TABLE PROFESSEUR (\
-NumProf INTEGER PRIMARY KEY,\
-NomProf VARCHAR(50) NOT NULL\
-);\
-\
-CREATE TABLE ETUDIANT (\
-Matricule INTEGER PRIMARY KEY,\
-NomEtudiant VARCHAR(50) NOT NULL\
-);\
-\
-CREATE TABLE COURS (\
-CodeCours VARCHAR(10) PRIMARY KEY,\
-TitreCours VARCHAR(100) NOT NULL,\
-NumProf INTEGER NOT NULL,\
-CONSTRAINT fk_cours_professeur\
-FOREIGN KEY (NumProf) REFERENCES PROFESSEUR(NumProf)\
-);\
-\
-CREATE TABLE INSCRIPTION (\
-Matricule INTEGER,\
-CodeCours VARCHAR(10),\
-CONSTRAINT pk_inscription\
-PRIMARY KEY (Matricule, CodeCours),\
-CONSTRAINT fk_inscription_etudiant\
-FOREIGN KEY (Matricule) REFERENCES ETUDIANT(Matricule),\
-CONSTRAINT fk_inscription_cours\
-FOREIGN KEY (CodeCours) REFERENCES COURS(CodeCours)\
+CREATE TABLE PROFESSEUR (
+NumProf INTEGER PRIMARY KEY,
+NomProf VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE ETUDIANT (
+Matricule INTEGER PRIMARY KEY,
+NomEtudiant VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE COURS (
+CodeCours VARCHAR(10) PRIMARY KEY,
+TitreCours VARCHAR(100) NOT NULL,
+NumProf INTEGER NOT NULL,
+CONSTRAINT fk_cours_professeur
+FOREIGN KEY (NumProf) REFERENCES PROFESSEUR(NumProf)
+);
+
+CREATE TABLE INSCRIPTION (
+Matricule INTEGER,
+CodeCours VARCHAR(10),
+CONSTRAINT pk_inscription
+PRIMARY KEY (Matricule, CodeCours),
+CONSTRAINT fk_inscription_etudiant
+FOREIGN KEY (Matricule) REFERENCES ETUDIANT(Matricule),
+CONSTRAINT fk_inscription_cours
+FOREIGN KEY (CodeCours) REFERENCES COURS(CodeCours)
 );
 
 #### ALTER TABLE et DROP TABLE
 
-> **ALTER TABLE :** Cette commande est utilisée pour modifier la structure d\'une table existante. Elle permet d\'ajouter, de supprimer ou de modifier des colonnes, ainsi que d\'ajouter ou de supprimer des contraintes. C\'est l\'outil de l\'évolution du schéma.\
-> SQL\
-> \-- Ajouter une colonne \'Bureau\' à la table PROFESSEUR\
+> **ALTER TABLE :** Cette commande est utilisée pour modifier la structure d\'une table existante. Elle permet d\'ajouter, de supprimer ou de modifier des colonnes, ainsi que d\'ajouter ou de supprimer des contraintes. C\'est l\'outil de l\'évolution du schéma.
+> SQL
+> \-- Ajouter une colonne \'Bureau\' à la table PROFESSEUR
 > ALTER TABLE PROFESSEUR ADD Bureau VARCHAR(20);
 >
-> **DROP TABLE :** Cette commande supprime définitivement une table, sa structure et toutes les données qu\'elle contient. C\'est une opération irréversible qui doit être utilisée avec la plus grande prudence.\
-> SQL\
+> **DROP TABLE :** Cette commande supprime définitivement une table, sa structure et toutes les données qu\'elle contient. C\'est une opération irréversible qui doit être utilisée avec la plus grande prudence.
+> SQL
 > DROP TABLE INSCRIPTION;
 
 ### 30.3.2 Langage de Manipulation de Données (LMD/DML)
 
 Le LMD, ou DML (Data Manipulation Language), est utilisé pour gérer les données elles-mêmes, c\'est-à-dire les tuples au sein des relations créées avec le LDD.
 
-> **INSERT INTO :** Permet d\'ajouter un ou plusieurs nouveaux tuples (lignes) à une table.\
-> SQL\
-> INSERT INTO PROFESSEUR (NumProf, NomProf) VALUES (101, \'Codd\');\
+> **INSERT INTO :** Permet d\'ajouter un ou plusieurs nouveaux tuples (lignes) à une table.
+> SQL
+> INSERT INTO PROFESSEUR (NumProf, NomProf) VALUES (101, \'Codd\');
 > INSERT INTO ETUDIANT (Matricule, NomEtudiant) VALUES (12345, \'Tremblay\');
 >
-> **UPDATE :** Modifie les valeurs des attributs dans des tuples existants. La clause WHERE est essentielle pour spécifier *quels* tuples doivent être modifiés. Omettre la clause WHERE mettrait à jour toutes les lignes de la table.\
-> SQL\
-> UPDATE PROFESSEUR\
-> SET NomProf = \'Date\'\
+> **UPDATE :** Modifie les valeurs des attributs dans des tuples existants. La clause WHERE est essentielle pour spécifier *quels* tuples doivent être modifiés. Omettre la clause WHERE mettrait à jour toutes les lignes de la table.
+> SQL
+> UPDATE PROFESSEUR
+> SET NomProf = \'Date\'
 > WHERE NumProf = 101;
 >
-> **DELETE FROM :** Supprime des tuples d\'une table. De même, la clause WHERE est cruciale pour cibler les tuples à supprimer. Sans clause WHERE, toutes les lignes de la table sont supprimées.\
-> SQL\
-> DELETE FROM ETUDIANT\
+> **DELETE FROM :** Supprime des tuples d\'une table. De même, la clause WHERE est cruciale pour cibler les tuples à supprimer. Sans clause WHERE, toutes les lignes de la table sont supprimées.
+> SQL
+> DELETE FROM ETUDIANT
 > WHERE Matricule = 12345;
 
 ### 30.3.3 Langage d\'Interrogation de Données (LID/DQL) : L\'Art de la Requête SELECT
@@ -663,20 +667,20 @@ Le LID, ou DQL (Data Query Language), est sans doute la partie la plus riche et 
 
 Une requête SQL de base se compose de trois clauses principales qui correspondent directement aux trois opérateurs fondamentaux de l\'algèbre :
 
-SELECT\... FROM\... WHERE\... est l\'équivalent syntaxique de l\'expression algébrique π(σ(R1​×R2​×...)).12
+SELECT\... FROM\... WHERE\... est l\'équivalent syntaxique de l\'expression algébrique π(σ(R1×R2×...)).12
 
-> SELECT A1,\..., An : Spécifie les colonnes à retourner. Cela correspond à l\'opérateur de **Projection** πA1​,\...,An​​. L\'utilisation de SELECT \* sélectionne toutes les colonnes. À noter que, par défaut, SQL ne supprime pas les doublons, contrairement à la projection formelle. Pour obtenir le comportement ensembliste, il faut utiliser SELECT DISTINCT.
+> SELECT A1,\..., An : Spécifie les colonnes à retourner. Cela correspond à l\'opérateur de **Projection** πA1,\...,An. L\'utilisation de SELECT \* sélectionne toutes les colonnes. À noter que, par défaut, SQL ne supprime pas les doublons, contrairement à la projection formelle. Pour obtenir le comportement ensembliste, il faut utiliser SELECT DISTINCT.
 >
-> FROM R1, R2,\... : Spécifie les tables sources. Si plusieurs tables sont listées, séparées par des virgules, SQL effectue un **Produit Cartésien** R1​×R2​×....
+> FROM R1, R2,\... : Spécifie les tables sources. Si plusieurs tables sont listées, séparées par des virgules, SQL effectue un **Produit Cartésien** R1×R2×....
 >
-> WHERE prédicat : Filtre les lignes du résultat intermédiaire (le produit cartésien) en fonction d\'une condition. Cela correspond à l\'opérateur de **Sélection** σpreˊdicat​.
+> WHERE prédicat : Filtre les lignes du résultat intermédiaire (le produit cartésien) en fonction d\'une condition. Cela correspond à l\'opérateur de **Sélection** σpreˊdicat.
 
 **Exemple :** Pour trouver le nom des étudiants et le titre des cours auxquels ils sont inscrits, une approche \"algébrique directe\" serait :
 
 > SQL
 
-SELECT E.NomEtudiant, C.TitreCours\
-FROM ETUDIANT AS E, INSCRIPTION AS I, COURS AS C\
+SELECT E.NomEtudiant, C.TitreCours
+FROM ETUDIANT AS E, INSCRIPTION AS I, COURS AS C
 WHERE E.Matricule = I.Matricule AND I.CodeCours = C.CodeCours;
 
 Cette requête effectue d\'abord le produit cartésien des trois tables, puis sélectionne les lignes où les matricules et les codes de cours correspondent, et enfin projette les colonnes désirées.
@@ -685,24 +689,24 @@ Cette requête effectue d\'abord le produit cartésien des trois tables, puis s�
 
 Bien que le produit cartésien explicite soit théoriquement correct, il est peu lisible et souvent inefficace. SQL fournit une syntaxe dédiée, la clause JOIN, qui est l\'implémentation directe et optimisée de l\'opérateur de jointure algébrique (⋈). Elle combine la spécification des tables et la condition de jointure en une seule expression sémantiquement plus claire.
 
-> **INNER JOIN :** C\'est la jointure la plus commune. Elle retourne uniquement les lignes pour lesquelles la condition de jointure (spécifiée dans la clause ON) est satisfaite dans les deux tables. C\'est l\'équivalent d\'une équi-jointure.\
-> SQL\
-> \-- Même requête que précédemment, mais avec la syntaxe JOIN\
-> SELECT E.NomEtudiant, C.TitreCours\
-> FROM ETUDIANT AS E\
-> INNER JOIN INSCRIPTION AS I ON E.Matricule = I.Matricule\
+> **INNER JOIN :** C\'est la jointure la plus commune. Elle retourne uniquement les lignes pour lesquelles la condition de jointure (spécifiée dans la clause ON) est satisfaite dans les deux tables. C\'est l\'équivalent d\'une équi-jointure.
+> SQL
+> \-- Même requête que précédemment, mais avec la syntaxe JOIN
+> SELECT E.NomEtudiant, C.TitreCours
+> FROM ETUDIANT AS E
+> INNER JOIN INSCRIPTION AS I ON E.Matricule = I.Matricule
 > INNER JOIN COURS AS C ON I.CodeCours = C.CodeCours;
 >
 > **LEFT OUTER JOIN (ou LEFT JOIN) :** Cette jointure externe retourne *toutes* les lignes de la table de gauche (celle mentionnée avant le JOIN), et les lignes correspondantes de la table de droite. S\'il n\'y a pas de correspondance dans la table de droite pour une ligne de la table de gauche, les colonnes de la table de droite seront remplies avec la valeur NULL.
 
 **Usage :** Utile pour trouver des entités qui n\'ont pas de correspondance. Par exemple, pour lister tous les étudiants et les cours auxquels ils sont inscrits, y compris ceux qui ne sont inscrits à aucun cours :
 
-> SQL\
-> SELECT E.NomEtudiant, I.CodeCours\
-> FROM ETUDIANT AS E\
+> SQL
+> SELECT E.NomEtudiant, I.CodeCours
+> FROM ETUDIANT AS E
 > LEFT JOIN INSCRIPTION AS I ON E.Matricule = I.Matricule;
 >
-> **RIGHT OUTER JOIN (ou RIGHT JOIN) :** C\'est le symétrique de LEFT JOIN. Elle retourne toutes les lignes de la table de droite et les correspondances de la table de gauche, avec des NULL si nécessaire. En pratique, elle est moins utilisée car toute\
+> **RIGHT OUTER JOIN (ou RIGHT JOIN) :** C\'est le symétrique de LEFT JOIN. Elle retourne toutes les lignes de la table de droite et les correspondances de la table de gauche, avec des NULL si nécessaire. En pratique, elle est moins utilisée car toute
 > RIGHT JOIN peut être réécrite en LEFT JOIN en inversant l\'ordre des tables.
 >
 > **FULL OUTER JOIN :** Cette jointure combine les comportements de LEFT et RIGHT JOIN. Elle retourne toutes les lignes des deux tables. Lorsqu\'une correspondance existe, les lignes sont combinées. Sinon, la ligne de chaque table est conservée, avec des NULL pour les colonnes de l\'autre table.
@@ -711,7 +715,8 @@ Bien que le produit cartésien explicite soit théoriquement correct, il est peu
 
 **Table 30.4 : Comparaison des Types de Jointures SQL**
 
-  ------------------ --------------------------------- ---------------------------------------------------------------------------------------------------------------- ------------------------------------
+---
+
   Type de Jointure   Syntaxe SQL (Exemple)             Description                                                                                                      Représentation (Diagramme de Venn)
 
   **INNER JOIN**     A INNER JOIN B ON A.key = B.key   Retourne uniquement les lignes où la clé de jointure correspond dans les deux tables A et B.                     Intersection de A et B.
@@ -721,7 +726,8 @@ Bien que le produit cartésien explicite soit théoriquement correct, il est peu
   **RIGHT JOIN**     A RIGHT JOIN B ON A.key = B.key   Retourne toutes les lignes de la table de droite (B), et les lignes correspondantes de la table de gauche (A).   Ensemble B complet.
 
   **FULL JOIN**      A FULL JOIN B ON A.key = B.key    Retourne toutes les lignes lorsqu\'il y a une correspondance dans l\'une ou l\'autre des tables.                 Union de A et B.
-  ------------------ --------------------------------- ---------------------------------------------------------------------------------------------------------------- ------------------------------------
+
+---
 
 #### Agrégation et Groupement
 
@@ -729,29 +735,29 @@ SQL étend l\'algèbre relationnelle de base avec de puissantes capacités d\'ag
 
 > **Fonctions d\'Agrégation :** Ce sont des fonctions qui opèrent sur un ensemble de valeurs et retournent une seule valeur de résumé. Les plus courantes sont COUNT() (nombre de lignes), SUM() (somme des valeurs), AVG() (moyenne), MIN() (minimum) et MAX() (maximum).
 >
-> **GROUP BY :** La clause GROUP BY est utilisée pour partitionner les lignes d\'une table en groupes. Les lignes ayant la même valeur pour la ou les colonnes spécifiées dans GROUP BY sont placées dans le même groupe. Les fonctions d\'agrégation opèrent alors sur chaque groupe individuellement, plutôt que sur la table entière.\
-> SQL\
-> \-- Compter le nombre d\'étudiants inscrits dans chaque cours\
-> SELECT CodeCours, COUNT(Matricule) AS NombreInscrits\
-> FROM INSCRIPTION\
+> **GROUP BY :** La clause GROUP BY est utilisée pour partitionner les lignes d\'une table en groupes. Les lignes ayant la même valeur pour la ou les colonnes spécifiées dans GROUP BY sont placées dans le même groupe. Les fonctions d\'agrégation opèrent alors sur chaque groupe individuellement, plutôt que sur la table entière.
+> SQL
+> \-- Compter le nombre d\'étudiants inscrits dans chaque cours
+> SELECT CodeCours, COUNT(Matricule) AS NombreInscrits
+> FROM INSCRIPTION
 > GROUP BY CodeCours;
 >
-> **HAVING :** La clause HAVING est au GROUP BY ce que la clause WHERE est au FROM. Elle permet de filtrer les *groupes* en fonction d\'une condition portant sur le résultat d\'une fonction d\'agrégation. La clause WHERE filtre les *lignes* avant le groupement, tandis que HAVING filtre les *groupes* après le groupement.\
-> SQL\
-> \-- Afficher uniquement les cours ayant plus de 30 inscrits\
-> SELECT CodeCours, COUNT(Matricule) AS NombreInscrits\
-> FROM INSCRIPTION\
-> GROUP BY CodeCours\
+> **HAVING :** La clause HAVING est au GROUP BY ce que la clause WHERE est au FROM. Elle permet de filtrer les *groupes* en fonction d\'une condition portant sur le résultat d\'une fonction d\'agrégation. La clause WHERE filtre les *lignes* avant le groupement, tandis que HAVING filtre les *groupes* après le groupement.
+> SQL
+> \-- Afficher uniquement les cours ayant plus de 30 inscrits
+> SELECT CodeCours, COUNT(Matricule) AS NombreInscrits
+> FROM INSCRIPTION
+> GROUP BY CodeCours
 > HAVING COUNT(Matricule) \> 30;
 
 #### Tri des Résultats
 
-> **ORDER BY :** La clause ORDER BY est utilisée pour trier l\'ensemble de résultats final. Elle doit être la dernière clause de la requête SELECT. On peut trier sur une ou plusieurs colonnes, en ordre ascendant (ASC, par défaut) ou descendant (DESC). Cette opération sort du cadre strict du modèle relationnel (qui ne définit pas d\'ordre), mais est essentielle pour la présentation des résultats.\
-> SQL\
-> \-- Lister les cours par nombre d\'inscrits, du plus populaire au moins populaire\
-> SELECT CodeCours, COUNT(Matricule) AS NombreInscrits\
-> FROM INSCRIPTION\
-> GROUP BY CodeCours\
+> **ORDER BY :** La clause ORDER BY est utilisée pour trier l\'ensemble de résultats final. Elle doit être la dernière clause de la requête SELECT. On peut trier sur une ou plusieurs colonnes, en ordre ascendant (ASC, par défaut) ou descendant (DESC). Cette opération sort du cadre strict du modèle relationnel (qui ne définit pas d\'ordre), mais est essentielle pour la présentation des résultats.
+> SQL
+> \-- Lister les cours par nombre d\'inscrits, du plus populaire au moins populaire
+> SELECT CodeCours, COUNT(Matricule) AS NombreInscrits
+> FROM INSCRIPTION
+> GROUP BY CodeCours
 > ORDER BY NombreInscrits DESC;
 
 #### Requêtes Complexes : Structurer la Logique
@@ -760,37 +766,31 @@ Pour des problèmes complexes, imbriquer des expressions algébriques les unes d
 
 > **Sous-requêtes (Subqueries) :** Une sous-requête est une instruction SELECT complète imbriquée à l\'intérieur d\'une autre instruction SQL (dans les clauses SELECT, FROM, WHERE ou HAVING).
 
-**Sous-requête scalaire :** Retourne une seule valeur (une ligne, une colonne). Peut être utilisée partout où une valeur unique est attendue.\
-SQL\
-\-- Trouver les étudiants dont le nom est le premier par ordre alphabétique\
-SELECT NomEtudiant FROM ETUDIANT\
+**Sous-requête scalaire :** Retourne une seule valeur (une ligne, une colonne). Peut être utilisée partout où une valeur unique est attendue.
+SQL
+\-- Trouver les étudiants dont le nom est le premier par ordre alphabétique
+SELECT NomEtudiant FROM ETUDIANT
 WHERE NomEtudiant = (SELECT MIN(NomEtudiant) FROM ETUDIANT);
 
-**Sous-requête multi-lignes :** Retourne une seule colonne avec plusieurs lignes. Elle est souvent utilisée avec des opérateurs comme IN, NOT IN, ANY, ALL.\
-SQL\
-\-- Trouver les professeurs qui n\'enseignent aucun cours\
-SELECT NomProf FROM PROFESSEUR\
+**Sous-requête multi-lignes :** Retourne une seule colonne avec plusieurs lignes. Elle est souvent utilisée avec des opérateurs comme IN, NOT IN, ANY, ALL.
+SQL
+\-- Trouver les professeurs qui n\'enseignent aucun cours
+SELECT NomProf FROM PROFESSEUR
 WHERE NumProf NOT IN (SELECT DISTINCT NumProf FROM COURS);
 
-**Sous-requête corrélée :** C\'est une sous-requête qui dépend de la requête externe pour ses valeurs. Elle est évaluée une fois pour chaque ligne traitée par la requête externe, ce qui peut être coûteux en performance.\
-SQL\
-\-- Trouver les cours ayant plus d\'inscrits que la moyenne des inscriptions par cours\
-SELECT C.TitreCours\
-FROM COURS C\
-WHERE (SELECT COUNT(\*) FROM INSCRIPTION I WHERE I.CodeCours = C.CodeCours)\
-\> (SELECT AVG(NombreInscrits) FROM (SELECT COUNT(\*) AS NombreInscrits FROM INSCRIPTION GROUP BY CodeCours) AS Compte);
+**Sous-requête corrélée :** C\'est une sous-requête qui dépend de la requête externe pour ses valeurs. Elle est évaluée une fois pour chaque ligne traitée par la requête externe, ce qui peut être coûteux en performance.SQL\-- Trouver les cours ayant plus d\'inscrits que la moyenne des inscriptions par coursSELECT C.TitreCoursFROM COURS CWHERE (SELECT COUNT(\*) FROM INSCRIPTION I WHERE I.CodeCours = C.CodeCours)\> (SELECT AVG(NombreInscrits) FROM (SELECT COUNT(\*) AS NombreInscrits FROM INSCRIPTION GROUP BY CodeCours) AS Compte);
 
-> **Expressions de Table Communes (CTE - Common Table Expressions) :** Introduites par la clause WITH, les CTE permettent de définir un ensemble de résultats temporaire et nommé, qui peut être référencé dans la suite de la requête SELECT, INSERT, UPDATE ou DELETE. Elles améliorent considérablement la lisibilité et la modularité des requêtes complexes en décomposant le problème en étapes logiques, à la manière de l\'assignation de résultats intermédiaires en algèbre.\
-> SQL\
-> \-- Même requête que la précédente, mais avec une CTE\
-> WITH CompteInscriptions AS (\
-> SELECT CodeCours, COUNT(\*) AS NombreInscrits\
-> FROM INSCRIPTION\
-> GROUP BY CodeCours\
-> )\
-> SELECT C.TitreCours\
-> FROM COURS C\
-> JOIN CompteInscriptions CI ON C.CodeCours = CI.CodeCours\
+> **Expressions de Table Communes (CTE - Common Table Expressions) :** Introduites par la clause WITH, les CTE permettent de définir un ensemble de résultats temporaire et nommé, qui peut être référencé dans la suite de la requête SELECT, INSERT, UPDATE ou DELETE. Elles améliorent considérablement la lisibilité et la modularité des requêtes complexes en décomposant le problème en étapes logiques, à la manière de l\'assignation de résultats intermédiaires en algèbre.
+> SQL
+> \-- Même requête que la précédente, mais avec une CTE
+> WITH CompteInscriptions AS (
+> SELECT CodeCours, COUNT(\*) AS NombreInscrits
+> FROM INSCRIPTION
+> GROUP BY CodeCours
+> )
+> SELECT C.TitreCours
+> FROM COURS C
+> JOIN CompteInscriptions CI ON C.CodeCours = CI.CodeCours
 > WHERE CI.NombreInscrits \> (SELECT AVG(NombreInscrits) FROM CompteInscriptions);
 
 **CTE récursives :** Une forme avancée de CTE peut se référencer elle-même, permettant de traiter des données hiérarchiques ou des graphes, comme un organigramme d\'entreprise ou une nomenclature de produit.
@@ -799,14 +799,14 @@ WHERE (SELECT COUNT(\*) FROM INSCRIPTION I WHERE I.CodeCours = C.CodeCours)\
 
 Une vue est une table virtuelle dont le contenu est défini par une requête SELECT. Elle ne stocke pas de données elle-même, mais présente les données des tables sous-jacentes d\'une manière prédéfinie.
 
-> **CREATE VIEW :** La commande pour créer une vue est simple. On donne un nom à la vue et on spécifie la requête SELECT qui la définit.\
-> SQL\
-> CREATE VIEW V_COURS_POPULAIRES AS\
-> SELECT CodeCours, COUNT(Matricule) AS NombreInscrits\
-> FROM INSCRIPTION\
-> GROUP BY CodeCours\
-> HAVING COUNT(Matricule) \> 30;\
-> \
+> **CREATE VIEW :** La commande pour créer une vue est simple. On donne un nom à la vue et on spécifie la requête SELECT qui la définit.
+> SQL
+> CREATE VIEW V_COURS_POPULAIRES AS
+> SELECT CodeCours, COUNT(Matricule) AS NombreInscrits
+> FROM INSCRIPTION
+> GROUP BY CodeCours
+> HAVING COUNT(Matricule) \> 30;
+>
 > Une fois la vue créée, on peut l\'interroger comme s\'il s\'agissait d\'une table normale : SELECT \* FROM V_COURS_POPULAIRES;.
 >
 > **Utilité des Vues :**
@@ -818,4 +818,3 @@ Une vue est une table virtuelle dont le contenu est défini par une requête SEL
 **Indépendance logique des données :** Si la structure des tables de base change (par exemple, une table est décomposée en deux), on peut parfois redéfinir une vue pour qu\'elle présente les données de la même manière qu\'auparavant. Cela permet aux applications qui utilisent la vue de continuer à fonctionner sans modification, préservant ainsi l\'indépendance entre la logique applicative et le schéma physique des données.
 
 En conclusion, le langage SQL, loin d\'être un simple outil technique, est l\'aboutissement de décennies de recherche en théorie des bases de données. Sa structure et ses commandes sont le reflet direct des concepts formels du modèle relationnel, offrant un pont robuste et éprouvé entre les besoins humains d\'interrogation de données et la capacité de la machine à les exécuter de manière efficace et optimisée. La maîtrise de SQL passe inévitablement par la compréhension de ces fondements théoriques.
-

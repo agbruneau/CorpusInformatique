@@ -1,5 +1,3 @@
-Le dernier volume explore les domaines de pointe qui redéfinissent les capacités des systèmes informatiques et leur interaction avec le monde réel. L\'**Intelligence Artificielle (IA) et l\'Apprentissage Automatique (ML)** sont traités en profondeur, depuis les méthodes de recherche classiques jusqu\'aux architectures d\'apprentissage profond (Deep Learning) et à l\'apprentissage par renforcement. Le Cursus examine ensuite des **Domaines d\'Application Avancés**, tels que le Traitement du Langage Naturel (TALN), la Vision par Ordinateur, l\'Infographie, la Robotique et l\'Interaction Homme-Machine (IHM). Enfin, le Cursus se conclut par une réflexion essentielle sur les **Aspects Sociétaux et les Horizons Futurs**. Reconnaissant que la technologie n\'est pas neutre, il aborde les questions d\'éthique professionnelle, de droit (protection de la vie privée), et les défis posés par les biais algorithmiques. Il ouvre également la voie aux prochaines révolutions, notamment l\'informatique quantique et le calcul haute performance.
-
 # Chapitre I.41 : Fondements Intelligence Artificielle (IA)
 
 Ce chapitre inaugural du volume consacré à l\'intelligence artificielle (IA) a pour vocation d\'établir les fondations conceptuelles, historiques et algorithmiques de la discipline. Nous débuterons par un survol de l\'histoire et des débats philosophiques qui ont façonné l\'IA, de sa naissance officielle à la conférence de Dartmouth jusqu\'aux questionnements contemporains sur la nature de la pensée et de la conscience. Nous introduirons ensuite le paradigme de l\'agent intelligent, un cadre formel unificateur qui nous permettra de structurer notre exploration du domaine. Le cœur de ce chapitre sera consacré à l\'un des piliers de l\'IA classique : la résolution de problèmes par la recherche. Nous aborderons cette thématique avec une rigueur algorithmique croissante, en commençant par les stratégies de recherche non informées, puis en introduisant la puissance des heuristiques dans les recherches informées comme l\'algorithme A\*. Nous explorerons ensuite des approches alternatives telles que la recherche locale et les algorithmes évolutionnaires. Enfin, nous étendrons notre analyse à des environnements plus complexes : les jeux à deux joueurs, qui nécessitent une recherche adversariale, et les problèmes de satisfaction de contraintes (CSP), qui représentent une classe de problèmes structurés omniprésents en ingénierie et en recherche opérationnelle. À travers ce parcours, l\'objectif est de doter le lecteur d\'une compréhension profonde des mécanismes fondamentaux qui permettent à un agent de raisonner, de planifier et d\'agir de manière intelligente dans un environnement formalisé.
@@ -26,7 +24,7 @@ C\'est dans ce climat d\'effervescence intellectuelle que John McCarthy, un jeun
 
 Ce document historique n\'était pas un simple plan de projet technique ; il s\'agissait d\'une déclaration philosophique radicale. Il reposait sur une conjecture audacieuse qui constitue encore aujourd\'hui le postulat fondamental de l\'IA :
 
-> « L\'étude doit procéder sur la base de la conjecture que chaque aspect de l\'apprentissage ou toute autre caractéristique de l\'intelligence peut en principe être décrit avec une telle précision qu\'une machine peut être fabriquée pour le simuler. » 
+> « L\'étude doit procéder sur la base de la conjecture que chaque aspect de l\'apprentissage ou toute autre caractéristique de l\'intelligence peut en principe être décrit avec une telle précision qu\'une machine peut être fabriquée pour le simuler. »
 
 Cette affirmation représente une rupture philosophique majeure avec la vision dominante de l\'ordinateur. Elle postule que l\'intelligence, dans toutes ses manifestations --- apprentissage, raisonnement, créativité, langage --- n\'est pas une propriété métaphysique insaisissable, mais un processus de traitement de l\'information suffisamment complexe pour être formalisé et, par conséquent, calculable. C\'est cet acte de foi en la calculabilité de l\'intelligence qui a véritablement distingué l\'IA naissante de l\'informatique générale, en orientant le nouveau domaine vers l\'exploration des *inconnues* de la cognition, plutôt que vers la simple application d\'algorithmes *connus*.
 
@@ -128,7 +126,7 @@ Avant de pouvoir résoudre un problème, un agent doit le formuler de manière p
 
 > **L\'espace d\'états (S) :** C\'est l\'ensemble de toutes les configurations possibles que l\'environnement peut occuper. Chaque état est une représentation complète de la situation à un instant donné. Par exemple, dans un problème de navigation routière, un état pourrait être défini par la ville où se trouve l\'agent. Dans le jeu du taquin, un état est une configuration spécifique des tuiles sur le plateau. L\'espace d\'états peut être fini ou infini.
 >
-> **L\'état initial (s0​) :** C\'est l\'état dans lequel l\'agent commence sa recherche. Il est un élément de l\'espace d\'états S.
+> **L\'état initial (s0) :** C\'est l\'état dans lequel l\'agent commence sa recherche. Il est un élément de l\'espace d\'états S.
 >
 > **Les actions (ou opérateurs) :** Il s\'agit d\'une description des actions possibles pour l\'agent. On définit souvent une fonction ACTIONS(s) qui retourne l\'ensemble des actions applicables dans un état s∈S. Par exemple, depuis une ville donnée, les actions possibles sont les routes menant aux villes voisines.
 >
@@ -176,24 +174,24 @@ La recherche en largeur d\'abord (BFS) explore l\'arbre de recherche niveau par 
 
 L\'algorithme BFS utilise également un ensemble de nœuds **explorés** (ou *closed list*) pour éviter de traiter plusieurs fois le même état, ce qui est crucial dans les graphes contenant des cycles.
 
-fonction RECHERCHE-EN-LARGEUR(problème) retourne une solution ou un échec\
-nœud ← NŒUD(ÉTAT=problème.ÉTAT-INITIAL, CHEMIN-COÛT=0)\
-si problème.TEST-BUT(nœud.ÉTAT) alors retourner SOLUTION(nœud)\
-\
-frontière ← une file FIFO avec nœud comme seul élément\
-explorés ← un ensemble vide\
-\
-boucle infinie :\
-si FRONTIÈRE-EST-VIDE?(frontière) alors retourner échec\
-\
-nœud ← POP(frontière) // Retire le premier élément de la file\
-ajouter nœud.ÉTAT à explorés\
-\
-pour chaque action dans problème.ACTIONS(nœud.ÉTAT) :\
-enfant ← NŒUD-ENFANT(problème, nœud, action)\
-\
-si enfant.ÉTAT n\'est pas dans explorés et n\'est pas dans frontière :\
-si problème.TEST-BUT(enfant.ÉTAT) alors retourner SOLUTION(enfant)\
+fonction RECHERCHE-EN-LARGEUR(problème) retourne une solution ou un échec
+nœud ← NŒUD(ÉTAT=problème.ÉTAT-INITIAL, CHEMIN-COÛT=0)
+si problème.TEST-BUT(nœud.ÉTAT) alors retourner SOLUTION(nœud)
+
+frontière ← une file FIFO avec nœud comme seul élément
+explorés ← un ensemble vide
+
+boucle infinie :
+si FRONTIÈRE-EST-VIDE?(frontière) alors retourner échec
+
+nœud ← POP(frontière) // Retire le premier élément de la file
+ajouter nœud.ÉTAT à explorés
+
+pour chaque action dans problème.ACTIONS(nœud.ÉTAT) :
+enfant ← NŒUD-ENFANT(problème, nœud, action)
+
+si enfant.ÉTAT n\'est pas dans explorés et n\'est pas dans frontière :
+si problème.TEST-BUT(enfant.ÉTAT) alors retourner SOLUTION(enfant)
 ajouter enfant à la fin de la frontière
 
 **Analyse des propriétés**
@@ -216,18 +214,18 @@ La recherche en profondeur d\'abord (DFS) explore l\'arbre de recherche en suiva
 
 **Pseudo-code (version récursive)**
 
-fonction RECHERCHE-EN-PROFONDEUR-RÉCURSIVE(nœud, problème, explorés) retourne une solution ou un échec\
-si problème.TEST-BUT(nœud.ÉTAT) alors retourner SOLUTION(nœud)\
-\
-ajouter nœud.ÉTAT à explorés\
-\
-pour chaque action dans problème.ACTIONS(nœud.ÉTAT) :\
-enfant ← NŒUD-ENFANT(problème, nœud, action)\
-\
-si enfant.ÉTAT n\'est pas dans explorés :\
-résultat ← RECHERCHE-EN-PROFONDEUR-RÉCURSIVE(enfant, problème, explorés)\
-si résultat n\'est pas un échec alors retourner résultat\
-\
+fonction RECHERCHE-EN-PROFONDEUR-RÉCURSIVE(nœud, problème, explorés) retourne une solution ou un échec
+si problème.TEST-BUT(nœud.ÉTAT) alors retourner SOLUTION(nœud)
+
+ajouter nœud.ÉTAT à explorés
+
+pour chaque action dans problème.ACTIONS(nœud.ÉTAT) :
+enfant ← NŒUD-ENFANT(problème, nœud, action)
+
+si enfant.ÉTAT n\'est pas dans explorés :
+résultat ← RECHERCHE-EN-PROFONDEUR-RÉCURSIVE(enfant, problème, explorés)
+si résultat n\'est pas un échec alors retourner résultat
+
 retourner échec
 
 **Analyse des propriétés**
@@ -236,7 +234,7 @@ retourner échec
 >
 > **Optimalité :** DFS n\'est pas optimale. Elle retourne la première solution qu\'elle trouve, qui peut se trouver très profondément dans l\'arbre et être beaucoup plus coûteuse qu\'une autre solution située sur une branche explorée plus tard.
 >
-> **Complexité temporelle :** Dans le pire des cas, DFS peut explorer l\'intégralité de l\'arbre de recherche jusqu\'à sa profondeur maximale m. La complexité temporelle est donc de O(bm). Si\
+> **Complexité temporelle :** Dans le pire des cas, DFS peut explorer l\'intégralité de l\'arbre de recherche jusqu\'à sa profondeur maximale m. La complexité temporelle est donc de O(bm). Si
 > m est beaucoup plus grand que d, DFS peut être beaucoup plus lente que BFS.
 >
 > **Complexité spatiale :** C\'est le principal avantage de DFS. L\'algorithme n\'a besoin de stocker en mémoire que le chemin actuel depuis la racine jusqu\'au nœud courant, ainsi que les frères non explorés des nœuds de ce chemin. La taille de la frontière est donc de l\'ordre de b×m. La complexité spatiale est de O(bm), ce qui est linéaire en la profondeur maximale et bien meilleur que la complexité exponentielle de BFS.
@@ -263,10 +261,10 @@ La qualité d\'une heuristique est cruciale. Deux propriétés sont particulièr
 
 > **Admissibilité :** Une fonction heuristique h est dite **admissible** si, pour chaque nœud n, elle ne surestime jamais le coût réel pour atteindre le but. Formellement, h(n)≤h∗(n), où h∗(n) est le coût réel du chemin optimal de n à un état but. Une heuristique admissible est une heuristique \"optimiste\". La distance à vol d\'oiseau est admissible car le chemin le plus court entre deux points est la ligne droite.
 >
-> Cohérence (ou Monotonicité) : Une heuristique h est dite cohérente (ou monotone) si, pour chaque nœud n et chaque successeur n′ de n généré par une action a de coût c(n,a,n′), le coût estimé depuis n n\'est pas supérieur au coût de l\'action pour aller de n à n′ plus le coût estimé depuis n′. Formellement, l\'inégalité du triangle doit être respectée :\
-> \
-> h(n)≤c(n,a,n′)+h(n′)\
-> \
+> Cohérence (ou Monotonicité) : Une heuristique h est dite cohérente (ou monotone) si, pour chaque nœud n et chaque successeur n′ de n généré par une action a de coût c(n,a,n′), le coût estimé depuis n n\'est pas supérieur au coût de l\'action pour aller de n à n′ plus le coût estimé depuis n′. Formellement, l\'inégalité du triangle doit être respectée :
+>
+> h(n)≤c(n,a,n′)+h(n′)
+>
 > Une conséquence de la cohérence est que les valeurs de f(n) (que nous définirons ci-dessous) le long de n\'importe quel chemin sont non décroissantes. Il est possible de prouver que toute heuristique cohérente est également admissible.43
 
 #### L\'algorithme A\*
@@ -291,26 +289,26 @@ Ainsi, f(n) représente une estimation du coût total du chemin le moins cher pa
 
 Pour implémenter cette stratégie, A\* maintient la frontière comme une **file de priorité**, ordonnée par les valeurs de f(n).
 
-fonction RECHERCHE-A-ETOILE(problème) retourne une solution ou un échec\
-nœud ← NŒUD(ÉTAT=problème.ÉTAT-INITIAL, CHEMIN-COÛT=0)\
-frontière ← une file de priorité ordonnée par CHEMIN-COÛT + h(n), avec nœud comme seul élément\
-explorés ← un ensemble vide\
-\
-boucle infinie :\
-si FRONTIÈRE-EST-VIDE?(frontière) alors retourner échec\
-\
-nœud ← POP(frontière) // Retire le nœud avec le plus petit f(n)\
-\
-si problème.TEST-BUT(nœud.ÉTAT) alors retourner SOLUTION(nœud)\
-\
-ajouter nœud.ÉTAT à explorés\
-\
-pour chaque action dans problème.ACTIONS(nœud.ÉTAT) :\
-enfant ← NŒUD-ENFANT(problème, nœud, action)\
-\
-si enfant.ÉTAT n\'est pas dans explorés et n\'est pas dans frontière :\
-ajouter enfant à la frontière\
-sinon si enfant.ÉTAT est dans frontière avec un CHEMIN-COÛT plus élevé :\
+fonction RECHERCHE-A-ETOILE(problème) retourne une solution ou un échec
+nœud ← NŒUD(ÉTAT=problème.ÉTAT-INITIAL, CHEMIN-COÛT=0)
+frontière ← une file de priorité ordonnée par CHEMIN-COÛT + h(n), avec nœud comme seul élément
+explorés ← un ensemble vide
+
+boucle infinie :
+si FRONTIÈRE-EST-VIDE?(frontière) alors retourner échec
+
+nœud ← POP(frontière) // Retire le nœud avec le plus petit f(n)
+
+si problème.TEST-BUT(nœud.ÉTAT) alors retourner SOLUTION(nœud)
+
+ajouter nœud.ÉTAT à explorés
+
+pour chaque action dans problème.ACTIONS(nœud.ÉTAT) :
+enfant ← NŒUD-ENFANT(problème, nœud, action)
+
+si enfant.ÉTAT n\'est pas dans explorés et n\'est pas dans frontière :
+ajouter enfant à la frontière
+sinon si enfant.ÉTAT est dans frontière avec un CHEMIN-COÛT plus élevé :
 remplacer ce nœud de la frontière par enfant
 
 **Analyse des propriétés et preuve d\'optimalité**
@@ -323,35 +321,33 @@ remplacer ce nœud de la frontière par enfant
 
 La preuve de cette propriété fondamentale se fait par contradiction.
 
-> **Hypothèse :** Supposons que A\* ne soit pas optimal. Cela signifie qu\'il termine sa recherche en retournant un chemin vers un état but sous-optimal G2​, alors qu\'il existe un chemin vers un état but optimal G1​. Notons C∗ le coût du chemin optimal (vers G1​) et C2​ le coût du chemin sous-optimal trouvé (vers G2​). Par hypothèse, nous avons C2​\>C∗.
+> **Hypothèse :** Supposons que A\* ne soit pas optimal. Cela signifie qu\'il termine sa recherche en retournant un chemin vers un état but sous-optimal G2, alors qu\'il existe un chemin vers un état but optimal G1. Notons C∗ le coût du chemin optimal (vers G1) et C2 le coût du chemin sous-optimal trouvé (vers G2). Par hypothèse, nous avons C2\>C∗.
 >
-> **État de la frontière :** Puisque C2​\>C∗, et que A\* a exploré les chemins par ordre croissant de f(n), il doit exister au moins un nœud n sur le chemin optimal vers G1​ qui n\'a pas encore été exploré au moment où G2​ est sélectionné dans la frontière pour être \"expandu\".
+> **État de la frontière :** Puisque C2\>C∗, et que A\* a exploré les chemins par ordre croissant de f(n), il doit exister au moins un nœud n sur le chemin optimal vers G1 qui n\'a pas encore été exploré au moment où G2 est sélectionné dans la frontière pour être \"expandu\".
 >
-> Condition de sélection : A\* a choisi d\'explorer G2​ plutôt que n. Cela signifie que la valeur f de G2​ était inférieure ou égale à la valeur f de n :\
-> \
-> f(G2​)≤f(n)
+> Condition de sélection : A\* a choisi d\'explorer G2 plutôt que n. Cela signifie que la valeur f de G2 était inférieure ou égale à la valeur f de n :
 >
-> Analyse de f(G2​) : Pour un nœud but, l\'heuristique est nulle par définition (h(G2​)=0). Par conséquent, sa valeur f est égale à son coût de chemin g :\
-> \
-> f(G2​)=g(G2​)+h(G2​)=g(G2​)=C2​
+> f(G2)≤f(n)
 >
-> **Analyse de f(n) :** Pour le nœud n qui se trouve sur le chemin optimal vers G1​, sa valeur f est f(n)=g(n)+h(n).
+> Analyse de f(G2) : Pour un nœud but, l\'heuristique est nulle par définition (h(G2)=0). Par conséquent, sa valeur f est égale à son coût de chemin g :
+>
+> f(G2)=g(G2)+h(G2)=g(G2)=C2
+>
+> **Analyse de f(n) :** Pour le nœud n qui se trouve sur le chemin optimal vers G1, sa valeur f est f(n)=g(n)+h(n).
 
 Le coût g(n) est le coût du chemin de l\'état initial à n. Puisque n est sur le chemin optimal, ce coût est optimal.
 
-L\'heuristique h(n) est admissible, ce qui signifie qu\'elle est inférieure ou égale au coût réel optimal pour aller de n à G1​, noté h∗(n): h(n)≤h∗(n).
+L\'heuristique h(n) est admissible, ce qui signifie qu\'elle est inférieure ou égale au coût réel optimal pour aller de n à G1, noté h∗(n): h(n)≤h∗(n).
 
-La somme du coût optimal pour atteindre n et du coût optimal pour aller de n à G1​ est, par définition, le coût optimal total C∗. Donc, g(n)+h∗(n)=C∗.
+La somme du coût optimal pour atteindre n et du coût optimal pour aller de n à G1 est, par définition, le coût optimal total C∗. Donc, g(n)+h∗(n)=C∗.
 
-En combinant ces éléments, nous obtenons :\
-\
-f(n)=g(n)+h(n)≤g(n)+h∗(n)=C∗
+En combinant ces éléments, nous obtenons :f(n)=g(n)+h(n)≤g(n)+h∗(n)=C∗
 
-> La contradiction : En rassemblant les inégalités des étapes 3, 4 et 5, nous avons :\
-> \
-> C2​=f(G2​)≤f(n)≤C∗\
-> \
-> Cela implique que C2​≤C∗. Or, notre hypothèse de départ était que C2​\>C∗. Nous avons atteint une contradiction.
+> La contradiction : En rassemblant les inégalités des étapes 3, 4 et 5, nous avons :
+>
+> C2=f(G2)≤f(n)≤C∗
+>
+> Cela implique que C2≤C∗. Or, notre hypothèse de départ était que C2\>C∗. Nous avons atteint une contradiction.
 >
 > **Conclusion :** L\'hypothèse initiale est donc fausse. A\* ne peut pas retourner un chemin sous-optimal si son heuristique est admissible. L\'algorithme est donc optimal.
 >
@@ -383,9 +379,9 @@ L\'algorithme commence avec une solution aléatoire et une température T élev�
 
 La probabilité d\'accepter un \"mauvais\" mouvement est donnée par le critère de Metropolis :
 
-P(accepter)=e−TΔE​
+P(accepter)=e−TΔE
 
-où ΔE est l\'augmentation du coût (Enouveau​−Eactuel​) et T est la température actuelle.51
+où ΔE est l\'augmentation du coût (Enouveau−Eactuel) et T est la température actuelle.51
 
 > Lorsque T est élevée, la probabilité d\'accepter un mauvais mouvement est grande, ce qui permet à l\'algorithme d\'explorer largement l\'espace des solutions (phase d\'exploration).
 >
@@ -393,20 +389,20 @@ où ΔE est l\'augmentation du coût (Enouveau​−Eactuel​) et T est la temp
 
 **Schéma de refroidissement et pseudo-code**
 
-La manière dont la température T diminue au fil du temps est appelée le **schéma de refroidissement**. Un schéma courant est la décroissance géométrique : Tk+1​=αTk​, où α est un facteur proche de 1 (par exemple, 0.99).
+La manière dont la température T diminue au fil du temps est appelée le **schéma de refroidissement**. Un schéma courant est la décroissance géométrique : Tk+1=αTk, où α est un facteur proche de 1 (par exemple, 0.99).
 
-fonction RECUIT-SIMULÉ(problème, schéma_refroidissement) retourne une solution\
-courant ← NŒUD(ÉTAT=problème.ÉTAT-INITIAL)\
-pour t de 1 à ∞ :\
-T ← schéma_refroidissement(t)\
-si T = 0 alors retourner courant.ÉTAT\
-\
-prochain ← un successeur choisi aléatoirement de courant\
-ΔE ← VALEUR(prochain.ÉTAT) - VALEUR(courant.ÉTAT)\
-\
-si ΔE \< 0 : // Pour la minimisation, une valeur plus faible est meilleure\
-courant ← prochain\
-sinon :\
+fonction RECUIT-SIMULÉ(problème, schéma_refroidissement) retourne une solution
+courant ← NŒUD(ÉTAT=problème.ÉTAT-INITIAL)
+pour t de 1 à ∞ :
+T ← schéma_refroidissement(t)
+si T = 0 alors retourner courant.ÉTAT
+
+prochain ← un successeur choisi aléatoirement de courant
+ΔE ← VALEUR(prochain.ÉTAT) - VALEUR(courant.ÉTAT)
+
+si ΔE \< 0 : // Pour la minimisation, une valeur plus faible est meilleure
+courant ← prochain
+sinon :
 courant ← prochain avec une probabilité e\^(-ΔE / T)
 
 Le recuit simulé est un algorithme puissant qui, avec un schéma de refroidissement suffisamment lent, converge en probabilité vers l\'optimum global. En pratique, on utilise des schémas plus rapides qui trouvent de très bonnes solutions, bien que non garanties d\'être optimales.
@@ -433,23 +429,24 @@ L\'algorithme procède par itérations, appelées générations. À chaque gén�
 
 **Pseudo-code**
 
-fonction ALGORITHME-GÉNÉTIQUE(population, fonction_fitness) retourne un individu\
-répéter :\
-nouvelle_population ← ensemble vide\
-pour i de 1 à TAILLE(population) :\
-parent1 ← SÉLECTION-ALÉATOIRE(population, fonction_fitness)\
-parent2 ← SÉLECTION-ALÉATOIRE(population, fonction_fitness)\
-enfant ← CROISEMENT(parent1, parent2)\
-si (petite probabilité) alors enfant ← MUTATION(enfant)\
-ajouter enfant à nouvelle_population\
-population ← nouvelle_population\
-jusqu\'à ce qu\'un critère d\'arrêt soit satisfait (ex: nombre de générations, convergence)\
-\
+fonction ALGORITHME-GÉNÉTIQUE(population, fonction_fitness) retourne un individu
+répéter :
+nouvelle_population ← ensemble vide
+pour i de 1 à TAILLE(population) :
+parent1 ← SÉLECTION-ALÉATOIRE(population, fonction_fitness)
+parent2 ← SÉLECTION-ALÉATOIRE(population, fonction_fitness)
+enfant ← CROISEMENT(parent1, parent2)
+si (petite probabilité) alors enfant ← MUTATION(enfant)
+ajouter enfant à nouvelle_population
+population ← nouvelle_population
+jusqu\'à ce qu\'un critère d\'arrêt soit satisfait (ex: nombre de générations, convergence)
+
 retourner le meilleur individu de la population
 
 Les algorithmes génétiques sont particulièrement efficaces pour les problèmes d\'optimisation complexes et de grande dimension où l\'espace de recherche est vaste et mal compris.
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------------ ------------ -------------------------- ---------------------
+---
+
   Algorithme                                                                                                                                                                                                                                                                                                                                      Complétude   Optimalité   Complexité Temporelle      Complexité Spatiale
 
   **Recherche en largeur (BFS)**                                                                                                                                                                                                                                                                                                                  Oui¹         Oui²         O(bd)                      O(bd)
@@ -460,16 +457,17 @@ Les algorithmes génétiques sont particulièrement efficaces pour les problème
 
   **A\***                                                                                                                                                                                                                                                                                                                                         Oui¹         Oui⁴         Dépend de l\'heuristique   O(bd)
 
-  *Tableau 41.1 : Comparaison des propriétés des principaux algorithmes de recherche systématique. Les complexités sont exprimées en fonction du facteur de branchement b, de la profondeur de la solution optimale d, de la profondeur maximale de l\'arbre m, du coût de la solution optimale \$C\^*\$, et du coût minimal d\'une action ϵ.\*                                                        
+  *Tableau 41.1 : Comparaison des propriétés des principaux algorithmes de recherche systématique. Les complexités sont exprimées en fonction du facteur de branchement b, de la profondeur de la solution optimale d, de la profondeur maximale de l\'arbre m, du coût de la solution optimale \$C\^*\$, et du coût minimal d\'une action ϵ.\*
 
-  ¹ Si le facteur de branchement b est fini.                                                                                                                                                                                                                                                                                                                                                           
+  ¹ Si le facteur de branchement b est fini.
 
-  ² Si tous les coûts d\'action sont identiques.                                                                                                                                                                                                                                                                                                                                                       
+  ² Si tous les coûts d\'action sont identiques.
 
-  ³ Complète dans les espaces d\'états finis si la détection de cycles est implémentée.                                                                                                                                                                                                                                                                                                                
+  ³ Complète dans les espaces d\'états finis si la détection de cycles est implémentée.
 
-  ⁴ Si l\'heuristique est admissible (ou cohérente pour les graphes).                                                                                                                                                                                                                                                                                                                                  
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------------ ------------ -------------------------- ---------------------
+  ⁴ Si l\'heuristique est admissible (ou cohérente pour les graphes).
+
+---
 
 ## 41.3 Recherche Adversariale et Théorie des Jeux
 
@@ -553,7 +551,7 @@ Considérons l\'arbre de jeu suivant, où les valeurs aux feuilles sont les scor
 >
 > De retour à la racine A (MAX), la valeur de A est maintenant max(−∞,5)=5. α pour A devient 5.
 >
-> On explore le second enfant de A, C (MIN). Appel pour C avec (α=5,β=+∞).\
+> On explore le second enfant de A, C (MIN). Appel pour C avec (α=5,β=+∞).
 > \... et ainsi de suite.
 
 L\'efficacité de l\'élagage alpha-bêta n\'est pas constante ; elle est extraordinairement dépendante de l\'ordre dans lequel les coups sont explorés. Si, par un heureux hasard ou une bonne heuristique, l\'algorithme explore toujours le meilleur coup en premier pour chaque nœud, alors l\'élagage est maximal. Dans ce cas idéal, la complexité temporelle passe de O(bd) à environ O(bd/2). Cela signifie que, pour le même temps de calcul, on peut explorer deux fois plus profondément l\'arbre de jeu, un gain exponentiel. À l\'inverse, si les pires coups sont explorés en premier, aucune coupure ne se produit, et l\'algorithme se dégrade pour retrouver la performance de Minimax. Cette sensibilité à l\'ordre des coups explique pourquoi les moteurs de jeu réels investissent des efforts considérables dans des heuristiques d\'ordonnancement des coups (telles que la *killer heuristic* ou l\'utilisation de tables de transposition) pour présenter les coups les plus prometteurs en premier à l\'algorithme alpha-bêta, transformant ainsi une simple optimisation en un outil pratique et puissant pour la recherche profonde dans les arbres de jeu.
@@ -590,11 +588,11 @@ De nombreux problèmes en intelligence artificielle et en ingénierie ne consist
 
 Un problème de satisfaction de contraintes est défini formellement par un triplet (X,D,C)  :
 
-> **Variables (X) :** Un ensemble fini de variables, X={X1​,X2​,\...,Xn​}.
+> **Variables (X) :** Un ensemble fini de variables, X={X1,X2,\...,Xn}.
 >
-> **Domaines (D) :** Un ensemble de domaines, D={D1​,D2​,\...,Dn​}, où chaque domaine Di​ est l\'ensemble fini des valeurs possibles pour la variable Xi​.
+> **Domaines (D) :** Un ensemble de domaines, D={D1,D2,\...,Dn}, où chaque domaine Di est l\'ensemble fini des valeurs possibles pour la variable Xi.
 >
-> **Contraintes (C) :** Un ensemble fini de contraintes, C={C1​,C2​,\...,Cm​}. Chaque contrainte Cj​ est définie sur un sous-ensemble de variables (son *scope*) et spécifie les combinaisons de valeurs autorisées pour ces variables.
+> **Contraintes (C) :** Un ensemble fini de contraintes, C={C1,C2,\...,Cm}. Chaque contrainte Cj est définie sur un sous-ensemble de variables (son *scope*) et spécifie les combinaisons de valeurs autorisées pour ces variables.
 
 Une **assignation** est une attribution de valeur à une ou plusieurs variables. Une assignation est **consistante** (ou légale) si elle ne viole aucune contrainte. Une assignation est **complète** si toutes les variables ont reçu une valeur. Une **solution** à un CSP est une assignation qui est à la fois complète et consistante.
 
@@ -626,18 +624,18 @@ Ce processus se poursuit jusqu\'à ce qu\'une assignation complète et consistan
 
 L\'algorithme est naturellement implémenté de manière récursive.
 
-fonction RECHERCHE-BACKTRACKING(assignation, csp) retourne une solution ou un échec\
-si assignation est complète alors retourner assignation\
-\
-var ← SÉLECTIONNER-VARIABLE-NON-ASSIGNÉE(csp)\
-\
-pour chaque valeur dans ORDONNER-VALEURS-DOMAINE(var, assignation, csp) :\
-si valeur est consistante avec assignation selon les contraintes de csp :\
-ajouter {var = valeur} à assignation\
-résultat ← RECHERCHE-BACKTRACKING(assignation, csp)\
-si résultat n\'est pas un échec alors retourner résultat\
-retirer {var = valeur} de assignation // Backtrack\
-\
+fonction RECHERCHE-BACKTRACKING(assignation, csp) retourne une solution ou un échec
+si assignation est complète alors retourner assignation
+
+var ← SÉLECTIONNER-VARIABLE-NON-ASSIGNÉE(csp)
+
+pour chaque valeur dans ORDONNER-VALEURS-DOMAINE(var, assignation, csp) :
+si valeur est consistante avec assignation selon les contraintes de csp :
+ajouter {var = valeur} à assignation
+résultat ← RECHERCHE-BACKTRACKING(assignation, csp)
+si résultat n\'est pas un échec alors retourner résultat
+retirer {var = valeur} de assignation // Backtrack
+
 retourner échec
 
 ### 41.4.3 Amélioration de l\'efficacité : Heuristiques et Inférence
@@ -658,20 +656,20 @@ L\'ordre dans lequel les variables sont choisies et les valeurs sont testées a 
 
 L\'inférence, ou propagation de contraintes, consiste à utiliser les contraintes pour déduire des restrictions sur les domaines des variables non encore assignées.
 
-> **Vérification anticipée (Forward Checking) :** C\'est une forme simple d\'inférence. Chaque fois qu\'une valeur est assignée à une variable X, l\'algorithme examine toutes les variables non assignées Y qui sont connectées à X par une contrainte. Pour chacune de ces variables Y, il supprime de son domaine DY​ toutes les valeurs qui sont inconsistantes avec la valeur choisie pour X. Si le domaine d\'une variable Y devient vide, l\'algorithme sait immédiatement que l\'assignation actuelle de X mène à un échec et peut donc revenir en arrière sans explorer plus loin.
+> **Vérification anticipée (Forward Checking) :** C\'est une forme simple d\'inférence. Chaque fois qu\'une valeur est assignée à une variable X, l\'algorithme examine toutes les variables non assignées Y qui sont connectées à X par une contrainte. Pour chacune de ces variables Y, il supprime de son domaine DY toutes les valeurs qui sont inconsistantes avec la valeur choisie pour X. Si le domaine d\'une variable Y devient vide, l\'algorithme sait immédiatement que l\'assignation actuelle de X mène à un échec et peut donc revenir en arrière sans explorer plus loin.
 >
-> **Consistance d\'arc et l\'algorithme AC-3 :** La vérification anticipée ne détecte pas toutes les inconsistances. Une forme d\'inférence plus puissante est la **consistance d\'arc**. Un arc (Xi​,Xj​) dans le graphe de contraintes est dit consistant si, pour chaque valeur x dans le domaine de Xi​, il existe au moins une valeur y dans le domaine de Xj​ telle que l\'assignation (Xi​=x,Xj​=y) est autorisée par la contrainte.\
+> **Consistance d\'arc et l\'algorithme AC-3 :** La vérification anticipée ne détecte pas toutes les inconsistances. Une forme d\'inférence plus puissante est la **consistance d\'arc**. Un arc (Xi,Xj) dans le graphe de contraintes est dit consistant si, pour chaque valeur x dans le domaine de Xi, il existe au moins une valeur y dans le domaine de Xj telle que l\'assignation (Xi=x,Xj=y) est autorisée par la contrainte.
 > L\'**algorithme AC-3** est la méthode la plus courante pour appliquer la consistance d\'arc à un CSP. Il fonctionne comme suit :
 
 Initialiser une file avec tous les arcs du graphe de contraintes.
 
-Tant que la file n\'est pas vide, retirer un arc (Xi​,Xj​).
+Tant que la file n\'est pas vide, retirer un arc (Xi,Xj).
 
-Pour chaque valeur x dans le domaine de Xi​, vérifier s\'il existe une valeur compatible y dans le domaine de Xj​.
+Pour chaque valeur x dans le domaine de Xi, vérifier s\'il existe une valeur compatible y dans le domaine de Xj.
 
-Si aucune valeur compatible n\'est trouvée pour x, supprimer x du domaine de Xi​.
+Si aucune valeur compatible n\'est trouvée pour x, supprimer x du domaine de Xi.
 
-Si le domaine de Xi​ a été modifié, ajouter à la file tous les arcs (Xk​,Xi​) où Xk​ est un voisin de Xi​.
+Si le domaine de Xi a été modifié, ajouter à la file tous les arcs (Xk,Xi) où Xk est un voisin de Xi.
 
 L\'algorithme se termine lorsque la file est vide. Si, à un moment donné, un domaine devient vide, cela signifie que le CSP n\'a pas de solution.
 
@@ -686,8 +684,6 @@ Nous avons vu que la formalisation d\'un problème en termes d\'espace d\'états
 Nous avons ensuite élargi notre perspective au-delà des problèmes de recherche de chemin classiques. Les techniques de recherche locale, telles que le recuit simulé et les algorithmes génétiques, ont offert une approche efficace pour les problèmes d\'optimisation où seule la qualité de la solution finale importe. La recherche adversariale, avec les algorithmes Minimax et l\'élagage Alpha-Bêta, a fourni les outils pour raisonner stratégiquement dans des environnements compétitifs. Enfin, les problèmes de satisfaction de contraintes ont présenté un formalisme structuré pour une vaste classe de problèmes d\'assignation, où la synergie entre la recherche par retour sur trace, les heuristiques intelligentes et l\'inférence par propagation de contraintes se révèle être la clé de l\'efficacité.
 
 Les concepts et algorithmes présentés dans ce chapitre --- de la formalisation d\'un problème à l\'analyse des propriétés des algorithmes de recherche --- constituent le socle de l\'IA classique. Ils sont non seulement des outils puissants en eux-mêmes, mais aussi les fondations sur lesquelles reposent des domaines plus avancés de l\'IA, tels que la planification automatisée, l\'apprentissage par renforcement et la représentation des connaissances, qui seront explorés dans les chapitres suivants.
-
-
 
 ---
 

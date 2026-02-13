@@ -26,11 +26,11 @@ L\'architecture d\'un Transformer est composée d\'une pile de blocs identiques.
 
 Le mécanisme d\'attention, pierre angulaire du Transformer, est mathématiquement formulé comme une attention à produit scalaire pondéré (*scaled dot-product attention*). Pour chaque jeton, le modèle apprend trois vecteurs distincts : une **Requête** (*Query*, Q), une **Clé** (*Key*, K) et une **Valeur** (*Value*, V), qui sont des projections linéaires de l\'embedding d\'entrée du jeton. La compatibilité entre la Requête d\'un jeton et la Clé d\'un autre est calculée via un produit scalaire. Ces scores de compatibilité sont ensuite normalisés et passés à travers une fonction softmax pour obtenir des poids d\'attention, qui sont finalement utilisés pour calculer une somme pondérée des vecteurs Valeur de tous les jetons de la séquence. L\'équation est la suivante  :
 
-Attention(Q,K,V)=softmax(dk​​QKT​)V
+Attention(Q,K,V)=softmax(dkQKT)V
 
-où dk​ est la dimension des vecteurs Clé, utilisée comme facteur de normalisation pour stabiliser les gradients. Le mécanisme \"multi-têtes\" améliore ce processus en exécutant plusieurs calculs d\'attention en parallèle, chacun avec des projections Q, K, V différentes, permettant au modèle de se concentrer simultanément sur différents aspects de la relation entre les jetons.
+où dk est la dimension des vecteurs Clé, utilisée comme facteur de normalisation pour stabiliser les gradients. Le mécanisme \"multi-têtes\" améliore ce processus en exécutant plusieurs calculs d\'attention en parallèle, chacun avec des projections Q, K, V différentes, permettant au modèle de se concentrer simultanément sur différents aspects de la relation entre les jetons.
 
-La mise à l\'échelle de l\'architecture Transformer pour créer des modèles plus grands et plus puissants se fait principalement selon trois axes : l\'augmentation de la **profondeur** (le nombre de blocs Transformer empilés), l\'augmentation de la **largeur** (la dimension de l\'espace d\'embedding et des couches cachées, dmodel​), et l\'augmentation du nombre de **têtes d\'attention**. Ces augmentations directes du nombre de paramètres accroissent la capacité du modèle à mémoriser et à généraliser à partir des motifs complexes présents dans les données d\'entraînement. C\'est cette capacité à s\'adapter à une augmentation massive du nombre de paramètres qui a directement conduit à la nécessité de disposer de plus de données et de plus de calcul, posant ainsi les bases des lois d\'échelle que nous aborderons plus loin.
+La mise à l\'échelle de l\'architecture Transformer pour créer des modèles plus grands et plus puissants se fait principalement selon trois axes : l\'augmentation de la **profondeur** (le nombre de blocs Transformer empilés), l\'augmentation de la **largeur** (la dimension de l\'espace d\'embedding et des couches cachées, dmodel), et l\'augmentation du nombre de **têtes d\'attention**. Ces augmentations directes du nombre de paramètres accroissent la capacité du modèle à mémoriser et à généraliser à partir des motifs complexes présents dans les données d\'entraînement. C\'est cette capacité à s\'adapter à une augmentation massive du nombre de paramètres qui a directement conduit à la nécessité de disposer de plus de données et de plus de calcul, posant ainsi les bases des lois d\'échelle que nous aborderons plus loin.
 
 #### L\'apprentissage auto-supervisé : Le moteur de l\'échelle
 
@@ -40,7 +40,7 @@ Si le Transformer fournit l\'architecture, l\'apprentissage auto-supervisé (SSL
 
 Popularisé par la série de modèles GPT (Generative Pre-trained Transformer) d\'OpenAI, l\'objectif autorégressif, ou prédiction du prochain jeton, est conceptuellement simple mais extrêmement puissant. Le modèle est entraîné à prédire le prochain jeton d\'une séquence, étant donné tous les jetons qui le précèdent. Formellement, il apprend à modéliser la probabilité conditionnelle
 
-P(ti​∣t1​,\...,ti−1​).
+P(ti∣t1,\...,ti−1).
 
 Pour ce faire, l\'architecture utilisée est un Transformer de type \"décodeur-seul\" (*decoder-only*). Dans cette configuration, le mécanisme d\'auto-attention est modifié par l\'application d\'un **masque causal**. Ce masque empêche chaque jeton de \"voir\" les jetons qui le suivent dans la séquence, garantissant que la prédiction pour une position donnée ne dépend que du contexte passé. Ce contexte unidirectionnel est intrinsèquement adapté aux tâches génératives, car il imite le processus de génération de texte de gauche à droite, un jeton à la fois. L\'entraînement de GPT-3 sur cet unique objectif à une échelle massive est ce qui lui a conféré ses capacités remarquables d\'apprentissage en quelques exemples (
 
@@ -56,7 +56,8 @@ Le choix entre ces deux objectifs d\'apprentissage n\'est pas anodin ; il dicte 
 
 **Tableau 55.1 : Comparaison des Objectifs d\'Apprentissage Auto-Supervisé**
 
-  ----------------------------- ------------------------------------------------------ -----------------------------------------------------------
+---
+
   Caractéristique               Modèles Autoregressifs (type GPT)                      Modèles Auto-Encodeurs (type BERT)
 
   **Objectif Principal**        Prédiction du prochain jeton (Next-Token Prediction)   Prédiction de jetons masqués (Masked Language Modeling)
@@ -70,7 +71,8 @@ Le choix entre ces deux objectifs d\'apprentissage n\'est pas anodin ; il dicte 
   **Forces Principales**        Tâches génératives, apprentissage \"few-shot\"         Tâches de compréhension (NLU), classification, extraction
 
   **Utilisation du Contexte**   Conditionné sur le passé uniquement                    Conditionné sur le contexte passé et futur
-  ----------------------------- ------------------------------------------------------ -----------------------------------------------------------
+
+---
 
 ### 55.1.2 Lois d\'échelle (Scaling Laws) et Comportements Émergents
 
@@ -124,7 +126,7 @@ Cette évolution ne se contente pas d\'ajouter de nouvelles fonctionnalités d\'
 
 La conception d\'un modèle multimodal à grande échelle, en particulier un modèle vision-langage (VLM), repose généralement sur la combinaison et l\'alignement de deux composants principaux, chacun spécialisé dans le traitement d\'une modalité.
 
-> **L\'encodeur de vision** : Ce module est responsable du traitement de l\'entrée visuelle (image ou vidéo). Les premières approches utilisaient des réseaux de neurones convolutifs (CNN) pour extraire des caractéristiques visuelles. Cependant, pour s\'aligner sur l\'architecture dominante et bénéficier de sa scalabilité, les modèles modernes utilisent massivement le\
+> **L\'encodeur de vision** : Ce module est responsable du traitement de l\'entrée visuelle (image ou vidéo). Les premières approches utilisaient des réseaux de neurones convolutifs (CNN) pour extraire des caractéristiques visuelles. Cependant, pour s\'aligner sur l\'architecture dominante et bénéficier de sa scalabilité, les modèles modernes utilisent massivement le
 > **Vision Transformer (ViT)**. Un ViT divise une image en une grille de patchs de taille fixe, traite chaque patch comme un \"jeton\" et les alimente dans une architecture Transformer standard. Cette approche unifie le traitement des images et du texte sous le même paradigme architectural, facilitant grandement leur intégration.
 >
 > **L\'encodeur de langage** : Ce composant est typiquement un grand modèle de langage (LLM) pré-entraîné, basé sur une architecture Transformer (par exemple, de type GPT ou T5). Il est chargé de traiter l\'entrée textuelle et de générer la sortie textuelle.
@@ -209,11 +211,11 @@ Le mécanisme de partitionnement des opérations matricielles est subtil et él�
 
 Y=GeLU(XA)B. Le calcul est parallélisé comme suit :
 
-> La première matrice de poids A est partitionnée en **colonnes**. Chaque GPU détient une tranche de colonnes Ai​. Le produit matriciel XAi​ est calculé en parallèle sur chaque GPU. L\'entrée X est dupliquée sur chaque GPU.
+> La première matrice de poids A est partitionnée en **colonnes**. Chaque GPU détient une tranche de colonnes Ai. Le produit matriciel XAi est calculé en parallèle sur chaque GPU. L\'entrée X est dupliquée sur chaque GPU.
 >
-> La fonction d\'activation GeLU est appliquée localement sur chaque GPU au résultat partiel XAi​. Aucune communication n\'est nécessaire à ce stade.
+> La fonction d\'activation GeLU est appliquée localement sur chaque GPU au résultat partiel XAi. Aucune communication n\'est nécessaire à ce stade.
 >
-> La deuxième matrice de poids B est partitionnée en **lignes**. Chaque GPU détient une tranche de lignes Bi​. Le produit matriciel (GeLU(XAi​))Bi​ est calculé localement.
+> La deuxième matrice de poids B est partitionnée en **lignes**. Chaque GPU détient une tranche de lignes Bi. Le produit matriciel (GeLU(XAi))Bi est calculé localement.
 >
 > Les résultats partiels de chaque GPU sont ensuite sommés à l\'aide d\'une opération All-Reduce pour obtenir le résultat final correct Y.
 
@@ -229,13 +231,14 @@ En pratique, l\'entraînement des plus grands modèles ne repose pas sur une seu
 >
 > **Parallélisme de données (DP)** est utilisé sur l\'ensemble du cluster. Chaque pipeline complet est une réplique pour le parallélisme de données, ce qui permet d\'augmenter la taille totale du lot et d\'accélérer la convergence.
 
-Le nombre total de GPUs est alors le produit des degrés de chaque parallélisme : Ntotal​=NTP​×NPP​×NDP​. La gestion de cette complexité est l\'un des plus grands défis du MLOps à grande échelle.
+Le nombre total de GPUs est alors le produit des degrés de chaque parallélisme : Ntotal=NTP×NPP×NDP. La gestion de cette complexité est l\'un des plus grands défis du MLOps à grande échelle.
 
 Le tableau suivant offre une analyse comparative des différentes stratégies de parallélisme, mettant en évidence leurs mécanismes, leurs avantages et leurs contraintes.
 
 **Tableau 55.2 : Analyse des Stratégies de Parallélisme pour l\'Entraînement Distribué**
 
-  ----------------------------------- ---------------------------------------------------------------- --------------------------------------------------- ---------------------------------------------- ------------------------------------------------------------------
+---
+
   Stratégie                           Mécanisme Principal                                              Réduction Mémoire (Modèle)                          Goulot d\'Étranglement Principal               Idéal Pour
 
   **Parallélisme de Données (DP)**    Réplication du modèle, partitionnement des données               Nulle (chaque GPU a une copie complète)             Communication (All-Reduce des gradients)       Accélérer le débit quand le modèle tient sur un GPU
@@ -245,7 +248,8 @@ Le tableau suivant offre une analyse comparative des différentes stratégies de
   **Parallélisme Tensoriel (TP)**     Partitionnement des tenseurs (poids) au sein des couches         Linéaire avec le nombre de GPUs                     Bande passante de l\'interconnexion (NVLink)   Modèles très larges (couches massives), communication intra-nœud
 
   **ZeRO-DP (Stade 3)**               Partitionnement des poids, gradients et états de l\'optimiseur   Linéaire avec le degré de parallélisme de données   Communication (All-Gather avant calcul)        Maximiser l\'efficacité mémoire du parallélisme de données
-  ----------------------------------- ---------------------------------------------------------------- --------------------------------------------------- ---------------------------------------------- ------------------------------------------------------------------
+
+---
 
 ### 55.2.2 Optimisation de la mémoire et du calcul
 
@@ -349,15 +353,15 @@ Plutôt que d\'apprendre la grande matrice de mise à jour ΔW∈Rd×k, LoRA la 
 
 La passe avant d\'une couche modifiée par LoRA est alors calculée comme suit :
 
-h=W0​x+ΔWx=W0​x+BAx
+h=W0x+ΔWx=W0x+BAx
 
-Pendant l\'entraînement, la matrice de poids originale W0​ est gelée et seuls les poids des matrices A et B sont mis à jour par rétropropagation. Le nombre de paramètres entraînables est ainsi réduit de d×k à seulement r×(d+k), ce qui représente une réduction drastique, souvent supérieure à 99%.37
+Pendant l\'entraînement, la matrice de poids originale W0 est gelée et seuls les poids des matrices A et B sont mis à jour par rétropropagation. Le nombre de paramètres entraînables est ainsi réduit de d×k à seulement r×(d+k), ce qui représente une réduction drastique, souvent supérieure à 99%.37
 
 **Implémentation et avantages**
 
-Dans l\'architecture Transformer, LoRA est généralement appliqué aux matrices de poids des couches d\'attention (Wq​,Wk​,Wv​,Wo​), car elles sont considérées comme les plus critiques pour l\'adaptation à de nouvelles tâches.
+Dans l\'architecture Transformer, LoRA est généralement appliqué aux matrices de poids des couches d\'attention (Wq,Wk,Wv,Wo), car elles sont considérées comme les plus critiques pour l\'adaptation à de nouvelles tâches.
 
-Un avantage crucial de LoRA par rapport à d\'autres méthodes PEFT (comme les adaptateurs qui ajoutent de nouvelles couches) est son **absence de latence à l\'inférence**. Une fois l\'entraînement de LoRA terminé, les matrices B et A peuvent être multipliées pour calculer ΔW, qui peut ensuite être simplement additionné à la matrice de poids originale W0​ pour obtenir une nouvelle matrice de poids fusionnée W′=W0​+BA. Cette nouvelle matrice W′ peut être utilisée directement dans le modèle original sans aucune modification de l\'architecture. Par conséquent, au moment de l\'inférence, le modèle ajusté avec LoRA est exactement aussi rapide que le modèle de base.
+Un avantage crucial de LoRA par rapport à d\'autres méthodes PEFT (comme les adaptateurs qui ajoutent de nouvelles couches) est son **absence de latence à l\'inférence**. Une fois l\'entraînement de LoRA terminé, les matrices B et A peuvent être multipliées pour calculer ΔW, qui peut ensuite être simplement additionné à la matrice de poids originale W0 pour obtenir une nouvelle matrice de poids fusionnée W′=W0+BA. Cette nouvelle matrice W′ peut être utilisée directement dans le modèle original sans aucune modification de l\'architecture. Par conséquent, au moment de l\'inférence, le modèle ajusté avec LoRA est exactement aussi rapide que le modèle de base.
 
 ### 55.3.2 Apprentissage en contexte (In-context learning) et Ingénierie de prompt
 
@@ -398,8 +402,6 @@ Le mécanisme de CoT consiste à ne pas seulement fournir la réponse finale dan
 Une découverte encore plus surprenante est le **CoT \"zéro-shot\"**. Il a été démontré que le simple fait d\'ajouter une phrase comme \"Pensons étape par étape\" ou \"Réfléchissons pas à pas\" à la fin d\'une question complexe peut inciter le modèle à décomposer le problème, à générer une chaîne de raisonnement et à arriver à une réponse plus précise, même sans aucun exemple.
 
 Le succès du CoT suggère que cette technique agit comme une forme d\'**échafaudage cognitif en contexte**. Un prompt standard demande une réponse directe, forçant le modèle à effectuer tout le raisonnement en interne, de manière implicite. Un prompt CoT, en revanche, externalise le processus de pensée. Il fournit une structure, un modèle de raisonnement, que le modèle peut suivre. En générant sa propre chaîne de pensée, le modèle utilise sa sortie comme un \"brouillon\" ou un \"espace de travail\" intermédiaire pour guider ses propres étapes de génération suivantes. Cela transforme la fenêtre de contexte d\'un simple tampon de mémoire passive en un espace de calcul actif. L\'ingénierie de prompt avancée ne consiste donc pas tant à programmer le modèle qu\'à gérer sa charge cognitive, en concevant des processus qui décomposent des tâches complexes en une séquence d\'étapes plus simples que le modèle peut exécuter de manière fiable.
-
-
 
 ---
 
