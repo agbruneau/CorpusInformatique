@@ -1,6 +1,6 @@
 # Chapitre I.68 : Machines à Vecteurs de Support Quantiques pour les Tâches d'Intelligence Artificielle Polyvalentes
 
-## I.68.1 Introduction : Convergence de l\'Apprentissage Automatique et de l\'Informatique Quantique
+## 68.1 Introduction : Convergence de l\'Apprentissage Automatique et de l\'Informatique Quantique
 
 L\'intersection de l\'apprentissage automatique et de l\'informatique quantique a donné naissance à un domaine de recherche interdisciplinaire d\'une immense promesse : l\'apprentissage automatique quantique (QML, de l\'anglais *Quantum Machine Learning*). Ce champ émergent explore comment les principes de la mécanique quantique, tels que la superposition et l\'intrication, peuvent être exploités pour concevoir des algorithmes d\'apprentissage potentiellement plus puissants que leurs homologues classiques. Inversement, il examine également comment les techniques d\'apprentissage automatique peuvent aider à caractériser et à contrôler des systèmes quantiques complexes. Au sein de ce vaste paysage, les machines à vecteurs de support quantiques (QSVM) se sont imposées comme l\'un des paradigmes les plus étudiés et les plus prometteurs, en particulier dans le contexte des ordinateurs quantiques bruités à échelle intermédiaire (NISQ, de l\'anglais *Noisy Intermediate-Scale Quantum*).
 
@@ -12,11 +12,11 @@ La transition vers le domaine quantique a été initiée par les travaux de Rebe
 
 Ce chapitre a pour objectif de fournir une monographie technique complète sur les machines à vecteurs de support quantiques, destinée à un public d\'experts. Nous commencerons par une revue approfondie et mathématiquement rigoureuse des fondements des SVM classiques. Cette base est indispensable, car la structure des QSVM est une généralisation directe du formalisme dual classique. Nous établirons ensuite le pont conceptuel et mathématique vers le monde quantique, en montrant comment l\'espace de Hilbert d\'un système quantique peut être interprété comme un espace de caractéristiques. Nous détaillerons les mécanismes d\'encodage des données classiques dans des états quantiques et les algorithmes quantiques pour l\'estimation du noyau. Par la suite, nous aborderons la conception d\'architectures hybrides quantique-classique, une approche pragmatique pour l\'ère NISQ. Une analyse critique des défis actuels, notamment l\'impact du bruit matériel, la complexité de l\'estimation du noyau et le phénomène des plateaux stériles, sera menée pour offrir une perspective équilibrée sur le potentiel réel d\'avantage quantique. Enfin, nous explorerons la polyvalence des QSVM en les étendant à des tâches de régression et de détection d\'anomalies, et nous illustrerons leur applicabilité à travers des études de cas dans des domaines de pointe tels que la bio-informatique, la science des matériaux et la finance. Le chapitre se conclura par une synthèse des connaissances actuelles et une discussion sur les perspectives et les défis ouverts qui façonneront la prochaine génération d\'algorithmes d\'IA quantiques.
 
-## I.68.2 Fondements Mathématiques des Machines à Vecteurs de Support Classiques
+## 68.2 Fondements Mathématiques des Machines à Vecteurs de Support Classiques
 
 Avant d\'explorer l\'univers quantique, une maîtrise approfondie des fondements mathématiques des machines à vecteurs de support classiques est impérative. Les QSVM ne sont pas une réinvention *ex nihilo*, mais plutôt une extension ingénieuse des principes établis par la théorie de l\'apprentissage statistique. Le formalisme quantique s\'appuie directement sur la formulation duale du problème d\'optimisation des SVM, et la notion de noyau quantique est une généralisation directe de l\'astuce du noyau classique. Cette section a donc pour but de construire, avec une rigueur mathématique, le socle théorique sur lequel repose l\'intégralité de ce chapitre.
 
-### I.68.2.1 Le Classifieur à Vaste Marge : Cas Linéairement Séparable (Marge Dure)
+### 68.2.1 Le Classifieur à Vaste Marge : Cas Linéairement Séparable (Marge Dure)
 
 Le cas le plus simple et le plus fondamental pour comprendre l\'essence des SVM est celui où les données d\'entraînement sont linéairement séparables. Dans ce scénario, il existe au moins un hyperplan capable de séparer parfaitement les données appartenant à deux classes distinctes. L\'objectif des SVM est de sélectionner, parmi l\'infinité d\'hyperplans séparateurs possibles, celui qui est le plus \"optimal\".
 
@@ -39,7 +39,7 @@ La distance perpendiculaire entre un point x0 et l\'hyperplan wTx+b=0 est donné
 
 Maximiser cette marge est équivalent à minimiser ∥w∥, ou de manière plus pratique pour l\'optimisation, minimiser 21∥w∥2. Le problème de trouver l\'hyperplan à marge maximale peut donc être formulé comme le problème d\'optimisation suivant, connu sous le nom de formulation primale à marge dure : w,bmin21∥w∥2, sous les contraintes : yi(wTxi+b)≥1,∀i=1,...,n. Ce problème est un problème de programmation quadratique (QP), car la fonction objectif est quadratique en w et les contraintes sont linéaires en w et b. De plus, la fonction objectif est strictement convexe, et l\'ensemble des contraintes définit une région réalisable convexe. Pour des données linéairement séparables, cette région est non vide. Par conséquent, ce problème d\'optimisation admet une solution globale unique, ce qui est un avantage majeur par rapport à d\'autres algorithmes comme les réseaux de neurones qui peuvent être sujets à des minima locaux.14
 
-### I.68.2.2 Le Cas Non Séparable : Marge Souple, Variables d\'Ajustement et Régularisation
+### 68.2.2 Le Cas Non Séparable : Marge Souple, Variables d\'Ajustement et Régularisation
 
 Le modèle à marge dure est une idéalisation. Dans la plupart des applications pratiques, les ensembles de données ne sont pas parfaitement séparables linéairement. Cela peut être dû à la nature intrinsèque des données (chevauchement des classes) ou à la présence de bruit et de valeurs aberrantes (*outliers*). Dans de tels cas, le problème d\'optimisation à marge dure n\'a pas de solution réalisable, car il est impossible de satisfaire toutes les contraintes
 
@@ -70,7 +70,7 @@ Pour équilibrer les deux objectifs (maximisation de la marge et minimisation de
 
 Le problème d\'optimisation pour la SVM à marge souple est donc formulé comme suit : w,b,ξmin21∥w∥2+Ci=1∑nξi sous les contraintes : yi(wTxi+b)≥1−ξi,etξi≥0,∀i=1,...,n. Cette formulation est également un problème de programmation quadratique convexe et possède donc une solution globale unique.16 Elle représente la forme la plus couramment utilisée des SVM linéaires.
 
-### I.68.2.3 Formulation Duale et Optimisation Convexe : Le Rôle des Conditions KKT
+### 68.2.3 Formulation Duale et Optimisation Convexe : Le Rôle des Conditions KKT
 
 Bien que la formulation primale des SVM soit intuitive, sa résolution directe peut être complexe, en particulier lorsque le nombre de caractéristiques p est grand. De plus, la formulation primale ne permet pas d\'utiliser l\'astuce du noyau. Pour ces raisons, on résout généralement le problème dual, qui est souvent plus facile à optimiser et qui révèle des propriétés structurelles profondes du modèle. La transition du problème primal au problème dual se fait via la théorie de l\'optimisation lagrangienne et les conditions de Karush-Kuhn-Tucker (KKT).
 
@@ -101,7 +101,7 @@ Les conditions KKT ne sont pas seulement un outil pour dériver le problème dua
 
 La conséquence la plus importante est que le vecteur normal de l\'hyperplan, w=∑iαiyixi, est une combinaison linéaire uniquement des vecteurs de support (les points pour lesquels αi\>0). La grande majorité des points d\'entraînement, qui sont correctement classés et loin de la marge, auront des αi nuls et n\'auront aucune influence sur le modèle final. Cette **sparsité** rend les SVM particulièrement efficaces en termes de mémoire et de temps de calcul lors de la prédiction, car la fonction de décision f(x)=sign(∑i∈SVαiyi(xiTx)+b) ne nécessite que les vecteurs de support (SV).
 
-### I.68.2.4 L\'Astuce du Noyau : Extension aux Problèmes Non Linéaires et Espaces de Hilbert à Noyau Reproduisant (EHNR)
+### 68.2.4 L\'Astuce du Noyau : Extension aux Problèmes Non Linéaires et Espaces de Hilbert à Noyau Reproduisant (EHNR)
 
 La véritable puissance des SVM réside dans leur capacité à gérer des problèmes de classification non linéaires avec une élégance remarquable. L\'approche ne consiste pas à abandonner le concept d\'hyperplan séparateur, mais plutôt à transformer l\'espace dans lequel cet hyperplan est recherché.
 
@@ -121,11 +121,11 @@ Le cadre mathématique formel pour les méthodes à noyau est celui des **Espace
 
 Le choix du noyau est une étape cruciale dans l\'application des SVM, car il définit implicitement l\'espace de caractéristiques et donc la forme de la frontière de décision. Le tableau suivant résume les noyaux les plus couramment utilisés. Cette synthèse des outils fondamentaux qui permettent aux SVM de gérer la non-linéarité sert de pont conceptuel vers la section suivante, où le \"noyau quantique\" sera introduit comme une généralisation de ces concepts. En présentant les formules, les hyperparamètres et les cas d\'usage, ce tableau fournit un référentiel concis qui prépare le terrain pour comprendre pourquoi et comment on cherche à concevoir des noyaux via des circuits quantiques.
 
-## I.68.3 Théorie des Machines à Vecteurs de Support Quantiques
+## 68.3 Théorie des Machines à Vecteurs de Support Quantiques
 
 La transition des SVM classiques vers leurs homologues quantiques s\'opère en exploitant une analogie profonde et mathématiquement rigoureuse. L\'astuce du noyau, qui est au cœur de la puissance des SVM non linéaires, trouve un partenaire naturel dans la mécanique quantique. L\'espace d\'états d\'un système quantique, l\'espace de Hilbert, est intrinsèquement un espace de caractéristiques de très grande dimension. Cette section établit les fondements théoriques des QSVM, en montrant comment les principes du calcul quantique permettent de redéfinir la notion de carte de caractéristiques et de noyau.
 
-### I.68.3.1 L\'Espace de Hilbert Quantique comme Espace de Caractéristiques
+### 68.3.1 L\'Espace de Hilbert Quantique comme Espace de Caractéristiques
 
 Le principe fondamental qui sous-tend les QSVM est l\'interprétation de l\'espace de Hilbert d\'un système quantique comme un espace de caractéristiques pour un algorithme d\'apprentissage automatique. Un système de N qubits est décrit par des vecteurs d\'état dans un espace de Hilbert H de dimension 2N. Cette croissance exponentielle de la dimension avec le nombre de qubits est la source de la puissance potentielle du calcul quantique.
 
@@ -135,7 +135,7 @@ Une **carte de caractéristiques quantique** (*quantum feature map*) est une pro
 
 L\'avantage potentiel de cette approche est que les phénomènes quantiques tels que la superposition et l\'intrication peuvent être utilisés pour créer des cartes de caractéristiques extrêmement complexes et non linéaires, qui pourraient être difficiles, voire impossibles, à simuler efficacement sur un ordinateur classique. Si une telle carte de caractéristiques permet une meilleure séparation des données pour un problème donné, le QSVM pourrait potentiellement surpasser son homologue classique.
 
-### I.68.3.2 Encodage des Données et Cartes de Caractéristiques Quantiques (***Quantum Feature Maps***)
+### 68.3.2 Encodage des Données et Cartes de Caractéristiques Quantiques (***Quantum Feature Maps***)
 
 L\'implémentation d\'une carte de caractéristiques quantique se fait via un circuit quantique. Un circuit unitaire UΦ(x), dont les portes sont paramétrées par les composantes du vecteur de données classique x, est appliqué à un état initial simple, généralement l\'état de base ∣0⟩⊗N (où N est le nombre de qubits). L\'état de caractéristiques résultant est alors : ∣Φ(x)⟩=UΦ(x)∣0⟩⊗N. Le choix de l\'architecture du circuit UΦ(x) est une étape de conception cruciale qui détermine entièrement les propriétés de la carte de caractéristiques et, par conséquent, les performances du QSVM. Plusieurs stratégies d\'encodage ont été développées, chacune présentant des compromis en termes de ressources requises (nombre de qubits, profondeur du circuit) et de puissance expressive.
 
@@ -150,7 +150,7 @@ Le tableau suivant synthétise les compromis entre ces différentes stratégies 
 
 Le choix de la méthode d\'encodage est une décision de conception fondamentale. Il reflète un compromis entre l\'efficacité des ressources (nombre de qubits et profondeur du circuit, critiques pour les dispositifs NISQ) et la puissance de calcul (l\'expressivité de la carte de caractéristiques). Pour un expert, ce tableau résume les options et leurs implications directes sur la faisabilité et la performance potentielle d\'un modèle QSVM.
 
-### I.68.3.3 Définition et Estimation du Noyau Quantique
+### 68.3.3 Définition et Estimation du Noyau Quantique
 
 Une fois les données encodées dans l\'espace de Hilbert, le QSVM fonctionne de manière analogue à un SVM classique utilisant l\'astuce du noyau. La fonction noyau est simplement le produit scalaire entre les états quantiques de caractéristiques.
 
@@ -179,11 +179,11 @@ Contrairement à un noyau classique, le noyau quantique ne peut généralement p
      La probabilité de mesurer l\'ancilla dans l\'état ∣0⟩ est donnée par P(∣0⟩)=21+21∣⟨Φ(xi)∣Φ(xj)⟩∣2. En estimant cette probabilité, on peut en déduire la valeur du noyau K(xi,xj).65 Bien que plus gourmande en ressources (elle nécessite
      2N+1 qubits), cette méthode est fondamentale en QML.
 
-## I.68.4 Conception et Implémentation des Algorithmes QSVM
+## 68.4 Conception et Implémentation des Algorithmes QSVM
 
 La transition de la théorie des QSVM à leur implémentation pratique soulève une série de défis et de considérations de conception, particulièrement dans le contexte des dispositifs quantiques actuels, caractérisés par un nombre limité de qubits et des niveaux de bruit non négligeables. Cette section aborde l\'architecture des algorithmes QSVM, la conception des circuits d\'encodage, les stratégies pour atténuer l\'impact du bruit, et analyse la complexité et le potentiel d\'avantage quantique de ces modèles.
 
-### I.68.4.1 Architectures Hybrides Quantique-Classique pour les QSVM
+### 68.4.1 Architectures Hybrides Quantique-Classique pour les QSVM
 
 Étant donné les limitations du matériel quantique de l\'ère NISQ, les implémentations de QSVM reposent quasi exclusivement sur des architectures hybrides quantique-classique. Dans ce paradigme, chaque composant (quantique et classique) est assigné à la tâche pour laquelle il est le plus performant.
 
@@ -196,7 +196,7 @@ Le flux de travail typique d\'un QSVM hybride se décompose comme suit :
 
 Une approche alternative est celle des **modèles variationnels (QV-SVM)**. Dans ce cas, le circuit de la carte de caractéristiques UΦ(x,θ) contient des paramètres entraînables θ. Une boucle d\'optimisation hybride est utilisée pour ajuster simultanément les paramètres du circuit θ et les poids du classifieur, afin d\'optimiser une fonction de coût globale. Cette approche offre plus de flexibilité mais sacrifie la garantie de convexité de l\'entraînement SVM standard.
 
-### I.68.4.2 Conception des Circuits d\'Encodage : Expressivité, Intrication et Profondeur
+### 68.4.2 Conception des Circuits d\'Encodage : Expressivité, Intrication et Profondeur
 
 La performance d\'un QSVM dépend de manière critique de la qualité de sa carte de caractéristiques quantique, qui est entièrement déterminée par l\'architecture du circuit d\'encodage UΦ(x). Trois propriétés interdépendantes du circuit sont particulièrement importantes : son expressivité, sa capacité d\'intrication et sa profondeur.
 
@@ -208,7 +208,7 @@ ZZFeatureMap sont spécifiquement conçues pour introduire des termes d\'interac
 
 La **profondeur du circuit**, c\'est-à-dire le nombre de couches de portes séquentielles, est directement liée à la complexité de la carte de caractéristiques qui peut être implémentée. Des circuits plus profonds peuvent, en principe, approcher des fonctions plus complexes. Cependant, dans l\'ère NISQ, la profondeur est une ressource extrêmement limitée. Chaque porte supplémentaire augmente la probabilité qu\'une erreur (due à la décohérence ou à une calibration imparfaite) se produise, dégradant ainsi la fidélité du calcul. Par conséquent, la conception de cartes de caractéristiques pour les dispositifs actuels implique un compromis délicat : maximiser l\'expressivité et l\'intrication nécessaires pour la tâche tout en maintenant la profondeur du circuit aussi faible que possible.
 
-### I.68.4.3 Défis de l\'Ère NISQ : Bruit Matériel et Mitigation d\'Erreurs
+### 68.4.3 Défis de l\'Ère NISQ : Bruit Matériel et Mitigation d\'Erreurs
 
 Les ordinateurs quantiques actuels sont intrinsèquement bruités. Les erreurs dans les calculs quantiques sont inévitables et constituent le principal obstacle à la réalisation d\'un avantage quantique pratique. Ces erreurs dégradent la qualité des états de caractéristiques quantiques et, par conséquent, faussent l\'estimation de la matrice du noyau, ce qui peut anéantir la performance du classifieur.
 
@@ -222,7 +222,7 @@ Pour lutter contre ces effets sans recourir à la correction d\'erreurs quantiqu
 
 L\'implémentation d\'un QSVM sur du matériel réel n\'est donc pas simplement une question de programmation du circuit idéal. Elle nécessite l\'intégration d\'une ou plusieurs de ces techniques de mitigation dans le flux de travail pour obtenir des résultats fiables. Le choix des techniques dépend de la nature dominante du bruit dans le dispositif matériel utilisé.
 
-### I.68.4.4 Complexité, Entraînabilité et Potentiel d\'Avantage Quantique
+### 68.4.4 Complexité, Entraînabilité et Potentiel d\'Avantage Quantique
 
 La promesse d\'une accélération exponentielle des QSVM doit être examinée avec un regard critique, en tenant compte de la complexité réelle de l\'algorithme et des défis liés à l\'entraînabilite.
 
@@ -254,11 +254,11 @@ Des exemples de tels noyaux ont été construits pour des problèmes artificiels
 
 Cependant, la pertinence de ces constructions pour des problèmes d\'apprentissage automatique du monde réel reste une question ouverte. De plus, la découverte d\'algorithmes classiques \"d\'inspiration quantique\" ou \"déquantisés\" a montré que, sous certaines hypothèses structurelles sur les données (par exemple, si la matrice de données est de faible rang), des techniques d\'échantillonnage classiques peuvent parfois simuler efficacement le calcul du noyau quantique, remettant en question l\'unicité de l\'avantage quantique. La recherche d\'un avantage quantique pratique et robuste reste donc un domaine de recherche actif et stimulant.
 
-## I.68.5 Applications Polyvalentes et Analyse Comparative
+## 68.5 Applications Polyvalentes et Analyse Comparative
 
 La flexibilité du cadre des SVM, héritée de sa formulation basée sur les noyaux, se transpose naturellement au domaine quantique. Les QSVM ne se limitent pas à la classification binaire ; ils peuvent être adaptés pour aborder un large éventail de tâches d\'apprentissage supervisé et non supervisé. Cette section explore ces extensions, présente des études de cas dans des domaines scientifiques et industriels de premier plan, et positionne les QSVM par rapport à un autre paradigme majeur du QML, les réseaux de neurones quantiques.
 
-### I.68.5.1 Au-delà de la Classification Binaire : Régression (QSVR) et Détection d\'Anomalies (***One-Class QSVM***)
+### 68.5.1 Au-delà de la Classification Binaire : Régression (QSVR) et Détection d\'Anomalies (***One-Class QSVM***)
 
 #### Régression à Vecteurs de Support Quantique (QSVR)
 
@@ -279,7 +279,7 @@ La détection d\'anomalies est une tâche d\'apprentissage non supervisé (ou se
 
 Encore une fois, comme la formulation de la SVM à une classe repose sur l\'astuce du noyau, elle peut être étendue à une **QSVM à une classe**. Le noyau quantique permet de définir des frontières de normalité de formes très complexes dans l\'espace de Hilbert, ce qui est potentiellement très puissant pour détecter des anomalies subtiles dans des données de grande dimension. Cette approche a suscité un intérêt considérable pour des applications critiques en matière de sécurité, telles que la détection de fraudes financières, la détection d\'intrusions dans les systèmes de contrôle industriels (ICS) et la cybersécurité.
 
-### I.68.5.2 Études de Cas : Bio-informatique, Science des Matériaux et Finance
+### 68.5.2 Études de Cas : Bio-informatique, Science des Matériaux et Finance
 
 La capacité potentielle des QSVM à traiter des données de grande dimension et à capturer des corrélations complexes les rend particulièrement attrayants pour des domaines où les données sont riches et les relations sous-jacentes non triviales.
 
@@ -287,7 +287,7 @@ La capacité potentielle des QSVM à traiter des données de grande dimension et
 - **Science des Matériaux et Chimie Quantique :** La prédiction des propriétés des matériaux à partir de leur structure est un problème fondamental. Les QSVM sont appliqués pour prédire les propriétés mécaniques et thermiques des polymères  ou pour classer les phases de la matière dans des systèmes quantiques complexes. La nature intrinsèquement quantique de ces problèmes suggère que les noyaux dérivés de simulations quantiques pourraient offrir un avantage naturel.
 - **Finance et Autres Domaines :** Dans le secteur financier, les QSVM sont explorés pour la détection de fraudes par carte de crédit, où des modèles subtils peuvent indiquer une activité illégitime. Dans le domaine de la sécurité des infrastructures critiques, les QSVM sont utilisés pour la détection d\'anomalies dans les données des systèmes de contrôle industriels (ICS), où une détection rapide des défaillances ou des cyberattaques est essentielle.
 
-### I.68.5.3 Analyse Comparative : QSVM face aux Réseaux de Neurones Quantiques (QNN)
+### 68.5.3 Analyse Comparative : QSVM face aux Réseaux de Neurones Quantiques (QNN)
 
 Les QSVM ne sont pas le seul paradigme en QML. Les réseaux de neurones quantiques (QNN), souvent implémentés sous forme de circuits quantiques variationnels, représentent une autre approche majeure. Une comparaison de ces deux modèles révèle des compromis fondamentaux en matière de conception et d\'entraînabilite.
 
@@ -304,7 +304,7 @@ Cependant, il est essentiel de reconnaître que les QSVM et les QNN ne sont pas 
 
 Cette vision unificatrice ouvre la voie à des architectures hybrides sophistiquées, telles que le modèle \"QSVM-QNN\" proposé dans la littérature. De tels modèles cherchent à combiner la robustesse de l\'optimisation convexe des SVM avec l\'expressivité et l\'adaptabilité des modèles variationnels. Par exemple, on pourrait utiliser un QNN pour apprendre une carte de caractéristiques optimale, puis utiliser le noyau résultant dans un classifieur SVM classique. Ces approches hybrides représentent une frontière de recherche prometteuse, visant à exploiter le meilleur des deux mondes.
 
-## I.68.6 Conclusion et Perspectives d\'Avenir
+## 68.6 Conclusion et Perspectives d\'Avenir
 
 Ce chapitre a entrepris une exploration exhaustive des machines à vecteurs de support quantiques, depuis leurs fondements mathématiques ancrés dans la théorie classique des SVM jusqu\'aux frontières de la recherche en apprentissage automatique quantique. Nous avons établi que les QSVM représentent une généralisation élégante et naturelle des SVM au domaine quantique, où l\'espace de Hilbert d\'un système de qubits sert d\'espace de caractéristiques ultime. L\'architecture hybride quantique-classique, où l\'ordinateur quantique agit comme un co-processeur pour estimer une matrice de noyau potentiellement non classique, se présente comme un paradigme pragmatique et bien adapté aux capacités des dispositifs de l\'ère NISQ.
 
