@@ -253,6 +253,34 @@ C\'est la couche la plus élevée du modèle OSI, celle qui est la plus proche d
 
 Exemples de protocoles : HTTP (HyperText Transfer Protocol) pour le web, SMTP (Simple Mail Transfer Protocol) pour l\'envoi d\'e-mails, FTP (File Transfer Protocol) pour le transfert de fichiers, DNS (Domain Name System) pour la résolution de noms.25
 
+**Figure 33.1 -- Modèle OSI : les sept couches et l\'encapsulation des données**
+
+```mermaid
+flowchart TB
+    subgraph OSI["Modèle OSI -- 7 couches"]
+        direction TB
+        L7["Couche 7 -- Application\n(HTTP, FTP, SMTP, DNS)"]
+        L6["Couche 6 -- Présentation\n(Chiffrement, Compression, Traduction)"]
+        L5["Couche 5 -- Session\n(Gestion du dialogue, Synchronisation)"]
+        L4["Couche 4 -- Transport\n(TCP, UDP) — Segments"]
+        L3["Couche 3 -- Réseau\n(IP, ICMP, Routage) — Paquets"]
+        L2["Couche 2 -- Liaison de données\n(Ethernet, Wi-Fi, MAC) — Trames"]
+        L1["Couche 1 -- Physique\n(Câbles, Signaux, Bits)"]
+    end
+
+    subgraph ENCAP["Encapsulation des données"]
+        direction TB
+        D7["Données"]
+        D4["En-tête Transport + Données = Segment"]
+        D3["En-tête Réseau + Segment = Paquet"]
+        D2["En-tête Liaison + Paquet + Trailer = Trame"]
+        D1["Flux de bits sur le média physique"]
+    end
+
+    L7 --> L6 --> L5 --> L4 --> L3 --> L2 --> L1
+    D7 --> D4 --> D3 --> D2 --> D1
+```
+
 ### 33.2.2 Le Modèle TCP/IP : L\'Architecture Pragmatique de l\'Internet
 
 Contrairement au modèle OSI, qui est le fruit d\'un comité de normalisation international, le modèle TCP/IP (Transmission Control Protocol/Internet Protocol) est né de manière plus organique et pragmatique des recherches menées pour le réseau ARPANET du Département de la Défense américain (DoD). Il n\'a pas été conçu comme un modèle de référence rigide, mais plutôt comme une description de la suite de protocoles qui fonctionnait et qui a finalement donné naissance à l\'Internet. C\'est donc une norme *de facto*.

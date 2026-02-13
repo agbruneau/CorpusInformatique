@@ -1,14 +1,3 @@
----
-
-# VOLUME IV : APACHE ICEBERG - LAKEHOUSE
-
-_Architecture de Données Moderne pour l'Entreprise_
-
----
-
-**Monographie : L'Entreprise Agentique**
-
----
 # Chapitre IV.1 — Le Monde du Lakehouse Apache Iceberg
 
 ---
@@ -613,6 +602,12 @@ Les chapitres suivants approfondiront l'anatomie technique d'Iceberg, les strat�
 
 
 ---
+
+### Références croisées
+
+- **Systemes de donnees modernes et Big Data** : voir aussi [Chapitre 1.32 -- Systemes de Donnees Modernes et Big Data](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.32_Donnees_Modernes_BigData.md)
+- **Integration des donnees en entreprise** : voir aussi [Chapitre 2.4 -- Integration des Donnees](../../../2 - Interopérabilité/Chapitre_2.4_Integration_Donnees.md)
+- **Fondements des SGBD** : voir aussi [Chapitre 1.30 -- Systemes de Gestion de Bases de Donnees (SGBD) -- Fondements](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.30_SGBD_Fondements.md)
 
 # Chapitre IV.2 — Anatomie Technique d'Apache Iceberg
 
@@ -1734,9 +1729,6 @@ L'évolution continue de la spécification Iceberg apporte régulièrement de no
 L'ajout prévu d'un endpoint de scan planning au REST Catalog permettra aux catalogues d'optimiser et de cacher les plans de requête. Les vues interopérables standardiseront la définition des vues entre moteurs. Ces évolutions renforceront le positionnement d'Iceberg comme standard universel du Data Lakehouse.
 
 Le chapitre suivant appliquera ces connaissances techniques à des scénarios concrets d'implémentation, démontrant comment créer, alimenter et interroger des tables Iceberg avec différents moteurs de requête dans un environnement de production.
-
-
----
 
 # Chapitre IV.3 — Mise en Pratique avec Apache Iceberg
 
@@ -3481,9 +3473,6 @@ Pour approfondir les sujets abordés dans ce chapitre, les ressources suivantes 
 - MinIO (2025). *The Definitive Guide to Lakehouse Architecture with Iceberg and MinIO*. https://blog.min.io/
 - Apache Software Foundation (2025). *Apache Superset Documentation*. https://superset.apache.org/docs/
 
-
----
-
 # Chapitre IV.4 — Préparer Votre Passage à Apache Iceberg
 
 ---
@@ -4379,9 +4368,6 @@ Avec les exigences clairement définies et le plan architectural approuvé, nous
 - Commission d'accès à l'information du Québec (2024). *Guide d'application de la Loi 25*. https://www.cai.gouv.qc.ca/
 - Gartner (2024). *Magic Quadrant for Data Integration Tools*. Gartner Research.
 - Forrester (2024). *The State of Data Management*. Forrester Research.
-
-
----
 
 # Chapitre IV.5 - Sélection de la Couche de Stockage
 
@@ -5510,9 +5496,6 @@ Le chapitre suivant aborde l'ingestion de données dans votre Lakehouse, où nou
 ---
 
 *Ce chapitre établit les fondations de stockage de votre architecture Lakehouse. Le chapitre suivant, « Ingestion de Données dans le Lakehouse », détaille les stratégies pour alimenter efficacement cette infrastructure avec vos sources de données batch et streaming.*
-
-
----
 
 
 # Chapitre IV.6 - Architecture de la Couche d'Ingestion
@@ -7140,9 +7123,6 @@ Le chapitre suivant explore la couche de catalogue, composante essentielle qui o
 ---
 
 *Ce chapitre établit les fondations de l'alimentation de votre Lakehouse. Le chapitre suivant, « Configuration du Catalogue Iceberg », détaille comment organiser, gouverner et exposer les métadonnées de vos tables pour une exploitation à l'échelle de l'entreprise.*
-
-
----
 
 
 # Chapitre IV.7 - Implémentation de la Couche de Catalogue
@@ -8982,9 +8962,6 @@ Le chapitre suivant explore la couche de fédération et de requête, où nous e
 *Ce chapitre établit la gouvernance des métadonnées de votre Lakehouse. Le chapitre suivant, « Requêtes Fédérées et Moteurs de Consommation », détaille comment exploiter efficacement ces métadonnées pour l'analytique à l'échelle de l'entreprise.*
 
 
----
-
-
 # Chapitre IV.8 - Conception de la Couche de Fédération
 
 ## Introduction
@@ -10811,9 +10788,6 @@ Le chapitre suivant explore la couche de consommation et les patterns d'accès a
 ---
 
 *Ce chapitre établit l'interface d'accès à votre Lakehouse. Le chapitre suivant, « Conception de la Couche de Consommation », détaille les patterns d'accès pour les différents profils d'utilisateurs et applications.*
-
-
----
 
 
 # Chapitre IV.9 - Comprendre la Couche de Consommation
@@ -12644,9 +12618,6 @@ Le chapitre suivant aborde la maintenance en production du Lakehouse, où nous e
 ---
 
 *Ce chapitre établit les fondations de l'accès aux données de votre Lakehouse. Le chapitre suivant, « Maintenance en Production », détaille les opérations quotidiennes garantissant performance et fiabilité sur le long terme.*
-
-
----
 
 # Chapitre IV.10 - Maintenir un Lakehouse Iceberg en Production
 
@@ -14640,9 +14611,6 @@ Le chapitre suivant aborde l'opérationnalisation complète du Lakehouse, où no
 
 *Ce chapitre établit les pratiques opérationnelles de votre Lakehouse. Le chapitre suivant, « Opérationnalisation et DevOps », explore les aspects organisationnels et les pratiques d'équipe pour une exploitation mature de la plateforme.*
 
-
----
-
 # Chapitre IV.11 - OPÉRATIONNALISER APACHE ICEBERG
 
 *De la conception à l'exploitation : transformer votre lakehouse en plateforme de production*
@@ -16374,9 +16342,6 @@ Le chapitre suivant explorera l'évolution vers le *Streaming Lakehouse*, où l'
 - IOMETE (2025). *Iceberg Disaster Recovery*. https://iomete.com/resources/blog/iceberg-disaster-recovery
 - PracData (2025). *State of Open Source Workflow Orchestration Systems 2025*. https://www.pracdata.io/p/state-of-workflow-orchestration-ecosystem-2025
 - Atlan (2025). *Apache Iceberg Tables Governance: A Practical Guide*. https://atlan.com/know/iceberg/apache-iceberg-table-governance/
-
-
----
 
 # Chapitre IV.12 - L'ÉVOLUTION VERS LE STREAMING LAKEHOUSE
 
@@ -18216,6 +18181,11 @@ Le Streaming Lakehouse représente l'état de l'art pour les architectures de do
 
 
 ---
+
+### Références croisées
+
+- **Fondamentaux Apache Kafka et Confluent** : voir aussi [Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent](../../Volume_II_Infrastructure_Agentique/Partie_1_Fondamentaux_Kafka_Confluent/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md)
+- **Conception d'applications de streaming** : voir aussi [Chapitre III.8 -- Conception d'Applications de Streaming](../../Volume_III_Apache_Kafka_Guide_Architecte/Partie_3_Stream_Processing_Gestion/Chapitre_III.8_Conception_Application_Streaming.md)
 
 # Chapitre IV.13 - SÉCURITÉ, GOUVERNANCE ET CONFORMITÉ DU LAKEHOUSE
 
@@ -20595,6 +20565,11 @@ La sécurité et la gouvernance ne sont pas des projets ponctuels mais des prati
 
 ---
 
+### Références croisées
+
+- **Fondements de la securite informatique** : voir aussi [Chapitre 1.37 -- Fondements de la Securite Informatique](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.37_Fondements_Securite.md)
+- **Conformite reglementaire et confidentialite** : voir aussi [Chapitre II.15 -- Conformite Reglementaire et Gestion de la Confidentialite](../../Volume_II_Infrastructure_Agentique/Partie_4_Securite_Conformite/Chapitre_II.15_Conformite_Reglementaire_Gestion_Confidentialite.md)
+
 # Chapitre IV.14 - L'Intégration avec Microsoft Fabric et Power BI
 
 ---
@@ -21772,9 +21747,6 @@ Cette convergence positionne les architectes de données pour construire des pla
 |:-------------|:-----------:|------------:|
 | [Chapitre IV.13 - Sécurité et Gouvernance](../Chapitre_IV.13_Securite_Gouvernance/) | [Table des matières](../../Table%20des%20matières.md) | [Chapitre IV.15 - Contexte Canadien et Études de Cas](../Chapitre_IV.15_Contexte_Canadien_Etudes_Cas/) |
 
-
----
-
 # Chapitre IV.15 — Contexte Canadien et Études de Cas
 
 *Partie 4 : Intégrations et Perspectives*
@@ -22682,9 +22654,6 @@ Les communautés professionnelles canadiennes offrent également des opportunit�
 *Le chapitre suivant conclut ce volume avec une perspective sur l'évolution du Data Lakehouse à l'horizon 2026-2030, explorant les tendances technologiques émergentes et leurs implications stratégiques pour les organisations canadiennes.*
 
 
----
-
-
 # Chapitre IV.16 - Conclusion Finale et Perspectives 2026-2030
 
 ## Introduction
@@ -23154,9 +23123,6 @@ Bonne construction de votre lakehouse !
 ---
 
 *Fin du Chapitre IV.16 - Conclusion Finale et Perspectives 2026-2030*
-
-
----
 
 # Annexe A - La Spécification Apache Iceberg
 
@@ -23702,9 +23668,6 @@ La maîtrise de cette spécification est essentielle pour concevoir des architec
 
 *Dernière mise à jour : Janvier 2026*
 *Basé sur la spécification Apache Iceberg v3 et les versions 1.8.0 à 1.10.x*
-
-
----
 
 # Annexe B - Glossaire
 
@@ -24311,7 +24274,3 @@ Ce glossaire doit être consulté comme référence complémentaire lors de la l
 
 *Dernière mise à jour : Janvier 2026*
 
-
----
-
-*Fin du Volume IV*

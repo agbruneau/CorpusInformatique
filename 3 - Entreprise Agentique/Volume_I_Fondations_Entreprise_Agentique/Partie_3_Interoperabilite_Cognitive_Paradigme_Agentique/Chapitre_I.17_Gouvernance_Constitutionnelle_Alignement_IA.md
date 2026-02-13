@@ -128,6 +128,31 @@ Pour l'entreprise agentique, la constitution agentique représente l'artefact fo
 
 ### I.17.5.1 Structure d'une Constitution Agentique
 
+**Figure I.17.1 --- Boucle de gouvernance agentique constitutionnelle**
+
+```mermaid
+flowchart TB
+    CONST["Constitution Agentique<br/>(Principes fondamentaux,<br/>Directives éthiques)"]
+    POL["Politiques Opérationnelles<br/>(Règles métier,<br/>Seuils d'autonomie)"]
+    GARDES["Garde-fous Techniques<br/>(Filtres, Validations,<br/>Limites d'action)"]
+    AGENTS["Agents Cognitifs<br/>(Exécution autonome<br/>sous contraintes)"]
+    AUDIT["Audit & Traçabilité<br/>(Journaux, Raisonnement<br/>en chaîne de pensée)"]
+    CONFORM["Évaluation de Conformité<br/>(Analyse automatisée,<br/>Revue humaine)"]
+    ADAPT["Adaptation &<br/>Mise à jour"]
+
+    CONST -->|"Définir"| POL
+    POL -->|"Implémenter"| GARDES
+    GARDES -->|"Encadrer"| AGENTS
+    AGENTS -->|"Produire traces"| AUDIT
+    AUDIT -->|"Évaluer"| CONFORM
+    CONFORM -->|"Recommandations"| ADAPT
+    ADAPT -->|"Réviser"| CONST
+
+    style CONST fill:#2c3e50,color:#ecf0f1
+    style CONFORM fill:#8e44ad,color:#ecf0f1
+    style AUDIT fill:#2980b9,color:#ecf0f1
+```
+
 Une constitution agentique d'entreprise s'organise typiquement en plusieurs niveaux hiérarchiques. Les principes fondamentaux, non négociables, définissent les interdictions absolues : ne pas causer de préjudice, ne pas violer la loi, ne pas tromper. Les directives éthiques précisent les valeurs à promouvoir : équité, transparence, respect de la vie privée. Les politiques opérationnelles traduisent ces principes en règles concrètes applicables aux contextes métier. Les garde-fous techniques implémentent ces règles dans les systèmes.
 
 **Tableau I.17.3 --- Structure d'une constitution agentique**

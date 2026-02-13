@@ -424,6 +424,34 @@ Les arbres de décision sont des modèles non paramétriques qui prédisent la v
 
 Leur principal attrait réside dans leur grande **interprétabilité**. La logique de décision est explicite et peut être facilement visualisée et comprise par des non-experts.
 
+**Figure 43.1 -- Exemple d\'arbre de décision pour la classification d\'une demande de prêt bancaire**
+
+```mermaid
+flowchart TD
+    A{"Revenu annuel\n> 50 000 $ ?"}
+    A -->|Oui| B{"Historique de\ncrédit favorable ?"}
+    A -->|Non| C{"Emploi stable\n> 2 ans ?"}
+
+    B -->|Oui| D["✅ Prêt\nAPPROUVÉ"]
+    B -->|Non| E{"Ratio dette/revenu\n< 40 % ?"}
+
+    C -->|Oui| F{"Montant demandé\n< 10 000 $ ?"}
+    C -->|Non| G["❌ Prêt\nREFUSÉ"]
+
+    E -->|Oui| H["✅ Prêt\nAPPROUVÉ"]
+    E -->|Non| I["❌ Prêt\nREFUSÉ"]
+
+    F -->|Oui| J["✅ Prêt\nAPPROUVÉ"]
+    F -->|Non| K["❌ Prêt\nREFUSÉ"]
+
+    style D fill:#2d6a2e,color:#fff
+    style H fill:#2d6a2e,color:#fff
+    style J fill:#2d6a2e,color:#fff
+    style G fill:#8b1a1a,color:#fff
+    style I fill:#8b1a1a,color:#fff
+    style K fill:#8b1a1a,color:#fff
+```
+
 **Algorithme de Construction (ID3/C4.5)**
 
 Les arbres de décision sont généralement construits de manière récursive de haut en bas, selon une approche gloutonne (*greedy*). L\'algorithme le plus célèbre est **ID3** (*Iterative Dichotomiser 3*), développé par Ross Quinlan. Son successeur,
@@ -965,3 +993,11 @@ Pour les problèmes de régression, où l\'on prédit une valeur continue, les m
 
 En conclusion, une évaluation rigoureuse est une démarche multi-facettes. Elle nécessite une séparation stricte des données, l\'utilisation de techniques robustes comme la validation croisée pour estimer la performance, et le choix judicieux de métriques qui sont en adéquation avec les objectifs finaux de l\'application. C\'est seulement en respectant ces principes que l\'on peut développer des modèles d\'apprentissage automatique qui sont non seulement performants sur le papier, mais aussi fiables et utiles dans le monde réel.
 
+
+
+---
+
+### Références croisées
+
+- **Google Cloud Vertex AI pour le ML en production** : voir aussi [Chapitre II.6 -- Google Cloud Vertex AI](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_2_Vertex_AI_Patrons_Avances/Chapitre_II.6_Google_Cloud_Vertex_AI.md)
+- **Ingenierie du contexte et RAG** : voir aussi [Chapitre II.7 -- Ingenierie du Contexte et RAG](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_2_Vertex_AI_Patrons_Avances/Chapitre_II.7_Ingenierie_Contexte_RAG.md)

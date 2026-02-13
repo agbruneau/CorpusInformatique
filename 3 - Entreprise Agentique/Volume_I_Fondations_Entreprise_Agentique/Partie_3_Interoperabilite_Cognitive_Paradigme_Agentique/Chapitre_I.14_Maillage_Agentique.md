@@ -54,6 +54,50 @@ Les principes architecturaux énoncés trouvent leur expression concrète dans l
 
 Le maillage agentique se distingue des architectures multi-agents classiques par plusieurs caractéristiques essentielles.
 
+**Figure I.14.1 --- Topologie du Maillage Agentique (Agentic Mesh)**
+
+```mermaid
+graph TB
+    subgraph Gouvernance["Couche de Gouvernance"]
+        GOV["Constitution Agentique<br/>Politiques & Conformité"]
+    end
+
+    subgraph Orchestration["Couche d'Orchestration"]
+        ORCH["Orchestrateur / Superviseur"]
+    end
+
+    subgraph Cognitif["Couche Cognitive — Agents Spécialisés"]
+        A1["Agent<br/>Analyse<br/>Financière"]
+        A2["Agent<br/>Service<br/>Client"]
+        A3["Agent<br/>Logistique"]
+        A4["Agent<br/>Conformité"]
+        A5["Agent<br/>Résolution"]
+    end
+
+    subgraph Infra["Couche d'Infrastructure — Backbone Événementiel"]
+        BUS["Bus d'Événements<br/>(Apache Kafka)"]
+    end
+
+    GOV -->|"Règles & Garde-fous"| ORCH
+    ORCH -->|"Coordination"| A1
+    ORCH -->|"Coordination"| A2
+    ORCH -->|"Coordination"| A3
+    ORCH -->|"Coordination"| A4
+    ORCH -->|"Coordination"| A5
+
+    A1 <-->|"Événements"| BUS
+    A2 <-->|"Événements"| BUS
+    A3 <-->|"Événements"| BUS
+    A4 <-->|"Événements"| BUS
+    A5 <-->|"Événements"| BUS
+
+    A1 -.->|"Collaboration"| A2
+    A2 -.->|"Collaboration"| A5
+    A3 -.->|"Collaboration"| A4
+
+    GOV -->|"Audit & Conformité"| BUS
+```
+
 ### I.14.2.1 Topologie Dynamique
 
 Contrairement aux systèmes où les interactions sont prédéfinies et figées, le maillage agentique permet des collaborations dynamiques. Les agents peuvent se découvrir mutuellement, négocier les modalités de leur coopération et former des coalitions temporaires pour résoudre des problèmes spécifiques. Cette flexibilité topologique permet au système de s'adapter à des situations imprévues.

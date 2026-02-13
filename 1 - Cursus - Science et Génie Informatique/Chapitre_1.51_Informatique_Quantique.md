@@ -148,6 +148,35 @@ où 0≤θ≤π et 0≤ϕ\<2π. On peut vérifier que cette forme respecte bien 
 
 Cette paramétrisation suggère une interprétation géométrique naturelle. Les angles θ et ϕ peuvent être vus comme les coordonnées sphériques d\'un point sur la surface d\'une sphère de rayon 1. C\'est la **sphère de Bloch**. Chaque point sur la surface de cette sphère correspond à un état pur unique d\'un seul qubit.
 
+**Figure 51.1 -- Représentation schématique de la sphère de Bloch et des états d\'un qubit**
+
+```mermaid
+flowchart TB
+    subgraph BLOCH["Sphère de Bloch"]
+        direction TB
+        N["|0⟩\n(Pôle Nord)"]
+        S["|1⟩\n(Pôle Sud)"]
+
+        subgraph EQ["Équateur (superpositions équilibrées)"]
+            PX["|+⟩ = (|0⟩+|1⟩)/√2\n(axe +X)"]
+            MX["|−⟩ = (|0⟩−|1⟩)/√2\n(axe −X)"]
+            PY["|i⟩ = (|0⟩+i|1⟩)/√2\n(axe +Y)"]
+            MY["(|0⟩−i|1⟩)/√2\n(axe −Y)"]
+        end
+
+        PSI["|ψ⟩ = cos(θ/2)|0⟩ + e^(iϕ)sin(θ/2)|1⟩\n(état général sur la sphère)"]
+    end
+
+    N ---|"θ = angle polaire\n(0 à π)"| PSI
+    PSI ---|"θ = π"| S
+    PSI -.-|"ϕ = angle\nazimutal\n(0 à 2π)"| EQ
+
+    MESURE["Mesure dans la\nbase computationnelle"]
+    PSI --> MESURE
+    MESURE -->|"P = cos²(θ/2)"| R0["Résultat : 0"]
+    MESURE -->|"P = sin²(θ/2)"| R1["Résultat : 1"]
+```
+
 La correspondance est la suivante :
 
 > Le **pôle Nord** (θ=0) correspond à l\'état ∣0⟩. Pour cette valeur, cos(0/2)=1 et sin(0/2)=0, donc ∣ψ⟩=∣0⟩.

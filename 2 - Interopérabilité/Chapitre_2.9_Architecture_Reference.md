@@ -156,6 +156,70 @@ Entre ces extrêmes, des **modèles de cohérence intermédiaires** offrent des 
 
 ### 9.2.1 Vue Logique en Trois Couches
 
+**Figure — Architecture de référence en couches**
+
+Le diagramme suivant présente la vue logique de l'architecture de référence convergente, organisée en couches empilées depuis la présentation jusqu'au stockage des données, reliées par le bus d'événements.
+
+```mermaid
+graph TB
+    subgraph "Couche Présentation"
+        WEB["Application Web"]
+        MOB["Application Mobile"]
+        B2B["Partenaires B2B"]
+    end
+
+    subgraph "Couche API Gateway"
+        GW["API Gateway<br/>Authentification · Routage · Limitation de débit"]
+    end
+
+    subgraph "Couche Services Métier"
+        SVC1["Service<br/>Commandes"]
+        SVC2["Service<br/>Inventaire"]
+        SVC3["Service<br/>Paiements"]
+        SVC4["Service<br/>Expéditions"]
+    end
+
+    subgraph "Couche Bus d'Événements"
+        KAFKA["Bus d'événements (Kafka)<br/>Topics · Schema Registry · Event Mesh"]
+    end
+
+    subgraph "Couche Données"
+        DB1[("PostgreSQL<br/>Commandes")]
+        DB2[("MongoDB<br/>Inventaire")]
+        DB3[("PostgreSQL<br/>Paiements")]
+        DW[("Entrepôt<br/>analytique")]
+    end
+
+    WEB --> GW
+    MOB --> GW
+    B2B --> GW
+
+    GW --> SVC1
+    GW --> SVC2
+    GW --> SVC3
+    GW --> SVC4
+
+    SVC1 <--> KAFKA
+    SVC2 <--> KAFKA
+    SVC3 <--> KAFKA
+    SVC4 <--> KAFKA
+
+    KAFKA --> DB1
+    KAFKA --> DB2
+    KAFKA --> DB3
+    KAFKA --> DW
+
+    SVC1 --- DB1
+    SVC2 --- DB2
+    SVC3 --- DB3
+
+    style GW fill:#3498db,color:#fff,stroke:#2980b9
+    style KAFKA fill:#2ecc71,color:#fff,stroke:#27ae60
+    style DW fill:#9b59b6,color:#fff,stroke:#8e44ad
+```
+
+Cette architecture matérialise les trois couches identifiées : le *System of Engagement* (présentation et API Gateway), l'*Integration Backbone* (bus d'événements), et le *System of Record* (données persistantes). Chaque service métier possède sa propre base de données et communique avec le reste de l'écosystème via le bus d'événements.
+
 L'architecture de référence convergente s'organise en trois couches logiques, chacune correspondant à un rôle architectural distinct et à une position caractéristique sur le continuum couplage/découplage.
 
 > **Définition formelle**
@@ -717,3 +781,11 @@ Au-delà de l'étude de cas, cette architecture de référence prépare le terra
 ---
 
 *Références du chapitre : Reactive Manifesto (Bonér et al., 2014), Designing Data-Intensive Applications (Kleppmann, 2017), Building Event-Driven Microservices (Stopford, 2020), Confluent Documentation (2024-2025)*
+
+
+---
+
+### Références croisées
+
+- **Conception et architecture logicielle** : voir aussi [Chapitre 1.27 -- Conception et Architecture Logicielle](../1 - Cursus - Science et Génie Informatique/Chapitre_1.27_Architecture_Logicielle.md)
+- **Principes d'architecture reactive** : voir aussi [Chapitre I.4 -- Principes d'Architecture Reactive](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_1_Crise_Fondations_Architecturales/Chapitre_I.4_Principes_Architecture_Reactive.md)

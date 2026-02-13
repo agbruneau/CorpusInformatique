@@ -20,6 +20,61 @@ Ce chapitre adopte une structure en quatre phases qui reflètent la progression 
 
 ### 10.1.1 Le Scénario Métier
 
+**Figure — Flux complet du processus Order-to-Cash**
+
+Le diagramme de séquence suivant illustre les étapes principales du processus Order-to-Cash, de la soumission de la commande par le client jusqu'à l'encaissement du paiement, en passant par la vérification de crédit, la préparation, l'expédition et la facturation.
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Commande as Service Commandes
+    participant Crédit as Vérification Crédit
+    participant Inventaire as Service Inventaire
+    participant Expédition as Service Expéditions
+    participant Facturation as Service Facturation
+    participant Paiement as Service Paiements
+
+    Client->>Commande: Soumettre commande
+    activate Commande
+
+    Commande->>Crédit: Vérifier solvabilité client
+    activate Crédit
+    Crédit-->>Commande: Crédit approuvé
+    deactivate Crédit
+
+    Commande->>Inventaire: Réserver articles
+    activate Inventaire
+    Inventaire-->>Commande: Réservation confirmée
+    deactivate Inventaire
+
+    Commande-->>Client: Commande acceptée
+    deactivate Commande
+
+    Note over Commande,Inventaire: Événement OrderCreated publié sur Kafka
+
+    Inventaire->>Expédition: Préparer colis
+    activate Expédition
+    Expédition-->>Inventaire: Colis préparé
+    deactivate Expédition
+
+    Expédition->>Expédition: Expédier au client
+    Note over Expédition: Événement ShipmentDispatched
+
+    Expédition->>Facturation: Déclencher facturation
+    activate Facturation
+    Facturation-->>Client: Facture émise
+    deactivate Facturation
+
+    Facturation->>Paiement: Capturer le paiement
+    activate Paiement
+    Paiement-->>Facturation: Paiement encaissé
+    deactivate Paiement
+
+    Note over Client,Paiement: Événement OrderCompleted — Processus O2C terminé
+```
+
+Ce flux illustre l'hybridation des trois domaines d'intégration. Les premières étapes (validation, réservation) sont synchrones (domaine App). La propagation vers les services aval (expédition, facturation) s'effectue par événements (domaine Event). Les vues consolidées et la traçabilité reposent sur la capture de changements (domaine Data).
+
 Notre étude de cas porte sur  *TechnoCommerce* , un détaillant omnicanal fictif mais représentatif des défis contemporains. L'entreprise opère à travers trois canaux de vente : une application mobile native (iOS et Android), un site web responsive et un réseau de boutiques physiques équipées de points de vente connectés. Le catalogue compte 50 000 références, l'inventaire est réparti sur cinq entrepôts régionaux, et le volume quotidien atteint 25 000 commandes en période normale, avec des pics à 150 000 lors des événements promotionnels.
 
 Le processus Order-to-Cash de TechnoCommerce se décompose en étapes distinctes mais interdépendantes. Un client sélectionne des produits et initie une commande. Le système vérifie la disponibilité en temps réel et calcule les options de livraison. Le client finalise sa commande avec paiement. La commande est transmise à l'entrepôt approprié pour préparation. Le colis est expédié et suivi jusqu'à livraison. La facture est émise et le paiement rapproché. Tout au long du processus, le client peut consulter l'état de sa commande, et les équipes internes disposent de tableaux de bord temps réel.

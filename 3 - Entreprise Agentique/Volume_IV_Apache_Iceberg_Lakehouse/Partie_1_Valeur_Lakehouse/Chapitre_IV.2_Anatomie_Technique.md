@@ -22,6 +22,45 @@ Apache Iceberg organise une table selon une architecture en trois couches distin
 
 ### Vue d'Ensemble de l'Architecture
 
+**Figure IV.2.1 --- Couches architecturales d'une table Apache Iceberg**
+
+```mermaid
+graph TB
+    subgraph Requete["Moteurs de Requête"]
+        QE1["Spark"]
+        QE2["Trino / Presto"]
+        QE3["Flink"]
+    end
+
+    subgraph Catalogue["1. Couche Catalogue"]
+        CAT["Catalogue Iceberg<br/>(REST Catalog / Polaris / Glue)<br/>Pointeur vers metadata.json"]
+    end
+
+    subgraph Metadonnees["2. Couche Métadonnées"]
+        META["metadata.json<br/>(Schémas, Snapshots,<br/>Spécifications de partition)"]
+        ML["Liste de Manifestes<br/>(Manifest List)"]
+        MF1["Fichier Manifeste A<br/>(Statistiques, bornes min/max)"]
+        MF2["Fichier Manifeste B<br/>(Statistiques, bornes min/max)"]
+    end
+
+    subgraph Donnees["3. Couche Données"]
+        DF1["Fichiers Parquet"]
+        DF2["Fichiers Parquet"]
+        DF3["Fichiers Parquet"]
+        DF4["Fichiers Parquet"]
+    end
+
+    QE1 & QE2 & QE3 -->|"Localiser table"| CAT
+    CAT -->|"Référencer"| META
+    META -->|"Snapshot actif"| ML
+    ML -->|"Manifestes"| MF1
+    ML -->|"Manifestes"| MF2
+    MF1 -->|"Fichiers de données"| DF1
+    MF1 -->|"Fichiers de données"| DF2
+    MF2 -->|"Fichiers de données"| DF3
+    MF2 -->|"Fichiers de données"| DF4
+```
+
 La première couche, le catalogue, agit comme point d'entrée et source de vérité pour localiser les tables. La deuxième couche, les métadonnées, contient toute l'information nécessaire pour comprendre l'état d'une table à n'importe quel moment. La troisième couche, les données, stocke les enregistrements réels dans des formats de fichiers optimisés.
 
 Cette architecture se différencie fondamentalement de l'approche traditionnelle de type Hive où la structure des répertoires servait de métadonnées implicites. Dans le modèle Hive, pour déterminer quels fichiers appartiennent à une table, le moteur de requête devait effectuer des opérations coûteuses de listage de répertoires, parcourant potentiellement des milliers de partitions et des millions de fichiers. Iceberg remplace cette approche par un système de manifestes explicites qui énumère précisément chaque fichier appartenant à la table.

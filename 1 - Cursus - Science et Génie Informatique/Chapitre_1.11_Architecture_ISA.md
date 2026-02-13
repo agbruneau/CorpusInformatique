@@ -20,6 +20,33 @@ Cette unification de la mémoire pour les instructions et les données est la ca
 
 La structure d\'un ordinateur Von Neumann est conceptuellement simple. Elle s\'articule autour de quelques composants principaux interconnectés par un ensemble de canaux de communication appelé le bus système.
 
+**Figure 11.1 -- Architecture de Von Neumann : structure fondamentale**
+
+```mermaid
+flowchart TB
+    subgraph CPU["Unité Centrale de Traitement (CPU)"]
+        CU["Unité de Contrôle\n(CU)"]
+        ALU["Unité Arithmétique\net Logique (ALU)"]
+        REG["Registres\n(PC, IR, ACC, ...)"]
+        CU <--> ALU
+        CU <--> REG
+        ALU <--> REG
+    end
+
+    subgraph MEM["Mémoire Principale"]
+        INST["Instructions"]
+        DATA["Données"]
+    end
+
+    subgraph IO["Entrées / Sorties"]
+        INPUT["Périphériques\nd'entrée"]
+        OUTPUT["Périphériques\nde sortie"]
+    end
+
+    CPU <-->|"Bus de données\nBus d'adresses\nBus de contrôle"| MEM
+    CPU <-->|"Bus E/S"| IO
+```
+
 1.  **L\'Unité Centrale de Traitement (CPU)** : Le cerveau de l\'ordinateur, responsable de l\'exécution des instructions. Elle contient l\'Unité Arithmétique et Logique (ALU) pour les calculs, l\'Unité de Contrôle (CU) pour orchestrer les opérations, et un ensemble de registres pour le stockage temporaire à haute vitesse.
 
 2.  **La Mémoire Principale** : Un espace de stockage unifié qui contient à la fois les instructions du programme en cours d\'exécution et les données que ce programme manipule.

@@ -4,6 +4,32 @@
 
 ---
 
+## Tableau de suivi d'exécution
+
+| Tâche | Description | Agent | Statut | Notes |
+|-------|-------------|-------|--------|-------|
+| T0.1 | Vérification doublons MD5 | auditor | ✅ Terminé | 5/5 paires IDENTIQUES (MD5 confirmé) |
+| T0.2 | Audit complétude Chapitre V.10 | auditor | ✅ Terminé | 94/100 — aucune lacune critique |
+| T0.3 | Inventaire fichiers legacy Section 2 | auditor | ✅ Terminé | 12/12 paires IDENTIQUES (MD5 confirmé) |
+| T0.4 | Inventaire Section 1 volumes vs chapitres | auditor | ✅ Terminé | 83 chapitres = 7 volumes (diff 0, delta = CRLF uniquement) |
+| T1.1 | Supprimer Consolidés dupliqués Section 2 | cleanup-1 | ✅ Terminé | 5 fichiers supprimés (~4.5 Mo) |
+| T1.2 | Supprimer fichiers legacy NN_ Section 2 | cleanup-1 | ✅ Terminé | 12 fichiers supprimés (~743 Ko) |
+| T1.3 | Nettoyer monolithes Section 1 | cleanup-2 | ✅ Terminé | 7 fichiers supprimés (~6.9 Mo) |
+| T1.4 | Compléter Chapitre V.10 | writer-agentique | ✅ Terminé | Chapitre déjà complet (94/100), pas d'action requise |
+| T1.5 | Mettre à jour CLAUDE.md | lead | ✅ Terminé | Convention unifiée, doublons supprimés, stats actualisées |
+| T2.1 | Rééquilibrer Volume I | writer-agentique | ✅ Terminé | 3-6-3-8-8 → 6-5-6-6-5, 13 fichiers déplacés |
+| T2.2 | Références croisées inter-sections | indexer | ✅ Terminé | 99 références croisées dans 42 fichiers (16 thèmes) |
+| T2.3 | INDEX.md + Glossaire fédéré | indexer | ⏳ En cours | Débloqué par T2.2 |
+| T2.4 | Régénérer Consolidés Section 3 | writer-agentique | ✅ Terminé | 5 consolidés régénérés (~4.5 Mo total) |
+| T3.1 | Diagrammes Mermaid Section 1 | writer-cursus | ✅ Terminé | 7 diagrammes dans 7 chapitres |
+| T3.2 | Diagrammes Mermaid Section 2 | writer-interop | ✅ Terminé | 5 diagrammes dans 5 chapitres |
+| T3.3 | Diagrammes Mermaid Section 3 | writer-agentique | ✅ Terminé | 10 diagrammes dans 8 chapitres |
+| T3.4 | Code pratique Sections 2 et 3 | writer-interop + writer-agentique | ⏳ En cours | Débloqué par T3.2, T3.3 |
+| T3.5 | Lacunes thématiques Interopérabilité | writer-interop | ⏳ En cours | Débloqué par T3.2 |
+| T3.6 | Streaming Lakehouse Kafka→Iceberg | writer-agentique | ⏳ En cours | Débloqué par T3.3 |
+
+---
+
 ## Vue d'ensemble
 
 Ce plan organise **18 tâches** en **4 phases** avec dépendances explicites, conçu pour exécution par une équipe d'agents Claude Code (Agent Teams). Chaque tâche spécifie son agent assigné, ses pré-requis, ses entrées/sorties et ses critères de complétion.

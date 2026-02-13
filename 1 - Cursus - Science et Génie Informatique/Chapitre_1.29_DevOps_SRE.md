@@ -740,3 +740,11 @@ Alors que nous regardons vers l\'avenir, de nouvelles tendances émergent, s\'ap
 Ces évolutions confirment que les principes décrits dans ce chapitre ne sont pas une destination finale, mais une base solide sur laquelle se construiront les prochaines générations de pratiques d\'ingénierie logicielle, poursuivant sans relâche la quête de l\'équilibre entre l\'innovation rapide et une fiabilité à toute épreuve.
 
 #
+
+
+---
+
+### Références croisées
+
+- **Pipelines CI/CD pour le deploiement d'agents** : voir aussi [Chapitre II.10 -- Pipelines CI/CD et Deploiement des Agents](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_3_CI_CD_Observabilite_Tests/Chapitre_II.10_Pipelines_CI_CD_Deploiement_Agents.md)
+- **Observabilite comportementale et monitoring** : voir aussi [Chapitre II.11 -- Observabilite Comportementale et Monitoring](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_3_CI_CD_Observabilite_Tests/Chapitre_II.11_Observabilite_Comportementale_Monitoring.md)

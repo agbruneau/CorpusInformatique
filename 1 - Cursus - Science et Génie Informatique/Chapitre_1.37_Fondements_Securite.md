@@ -538,3 +538,12 @@ Enfin, l\'**ABAC** marque la dernière évolution de ce paradigme. Il découple 
 
 Cette évolution est au cœur des architectures de sécurité modernes, notamment le modèle **Zero Trust**, qui postule qu\'aucune confiance ne doit être accordée a priori, et que chaque demande d\'accès doit être vérifiée de manière dynamique. L\'ABAC est le modèle qui incarne le mieux cette philosophie. Cependant, sa complexité signifie que de nombreuses organisations adoptent une approche hybride, utilisant le RBAC pour définir des permissions de base et y superposant des politiques ABAC pour les accès les plus sensibles et les plus contextuels. Le choix d\'un modèle de contrôle d\'accès est donc un arbitrage d\'ingénierie fondamental entre le niveau de sécurité requis, la flexibilité opérationnelle et la complexité de gestion.
 
+
+
+---
+
+### Références croisées
+
+- **Securite des systemes agentiques** : voir aussi [Chapitre II.13 -- Paysage des Menaces et Securite des Systemes Agentiques](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_4_Securite_Conformite/Chapitre_II.13_Paysage_Menaces_Securite_Systemes_Agentiques.md)
+- **Securisation de l'infrastructure agentique** : voir aussi [Chapitre II.14 -- Securisation de l'Infrastructure](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_4_Securite_Conformite/Chapitre_II.14_Securisation_Infrastructure.md)
+- **Securite et gouvernance du Lakehouse** : voir aussi [Chapitre IV.13 -- Securite, Gouvernance et Conformite](../3 - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Partie_3_Operer_Lakehouse/Chapitre_IV.13_Securite_Gouvernance_Conformite.md)

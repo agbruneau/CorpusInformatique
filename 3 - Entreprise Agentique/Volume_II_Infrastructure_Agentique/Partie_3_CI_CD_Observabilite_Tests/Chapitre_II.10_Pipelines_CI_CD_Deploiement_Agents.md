@@ -148,6 +148,41 @@ L'intégration avec le Stream Catalog de Confluent enrichit ce lignage en docume
 
 ### Architecture de Pipeline CI/CD pour Systèmes Agentiques
 
+**Figure II.10.1 --- Flux CI/CD agentique avec boucle de rétroaction**
+
+```mermaid
+flowchart LR
+    subgraph Dev["Développement"]
+        CODE["Code Agent<br/>+ Prompts<br/>+ Schémas"]
+    end
+
+    subgraph CI["Intégration Continue"]
+        BUILD["Build &<br/>Validation<br/>Artefacts"]
+        TEST["Tests<br/>Unitaires &<br/>Comportementaux"]
+        EVAL["Évaluation<br/>IA<br/>(LLM-as-Judge)"]
+    end
+
+    subgraph CD["Déploiement Continu"]
+        DEPLOY["Déploiement<br/>Progressif<br/>(Canary / Blue-Green)"]
+        MONITOR["Monitoring &<br/>Observabilité<br/>Comportementale"]
+    end
+
+    subgraph Feedback["Rétroaction"]
+        METRICS["Métriques<br/>de Performance"]
+        ALERT["Alertes &<br/>Rollback<br/>Automatique"]
+    end
+
+    CODE -->|"Commit"| BUILD
+    BUILD -->|"Artefacts validés"| TEST
+    TEST -->|"Tests réussis"| EVAL
+    EVAL -->|"Seuils atteints"| DEPLOY
+    DEPLOY -->|"Agent en production"| MONITOR
+    MONITOR -->|"Collecte"| METRICS
+    METRICS -->|"Anomalies"| ALERT
+    ALERT -.->|"Boucle d'amélioration"| CODE
+    METRICS -.->|"Rétroaction continue"| CODE
+```
+
 Les pipelines d'intégration et de déploiement continus pour les agents cognitifs diffèrent significativement de leurs homologues traditionnels. La nature non déterministe des réponses des modèles de langage impose des mécanismes de validation spécifiques, tandis que l'interdépendance entre les différents artefacts nécessite une orchestration sophistiquée.
 
 Un pipeline CI/CD agentique se structure généralement en cinq phases distinctes : la validation des artefacts, les tests unitaires et d'intégration, l'évaluation comportementale, le déploiement progressif et la validation post-déploiement. Chaque phase intègre des points de contrôle automatisés et des seuils de qualité qui conditionnent la progression vers la phase suivante.
@@ -1060,3 +1095,11 @@ Le chapitre suivant prolongera cette exploration opérationnelle en abordant l'o
 *Monographie « L'Entreprise Agentique »*
 
 *Chapitre suivant : Chapitre II.11 — Observabilité Comportementale et Monitoring*
+
+
+---
+
+### Références croisées
+
+- **Pratiques modernes DevOps et SRE** : voir aussi [Chapitre 1.29 -- Pratiques Modernes de Developpement (DevOps et SRE)](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.29_DevOps_SRE.md)
+- **Qualite logicielle, test et maintenance** : voir aussi [Chapitre 1.28 -- Qualite Logicielle : Test et Maintenance](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.28_Qualite_Test_Maintenance.md)

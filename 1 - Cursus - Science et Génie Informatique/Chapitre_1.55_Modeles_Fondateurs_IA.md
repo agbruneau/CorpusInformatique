@@ -399,3 +399,12 @@ Une découverte encore plus surprenante est le **CoT \"zéro-shot\"**. Il a ét�
 
 Le succès du CoT suggère que cette technique agit comme une forme d\'**échafaudage cognitif en contexte**. Un prompt standard demande une réponse directe, forçant le modèle à effectuer tout le raisonnement en interne, de manière implicite. Un prompt CoT, en revanche, externalise le processus de pensée. Il fournit une structure, un modèle de raisonnement, que le modèle peut suivre. En générant sa propre chaîne de pensée, le modèle utilise sa sortie comme un \"brouillon\" ou un \"espace de travail\" intermédiaire pour guider ses propres étapes de génération suivantes. Cela transforme la fenêtre de contexte d\'un simple tampon de mémoire passive en un espace de calcul actif. L\'ingénierie de prompt avancée ne consiste donc pas tant à programmer le modèle qu\'à gérer sa charge cognitive, en concevant des processus qui décomposent des tâches complexes en une séquence d\'étapes plus simples que le modèle peut exécuter de manière fiable.
 
+
+
+---
+
+### Références croisées
+
+- **Ere de l'IA agentique et travailleur numerique** : voir aussi [Chapitre I.13 -- L'Ere de l'IA Agentique](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_3_Interoperabilite_Cognitive_Paradigme_Agentique/Chapitre_I.13_Ere_IA_Agentique_Modele_Travailleur_Numerique.md)
+- **Ingenierie du contexte et RAG** : voir aussi [Chapitre II.7 -- Ingenierie du Contexte et RAG](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_2_Vertex_AI_Patrons_Avances/Chapitre_II.7_Ingenierie_Contexte_RAG.md)
+- **Apprentissage profond (Deep Learning)** : voir aussi [Chapitre 1.44 -- Apprentissage Profond (Deep Learning)](Chapitre_1.44_DeepLearning.md)

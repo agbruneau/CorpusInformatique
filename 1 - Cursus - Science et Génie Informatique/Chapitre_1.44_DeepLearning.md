@@ -640,3 +640,11 @@ Malgré ces défis, les GANs et leurs nombreuses variantes (DCGAN, StyleGAN, Cyc
 
 Les VAE et les GAN incarnent deux philosophies distinctes de la génération. Le VAE adopte une approche basée sur l\'inférence probabiliste, cherchant à modéliser explicitement une distribution via l\'optimisation de la vraisemblance. Le GAN, quant à lui, utilise une approche basée sur la théorie des jeux, où la notion de \"réalisme\" n\'est pas définie par une fonction de perte fixe comme la MSE, mais est apprise dynamiquement par le discriminateur. C\'est cette fonction de perte adaptative qui permet aux GANs de capturer les textures et les structures complexes du monde réel avec une fidélité que les fonctions de perte basées sur les pixels peinent à atteindre.
 
+
+
+---
+
+### Références croisées
+
+- **Modeles fondateurs et IA a grande echelle** : voir aussi [Chapitre 1.55 -- Modeles Fondateurs et Ingenierie de l'IA a Grande Echelle](Chapitre_1.55_Modeles_Fondateurs_IA.md)
+- **Google Cloud Vertex AI** : voir aussi [Chapitre II.6 -- Google Cloud Vertex AI](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_2_Vertex_AI_Patrons_Avances/Chapitre_II.6_Google_Cloud_Vertex_AI.md)

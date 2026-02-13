@@ -295,6 +295,40 @@ Ces trois dimensions ne sont pas indépendantes. Un couplage fort facilite la co
 
 La métaphore du spectre est délibérément choisie. Contrairement à une taxonomie discrète qui classerait les solutions dans des catégories étanches, le spectre reconnaît la continuité des positions possibles. Entre l'appel synchrone bloquant et la publication d'événement « fire-and-forget », il existe une infinité de positions intermédiaires : appels asynchrones avec callback, files de messages avec confirmation, flux d'événements avec fenêtre de rétention. L'architecte navigue sur ce spectre plutôt que de choisir dans un catalogue.
 
+**Figure — Continuum d'interopérabilité : du couplage fort au découplage maximal**
+
+Le diagramme suivant illustre la progression des styles d'intégration sur le spectre du couplage, depuis les connexions point-à-point fortement couplées jusqu'au découplage maximal offert par le streaming d'événements.
+
+```mermaid
+graph LR
+    subgraph "Couplage fort"
+        A["Point-à-Point<br/>(appels directs)"]
+    end
+
+    subgraph "Couplage modéré"
+        B["ESB<br/>(bus centralisé)"]
+        C["Courtier de messages<br/>(Message Broker)"]
+    end
+
+    subgraph "Découplage maximal"
+        D["Streaming d'événements<br/>(Kafka, Pulsar)"]
+        E["Chorégraphie<br/>événementielle<br/>(Pub/Sub pur)"]
+    end
+
+    A -- "Indirection<br/>centralisée" --> B
+    B -- "Canaux simples,<br/>logique aux extrémités" --> C
+    C -- "Log persistant,<br/>rétention" --> D
+    D -- "Ignorance mutuelle<br/>producteur/consommateur" --> E
+
+    style A fill:#e74c3c,color:#fff,stroke:#c0392b
+    style B fill:#e67e22,color:#fff,stroke:#d35400
+    style C fill:#f1c40f,color:#333,stroke:#f39c12
+    style D fill:#2ecc71,color:#fff,stroke:#27ae60
+    style E fill:#3498db,color:#fff,stroke:#2980b9
+```
+
+Ce continuum constitue le fil directeur de l'ensemble de cet essai. Chaque position sur le spectre implique des compromis explicites entre la cohérence, la disponibilité, la latence et l'autonomie des composants.
+
 ### 2.4.2 Les trois domaines comme positions sur le continuum
 
 Les trois domaines d'intégration qui structurent les chapitres III à V occupent des positions caractéristiques sur ce continuum. Chaque domaine possède une « zone de confort » où ses patrons s'appliquent naturellement, mais les frontières entre domaines restent poreuses.

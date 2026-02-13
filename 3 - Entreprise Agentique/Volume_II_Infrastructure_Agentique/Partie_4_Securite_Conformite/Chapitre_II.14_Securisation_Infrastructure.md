@@ -599,3 +599,11 @@ La sécurisation de l'infrastructure agentique représente un investissement sig
 ---
 
 *Chapitre suivant : Chapitre II.15 — Conformité Réglementaire et Gestion de la Confidentialité*
+
+
+---
+
+### Références croisées
+
+- **Fondements de la securite informatique** : voir aussi [Chapitre 1.37 -- Fondements de la Securite Informatique](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.37_Fondements_Securite.md)
+- **Cryptographie appliquee** : voir aussi [Chapitre 1.38 -- Cryptographie Appliquee](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.38_Cryptographie_Appliquee.md)

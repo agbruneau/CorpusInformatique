@@ -417,3 +417,11 @@ L\'avènement des LLMs marque le **triomphe de l\'échelle et de la généralisa
 
 Cette transformation a également fait émerger **l\'interaction comme une nouvelle forme de programmation**. Historiquement, l\'exécution d\'une tâche par un ordinateur nécessitait un code explicite. Avec l\'apprentissage supervisé, on programmait en fournissant des milliers d\'exemples étiquetés. Avec les LLMs et l\'apprentissage en contexte, la frontière s\'estompe davantage. On « programme » désormais le modèle en dialoguant avec lui en langage naturel, en lui montrant quelques exemples dans un prompt. L\'ingénierie de prompt devient une compétence essentielle, une nouvelle interface homme-machine où le langage humain agit comme un langage de programmation de très haut niveau. Des techniques comme la chaîne de pensée peuvent être vues comme de nouvelles « structures de contrôle » dans ce paradigme, guidant le flux de raisonnement du modèle. Cela ouvre la porte à une démocratisation de la création d\'applications d\'IA, mais soulève également de nouveaux défis en matière de fiabilité, de sécurité et de contrôle du comportement de ces systèmes complexes. Le développeur de demain pourrait bien être, en partie, un « psychologue de LLMs », cherchant les incitations les plus efficaces pour obtenir le comportement désiré.
 
+
+
+---
+
+### Références croisées
+
+- **Ingenierie du contexte et RAG** : voir aussi [Chapitre II.7 -- Ingenierie du Contexte et RAG](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_2_Vertex_AI_Patrons_Avances/Chapitre_II.7_Ingenierie_Contexte_RAG.md)
+- **IA comme moteur d'interoperabilite** : voir aussi [Chapitre I.11 -- L'IA comme Moteur de l'Interoperabilite](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_2_Infrastructure_Ecosysteme_Technique/Chapitre_I.11_IA_Moteur_Interoperabilite.md)

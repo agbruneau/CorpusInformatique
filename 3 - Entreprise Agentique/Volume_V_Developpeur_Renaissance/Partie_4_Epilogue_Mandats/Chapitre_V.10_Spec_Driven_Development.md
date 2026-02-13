@@ -297,6 +297,31 @@ Cela ne signifie pas que la créativité disparaît — elle se concentre là o�
 
 ### Les Étapes de la Chaîne
 
+**Figure V.10.1 --- Flux de travail Spec-Driven Development (SDD)**
+
+```mermaid
+flowchart LR
+    ELIC["Élicitation<br/>(Besoins bruts)"]
+    SPEC["Spécification<br/>(Contrat SDD)"]
+    REV["Revue &<br/>Validation"]
+    GEN["Génération<br/>Artefacts<br/>(Tests, Squelettes)"]
+    IMPL["Implémentation<br/>(Développeur<br/>+ Agent IA)"]
+    VERIF["Vérification<br/>(Tests automatisés,<br/>Critères d'acceptation)"]
+    DEPLOY["Déploiement<br/>(Production)"]
+    DOC["Documentation<br/>Vivante"]
+
+    ELIC -->|"Formaliser"| SPEC
+    SPEC -->|"Soumettre"| REV
+    REV -->|"Approuvé"| GEN
+    REV -->|"Rejeté"| SPEC
+    GEN -->|"Artefacts"| IMPL
+    IMPL -->|"Code"| VERIF
+    VERIF -->|"Conforme"| DEPLOY
+    VERIF -->|"Non conforme"| IMPL
+    DEPLOY -->|"Mettre à jour"| DOC
+    DOC -.->|"Rétroaction"| SPEC
+```
+
 La chaîne de production SDD comprend plusieurs étapes, chacune avec ses entrées, ses sorties, et ses vérifications.
 
 #### Étape 1 : Élicitation et Rédaction
@@ -1081,3 +1106,11 @@ Ce chapitre final du Volume V présente en profondeur la **Spécification-Driven
 *Le SDD répond à cette exigence logique : définir clairement ce que le système est censé faire, pour pouvoir vérifier s'il le fait. C'est la base de toute ingénierie responsable, et la condition de toute collaboration efficace — entre humains, entre humains et machines, entre le présent et le futur.*
 
 *Spécifiez. Vérifiez. Construisez.*
+
+
+---
+
+### Références croisées
+
+- **Qualite logicielle, test et maintenance** : voir aussi [Chapitre 1.28 -- Qualite Logicielle : Test et Maintenance](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.28_Qualite_Test_Maintenance.md)
+- **Processus de developpement logiciel** : voir aussi [Chapitre 1.26 -- Le Processus de Developpement Logiciel](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.26_Processus_Developpement.md)

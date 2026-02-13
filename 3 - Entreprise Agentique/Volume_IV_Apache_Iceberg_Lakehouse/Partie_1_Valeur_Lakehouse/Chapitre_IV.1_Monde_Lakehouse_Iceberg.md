@@ -599,3 +599,12 @@ Les chapitres suivants approfondiront l'anatomie technique d'Iceberg, les strat�
 ---
 
 *Chapitre suivant : Chapitre IV.2 — Anatomie Technique d'Apache Iceberg*
+
+
+---
+
+### Références croisées
+
+- **Systemes de donnees modernes et Big Data** : voir aussi [Chapitre 1.32 -- Systemes de Donnees Modernes et Big Data](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.32_Donnees_Modernes_BigData.md)
+- **Integration des donnees en entreprise** : voir aussi [Chapitre 2.4 -- Integration des Donnees](../../../2 - Interopérabilité/Chapitre_2.4_Integration_Donnees.md)
+- **Fondements des SGBD** : voir aussi [Chapitre 1.30 -- Systemes de Gestion de Bases de Donnees (SGBD) -- Fondements](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.30_SGBD_Fondements.md)

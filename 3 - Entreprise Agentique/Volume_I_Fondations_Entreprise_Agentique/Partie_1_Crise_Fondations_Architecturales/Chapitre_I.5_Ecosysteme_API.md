@@ -171,3 +171,11 @@ Ce chapitre a exploré l'écosystème API comme composante essentielle du systè
 ---
 
 *Chapitre suivant : Chapitre I.6 — Architecture Orientée Événements (EDA) et le Maillage d'Événements*
+
+
+---
+
+### Références croisées
+
+- **Integration des applications** : voir aussi [Chapitre 2.3 -- Integration des Applications](../../../2 - Interopérabilité/Chapitre_2.3_Integration_Applications.md)
+- **Standards et contrats d'interface** : voir aussi [Chapitre 2.6 -- Standards et Contrats d'Interface](../../../2 - Interopérabilité/Chapitre_2.6_Standards_Contrats.md)

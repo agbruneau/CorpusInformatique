@@ -1,14 +1,3 @@
----
-
-# VOLUME III : APACHE KAFKA - GUIDE DE L'ARCHITECTE
-
-_Maîtriser le Backbone Événementiel de l'Entreprise_
-
----
-
-**Monographie : L'Entreprise Agentique**
-
----
 # Chapitre III.1
 
 ## DÉCOUVRIR KAFKA EN TANT QU'ARCHITECTE
@@ -852,6 +841,12 @@ L'architecte qui maîtrise à la fois la vision stratégique développée dans c
 
 ---
 
+### Références croisées
+
+- **Integration des evenements en entreprise** : voir aussi [Chapitre 2.5 -- Integration des Evenements](../../../2 - Interopérabilité/Chapitre_2.5_Integration_Evenements.md)
+- **Fondamentaux Kafka dans l'infrastructure agentique** : voir aussi [Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent](../../Volume_II_Infrastructure_Agentique/Partie_1_Fondamentaux_Kafka_Confluent/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md)
+- **Architecture EDA** : voir aussi [Chapitre I.6 -- Architecture Orientee Evenements (EDA)](../../Volume_I_Fondations_Entreprise_Agentique/Partie_1_Crise_Fondations_Architecturales/Chapitre_I.6_Architecture_Evenements_EDA.md)
+
 # Chapitre III.2
 
 ## ARCHITECTURE D'UN CLUSTER KAFKA
@@ -1577,9 +1572,6 @@ L'architecte qui maîtrise à la fois l'architecture du cluster (ce chapitre) et
 *Chapitre III.2 — Architecture d'un Cluster Kafka*
 
 *Monographie « L'Entreprise Agentique »*
-
-
----
 
 # Chapitre III.3
 
@@ -2758,9 +2750,6 @@ La maîtrise des deux côtés — production et consommation — permet à l'arc
 *Chapitre III.3 — Clients Kafka et Production de Messages*
 
 *Monographie « L'Entreprise Agentique »*
-
-
----
 
 # Chapitre III.4
 
@@ -4427,9 +4416,6 @@ La maîtrise de la production (chapitre III.3) et de la consommation (ce chapitr
 
 *Monographie « L'Entreprise Agentique »*
 
-
----
-
 # Chapitre III.5
 
 ## CAS D'UTILISATION KAFKA
@@ -5752,9 +5738,6 @@ Les contrats de données sont le fondement de la gouvernance Kafka à grande éc
 *Chapitre III.5 — Cas d'Utilisation Kafka*
 
 *Monographie « L'Entreprise Agentique »*
-
-
----
 
 # Chapitre III.6
 
@@ -7923,9 +7906,6 @@ Les contrats de données définissent la structure des messages échangés. Le c
 *Chapitre III.6 — Contrats de Données*
 
 *Monographie « L'Entreprise Agentique »*
-
-
----
 
 # Chapitre III.7
 
@@ -10773,9 +10753,6 @@ Les patrons d'interaction définissent comment les messages circulent dans l'éc
 
 *Monographie « L'Entreprise Agentique »*
 
-
----
-
 # Chapitre III.8 - CONCEPTION D'APPLICATION DE TRAITEMENT DE FLUX EN CONTINU
 
 ---
@@ -12643,9 +12620,6 @@ Pour les architectes d'entreprise, Kafka Streams représente aujourd'hui l'un de
 
 *Fin du chapitre III.8*
 
-
----
-
 # Chapitre III.9 - GESTION KAFKA D'ENTREPRISE
 
 ## Introduction
@@ -13520,9 +13494,6 @@ Le chapitre suivant, **Organisation d'un Projet Kafka**, abordera les aspects m�
 ---
 
 *La maîtrise de la gestion Kafka d'entreprise distingue les organisations qui utilisent Kafka de celles qui en dépendent en toute confiance. Cette maîtrise s'acquiert par l'expérience, mais se préserve par la rigueur des processus et la discipline opérationnelle.*
-
----
-
 # Chapitre III.10 - Organisation d'un Projet Kafka
 
 ---
@@ -15066,9 +15037,6 @@ Le chapitre suivant aborde les aspects opérationnels de Kafka en production : �
 ---
 
 *Fin du Chapitre III.10*
-
----
-
 # Chapitre III.11 - Opérer Kafka
 
 ---
@@ -17029,9 +16997,6 @@ Le chapitre suivant explore l'avenir de Kafka : évolutions architecturales, int
 *Fin du Chapitre III.11*
 ```
 
-
----
-
 # Chapitre III.12 - AVENIR KAFKA
 
 *L'Évolution Continue d'une Plateforme Fondamentale*
@@ -17947,7 +17912,3 @@ Pour approfondir les sujets abordés dans ce chapitre, les architectes peuvent c
 
 Cette veille technologique continue est essentielle pour les architectes naviguant l'évolution rapide de l'écosystème Kafka et de l'IA agentique.
 
-
----
-
-*Fin du Volume III*

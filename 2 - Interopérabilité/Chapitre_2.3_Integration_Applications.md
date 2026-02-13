@@ -56,6 +56,45 @@ Les patrons présentés dans ce chapitre contribuent à cette sécurisation. L'A
 
 ## 3.2 Catalogue des Patrons d'Architecture
 
+**Figure — Patrons d'intégration des applications**
+
+Le diagramme suivant synthétise les quatre grandes familles de patrons d'intégration applicative, chacune répondant à un besoin architectural distinct : la gestion du trafic entrant, la communication asynchrone, la diffusion d'événements et la traçabilité de l'état.
+
+```mermaid
+flowchart TB
+    subgraph "API Gateway"
+        GW["Passerelle API<br/>(Point d'entrée unifié)"]
+        GW --> AUTH["Authentification<br/>Autorisation"]
+        GW --> RL["Limitation de débit"]
+        GW --> ROUTE["Routage intelligent"]
+    end
+
+    subgraph "File de messages (Message Queue)"
+        PROD_Q["Producteur"] --> QUEUE["File d'attente<br/>(Point-à-point)"]
+        QUEUE --> CONS_Q["Consommateur unique"]
+    end
+
+    subgraph "Publication / Souscription (Pub/Sub)"
+        PROD_PS["Producteur"] --> TOPIC["Topic<br/>(Diffusion)"]
+        TOPIC --> SUB1["Abonné A"]
+        TOPIC --> SUB2["Abonné B"]
+        TOPIC --> SUB3["Abonné C"]
+    end
+
+    subgraph "Event Sourcing"
+        CMD["Commande métier"] --> ESTORE["Magasin d'événements<br/>(séquence immuable)"]
+        ESTORE --> PROJ1["Projection de lecture A"]
+        ESTORE --> PROJ2["Projection de lecture B"]
+    end
+
+    style GW fill:#3498db,color:#fff,stroke:#2980b9
+    style QUEUE fill:#e67e22,color:#fff,stroke:#d35400
+    style TOPIC fill:#2ecc71,color:#fff,stroke:#27ae60
+    style ESTORE fill:#9b59b6,color:#fff,stroke:#8e44ad
+```
+
+Chacun de ces patrons occupe une position caractéristique sur le continuum de couplage présenté au chapitre II. L'API Gateway centralise les préoccupations transversales tout en maintenant un couplage synchrone. La file de messages relâche le couplage temporel. Le Pub/Sub élimine le couplage spatial. L'Event Sourcing transforme le journal de changements en source de vérité.
+
 Les sept patrons suivants constituent la boîte à outils essentielle de l'architecte d'intégration applicative. Ils ne sont pas mutuellement exclusifs — une architecture réelle les combine souvent pour adresser différents aspects d'un même système.
 
 ### 3.2.1 API Gateway
@@ -664,3 +703,11 @@ L'architecte averti notera que les frontières entre ces domaines ne sont pas é
 **Combinaisons clés** : Les patrons se combinent naturellement — Gateway + BFF + Aggregator pour une architecture multi-canal complète, ACL + Strangler Fig pour une migration maîtrisée, Service Registry + Consumer-Driven Contracts pour un écosystème dynamique et fiable.
 
 **Transition** : Le chapitre IV explorera l'intégration des données (« Le Nom »), progressant vers un couplage intermédiaire où la préoccupation principale devient la cohérence de l'état plutôt que l'orchestration des processus. Les patrons CDC, CQRS et Data Mesh illustreront comment maintenir des vues cohérentes de données distribuées.
+
+
+---
+
+### Références croisées
+
+- **Ecosysteme API et strategie produit** : voir aussi [Chapitre I.5 -- Ecosysteme API : Protocoles Modernes et Strategie Produit](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_1_Crise_Fondations_Architecturales/Chapitre_I.5_Ecosysteme_API.md)
+- **Conception et architecture logicielle** : voir aussi [Chapitre 1.27 -- Conception et Architecture Logicielle](../1 - Cursus - Science et Génie Informatique/Chapitre_1.27_Architecture_Logicielle.md)

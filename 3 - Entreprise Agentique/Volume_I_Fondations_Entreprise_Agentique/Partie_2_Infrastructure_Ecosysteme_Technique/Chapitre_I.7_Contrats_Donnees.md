@@ -176,3 +176,11 @@ Ce chapitre a établi les contrats de données comme pilier de la fiabilité dan
 ---
 
 *Chapitre suivant : Chapitre I.8 — Conception, Implémentation et Observabilité de l'Infrastructure*
+
+
+---
+
+### Références croisées
+
+- **Standards et contrats d'interface** : voir aussi [Chapitre 2.6 -- Standards et Contrats d'Interface](../../../2 - Interopérabilité/Chapitre_2.6_Standards_Contrats.md)
+- **Contrats de donnees dans l'ecosysteme Kafka** : voir aussi [Chapitre III.6 -- Contrats de Donnees (Kafka)](../../Volume_III_Apache_Kafka_Guide_Architecte/Partie_2_Cas_Usage_Patrons/Chapitre_III.6_Contrats_Donnees.md)

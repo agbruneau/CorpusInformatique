@@ -242,3 +242,12 @@ Ce chapitre a exploré comment l'intelligence artificielle transforme l'interop�
 ---
 
 *Chapitre suivant : Chapitre I.12 — Définition de l'Interopérabilité Cognitivo-Adaptative*
+
+
+---
+
+### Références croisées
+
+- **Fondements de l'intelligence artificielle** : voir aussi [Chapitre 1.41 -- Fondements de l'Intelligence Artificielle](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.41_Fondements_IA.md)
+- **Apprentissage automatique (ML) -- Fondements** : voir aussi [Chapitre 1.43 -- Apprentissage Automatique (ML) -- Fondements](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.43_ML_Fondements.md)
+- **Modeles fondateurs et IA a grande echelle** : voir aussi [Chapitre 1.55 -- Modeles Fondateurs et IA a Grande Echelle](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.55_Modeles_Fondateurs_IA.md)

@@ -413,3 +413,11 @@ Les fondations étant posées, le chapitre suivant établira les bases théoriqu
 ---
 
 *Chapitre I — Fin*
+
+
+---
+
+### Références croisées
+
+- **Crise de l'integration systemique** : voir aussi [Chapitre I.1 -- La Crise de l'Integration Systemique](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_1_Crise_Fondations_Architecturales/Chapitre_I.1_Crise_Integration_Systemique.md)
+- **Fondements et dimensions de l'interoperabilite** : voir aussi [Chapitre I.2 -- Fondements et Dimensions de l'Interoperabilite](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_1_Crise_Fondations_Architecturales/Chapitre_I.2_Fondements_Dimensions_Interoperabilite.md)

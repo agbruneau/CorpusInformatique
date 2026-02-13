@@ -687,3 +687,12 @@ Nous avons ensuite élargi notre perspective au-delà des problèmes de recherch
 
 Les concepts et algorithmes présentés dans ce chapitre --- de la formalisation d\'un problème à l\'analyse des propriétés des algorithmes de recherche --- constituent le socle de l\'IA classique. Ils sont non seulement des outils puissants en eux-mêmes, mais aussi les fondations sur lesquelles reposent des domaines plus avancés de l\'IA, tels que la planification automatisée, l\'apprentissage par renforcement et la représentation des connaissances, qui seront explorés dans les chapitres suivants.
 
+
+
+---
+
+### Références croisées
+
+- **IA comme moteur d'interoperabilite** : voir aussi [Chapitre I.11 -- L'IA comme Moteur de l'Interoperabilite](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_2_Infrastructure_Ecosysteme_Technique/Chapitre_I.11_IA_Moteur_Interoperabilite.md)
+- **Ere de l'IA agentique** : voir aussi [Chapitre I.13 -- L'Ere de l'IA Agentique](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_3_Interoperabilite_Cognitive_Paradigme_Agentique/Chapitre_I.13_Ere_IA_Agentique_Modele_Travailleur_Numerique.md)
+- **Google Cloud Vertex AI** : voir aussi [Chapitre II.6 -- Google Cloud Vertex AI](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_2_Vertex_AI_Patrons_Avances/Chapitre_II.6_Google_Cloud_Vertex_AI.md)

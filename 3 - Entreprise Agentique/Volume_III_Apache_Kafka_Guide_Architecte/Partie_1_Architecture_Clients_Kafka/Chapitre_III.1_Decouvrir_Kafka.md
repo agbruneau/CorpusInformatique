@@ -36,6 +36,48 @@ Ces questions exigent une perspective différente — une perspective qui transc
 
 L'architecte ne demande pas « comment configurer un topic ? » mais « quelle stratégie de topologie des topics servira notre évolution sur cinq ans ? ». Il ne demande pas « quel est le débit maximal ? » mais « comment le profil de charge prévu influencera-t-il notre architecture de déploiement et notre modèle de coûts ? ».
 
+**Figure III.1.1 --- Architecture fondamentale d'Apache Kafka**
+
+```mermaid
+graph LR
+    subgraph Producteurs
+        P1["Producteur A"]
+        P2["Producteur B"]
+        P3["Producteur C"]
+    end
+
+    subgraph Cluster["Cluster Kafka (KRaft)"]
+        subgraph Topic1["Topic : commandes"]
+            Part0["Partition 0"]
+            Part1["Partition 1"]
+            Part2["Partition 2"]
+        end
+        subgraph Topic2["Topic : paiements"]
+            Part3["Partition 0"]
+            Part4["Partition 1"]
+        end
+        KRAFT["Contrôleur KRaft<br/>(Consensus Raft)"]
+    end
+
+    subgraph Consommateurs
+        CG1["Groupe de<br/>Consommateurs A"]
+        CG2["Groupe de<br/>Consommateurs B"]
+    end
+
+    P1 -->|"Messages"| Part0
+    P2 -->|"Messages"| Part1
+    P3 -->|"Messages"| Part3
+
+    KRAFT -.->|"Métadonnées"| Topic1
+    KRAFT -.->|"Métadonnées"| Topic2
+
+    Part0 -->|"Consommation"| CG1
+    Part1 -->|"Consommation"| CG1
+    Part2 -->|"Consommation"| CG1
+    Part3 -->|"Consommation"| CG2
+    Part4 -->|"Consommation"| CG2
+```
+
 ### Les Quatre Dimensions de l'Évaluation Architecturale
 
 Pour évaluer Kafka — ou toute technologie structurante — l'architecte doit considérer quatre dimensions interdépendantes qui forment le cadre de son analyse. Ces dimensions constituent une grille d'analyse applicable à toute décision technologique majeure.
@@ -837,3 +879,12 @@ L'architecte qui maîtrise à la fois la vision stratégique développée dans c
 *Chapitre III.1 — Découvrir Kafka en tant qu'Architecte*
 
 *Monographie « L'Entreprise Agentique »*
+
+
+---
+
+### Références croisées
+
+- **Integration des evenements en entreprise** : voir aussi [Chapitre 2.5 -- Integration des Evenements](../../../2 - Interopérabilité/Chapitre_2.5_Integration_Evenements.md)
+- **Fondamentaux Kafka dans l'infrastructure agentique** : voir aussi [Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent](../../Volume_II_Infrastructure_Agentique/Partie_1_Fondamentaux_Kafka_Confluent/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md)
+- **Architecture EDA** : voir aussi [Chapitre I.6 -- Architecture Orientee Evenements (EDA)](../../Volume_I_Fondations_Entreprise_Agentique/Partie_1_Crise_Fondations_Architecturales/Chapitre_I.6_Architecture_Evenements_EDA.md)

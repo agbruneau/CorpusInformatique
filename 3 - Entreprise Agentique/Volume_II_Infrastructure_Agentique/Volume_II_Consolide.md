@@ -1,14 +1,3 @@
----
-
-# VOLUME II : INFRASTRUCTURE AGENTIQUE
-
-_Confluent et Google Cloud pour l'Entreprise Cognitive_
-
----
-
-**Monographie : L'Entreprise Agentique**
-
----
 # Chapitre II.1 — Ingénierie de Plateforme comme Fondement de l'Entreprise Agentique
 
 ---
@@ -263,9 +252,6 @@ Ce chapitre a établi l'ingénierie de plateforme comme fondement indispensable 
 *Ce chapitre inaugure le Volume II en posant les fondations organisationnelles et architecturales de l'infrastructure agentique. Les chapitres suivants détaillent les composantes techniques de cette plateforme, depuis le backbone événementiel Confluent jusqu'aux mécanismes de sécurité et de conformité.*
 
 *Chapitre suivant : Chapitre II.2 — Fondamentaux d'Apache Kafka et de l'Écosystème Confluent*
-
-
----
 
 # Chapitre II.2 — Fondamentaux d'Apache Kafka et de l'Écosystème Confluent
 
@@ -624,6 +610,12 @@ Ces fondamentaux techniques constituent le socle sur lequel s'appuient les chapi
 
 
 ---
+
+### Références croisées
+
+- **Integration des evenements** : voir aussi [Chapitre 2.5 -- Integration des Evenements](../../../2 - Interopérabilité/Chapitre_2.5_Integration_Evenements.md)
+- **Decouvrir Kafka en tant qu'architecte** : voir aussi [Chapitre III.1 -- Decouvrir Kafka](../../Volume_III_Apache_Kafka_Guide_Architecte/Partie_1_Architecture_Clients_Kafka/Chapitre_III.1_Decouvrir_Kafka.md)
+- **Architecture d'un cluster Kafka** : voir aussi [Chapitre III.2 -- Architecture d'un Cluster Kafka](../../Volume_III_Apache_Kafka_Guide_Architecte/Partie_1_Architecture_Clients_Kafka/Chapitre_III.2_Architecture_Cluster_Kafka.md)
 
 # Chapitre II.3 — Conception et Modélisation du Flux d'Événements
 
@@ -1058,9 +1050,6 @@ Ces pratiques établissent le pont entre l'intention métier capturée en atelie
 *La qualité d'une architecture événementielle ne se mesure pas à la sophistication de son infrastructure, mais à la clarté avec laquelle elle exprime le domaine métier. Les événements sont le langage du système — leur conception mérite la même attention que l'on porterait à la conception d'une API publique ou d'une interface utilisateur.*
 
 *Chapitre suivant : Chapitre II.4 — Contrats de Données et Gouvernance Sémantique (Schema Registry)*
-
-
----
 
 # Chapitre II.4 — Contrats de Données et Gouvernance Sémantique (Schema Registry)
 
@@ -1610,9 +1599,6 @@ Le chapitre suivant (II.5) explorera le traitement en temps réel avec Kafka Str
 *Le Schema Registry incarne un principe fondamental de l'ingénierie des systèmes distribués : les contrats explicites entre composants indépendants sont la seule fondation viable pour la confiance et l'évolution à l'échelle. Dans l'entreprise agentique, où des agents cognitifs autonomes interprètent et agissent sur les données, cette gouvernance devient le garde-fou qui sépare l'intelligence de l'anarchie.*
 
 *Chapitre suivant : Chapitre II.5 — Flux en Temps Réel : Moelle Épinière du Système Nerveux Numérique*
-
-
----
 
 # Chapitre II.5 — Flux en Temps Réel : Moelle Épinière du Système Nerveux Numérique
 
@@ -2310,9 +2296,6 @@ Ce chapitre a exploré les technologies de stream processing qui transforment le
 
 *Chapitre suivant : Chapitre II.6 — Google Cloud Vertex AI comme Environnement d'Exploitation Agentique*
 
-
----
-
 # Chapitre II.6 — Google Cloud Vertex AI comme Environnement d'Exploitation Agentique
 
 ---
@@ -2653,6 +2636,11 @@ Ce chapitre a présenté Google Cloud Vertex AI comme environnement d'exploitati
 
 
 ---
+
+### Références croisées
+
+- **Apprentissage automatique (ML) -- Fondements** : voir aussi [Chapitre 1.43 -- Apprentissage Automatique (ML) -- Fondements](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.43_ML_Fondements.md)
+- **Apprentissage profond (Deep Learning)** : voir aussi [Chapitre 1.44 -- Apprentissage Profond (Deep Learning)](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.44_DeepLearning.md)
 
 # Chapitre II.7 — Ingénierie du Contexte et RAG
 
@@ -3119,9 +3107,6 @@ L'ingénierie du contexte via RAG constitue le premier pilier de l'ancrage des a
 *Ce chapitre s'appuie sur les dernières avancées documentées en matière de RAG, incluant les travaux sur Self-RAG (Asai et al., 2023), CRAG (Yan et al., 2024), GraphRAG (Microsoft Research, 2024), et les architectures de production décrites par Confluent, Google Cloud et les leaders de l'industrie. Les benchmarks cités proviennent d'évaluations indépendantes réalisées en 2025.*
 
 *Chapitre suivant : Chapitre II.8 — Intégration du Backbone Événementiel et de la Couche Cognitive*
-
-
----
 
 # Chapitre II.8 — Intégration du Backbone Événementiel et de la Couche Cognitive
 
@@ -3876,9 +3861,6 @@ L'architecture intégrée décrite dans ce chapitre constitue le socle technique
 ---
 
 *Chapitre suivant : Chapitre II.9 — Patrons Architecturaux Avancés pour l'AEM*
-
-
----
 
 # Chapitre II.9 — Patrons Architecturaux Avancés pour l'AEM
 
@@ -8112,9 +8094,6 @@ Le chapitre suivant explorera les pipelines CI/CD et les stratégies de déploie
 
 *Chapitre suivant : Chapitre II.10 — Pipelines CI/CD et Déploiement des Agents*
 
-
----
-
 # Chapitre II.10 — Pipelines CI/CD et Déploiement des Agents
 
 ---
@@ -9180,6 +9159,11 @@ Le chapitre suivant prolongera cette exploration opérationnelle en abordant l'o
 
 
 ---
+
+### Références croisées
+
+- **Pratiques modernes DevOps et SRE** : voir aussi [Chapitre 1.29 -- Pratiques Modernes de Developpement (DevOps et SRE)](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.29_DevOps_SRE.md)
+- **Qualite logicielle, test et maintenance** : voir aussi [Chapitre 1.28 -- Qualite Logicielle : Test et Maintenance](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.28_Qualite_Test_Maintenance.md)
 
 # Chapitre II.11 — Observabilité Comportementale et Monitoring
 
@@ -10654,6 +10638,11 @@ Le chapitre suivant approfondira la dimension des tests et de l'évaluation, com
 
 
 ---
+
+### Références croisées
+
+- **Resilience et observabilite en entreprise** : voir aussi [Chapitre 2.7 -- Patrons Transversaux de Resilience et Observabilite](../../../2 - Interopérabilité/Chapitre_2.7_Resilience_Observabilite.md)
+- **Pratiques modernes DevOps et SRE** : voir aussi [Chapitre 1.29 -- Pratiques Modernes de Developpement (DevOps et SRE)](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.29_DevOps_SRE.md)
 
 # Chapitre II.12 — Tests, Évaluation et Simulation des Systèmes Multi-Agents
 
@@ -13270,9 +13259,6 @@ L'investissement dans ces pratiques de test et d'évaluation n'est pas optionnel
 
 *Chapitre suivant : Chapitre II.13 — Paysage des Menaces et la Sécurité des Systèmes Agentiques*
 
-
----
-
 # Chapitre II.13 — Paysage des Menaces et la Sécurité des Systèmes Agentiques
 
 *Volume II : Infrastructure Agentique — Confluent et Google Cloud*
@@ -13688,6 +13674,12 @@ Le chapitre suivant abordera la sécurisation de l'infrastructure sous-jacente, 
 
 
 ---
+
+### Références croisées
+
+- **Fondements de la securite informatique** : voir aussi [Chapitre 1.37 -- Fondements de la Securite Informatique](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.37_Fondements_Securite.md)
+- **Cryptographie appliquee** : voir aussi [Chapitre 1.38 -- Cryptographie Appliquee](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.38_Cryptographie_Appliquee.md)
+- **Securite des reseaux** : voir aussi [Chapitre 1.39 -- Securite des Reseaux](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.39_Securite_Reseaux.md)
 
 # Chapitre II.14 — Sécurisation de l'Infrastructure
 
@@ -14294,6 +14286,11 @@ La sécurisation de l'infrastructure agentique représente un investissement sig
 
 ---
 
+### Références croisées
+
+- **Fondements de la securite informatique** : voir aussi [Chapitre 1.37 -- Fondements de la Securite Informatique](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.37_Fondements_Securite.md)
+- **Cryptographie appliquee** : voir aussi [Chapitre 1.38 -- Cryptographie Appliquee](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.38_Cryptographie_Appliquee.md)
+
 # Chapitre II.15 — Conformité Réglementaire et Gestion de la Confidentialité
 
 ## Introduction
@@ -14620,7 +14617,3 @@ Ce chapitre clôture le Volume II en synthétisant les apprentissages clés et e
 
 *Fin du Volume II — Infrastructure Agentique*
 
-
----
-
-*Fin du Volume II*

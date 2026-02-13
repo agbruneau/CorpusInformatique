@@ -697,3 +697,11 @@ Le choix d\'un modèle de consistance n\'est pas une décision purement techniqu
   **Consistance à Terme (Faible)**       Les répliques convergent éventuellement en l\'absence de nouvelles écritures.    Faible latence, haut débit (les écritures sont locales et rapides).                                Réseaux sociaux, DNS, systèmes de recommandation, la plupart des services web à grande échelle.
   -------------------------------------- -------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------
 
+
+
+---
+
+### Références croisées
+
+- **Apache Kafka et ecosysteme Confluent** : voir aussi [Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_1_Fondamentaux_Kafka_Confluent/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md)
+- **Architecture de reference convergente** : voir aussi [Chapitre 2.9 -- Architecture de Reference Convergente](../2 - Interopérabilité/Chapitre_2.9_Architecture_Reference.md)

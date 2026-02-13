@@ -64,6 +64,47 @@ Cette structure standardisée facilite l'interopérabilité entre systèmes hét
 
 ### 5.2.1 Topologies de Communication
 
+**Figure — Architecture EDA (Event-Driven Architecture)**
+
+Le diagramme suivant présente les composants fondamentaux d'une architecture orientée événements, où les producteurs publient des faits métier vers un courtier d'événements, et les consommateurs y réagissent de manière autonome.
+
+```mermaid
+flowchart TB
+    subgraph Producteurs
+        P1["Service Commandes<br/>(Producteur)"]
+        P2["Service Inventaire<br/>(Producteur)"]
+        P3["Service Paiements<br/>(Producteur)"]
+    end
+
+    subgraph "Courtier d'événements"
+        direction TB
+        B["Bus d'événements<br/>(Kafka / RabbitMQ)"]
+        ES["Magasin d'événements<br/>(Event Store)<br/>Rétention et rejeu"]
+    end
+
+    subgraph Consommateurs
+        C1["Service Notification<br/>(Consommateur)"]
+        C2["Service Analytique<br/>(Consommateur)"]
+        C3["Service Facturation<br/>(Consommateur)"]
+    end
+
+    P1 -- "Publie événement" --> B
+    P2 -- "Publie événement" --> B
+    P3 -- "Publie événement" --> B
+
+    B -- "Persiste" --> ES
+    ES -- "Rejeu si nécessaire" --> B
+
+    B -- "Distribue" --> C1
+    B -- "Distribue" --> C2
+    B -- "Distribue" --> C3
+
+    style B fill:#2ecc71,color:#fff,stroke:#27ae60
+    style ES fill:#1abc9c,color:#fff,stroke:#16a085
+```
+
+Cette architecture réalise le découplage spatial (les producteurs ignorent les consommateurs) et temporel (les consommateurs traitent à leur propre rythme). Le magasin d'événements permet le rejeu intégral pour reconstruire l'état ou intégrer de nouveaux consommateurs a posteriori.
+
 L'architecture événementielle s'appuie sur des topologies de communication qui diffèrent fondamentalement du modèle requête-réponse. Comprendre ces topologies permet de choisir le patron approprié pour chaque cas d'usage.
 
 **La file d'attente point-à-point.** Dans ce modèle, un message émis par un producteur est consommé par exactement un consommateur. Si plusieurs consommateurs écoutent la même file, ils se partagent les messages selon un mécanisme de compétition. Ce modèle convient aux tâches de traitement distribué où chaque message doit être traité une seule fois.
@@ -529,3 +570,12 @@ Stopford, Ben.  *Designing Event-Driven Systems* . O'Reilly/Confluent, 2018. —
 ---
 
 *Chapitre suivant : VI — Standards et Contrats d'Interface*
+
+
+---
+
+### Références croisées
+
+- **Architecture EDA et maillage d'evenements** : voir aussi [Chapitre I.6 -- Architecture Orientee Evenements (EDA)](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_1_Crise_Fondations_Architecturales/Chapitre_I.6_Architecture_Evenements_EDA.md)
+- **Fondamentaux Apache Kafka et Confluent** : voir aussi [Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_1_Fondamentaux_Kafka_Confluent/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md)
+- **Guide architecte Kafka** : voir aussi [Chapitre III.1 -- Decouvrir Kafka en tant qu'Architecte](../3 - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Partie_1_Architecture_Clients_Kafka/Chapitre_III.1_Decouvrir_Kafka.md)

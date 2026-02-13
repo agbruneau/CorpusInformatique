@@ -183,3 +183,12 @@ Ce chapitre a posé les fondements conceptuels de l'ère agentique, première é
 ---
 
 *Chapitre suivant : Chapitre I.14 --- Maillage Agentique (Agentic Mesh)*
+
+
+---
+
+### Références croisées
+
+- **Entreprise agentique -- perspectives d'interoperabilite** : voir aussi [Chapitre 2.11 -- Conclusion : Vers l'Entreprise Agentique](../../../2 - Interopérabilité/Chapitre_2.11_Entreprise_Agentique.md)
+- **Modeles fondateurs et IA a grande echelle** : voir aussi [Chapitre 1.55 -- Modeles Fondateurs et Ingenierie de l'IA a Grande Echelle](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.55_Modeles_Fondateurs_IA.md)
+- **Vers l'AGI : alignement, securite et raisonnement** : voir aussi [Chapitre 1.56 -- Vers l'AGI : Alignement, Securite et Raisonnement Avance](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.56_AGI_Alignement_Securite.md)

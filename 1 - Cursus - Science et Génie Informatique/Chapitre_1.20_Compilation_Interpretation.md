@@ -46,7 +46,42 @@ Cette dichotomie historique a cependant été nuancée par l\'émergence de **mo
 
 ### 20.1.3 Le Pipeline de Compilation : Un Voyage Séquentiel à travers les Phases de Traduction
 
-La transformation d\'un programme source en code cible n\'est pas une opération monolithique. Elle est décomposée en une série de phases séquentielles, formant ce que l\'on appelle le **pipeline de compilation**. Chaque phase prend en entrée la représentation du programme produite par la phase précédente, y applique une transformation spécifique, et transmet sa sortie à la phase suivante. Cette structure modulaire permet de gérer la complexité du processus en isolant les différentes préoccupations. Le pipeline classique, souvent appelé le modèle du \"livre du dragon\" (en référence à l\'ouvrage de référence d\'Aho, Sethi et Ullman), se compose des phases suivantes  :
+La transformation d\'un programme source en code cible n\'est pas une opération monolithique. Elle est décomposée en une série de phases séquentielles, formant ce que l\'on appelle le **pipeline de compilation**.
+
+**Figure 20.1 -- Pipeline de compilation : du code source au binaire exécutable**
+
+```mermaid
+flowchart LR
+    SRC["Code\nsource"]
+    LEX["Analyse\nlexicale\n(Scanner)"]
+    PAR["Analyse\nsyntaxique\n(Parser)"]
+    AST["Arbre\nSyntaxique\nAbstrait (AST)"]
+    SEM["Analyse\nsémantique"]
+    IR["Génération\nde code\nintermédiaire\n(IR)"]
+    OPT["Optimisation\nde code"]
+    GEN["Génération\nde code\nfinal"]
+    BIN["Binaire\nexécutable"]
+
+    SRC --> LEX
+    LEX -->|"Flux de jetons"| PAR
+    PAR --> AST
+    AST --> SEM
+    SEM -->|"AST annoté"| IR
+    IR --> OPT
+    OPT -->|"IR optimisée"| GEN
+    GEN --> BIN
+
+    TS["Table des\nsymboles"]
+    ERR["Gestionnaire\nd'erreurs"]
+
+    TS -.-|"consulté par\ntoutes les phases"| LEX
+    TS -.-  SEM
+    TS -.- GEN
+    ERR -.-|"signale les\nerreurs"| PAR
+    ERR -.- SEM
+```
+
+Chaque phase prend en entrée la représentation du programme produite par la phase précédente, y applique une transformation spécifique, et transmet sa sortie à la phase suivante. Cette structure modulaire permet de gérer la complexité du processus en isolant les différentes préoccupations. Le pipeline classique, souvent appelé le modèle du \"livre du dragon\" (en référence à l\'ouvrage de référence d\'Aho, Sethi et Ullman), se compose des phases suivantes  :
 
 > **Analyse Lexicale (Scanning)** : Le compilateur commence par lire le fichier source comme une simple séquence de caractères. L\'analyseur lexical, ou *scanner*, regroupe ces caractères en unités lexicales significatives appelées *lexèmes*, et produit pour chacun un *jeton* (token). Par exemple, la chaîne position = initial + vitesse \* 60; est transformée en un flux de jetons tels que (IDENTIFIANT, \"position\"), (OPÉRATEUR_ASSIGNATION, \"=\"), (IDENTIFIANT, \"initial\"), etc.. Cette phase élimine également les éléments non pertinents pour la structure logique, comme les espaces et les commentaires.
 >

@@ -237,3 +237,11 @@ Ce chapitre a établi le diagnostic fondamental de la crise d'intégration des s
 ---
 
 *Chapitre suivant : Chapitre I.2 — Fondements et Dimensions de l'Interopérabilité*
+
+
+---
+
+### Références croisées
+
+- **Introduction a la problematique d'interoperabilite** : voir aussi [Chapitre 2.1 -- Introduction et Problematique](../../../2 - Interopérabilité/Chapitre_2.1_Introduction_Problematique.md)
+- **Fondements theoriques de l'interoperabilite** : voir aussi [Chapitre 2.2 -- Fondements Theoriques](../../../2 - Interopérabilité/Chapitre_2.2_Fondements_Theoriques.md)

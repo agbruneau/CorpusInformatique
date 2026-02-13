@@ -627,3 +627,11 @@ L\'Edge et le Fog Computing ne sont pas des concepts théoriques ; ils sont les 
 
 Ces exemples illustrent un principe fondamental : l\'Edge, le Fog et le Cloud ne sont pas des architectures concurrentes, mais des composantes complémentaires d\'un **continuum de calcul** distribué. Le cloud centralisé reste indispensable pour les tâches qui nécessitent une puissance de calcul massive et une vue d\'ensemble globale, comme l\'entraînement de modèles d\'intelligence artificielle complexes, l\'archivage de données à long terme ou la gestion des comptes clients à l\'échelle mondiale. L\'Edge et le Fog étendent la portée du cloud, lui donnant des \"yeux\", des \"oreilles\" et des \"réflexes\" rapides là où l\'action se déroule. Le défi architectural moderne n\'est plus de choisir entre ces modèles, mais de concevoir des applications capables de répartir intelligemment les tâches de calcul sur ce continuum, en plaçant la bonne charge de travail au bon endroit pour optimiser un ensemble de contraintes (latence, bande passante, coût, sécurité et confidentialité).
 
+
+
+---
+
+### Références croisées
+
+- **Ingenierie de plateforme agentique** : voir aussi [Chapitre II.1 -- Ingenierie de Plateforme](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_1_Fondamentaux_Kafka_Confluent/Chapitre_II.1_Ingenierie_Plateforme.md)
+- **Google Cloud Vertex AI** : voir aussi [Chapitre II.6 -- Google Cloud Vertex AI](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_2_Vertex_AI_Patrons_Avances/Chapitre_II.6_Google_Cloud_Vertex_AI.md)

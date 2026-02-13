@@ -436,3 +436,11 @@ Cette évolution continue et de nouvelles architectures émergent pour repousser
 
 Enfin, l\'intelligence artificielle et l\'apprentissage automatique (Machine Learning) ne sont plus de simples consommateurs de données, mais de puissants moteurs qui façonnent les architectures de demain. Les exigences du cycle de vie des modèles de ML --- de la collecte de données à l\'ingénierie des caractéristiques (*feature engineering*) à grande échelle, en passant par l\'entraînement, le déploiement et l\'inférence en temps réel --- imposent de nouvelles contraintes et nécessitent des plateformes de données encore plus intégrées, performantes et agiles. L\'avenir des systèmes de données ne réside pas seulement dans leur capacité à stocker et à interroger l\'information, mais de plus en plus dans leur aptitude à la transformer en intelligence active et automatisée.
 
+
+
+---
+
+### Références croisées
+
+- **Integration des donnees en entreprise** : voir aussi [Chapitre 2.4 -- Integration des Donnees](../2 - Interopérabilité/Chapitre_2.4_Integration_Donnees.md)
+- **Apache Iceberg et le monde Lakehouse** : voir aussi [Chapitre IV.1 -- Le Monde du Lakehouse et d'Apache Iceberg](../3 - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Partie_1_Valeur_Lakehouse/Chapitre_IV.1_Monde_Lakehouse_Iceberg.md)

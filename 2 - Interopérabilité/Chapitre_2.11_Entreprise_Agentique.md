@@ -309,3 +309,12 @@ Le continuum d'intégration, du couplage fort au découplage maximal, reste la b
 ---
 
 *Fin de l'Essai*
+
+
+---
+
+### Références croisées
+
+- **Ere de l'IA agentique et travailleur numerique** : voir aussi [Chapitre I.13 -- L'Ere de l'IA Agentique](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_3_Interoperabilite_Cognitive_Paradigme_Agentique/Chapitre_I.13_Ere_IA_Agentique_Modele_Travailleur_Numerique.md)
+- **Maillage agentique (Agentic Mesh)** : voir aussi [Chapitre I.14 -- Maillage Agentique (Agentic Mesh)](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_3_Interoperabilite_Cognitive_Paradigme_Agentique/Chapitre_I.14_Maillage_Agentique.md)
+- **Feuille de route de la transformation agentique** : voir aussi [Chapitre I.21 -- Feuille de Route de la Transformation Agentique](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_5_Industrialisation_Prospective_Synthese/Chapitre_I.21_Feuille_Route_Transformation_Agentique.md)

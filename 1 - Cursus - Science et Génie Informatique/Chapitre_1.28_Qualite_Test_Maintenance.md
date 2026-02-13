@@ -1003,3 +1003,11 @@ La gestion de la dette technique est un exercice d\'équilibrage continu. Il n\'
 
 En définitive, la gestion de la dette technique est le moteur économique qui unifie l\'ensemble des activités d\'assurance qualité décrites dans ce chapitre. La vérification et la validation préviennent l\'accumulation de dette accidentelle. Les niveaux de test gèrent le coût de la détection de la dette à différentes étapes. Le TDD vise à produire un code avec une faible dette initiale et fournit le filet de sécurité nécessaire pour permettre son remboursement sécurisé via le réusinage. La maintenance préventive n\'est rien d\'autre qu\'une stratégie proactive de remboursement de la dette. Chaque décision concernant la qualité est, en fin de compte, une décision économique sur la manière de gérer cette dette pour assurer la pérennité et la capacité d\'innovation du produit logiciel.
 
+
+
+---
+
+### Références croisées
+
+- **Tests et simulation des systemes multi-agents** : voir aussi [Chapitre II.12 -- Tests, Evaluation et Simulation des Systemes Multi-Agents](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_3_CI_CD_Observabilite_Tests/Chapitre_II.12_Tests_Evaluation_Simulation_Systemes_Multi_Agents.md)
+- **Imperatif qualite et responsabilite** : voir aussi [Chapitre V.5 -- L'Imperatif Qualite et Responsabilite](../3 - Entreprise Agentique/Volume_V_Developpeur_Renaissance/Partie_3_Qualite_Capital_Humain/Chapitre_V.5_Imperatif_Qualite_Responsabilite.md)

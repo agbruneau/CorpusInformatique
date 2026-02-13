@@ -732,3 +732,11 @@ Cette analogie illustre les trois propriétés mathématiques qui définissent f
 
 Les ZKP, initialement une curiosité théorique, sont devenus une brique technologique essentielle dans de nombreux domaines, notamment les cryptomonnaies (pour permettre des transactions anonymes et confidentielles sur une blockchain publique), les systèmes d\'authentification (pour prouver la possession d\'un mot de passe sans le transmettre sur le réseau) et le vote électronique. Ils représentent une frontière avancée de la cryptographie, où la gestion de la connaissance elle-même devient l\'objet de la protection.
 
+
+
+---
+
+### Références croisées
+
+- **Securisation de l'infrastructure agentique** : voir aussi [Chapitre II.14 -- Securisation de l'Infrastructure](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_4_Securite_Conformite/Chapitre_II.14_Securisation_Infrastructure.md)
+- **Fondements de la securite informatique** : voir aussi [Chapitre 1.37 -- Fondements de la Securite Informatique](Chapitre_1.37_Fondements_Securite.md)

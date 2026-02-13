@@ -1128,3 +1128,11 @@ Le chapitre suivant prolonge cette réflexion en abordant les patrons transversa
 ---
 
 *Chapitre suivant : VII — Patrons Transversaux de Résilience et Observabilité*
+
+
+---
+
+### Références croisées
+
+- **Contrats de donnees dans l'ecosysteme agentique** : voir aussi [Chapitre I.7 -- Contrats de Donnees](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_2_Infrastructure_Ecosysteme_Technique/Chapitre_I.7_Contrats_Donnees.md)
+- **Contrats de donnees dans l'ecosysteme Kafka** : voir aussi [Chapitre III.6 -- Contrats de Donnees (Kafka)](../3 - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Partie_2_Cas_Usage_Patrons/Chapitre_III.6_Contrats_Donnees.md)

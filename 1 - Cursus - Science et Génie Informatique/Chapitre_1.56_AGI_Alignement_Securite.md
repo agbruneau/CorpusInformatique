@@ -359,3 +359,11 @@ Cela conduit au **paradoxe du contrôle** : si nous pouvons comprendre et prédi
 
 Cette perspective inverse la charge de la preuve en matière de sécurité. Pour la plupart des technologies, nous les considérons comme sûres jusqu\'à preuve du contraire. L\'argument de l\'incalculabilité du contrôle suggère que pour l\'IA avancée, nous devrions peut-être l\'assumer comme étant potentiellement dangereuse jusqu\'à ce que nous puissions prouver sa sécurité. Le problème est que cette preuve pourrait être impossible à fournir. Cela place la communauté de recherche et la société face à un dilemme profond : continuer à développer des systèmes de plus en plus capables en l\'absence d\'une théorie de la sécurité et du contrôle adéquate, ou ralentir, voire pauser, le développement jusqu\'à ce que de telles théories émergent. C\'est le cœur du débat philosophique et stratégique qui façonnera l\'avenir de l\'intelligence artificielle.
 
+
+
+---
+
+### Références croisées
+
+- **Gouvernance constitutionnelle et alignement IA** : voir aussi [Chapitre I.17 -- Gouvernance Constitutionnelle et Alignement de l'IA](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_3_Interoperabilite_Cognitive_Paradigme_Agentique/Chapitre_I.17_Gouvernance_Constitutionnelle_Alignement_IA.md)
+- **Gestion des risques systemiques et superalignement** : voir aussi [Chapitre I.26 -- Gestion des Risques Systemiques et Superalignement](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_5_Industrialisation_Prospective_Synthese/Chapitre_I.26_Gestion_Risques_Systemiques_Superalignement.md)

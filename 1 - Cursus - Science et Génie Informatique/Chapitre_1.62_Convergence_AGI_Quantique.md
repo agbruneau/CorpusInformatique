@@ -284,6 +284,42 @@ Après avoir examiné séparément les piliers de l\'intelligence artificielle g
 
 ### 1.4.1 La relation symbiotique : Une boucle de rétroaction vertueuse
 
+**Figure 1.1 -- Convergence de l\'IA, de l\'informatique quantique et du calcul classique : boucle de rétroaction symbiotique**
+
+```mermaid
+flowchart TB
+    subgraph CLASSIQUE["Informatique Classique"]
+        CC1["Calcul haute performance\n(HPC / GPU / TPU)"]
+        CC2["Algorithmes classiques\n(ML, optimisation)"]
+        CC3["Infrastructure cloud\net centres de données"]
+    end
+
+    subgraph QUANTIQUE["Informatique Quantique"]
+        QC1["Qubits et\nportes quantiques"]
+        QC2["Algorithmes quantiques\n(Shor, Grover, VQE)"]
+        QC3["Correction d'erreurs\nquantiques (QEC)"]
+    end
+
+    subgraph IAG["Intelligence Artificielle Générale"]
+        AI1["Apprentissage profond\net modèles fondateurs"]
+        AI2["Raisonnement abstrait\net transfert de connaissances"]
+        AI3["Apprentissage par\nrenforcement"]
+    end
+
+    QUANTIQUE -->|"Accélération exponentielle :\noptimisation, échantillonnage,\nalgèbre linéaire"| IAG
+    IAG -->|"Conception de circuits,\ncalibration, décodage\nd'erreurs"| QUANTIQUE
+    CLASSIQUE -->|"Entraînement de modèles,\ninfrastructure de calcul"| IAG
+    IAG -->|"Optimisation automatisée,\nintelligence des systèmes"| CLASSIQUE
+    CLASSIQUE <-->|"Algorithmes hybrides\nclassique-quantique (VQA)"| QUANTIQUE
+
+    CONV["Convergence\nQuantum-IAG"]
+    IAG --> CONV
+    QUANTIQUE --> CONV
+    CLASSIQUE --> CONV
+
+    CONV --> APP["Applications transformatrices :\nDécouverte de médicaments,\nSciences des matériaux,\nOptimisation logistique,\nModélisation climatique"]
+```
+
 La relation entre l\'IAG et l\'informatique quantique est profondément symbiotique. Chacune détient la clé pour déverrouiller le plein potentiel de l\'autre, créant une dynamique de co-évolution qui pourrait accélérer le progrès technologique de manière non linéaire.
 
 Les sections précédentes ont posé les bases de cette dynamique. D\'une part, le développement de l\'IAG est actuellement freiné par des problèmes dont la complexité intrinsèque est exponentielle, constituant un mur pour les architectures de calcul classiques. D\'autre part, l\'informatique quantique est précisément le paradigme conçu pour manipuler et résoudre des problèmes de cette nature exponentielle. Simultanément, la construction et l\'opération d\'ordinateurs quantiques à grande échelle sont elles-mêmes des défis d\'une complexité immense. Les systèmes quantiques de l\'ère NISQ sont bruités, instables et exigent des procédures de calibration et de contrôle d\'une précision extrême, des tâches qui relèvent de l\'optimisation de systèmes complexes --- un domaine où l\'intelligence artificielle excelle déjà.

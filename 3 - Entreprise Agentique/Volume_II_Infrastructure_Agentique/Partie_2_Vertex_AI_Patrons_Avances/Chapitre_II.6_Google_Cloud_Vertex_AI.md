@@ -335,3 +335,11 @@ Ce chapitre a présenté Google Cloud Vertex AI comme environnement d'exploitati
 *Ce chapitre prépare le terrain pour le Chapitre II.7, qui approfondira l'ingénierie du contexte et les stratégies RAG avancées pour ancrer les agents dans la réalité des données d'entreprise.*
 
 *Chapitre suivant : Chapitre II.7 — Ingénierie du Contexte et RAG*
+
+
+---
+
+### Références croisées
+
+- **Apprentissage automatique (ML) -- Fondements** : voir aussi [Chapitre 1.43 -- Apprentissage Automatique (ML) -- Fondements](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.43_ML_Fondements.md)
+- **Apprentissage profond (Deep Learning)** : voir aussi [Chapitre 1.44 -- Apprentissage Profond (Deep Learning)](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.44_DeepLearning.md)

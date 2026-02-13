@@ -30,6 +30,40 @@ Dans le contexte agentique, la Saga Chorégraphiée prend une dimension particul
 
 L'architecture d'une Saga Chorégraphiée repose sur plusieurs éléments fondamentaux. Les événements de domaine capturent les faits métier significatifs. Les participants réagissent à ces événements et produisent de nouveaux événements. Les événements de compensation permettent d'annuler les effets d'une transaction locale en cas d'échec ultérieur.
 
+**Figure II.9.2 --- Pipeline d'une Saga Chorégraphiée avec compensation**
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant ServiceA as Service A<br/>(Demande de prêt)
+    participant Bus as Bus Événementiel<br/>(Kafka)
+    participant ServiceB as Service B<br/>(Vérification crédit)
+    participant ServiceC as Service C<br/>(Validation documents)
+    participant ServiceD as Service D<br/>(Approbation finale)
+
+    Client->>ServiceA: Soumettre demande
+    ServiceA->>Bus: DemandePrêtCréée
+    Bus->>ServiceB: DemandePrêtCréée
+    ServiceB->>ServiceB: Vérifier crédit
+    ServiceB->>Bus: VérificationCréditRéussie
+    Bus->>ServiceC: VérificationCréditRéussie
+    ServiceC->>ServiceC: Valider documents
+
+    alt Succès
+        ServiceC->>Bus: DocumentsValidés
+        Bus->>ServiceD: DocumentsValidés
+        ServiceD->>Bus: PrêtApprouvé
+        Bus->>Client: Notification approbation
+    else Échec - Compensation
+        ServiceC->>Bus: ValidationDocumentsÉchouée
+        Bus->>ServiceB: Compensation : AnnulerVérificationCrédit
+        ServiceB->>Bus: VérificationCréditAnnulée
+        Bus->>ServiceA: Compensation : AnnulerDemande
+        ServiceA->>Bus: DemandeAnnulée
+        Bus->>Client: Notification rejet
+    end
+```
+
 | Type d'événement | Rôle | Exemple |
 |------------------|------|---------|
 | Commande | Initie une action | ProcessLoanRequest |
@@ -449,6 +483,43 @@ Le modèle de commande, ou write model, capture l'état autoritatif du système.
 ### Architecture CQRS pour Systèmes Agentiques
 
 L'implémentation de CQRS dans un système agentique s'articule autour du backbone événementiel Kafka. Les commandes sont traitées par des handlers dédiés qui appliquent les règles métier et publient des événements de domaine. Ces événements sont consommés par des projecteurs qui maintiennent les différentes vues de lecture. Les agents interrogent ces vues pour obtenir l'information nécessaire à leurs décisions.
+
+**Figure II.9.1 --- Architecture CQRS / Event Sourcing dans un contexte agentique**
+
+```mermaid
+flowchart LR
+    subgraph Ecriture["Côté Écriture (Command)"]
+        CMD["Commande"]
+        HANDLER["Command Handler<br/>(Règles métier)"]
+        ES["Event Store<br/>(Journal immuable)"]
+    end
+
+    subgraph Bus["Backbone Événementiel"]
+        KAFKA["Bus d'Événements<br/>(Kafka)"]
+    end
+
+    subgraph Lecture["Côté Lecture (Query)"]
+        PROJ["Projecteurs"]
+        VIEW1["Vue Agent<br/>Service Client"]
+        VIEW2["Vue Agent<br/>Analytique"]
+        VIEW3["Vue Agent<br/>Conformité"]
+    end
+
+    subgraph Agents["Agents Cognitifs"]
+        AG1["Agent<br/>Décisionnel"]
+        AG2["Agent<br/>Audit"]
+    end
+
+    CMD -->|"Valider & Exécuter"| HANDLER
+    HANDLER -->|"Persister"| ES
+    ES -->|"Publier événements"| KAFKA
+    KAFKA -->|"Propager"| PROJ
+    PROJ -->|"Projections"| VIEW1
+    PROJ -->|"Projections"| VIEW2
+    PROJ -->|"Projections"| VIEW3
+    VIEW1 -->|"Requêtes"| AG1
+    VIEW3 -->|"Requêtes"| AG2
+```
 
 ```python
 # cqrs/commands.py

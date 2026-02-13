@@ -179,6 +179,46 @@ Cette fonctionnalité répond aux besoins de traitement où l'ordre strict n'est
 
 ### Vue d'Ensemble de la Plateforme
 
+**Figure II.2.1 --- Architecture de la plateforme Confluent**
+
+```mermaid
+graph LR
+    subgraph Sources["Producteurs"]
+        P1["Applications<br/>Métier"]
+        P2["Agents<br/>Cognitifs"]
+        P3["Connecteurs<br/>CDC (Debezium)"]
+    end
+
+    subgraph Confluent["Plateforme Confluent"]
+        SR["Schema Registry<br/>(Avro / Protobuf /<br/>JSON Schema)"]
+        subgraph KafkaCluster["Cluster Kafka (KRaft)"]
+            T1["Topics &<br/>Partitions"]
+        end
+        FLINK["Flink SQL<br/>(Traitement de flux)"]
+        TF["Tableflow<br/>(Iceberg / Delta)"]
+        GOV["Stream Governance<br/>(Lineage, Catalog,<br/>Data Portal)"]
+    end
+
+    subgraph Consommation["Consommateurs"]
+        C1["Agents<br/>Cognitifs"]
+        C2["Applications<br/>Analytiques"]
+        C3["Lakehouse<br/>(Iceberg)"]
+    end
+
+    P1 -->|"Produire"| SR
+    P2 -->|"Produire"| SR
+    P3 -->|"Produire"| SR
+    SR -->|"Valider schéma"| T1
+    T1 -->|"Flux"| FLINK
+    T1 -->|"Matérialiser"| TF
+    FLINK -->|"Résultats"| T1
+    GOV -.->|"Gouvernance"| T1
+    GOV -.->|"Gouvernance"| SR
+    T1 -->|"Consommer"| C1
+    T1 -->|"Consommer"| C2
+    TF -->|"Tables"| C3
+```
+
 Confluent Cloud représente l'offre de streaming de données managée de Confluent, construite sur Apache Kafka et enrichie de capacités entreprise. La plateforme abstrait la complexité opérationnelle de Kafka tout en exposant l'intégralité de ses fonctionnalités, permettant aux équipes de se concentrer sur la création de valeur plutôt que sur la gestion d'infrastructure.
 
 L'écosystème Confluent s'articule autour de trois piliers complémentaires : Confluent Cloud pour les déploiements managés dans le nuage, Confluent Platform pour les déploiements autogérés sur site ou dans le nuage privé, et WarpStream (acquis en septembre 2024) pour les architectures BYOC où les données restent dans le nuage du client tandis que Confluent gère le plan de contrôle.
@@ -352,3 +392,12 @@ Ces fondamentaux techniques constituent le socle sur lequel s'appuient les chapi
 *Ce chapitre établit les fondations techniques du backbone événementiel de l'entreprise agentique. La maîtrise de ces concepts est indispensable pour concevoir des architectures de streaming robustes capables de supporter les exigences des systèmes multi-agents en production.*
 
 *Chapitre suivant : Chapitre II.3 — Conception et Modélisation du Flux d'Événements*
+
+
+---
+
+### Références croisées
+
+- **Integration des evenements** : voir aussi [Chapitre 2.5 -- Integration des Evenements](../../../2 - Interopérabilité/Chapitre_2.5_Integration_Evenements.md)
+- **Decouvrir Kafka en tant qu'architecte** : voir aussi [Chapitre III.1 -- Decouvrir Kafka](../../Volume_III_Apache_Kafka_Guide_Architecte/Partie_1_Architecture_Clients_Kafka/Chapitre_III.1_Decouvrir_Kafka.md)
+- **Architecture d'un cluster Kafka** : voir aussi [Chapitre III.2 -- Architecture d'un Cluster Kafka](../../Volume_III_Apache_Kafka_Guide_Architecte/Partie_1_Architecture_Clients_Kafka/Chapitre_III.2_Architecture_Cluster_Kafka.md)

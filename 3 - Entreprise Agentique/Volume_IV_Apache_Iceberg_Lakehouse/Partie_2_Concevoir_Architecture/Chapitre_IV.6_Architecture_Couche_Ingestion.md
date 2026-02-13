@@ -31,6 +31,54 @@ L'ingestion de données dans un Lakehouse Iceberg s'articule autour de trois pat
 | Micro-batch | Minutes         | Mo à Go              | Moyenne     | Rapports tactiques       |
 | Streaming   | Secondes        | Ko à Mo              | Élevée    | Temps réel, alertes     |
 
+**Figure IV.6.1 --- Architecture Lakehouse en couches (Medallion Architecture)**
+
+```mermaid
+graph TB
+    subgraph Sources["Sources de Données"]
+        S1["SGBD<br/>(CDC)"]
+        S2["API<br/>(REST)"]
+        S3["IoT /<br/>Fichiers"]
+        S4["SaaS /<br/>Logs"]
+    end
+
+    subgraph Ingestion["Couche d'Ingestion"]
+        KAFKA["Apache Kafka<br/>(Streaming)"]
+        BATCH["Spark / Flink<br/>(Batch & Micro-batch)"]
+    end
+
+    subgraph Bronze["Couche Bronze — Données Brutes"]
+        BR["Tables Iceberg<br/>Données brutes, non transformées<br/>Format source préservé"]
+    end
+
+    subgraph Silver["Couche Silver — Données Nettoyées"]
+        SIL["Tables Iceberg<br/>Données validées, dédupliquées<br/>Schéma normalisé"]
+    end
+
+    subgraph Gold["Couche Gold — Données Curées"]
+        GOL["Tables Iceberg<br/>Agrégations métier<br/>Métriques, KPI, modèles"]
+    end
+
+    subgraph Serving["Couche de Consommation"]
+        DASH["Tableaux de bord<br/>(Power BI / Looker)"]
+        ML["Modèles ML /<br/>Agents IA"]
+        API["API de<br/>Données"]
+    end
+
+    S1 & S2 & S3 & S4 -->|"Collecter"| KAFKA
+    S1 & S2 & S3 & S4 -->|"Collecter"| BATCH
+    KAFKA & BATCH -->|"Ingérer"| BR
+    BR -->|"Nettoyer & Valider"| SIL
+    SIL -->|"Agréger & Enrichir"| GOL
+    GOL --> DASH
+    GOL --> ML
+    GOL --> API
+
+    style BR fill:#cd7f32,color:#fff
+    style SIL fill:#c0c0c0,color:#000
+    style GOL fill:#ffd700,color:#000
+```
+
 ### Évolution vers le Streaming Lakehouse
 
 L'architecture Streaming Lakehouse, introduite conceptuellement dans le Volume III avec Apache Kafka, unifie les traitements batch et streaming au sein d'une plateforme cohérente. Apache Iceberg joue un rôle central dans cette unification en fournissant :
