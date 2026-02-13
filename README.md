@@ -8,7 +8,7 @@ Corpus encyclopédique francophone couvrant les fondements de l'informatique, l'
 
 ### I — Cursus : Science et Génie Informatique
 
-Programme complet en sept volumes (79 chapitres + 2 annexes = 81 fichiers) couvrant l'ensemble du génie informatique, des fondements théoriques aux architectures cognitivo-quantiques.
+Programme complet en sept volumes (81 chapitres) couvrant l'ensemble du génie informatique, des fondements théoriques aux architectures cognitivo-quantiques.
 
 | Volume | Titre | Chapitres |
 |--------|-------|-----------|
@@ -18,7 +18,7 @@ Programme complet en sept volumes (79 chapitres + 2 annexes = 81 fichiers) couvr
 | IV | Données, Réseaux et Sécurité | I.30 – I.40 |
 | V | Intelligence Artificielle et Domaines Spécialisés | I.41 – I.50 |
 | VI | Technologies Avant-Garde | I.51 – I.60 |
-| VII | Architecture Cognitivo-Quantique | I.61 – I.79 + annexes |
+| VII | Architecture Cognitivo-Quantique | I.61 – I.81 |
 
 ### II — Interopérabilité
 

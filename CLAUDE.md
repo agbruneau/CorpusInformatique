@@ -19,14 +19,15 @@ CorpusInformatique/
 │   ├── Volume_IV_Apache_Iceberg_Lakehouse/           #   18 files (16 ch. + 2 annexes)
 │   └── Volume_V_Developpeur_Renaissance/             #   11 chapters
 ├── README.md
-└── CLAUDE.md
+├── CLAUDE.md
+└── plan.md
 ```
 
 All sections use a flat structure — chapters are stored directly in their section or volume directory with no subdirectories.
 
 ### Section I — Science et Génie Informatique (7 volumes, 81 files)
 
-Foundational CS curriculum: theoretical foundations (Vol. I), hardware architecture (Vol. II), software methodologies (Vol. III), data/networks/security (Vol. IV), AI (Vol. V), cutting-edge technologies (Vol. VI), cognitive-quantum architecture (Vol. VII). Chapters I.1–I.79 plus annexes I.A and I.B.
+Foundational CS curriculum: theoretical foundations (Vol. I), hardware architecture (Vol. II), software methodologies (Vol. III), data/networks/security (Vol. IV), AI (Vol. V), cutting-edge technologies (Vol. VI), cognitive-quantum architecture (Vol. VII). Chapters I.1–I.81.
 
 | Volume | Chapitres | Thème | Nombre |
 |--------|-----------|-------|--------|
@@ -36,8 +37,7 @@ Foundational CS curriculum: theoretical foundations (Vol. I), hardware architect
 | IV | I.30 – I.40 | Données, réseaux et sécurité | 11 |
 | V | I.41 – I.50 | Intelligence artificielle | 10 |
 | VI | I.51 – I.60 | Technologies avant-garde | 10 |
-| VII | I.61 – I.79 | Architecture cognitivo-quantique | 19 |
-| Annexes | I.A, I.B | Centres de données, Architecture ACQ | 2 |
+| VII | I.61 – I.81 | Architecture cognitivo-quantique | 21 |
 
 ### Section II — Interopérabilité (12 files: 11 chapters + annexes)
 
@@ -67,7 +67,7 @@ All sections use Roman numeral prefixes for section/volume identification:
 | III | `Chapitre_[Vol].[N]_[Topic].md` | `Chapitre_I.1_Crise_Integration_Systemique.md` |
 
 - Section III uses Roman numeral volume prefixes (I–V) matching the volume number.
-- Annexes use letter suffixes: `Chapitre_I.A_Annexe_...md`, `Chapitre_IV.Annexe_A_...md`.
+- Section III annexes use letter suffixes: `Chapitre_IV.Annexe_A_...md`.
 - Topic names use underscores and stripped accents (e.g., `Resilience_Observabilite`).
 
 ### Chapter Internal Structure
