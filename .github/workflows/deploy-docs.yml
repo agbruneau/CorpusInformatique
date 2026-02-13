@@ -28,6 +28,7 @@ jobs:
           cp -r "I - Science et Génie Informatique" docs/
           cp -r "II - Interopérabilité" docs/
           cp -r "III - Entreprise Agentique" docs/
+          cp -r css docs/
 
       - name: Deploy to GitHub Pages
         run: mkdocs gh-deploy --force --clean --verbose

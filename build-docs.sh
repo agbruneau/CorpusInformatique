@@ -15,6 +15,7 @@ cp README.md docs/
 cp -r "I - Science et Génie Informatique" docs/
 cp -r "II - Interopérabilité" docs/
 cp -r "III - Entreprise Agentique" docs/
+cp -r css docs/
 
 if [ "${1:-serve}" = "build" ]; then
   python -m mkdocs build
