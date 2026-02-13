@@ -177,5 +177,5 @@ Ce chapitre a exploré l'écosystème API comme composante essentielle du systè
 
 ### Références croisées
 
-- **Integration des applications** : voir aussi [Chapitre 2.3 -- Integration des Applications](../../../2 - Interopérabilité/Chapitre_2.3_Integration_Applications.md)
-- **Standards et contrats d'interface** : voir aussi [Chapitre 2.6 -- Standards et Contrats d'Interface](../../../2 - Interopérabilité/Chapitre_2.6_Standards_Contrats.md)
+- **Integration des applications** : voir aussi [Chapitre 2.3 -- Integration des Applications](../../II - Interopérabilité/Chapitre_II.3_Integration_Applications.md)
+- **Standards et contrats d'interface** : voir aussi [Chapitre 2.6 -- Standards et Contrats d'Interface](../../II - Interopérabilité/Chapitre_II.6_Standards_Contrats.md)

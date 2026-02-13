@@ -416,6 +416,6 @@ Le chapitre suivant abordera la sécurisation de l'infrastructure sous-jacente, 
 
 ### Références croisées
 
-- **Fondements de la securite informatique** : voir aussi [Chapitre 1.37 -- Fondements de la Securite Informatique](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.37_Fondements_Securite.md)
-- **Cryptographie appliquee** : voir aussi [Chapitre 1.38 -- Cryptographie Appliquee](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.38_Cryptographie_Appliquee.md)
-- **Securite des reseaux** : voir aussi [Chapitre 1.39 -- Securite des Reseaux](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.39_Securite_Reseaux.md)
+- **Fondements de la securite informatique** : voir aussi [Chapitre 1.37 -- Fondements de la Securite Informatique](../../I - Science et Génie Informatique/Chapitre_I.37_Fondements_Securite.md)
+- **Cryptographie appliquee** : voir aussi [Chapitre 1.38 -- Cryptographie Appliquee](../../I - Science et Génie Informatique/Chapitre_I.38_Cryptographie_Appliquee.md)
+- **Securite des reseaux** : voir aussi [Chapitre 1.39 -- Securite des Reseaux](../../I - Science et Génie Informatique/Chapitre_I.39_Securite_Reseaux.md)

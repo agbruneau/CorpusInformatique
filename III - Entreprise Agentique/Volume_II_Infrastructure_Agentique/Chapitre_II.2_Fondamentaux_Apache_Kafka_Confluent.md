@@ -515,6 +515,6 @@ Ces fondamentaux techniques constituent le socle sur lequel s'appuient les chapi
 
 ### Références croisées
 
-- **Integration des evenements** : voir aussi [Chapitre 2.5 -- Integration des Evenements](../../../2 - Interopérabilité/Chapitre_2.5_Integration_Evenements.md)
-- **Decouvrir Kafka en tant qu'architecte** : voir aussi [Chapitre III.1 -- Decouvrir Kafka](../../Volume_III_Apache_Kafka_Guide_Architecte/Partie_1_Architecture_Clients_Kafka/Chapitre_III.1_Decouvrir_Kafka.md)
-- **Architecture d'un cluster Kafka** : voir aussi [Chapitre III.2 -- Architecture d'un Cluster Kafka](../../Volume_III_Apache_Kafka_Guide_Architecte/Partie_1_Architecture_Clients_Kafka/Chapitre_III.2_Architecture_Cluster_Kafka.md)
+- **Integration des evenements** : voir aussi [Chapitre 2.5 -- Integration des Evenements](../../II - Interopérabilité/Chapitre_II.5_Integration_Evenements.md)
+- **Decouvrir Kafka en tant qu'architecte** : voir aussi [Chapitre III.1 -- Decouvrir Kafka](../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.1_Decouvrir_Kafka.md)
+- **Architecture d'un cluster Kafka** : voir aussi [Chapitre III.2 -- Architecture d'un Cluster Kafka](../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.2_Architecture_Cluster_Kafka.md)

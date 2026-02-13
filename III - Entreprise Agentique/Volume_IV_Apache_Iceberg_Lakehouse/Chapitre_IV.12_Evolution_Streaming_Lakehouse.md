@@ -1939,5 +1939,5 @@ Le Streaming Lakehouse représente l'état de l'art pour les architectures de do
 
 ### Références croisées
 
-- **Fondamentaux Apache Kafka et Confluent** : voir aussi [Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent](../../Volume_II_Infrastructure_Agentique/Partie_1_Fondamentaux_Kafka_Confluent/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md)
-- **Conception d'applications de streaming** : voir aussi [Chapitre III.8 -- Conception d'Applications de Streaming](../../Volume_III_Apache_Kafka_Guide_Architecte/Partie_3_Stream_Processing_Gestion/Chapitre_III.8_Conception_Application_Streaming.md)
+- **Fondamentaux Apache Kafka et Confluent** : voir aussi [Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent](../Volume_II_Infrastructure_Agentique/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md)
+- **Conception d'applications de streaming** : voir aussi [Chapitre III.8 -- Conception d'Applications de Streaming](../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.8_Conception_Application_Streaming.md)

@@ -243,5 +243,5 @@ Ce chapitre a établi le diagnostic fondamental de la crise d'intégration des s
 
 ### Références croisées
 
-- **Introduction a la problematique d'interoperabilite** : voir aussi [Chapitre 2.1 -- Introduction et Problematique](../../../2 - Interopérabilité/Chapitre_2.1_Introduction_Problematique.md)
-- **Fondements theoriques de l'interoperabilite** : voir aussi [Chapitre 2.2 -- Fondements Theoriques](../../../2 - Interopérabilité/Chapitre_2.2_Fondements_Theoriques.md)
+- **Introduction a la problematique d'interoperabilite** : voir aussi [Chapitre 2.1 -- Introduction et Problematique](../../II - Interopérabilité/Chapitre_II.1_Introduction_Problematique.md)
+- **Fondements theoriques de l'interoperabilite** : voir aussi [Chapitre 2.2 -- Fondements Theoriques](../../II - Interopérabilité/Chapitre_II.2_Fondements_Theoriques.md)

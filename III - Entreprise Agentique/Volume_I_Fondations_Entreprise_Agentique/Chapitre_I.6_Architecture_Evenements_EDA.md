@@ -180,6 +180,6 @@ Ce chapitre a exploré l'architecture orientée événements comme backbone asyn
 
 ### Références croisées
 
-- **Integration des evenements en entreprise** : voir aussi [Chapitre 2.5 -- Integration des Evenements](../../../2 - Interopérabilité/Chapitre_2.5_Integration_Evenements.md)
-- **Fondamentaux Apache Kafka** : voir aussi [Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent](../../Volume_II_Infrastructure_Agentique/Partie_1_Fondamentaux_Kafka_Confluent/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md)
-- **Patrons d'interaction Kafka** : voir aussi [Chapitre III.7 -- Patrons d'Interaction Kafka](../../Volume_III_Apache_Kafka_Guide_Architecte/Partie_2_Cas_Usage_Patrons/Chapitre_III.7_Patrons_Interaction_Kafka.md)
+- **Integration des evenements en entreprise** : voir aussi [Chapitre 2.5 -- Integration des Evenements](../../II - Interopérabilité/Chapitre_II.5_Integration_Evenements.md)
+- **Fondamentaux Apache Kafka** : voir aussi [Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent](../Volume_II_Infrastructure_Agentique/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md)
+- **Patrons d'interaction Kafka** : voir aussi [Chapitre III.7 -- Patrons d'Interaction Kafka](../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.7_Patrons_Interaction_Kafka.md)

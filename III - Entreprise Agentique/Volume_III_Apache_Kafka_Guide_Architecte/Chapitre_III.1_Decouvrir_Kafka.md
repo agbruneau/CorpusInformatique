@@ -885,6 +885,6 @@ L'architecte qui maîtrise à la fois la vision stratégique développée dans c
 
 ### Références croisées
 
-- **Integration des evenements en entreprise** : voir aussi [Chapitre 2.5 -- Integration des Evenements](../../../2 - Interopérabilité/Chapitre_2.5_Integration_Evenements.md)
-- **Fondamentaux Kafka dans l'infrastructure agentique** : voir aussi [Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent](../../Volume_II_Infrastructure_Agentique/Partie_1_Fondamentaux_Kafka_Confluent/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md)
-- **Architecture EDA** : voir aussi [Chapitre I.6 -- Architecture Orientee Evenements (EDA)](../../Volume_I_Fondations_Entreprise_Agentique/Partie_1_Crise_Fondations_Architecturales/Chapitre_I.6_Architecture_Evenements_EDA.md)
+- **Integration des evenements en entreprise** : voir aussi [Chapitre 2.5 -- Integration des Evenements](../../II - Interopérabilité/Chapitre_II.5_Integration_Evenements.md)
+- **Fondamentaux Kafka dans l'infrastructure agentique** : voir aussi [Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent](../Volume_II_Infrastructure_Agentique/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md)
+- **Architecture EDA** : voir aussi [Chapitre I.6 -- Architecture Orientee Evenements (EDA)](../Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.6_Architecture_Evenements_EDA.md)

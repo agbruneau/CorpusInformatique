@@ -211,5 +211,5 @@ Ce chapitre a établi les fondements conceptuels de l'interopérabilité :
 
 ### Références croisées
 
-- **Fondements theoriques de l'interoperabilite** : voir aussi [Chapitre 2.2 -- Fondements Theoriques](../../../2 - Interopérabilité/Chapitre_2.2_Fondements_Theoriques.md)
-- **Standards et contrats d'interface** : voir aussi [Chapitre 2.6 -- Standards et Contrats d'Interface](../../../2 - Interopérabilité/Chapitre_2.6_Standards_Contrats.md)
+- **Fondements theoriques de l'interoperabilite** : voir aussi [Chapitre 2.2 -- Fondements Theoriques](../../II - Interopérabilité/Chapitre_II.2_Fondements_Theoriques.md)
+- **Standards et contrats d'interface** : voir aussi [Chapitre 2.6 -- Standards et Contrats d'Interface](../../II - Interopérabilité/Chapitre_II.6_Standards_Contrats.md)

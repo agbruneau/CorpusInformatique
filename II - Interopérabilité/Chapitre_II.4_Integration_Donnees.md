@@ -649,6 +649,6 @@ L'étude de cas du chapitre X illustrera concrètement comment ces patrons s'art
 
 ### Références croisées
 
-- **Systemes de donnees modernes et Big Data** : voir aussi [Chapitre 1.32 -- Systemes de Donnees Modernes et Big Data](../1 - Cursus - Science et Génie Informatique/Chapitre_1.32_Donnees_Modernes_BigData.md)
-- **Apache Iceberg et le monde Lakehouse** : voir aussi [Chapitre IV.1 -- Le Monde du Lakehouse et d'Apache Iceberg](../3 - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Partie_1_Valeur_Lakehouse/Chapitre_IV.1_Monde_Lakehouse_Iceberg.md)
-- **Contrats de donnees** : voir aussi [Chapitre I.7 -- Contrats de Donnees](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_2_Infrastructure_Ecosysteme_Technique/Chapitre_I.7_Contrats_Donnees.md)
+- **Systemes de donnees modernes et Big Data** : voir aussi [Chapitre 1.32 -- Systemes de Donnees Modernes et Big Data](../I - Science et Génie Informatique/Chapitre_I.32_Donnees_Modernes_BigData.md)
+- **Apache Iceberg et le monde Lakehouse** : voir aussi [Chapitre IV.1 -- Le Monde du Lakehouse et d'Apache Iceberg](../III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.1_Monde_Lakehouse_Iceberg.md)
+- **Contrats de donnees** : voir aussi [Chapitre I.7 -- Contrats de Donnees](../III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.7_Contrats_Donnees.md)

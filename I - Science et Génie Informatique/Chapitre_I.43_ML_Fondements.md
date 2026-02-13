@@ -999,5 +999,5 @@ En conclusion, une évaluation rigoureuse est une démarche multi-facettes. Elle
 
 ### Références croisées
 
-- **Google Cloud Vertex AI pour le ML en production** : voir aussi [Chapitre II.6 -- Google Cloud Vertex AI](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_2_Vertex_AI_Patrons_Avances/Chapitre_II.6_Google_Cloud_Vertex_AI.md)
-- **Ingenierie du contexte et RAG** : voir aussi [Chapitre II.7 -- Ingenierie du Contexte et RAG](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_2_Vertex_AI_Patrons_Avances/Chapitre_II.7_Ingenierie_Contexte_RAG.md)
+- **Google Cloud Vertex AI pour le ML en production** : voir aussi [Chapitre II.6 -- Google Cloud Vertex AI](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.6_Google_Cloud_Vertex_AI.md)
+- **Ingenierie du contexte et RAG** : voir aussi [Chapitre II.7 -- Ingenierie du Contexte et RAG](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.7_Ingenierie_Contexte_RAG.md)

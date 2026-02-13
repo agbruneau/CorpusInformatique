@@ -2033,6 +2033,6 @@ public void payer(int montant) {
 
 ### Références croisées
 
-- **Architecture de reference convergente** : voir aussi [Chapitre 2.9 -- Architecture de Reference Convergente](../2 - Interopérabilité/Chapitre_2.9_Architecture_Reference.md)
-- **Principes d'architecture reactive** : voir aussi [Chapitre I.4 -- Principes d'Architecture Reactive](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_1_Crise_Fondations_Architecturales/Chapitre_I.4_Principes_Architecture_Reactive.md)
-- **Patrons architecturaux avances (AEM)** : voir aussi [Chapitre II.9 -- Patrons Architecturaux Avances AEM](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_2_Vertex_AI_Patrons_Avances/Chapitre_II.9_Patrons_Architecturaux_Avances_AEM.md)
+- **Architecture de reference convergente** : voir aussi [Chapitre 2.9 -- Architecture de Reference Convergente](../II - Interopérabilité/Chapitre_II.9_Architecture_Reference.md)
+- **Principes d'architecture reactive** : voir aussi [Chapitre I.4 -- Principes d'Architecture Reactive](../III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.4_Principes_Architecture_Reactive.md)
+- **Patrons architecturaux avances (AEM)** : voir aussi [Chapitre II.9 -- Patrons Architecturaux Avances AEM](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.9_Patrons_Architecturaux_Avances_AEM.md)

@@ -769,5 +769,5 @@ L'architecte averti notera que les frontières entre ces domaines ne sont pas é
 
 ### Références croisées
 
-- **Ecosysteme API et strategie produit** : voir aussi [Chapitre I.5 -- Ecosysteme API : Protocoles Modernes et Strategie Produit](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_1_Crise_Fondations_Architecturales/Chapitre_I.5_Ecosysteme_API.md)
-- **Conception et architecture logicielle** : voir aussi [Chapitre 1.27 -- Conception et Architecture Logicielle](../1 - Cursus - Science et Génie Informatique/Chapitre_1.27_Architecture_Logicielle.md)
+- **Ecosysteme API et strategie produit** : voir aussi [Chapitre I.5 -- Ecosysteme API : Protocoles Modernes et Strategie Produit](../III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.5_Ecosysteme_API.md)
+- **Conception et architecture logicielle** : voir aussi [Chapitre 1.27 -- Conception et Architecture Logicielle](../I - Science et Génie Informatique/Chapitre_I.27_Architecture_Logicielle.md)

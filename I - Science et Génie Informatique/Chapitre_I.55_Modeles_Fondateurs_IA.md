@@ -407,6 +407,6 @@ Le succès du CoT suggère que cette technique agit comme une forme d\'**échafa
 
 ### Références croisées
 
-- **Ere de l'IA agentique et travailleur numerique** : voir aussi [Chapitre I.13 -- L'Ere de l'IA Agentique](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_3_Interoperabilite_Cognitive_Paradigme_Agentique/Chapitre_I.13_Ere_IA_Agentique_Modele_Travailleur_Numerique.md)
-- **Ingenierie du contexte et RAG** : voir aussi [Chapitre II.7 -- Ingenierie du Contexte et RAG](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_2_Vertex_AI_Patrons_Avances/Chapitre_II.7_Ingenierie_Contexte_RAG.md)
-- **Apprentissage profond (Deep Learning)** : voir aussi [Chapitre 1.44 -- Apprentissage Profond (Deep Learning)](Chapitre_1.44_DeepLearning.md)
+- **Ere de l'IA agentique et travailleur numerique** : voir aussi [Chapitre I.13 -- L'Ere de l'IA Agentique](../III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.13_Ere_IA_Agentique_Modele_Travailleur_Numerique.md)
+- **Ingenierie du contexte et RAG** : voir aussi [Chapitre II.7 -- Ingenierie du Contexte et RAG](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.7_Ingenierie_Contexte_RAG.md)
+- **Apprentissage profond (Deep Learning)** : voir aussi [Chapitre 1.44 -- Apprentissage Profond (Deep Learning)](Chapitre_I.44_DeepLearning.md)

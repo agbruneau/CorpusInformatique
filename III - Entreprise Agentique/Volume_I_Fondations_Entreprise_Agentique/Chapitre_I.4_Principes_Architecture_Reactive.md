@@ -164,5 +164,5 @@ Ce chapitre a établi les principes directeurs de l'architecture réactive, hybr
 
 ### Références croisées
 
-- **Conception et architecture logicielle** : voir aussi [Chapitre 1.27 -- Conception et Architecture Logicielle](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.27_Architecture_Logicielle.md)
-- **Architecture de reference convergente** : voir aussi [Chapitre 2.9 -- Architecture de Reference Convergente](../../../2 - Interopérabilité/Chapitre_2.9_Architecture_Reference.md)
+- **Conception et architecture logicielle** : voir aussi [Chapitre 1.27 -- Conception et Architecture Logicielle](../../I - Science et Génie Informatique/Chapitre_I.27_Architecture_Logicielle.md)
+- **Architecture de reference convergente** : voir aussi [Chapitre 2.9 -- Architecture de Reference Convergente](../../II - Interopérabilité/Chapitre_II.9_Architecture_Reference.md)

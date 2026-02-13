@@ -931,5 +931,5 @@ Plus généralement, la maîtrise de la résilience et de l'observabilité prép
 
 ### Références croisées
 
-- **Conception et implementation de l'observabilite** : voir aussi [Chapitre I.8 -- Conception, Implementation et Observabilite](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_2_Infrastructure_Ecosysteme_Technique/Chapitre_I.8_Conception_Implementation_Observabilite.md)
-- **Observabilite comportementale et monitoring** : voir aussi [Chapitre II.11 -- Observabilite Comportementale et Monitoring](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_3_CI_CD_Observabilite_Tests/Chapitre_II.11_Observabilite_Comportementale_Monitoring.md)
+- **Conception et implementation de l'observabilite** : voir aussi [Chapitre I.8 -- Conception, Implementation et Observabilite](../III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.8_Conception_Implementation_Observabilite.md)
+- **Observabilite comportementale et monitoring** : voir aussi [Chapitre II.11 -- Observabilite Comportementale et Monitoring](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.11_Observabilite_Comportementale_Monitoring.md)

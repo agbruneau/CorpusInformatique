@@ -715,6 +715,6 @@ Ces questions n'ont pas de réponses confortables. Mais les poser — honnêteme
 
 ### Références croisées
 
-- **Qualite logicielle, test et maintenance** : voir aussi [Chapitre 1.28 -- Qualite Logicielle : Test et Maintenance](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.28_Qualite_Test_Maintenance.md)
-- **Processus de developpement logiciel** : voir aussi [Chapitre 1.26 -- Le Processus de Developpement Logiciel](../../../1 - Cursus - Science et Génie Informatique/Chapitre_1.26_Processus_Developpement.md)
-- **Spec-Driven Development** : voir aussi [Chapitre V.10 -- Spec-Driven Development](../Partie_4_Epilogue_Mandats/Chapitre_V.10_Spec_Driven_Development.md)
+- **Qualite logicielle, test et maintenance** : voir aussi [Chapitre 1.28 -- Qualite Logicielle : Test et Maintenance](../../I - Science et Génie Informatique/Chapitre_I.28_Qualite_Test_Maintenance.md)
+- **Processus de developpement logiciel** : voir aussi [Chapitre 1.26 -- Le Processus de Developpement Logiciel](../../I - Science et Génie Informatique/Chapitre_I.26_Processus_Developpement.md)
+- **Spec-Driven Development** : voir aussi [Chapitre V.10 -- Spec-Driven Development](Chapitre_V.10_Spec_Driven_Development.md)

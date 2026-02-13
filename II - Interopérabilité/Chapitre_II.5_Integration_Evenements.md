@@ -712,6 +712,6 @@ Stopford, Ben.  *Designing Event-Driven Systems* . O'Reilly/Confluent, 2018. —
 
 ### Références croisées
 
-- **Architecture EDA et maillage d'evenements** : voir aussi [Chapitre I.6 -- Architecture Orientee Evenements (EDA)](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_1_Crise_Fondations_Architecturales/Chapitre_I.6_Architecture_Evenements_EDA.md)
-- **Fondamentaux Apache Kafka et Confluent** : voir aussi [Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent](../3 - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Partie_1_Fondamentaux_Kafka_Confluent/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md)
-- **Guide architecte Kafka** : voir aussi [Chapitre III.1 -- Decouvrir Kafka en tant qu'Architecte](../3 - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Partie_1_Architecture_Clients_Kafka/Chapitre_III.1_Decouvrir_Kafka.md)
+- **Architecture EDA et maillage d'evenements** : voir aussi [Chapitre I.6 -- Architecture Orientee Evenements (EDA)](../III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.6_Architecture_Evenements_EDA.md)
+- **Fondamentaux Apache Kafka et Confluent** : voir aussi [Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md)
+- **Guide architecte Kafka** : voir aussi [Chapitre III.1 -- Decouvrir Kafka en tant qu'Architecte](../III - Entreprise Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.1_Decouvrir_Kafka.md)

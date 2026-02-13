@@ -365,5 +365,5 @@ Cette perspective inverse la charge de la preuve en matière de sécurité. Pour
 
 ### Références croisées
 
-- **Gouvernance constitutionnelle et alignement IA** : voir aussi [Chapitre I.17 -- Gouvernance Constitutionnelle et Alignement de l'IA](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_3_Interoperabilite_Cognitive_Paradigme_Agentique/Chapitre_I.17_Gouvernance_Constitutionnelle_Alignement_IA.md)
-- **Gestion des risques systemiques et superalignement** : voir aussi [Chapitre I.26 -- Gestion des Risques Systemiques et Superalignement](../3 - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Partie_5_Industrialisation_Prospective_Synthese/Chapitre_I.26_Gestion_Risques_Systemiques_Superalignement.md)
+- **Gouvernance constitutionnelle et alignement IA** : voir aussi [Chapitre I.17 -- Gouvernance Constitutionnelle et Alignement de l'IA](../III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.17_Gouvernance_Constitutionnelle_Alignement_IA.md)
+- **Gestion des risques systemiques et superalignement** : voir aussi [Chapitre I.26 -- Gestion des Risques Systemiques et Superalignement](../III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.26_Gestion_Risques_Systemiques_Superalignement.md)
