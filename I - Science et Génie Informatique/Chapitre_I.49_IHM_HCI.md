@@ -1,4 +1,4 @@
-# **Chapitre 49 : Interaction Homme-Machine (IHM/HCI)**
+# Chapitre I.49 : Interaction Homme-Machine (IHM/HCI)
 
 L\'Interaction Homme-Machine (IHM), ou *Human-Computer Interaction* (HCI) en anglais, est une discipline scientifique, technologique et conceptuelle qui se situe au carrefour de l\'informatique, de la psychologie cognitive, du design et des sciences sociales. Son objectif fondamental est d\'étudier et d\'optimiser la relation entre les êtres humains et les systèmes informatiques. Loin de se limiter à la simple conception d\'interfaces graphiques esthétiques, l\'IHM s\'attache à rendre la technologie non seulement utilisable et efficace, mais également utile, accessible et agréable. La prémisse centrale de cette discipline est que les systèmes doivent être conçus pour l\'humain, en tenant compte de ses capacités, de ses limites et de ses objectifs. Cette approche place l\'utilisateur au cœur absolu du processus de conception, transformant la création de technologies d\'un exercice purement technique en une quête pour augmenter les capacités humaines et enrichir l\'expérience vécue.
 

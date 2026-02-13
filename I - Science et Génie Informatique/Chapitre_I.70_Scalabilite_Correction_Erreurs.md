@@ -1,4 +1,4 @@
-# Chapitre 70 : Scalabilité, Atténuation d'Erreurs et Tolérance aux Pannes dans les Systèmes AGI Quantiques
+# Chapitre I.70 : Scalabilité, Atténuation d'Erreurs et Tolérance aux Pannes dans les Systèmes AGI Quantiques
 
 ## Introduction : Le fossé entre l\'algorithmique théorique et la réalité matérielle
 

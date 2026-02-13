@@ -1,4 +1,4 @@
-# Chapitre 3 : Architecture des Réseaux Neuronaux Quantiques : Conception et Mise en Œuvre
+# Chapitre I.64 : Architecture des Réseaux Neuronaux Quantiques : Conception et Mise en Œuvre
 
 ## 3.1 Introduction : Vers une Neuro-informatique Quantique
 

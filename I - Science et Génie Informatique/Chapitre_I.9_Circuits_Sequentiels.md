@@ -1,4 +1,4 @@
-# Chapitre 9 : Conception de Circuits Séquentiels
+# Chapitre I.9 : Conception de Circuits Séquentiels
 
 ## 9.1 Introduction à la Logique Séquentielle
 

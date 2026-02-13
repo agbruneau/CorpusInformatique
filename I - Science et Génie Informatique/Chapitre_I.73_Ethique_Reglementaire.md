@@ -1,4 +1,4 @@
-# Chapitre 73 : Enjeux Éthiques, Sociaux et Réglementaires du Quantum-AGI
+# Chapitre I.73 : Enjeux Éthiques, Sociaux et Réglementaires du Quantum-AGI
 
 ## 73.1 Introduction : Gouverner la Prochaine Révolution
 

@@ -1,4 +1,4 @@
-# Chapitre 47 : Vision par Ordinateur
+# Chapitre I.47 : Vision par Ordinateur
 
 ## 47.1 Traitement d\'images : Des pixels aux contours
 

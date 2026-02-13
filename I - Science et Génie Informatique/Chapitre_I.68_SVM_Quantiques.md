@@ -1,4 +1,4 @@
-# Chapitre 7 : Machines à Vecteurs de Support Quantiques pour les Tâches d'Intelligence Artificielle Polyvalentes
+# Chapitre I.68 : Machines à Vecteurs de Support Quantiques pour les Tâches d'Intelligence Artificielle Polyvalentes
 
 ## 7.1 Introduction : Convergence de l\'Apprentissage Automatique et de l\'Informatique Quantique
 

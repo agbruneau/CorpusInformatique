@@ -1,4 +1,4 @@
-# Chapitre 14 : Hiérarchie Mémoire et Stockage
+# Chapitre I.14 : Hiérarchie Mémoire et Stockage
 
 ## 14.1 Principes de Localité (Temporelle et Spatiale)
 

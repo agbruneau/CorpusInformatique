@@ -1,4 +1,4 @@
-# Chapitre 74 : Implémentation Matérielle du Quantum-AGI : des Qubits aux Processeurs
+# Chapitre I.74 : Implémentation Matérielle du Quantum-AGI : des Qubits aux Processeurs
 
 ## 74.1 Introduction : Les Critères Fondamentaux pour l\'Informatique Quantique
 

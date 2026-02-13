@@ -1,4 +1,4 @@
-# Chapitre 78 : Métriques de Performance et Bancs d\'Essai pour le Quantum-AGI
+# Chapitre I.78 : Métriques de Performance et Bancs d\'Essai pour le Quantum-AGI
 
 ## 78.1 Introduction : \"Si vous ne pouvez le mesurer, vous ne pouvez l\'améliorer\"
 

@@ -32,7 +32,7 @@ Ce volume se tourne vers l\'avenir, explorant les paradigmes computationnels qui
 
 10. **[Cybersécurité préemptive]** : Utilisation de l\'IA (SecOps) pour prédire, nier, perturber et tromper les attaquants avant même qu\'une violation ne soit complétée.
 
-# Chapitre 51 : Informatique Quantique -- Fondements et Ingénierie
+# Chapitre I.51 : Informatique Quantique -- Fondements et Ingénierie
 
 L\'avènement de l\'informatique au XXe siècle a transformé de manière irréversible la civilisation humaine, en se fondant sur un principe d\'une simplicité désarmante : la manipulation de bits, des entités physiques représentant sans ambiguïté les valeurs logiques 0 ou 1. Ce paradigme, formalisé par la thèse de Church-Turing, a défini les limites théoriques de ce qu\'une machine pouvait calculer. Pourtant, au cœur même de la physique qui régit le fonctionnement des transistors, composants ultimes de ces machines classiques, se trouve une description du monde bien plus riche et contre-intuitive : la mécanique quantique.
 

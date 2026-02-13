@@ -1,4 +1,4 @@
-# Chapitre 13 : Parallélisme au Niveau de l\'Instruction (ILP) et Architectures Avancées
+# Chapitre I.13 : Parallélisme au Niveau de l\'Instruction (ILP) et Architectures Avancées
 
 ## Introduction : La Quête de Performance au-delà de la Fréquence
 

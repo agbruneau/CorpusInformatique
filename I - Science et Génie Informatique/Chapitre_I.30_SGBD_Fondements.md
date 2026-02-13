@@ -1,6 +1,6 @@
 Dans un monde interconnecté et centré sur l\'information, le quatrième volume traite des piliers de l\'infrastructure numérique moderne. La **Gestion des Données** couvre les systèmes de bases de données relationnelles (SQL), les principes de transaction (ACID), ainsi que les écosystèmes modernes NoSQL et Big Data. Les **Réseaux et Systèmes Distribués** détaillent les protocoles (TCP/IP) qui régissent l\'Internet, les principes des systèmes répartis (consensus, tolérance aux pannes) et l\'architecture du Cloud Computing. Face aux menaces croissantes, la **Cybersécurité et la Cryptographie** occupent une place centrale, examinant les techniques de protection des données, la sécurité des protocoles et la conception de logiciels résilients.
 
-# Chapitre 30 : Systèmes de Gestion de Bases de Données (SGBD) - Fondements
+# Chapitre I.30 : Systèmes de Gestion de Bases de Données (SGBD) - Fondements
 
 ## Introduction Générale au Chapitre
 

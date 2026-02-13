@@ -1,4 +1,4 @@
-# Chapitre 11 : Architecture du Jeu d\'Instructions (ISA)
+# Chapitre I.11 : Architecture du Jeu d\'Instructions (ISA)
 
 L\'Architecture du Jeu d\'Instructions, ou ISA (de l\'anglais *Instruction Set Architecture*), constitue la pierre angulaire de la conception des systèmes informatiques. Elle représente le contrat formel, l\'interface abstraite et immuable qui régit le dialogue entre le matériel et le logiciel. Pour le programmeur, le compilateur ou le système d\'exploitation, l\'ISA définit la vue conceptuelle du processeur : l\'ensemble des instructions qu\'il peut exécuter, les registres qu\'il met à disposition, les modes d\'adressage pour accéder à la mémoire et le modèle de gestion des données. C\'est le vocabulaire fondamental que le matériel comprend et que le logiciel doit utiliser pour accomplir toute tâche.
 

@@ -1,4 +1,4 @@
-# Chapitre 5 : Calculabilité et Décidabilité
+# Chapitre I.5 : Calculabilité et Décidabilité
 
 ## Introduction : La Quête d\'une Définition Formelle de l\'Algorithme
 

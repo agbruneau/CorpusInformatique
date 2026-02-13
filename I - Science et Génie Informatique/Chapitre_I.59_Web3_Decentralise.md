@@ -1,4 +1,4 @@
-# Chapitre 59 : Technologies Décentralisées, Web3 et Systèmes de Confiance
+# Chapitre I.59 : Technologies Décentralisées, Web3 et Systèmes de Confiance
 
 ## 59.1 Fondements des Registres Distribués (DLT) et Blockchain
 

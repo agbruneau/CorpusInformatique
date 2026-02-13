@@ -1,4 +1,4 @@
-# Chapitre 37 : Fondements de la Sécurité Informatique
+# Chapitre I.37 : Fondements de la Sécurité Informatique
 
 La sécurité informatique, ou cybersécurité, est devenue une préoccupation centrale dans la conception et l\'exploitation des systèmes informatiques modernes. Loin d\'être une simple collection de technologies ou de produits à appliquer après coup, elle constitue une discipline d\'ingénierie à part entière, dont les principes doivent imprégner chaque phase du cycle de vie d\'un système, de sa conception initiale à son démantèlement. Traiter la sécurité comme une réflexion après coup est une invitation quasi certaine à l\'échec, entraînant des vulnérabilités coûteuses, des pertes de données catastrophiques et une érosion de la confiance des utilisateurs. L\'impératif est donc de l\'intégrer comme une exigence fondamentale, au même titre que la performance, la fiabilité ou la maintenabilité. Ce chapitre a pour vocation d\'établir les fondements de cette discipline, en présentant non pas un catalogue de solutions ponctuelles, mais un cadre de pensée rigoureux et systématique.
 

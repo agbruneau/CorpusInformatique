@@ -1,4 +1,4 @@
-# Chapitre 6 : Architectures Hybrides Classique--Quantique pour l'Informatique Cognitive
+# Chapitre I.67 : Architectures Hybrides Classique--Quantique pour l'Informatique Cognitive
 
 ## 6.1 Introduction : L\'Impératif de l\'Hybridité à l\'Ère NISQ
 

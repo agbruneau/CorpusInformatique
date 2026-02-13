@@ -1,4 +1,4 @@
-# Chapitre 4 : Langages Formels et Automates
+# Chapitre I.4 : Langages Formels et Automates
 
 ## 4.1 Introduction : La Structure du Langage et de la Computation
 

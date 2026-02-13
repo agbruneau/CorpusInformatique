@@ -1,4 +1,4 @@
-# Chapitre 72 : Sécurité, Confidentialité et Confiance dans les Systèmes AGI Quantiques
+# Chapitre I.72 : Sécurité, Confidentialité et Confiance dans les Systèmes AGI Quantiques
 
 ## 72.1 Introduction : Le Nouveau Contrat de Confiance à l\'Ère Quantique
 

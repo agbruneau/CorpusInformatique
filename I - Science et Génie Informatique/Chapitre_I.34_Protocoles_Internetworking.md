@@ -1,4 +1,4 @@
-# Chapitre 34 : Protocoles Réseau et Internetworking
+# Chapitre I.34 : Protocoles Réseau et Internetworking
 
 L\'Internet, cette infrastructure planétaire qui sous-tend une part croissante de l\'activité humaine, peut sembler d\'une complexité insondable. Pourtant, sa robustesse et sa capacité à évoluer reposent sur un ensemble de principes architecturaux d\'une élégance remarquable, incarnés par la suite de protocoles TCP/IP. Ce chapitre se propose de disséquer le cœur de cette architecture, en se concentrant sur les deux couches qui en constituent la fondation logique : la couche Réseau et la couche Transport.
 

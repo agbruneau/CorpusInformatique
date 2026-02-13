@@ -1,4 +1,4 @@
-# Chapitre 2 : Évolution de l'intelligence artificielle et de l'informatique quantique
+# Chapitre I.63 : Évolution de l'intelligence artificielle et de l'informatique quantique
 
 ## 2.1 Introduction : Deux Odyssées vers la Révolution Computationnelle
 

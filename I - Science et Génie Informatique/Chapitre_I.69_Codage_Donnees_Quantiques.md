@@ -1,4 +1,4 @@
-# Chapitre 69 : Codage des Données et Cartographies des Caractéristiques Quantiques pour l\'AGI
+# Chapitre I.69 : Codage des Données et Cartographies des Caractéristiques Quantiques pour l\'AGI
 
 ## 69.1 Introduction : Le Pont entre les Données Classiques et le Calcul Quantique
 

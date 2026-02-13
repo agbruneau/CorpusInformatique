@@ -1,4 +1,4 @@
-# Chapitre 6 : Théorie de la Complexité
+# Chapitre I.6 : Théorie de la Complexité
 
 ## Introduction : Le Grand Schisme -- De la Calculabilité à la Complexité
 

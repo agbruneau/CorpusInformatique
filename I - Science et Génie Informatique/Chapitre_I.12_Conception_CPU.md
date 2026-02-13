@@ -1,4 +1,4 @@
-# Chapitre 12 : Conception du Processeur Central (CPU)
+# Chapitre I.12 : Conception du Processeur Central (CPU)
 
 ## Introduction du Chapitre
 

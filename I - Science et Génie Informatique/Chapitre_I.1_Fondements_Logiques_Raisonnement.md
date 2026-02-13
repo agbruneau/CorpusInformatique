@@ -1,4 +1,4 @@
-# Chapitre 1 — Fondements Logiques et Raisonnement Formel
+# Chapitre I.1 — Fondements Logiques et Raisonnement Formel
 
 ---
 

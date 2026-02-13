@@ -1,4 +1,4 @@
-# Chapitre 71 : Traitement du Langage Naturel Quantique -- de la Syntaxe à la Sémantique
+# Chapitre I.71 : Traitement du Langage Naturel Quantique -- de la Syntaxe à la Sémantique
 
 ## 71.1 Introduction : À la Recherche du Sens Perdu
 

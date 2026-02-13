@@ -1,4 +1,4 @@
-# Chapitre 3 : Théorie des Graphes
+# Chapitre I.3 : Théorie des Graphes
 
 ## 3.1 Introduction : D\'un Problème de Ponts à une Théorie Universelle
 

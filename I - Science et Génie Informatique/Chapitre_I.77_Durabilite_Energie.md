@@ -1,4 +1,4 @@
-# Chapitre 77 : Durabilité et Efficacité Énergétique des Déploiements AGI Quantiques
+# Chapitre I.77 : Durabilité et Efficacité Énergétique des Déploiements AGI Quantiques
 
 ## 77.1 Introduction : La Double Comptabilité de la Révolution Quantique
 

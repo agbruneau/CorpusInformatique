@@ -1,4 +1,4 @@
-# Chapitre 8 : Conception de Circuits Combinatoires
+# Chapitre I.8 : Conception de Circuits Combinatoires
 
 ## Introduction Générale au Chapitre
 

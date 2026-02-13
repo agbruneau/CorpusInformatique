@@ -1,4 +1,4 @@
-# Chapitre 43 : Apprentissage Automatique (Machine Learning) - Fondements
+# Chapitre I.43 : Apprentissage Automatique (Machine Learning) - Fondements
 
 ## 43.1 Paradigmes d\'Apprentissage et Théorie de l\'Apprentissage Statistique (Biais-Variance)
 

@@ -1,4 +1,4 @@
-# Chapitre 54 : Architectures Post-Moore et Calcul Non Conventionnel
+# Chapitre I.54 : Architectures Post-Moore et Calcul Non Conventionnel
 
 L\'évolution de l\'informatique au cours du dernier demi-siècle a été rythmée par une cadence quasi métronomique, dictée par une observation empirique devenue prophétie autoréalisatrice : la loi de Moore. Formulée en 1965 par Gordon Moore, cofondateur d\'Intel, cette loi prédisait que le nombre de transistors sur une puce de circuit intégré doublerait environ tous les deux ans. Cette croissance exponentielle de la densité des transistors a été le moteur d\'une révolution technologique sans précédent, propulsant la puissance de calcul à des niveaux autrefois inimaginables et transformant tous les aspects de notre société. Des supercalculateurs aux téléphones intelligents, chaque avancée semblait confirmer la pérennité de cette marche en avant.
 

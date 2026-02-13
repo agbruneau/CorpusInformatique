@@ -1,4 +1,4 @@
-# Chapitre 60 : Synthèse du Volume VI et les Prochaines Frontières de la Computation
+# Chapitre I.60 : Synthèse du Volume VI et les Prochaines Frontières de la Computation
 
 ## Introduction : Le Crépuscule d\'une Ère et l\'Aube de la Prochaine
 

@@ -1,4 +1,4 @@
-# Chapitre 56 : Vers l\'AGI : Alignement, Sécurité et Raisonnement Avancé
+# Chapitre I.56 : Vers l\'AGI : Alignement, Sécurité et Raisonnement Avancé
 
 ## Introduction
 

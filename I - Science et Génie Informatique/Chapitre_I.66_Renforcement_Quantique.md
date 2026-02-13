@@ -1,4 +1,4 @@
-# Chapitre 5 : Renforcement Quantique : Fusion de la Recherche Quantique et de la Prise de Décision
+# Chapitre I.66 : Renforcement Quantique : Fusion de la Recherche Quantique et de la Prise de Décision
 
 ## 5.1 Introduction : L\'Agent Autonome à l\'Horizon Quantique
 

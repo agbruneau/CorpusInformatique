@@ -1,4 +1,4 @@
-# Chapitre 2 : Structures Discrètes et Combinatoire
+# Chapitre I.2 : Structures Discrètes et Combinatoire
 
 ## Introduction
 

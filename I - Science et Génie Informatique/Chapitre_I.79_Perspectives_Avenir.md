@@ -1,4 +1,4 @@
-# Chapitre 79 : Perspectives -- Vers une Intelligence Générale Durable grâce à l'Informatique Quantique
+# Chapitre I.79 : Perspectives -- Vers une Intelligence Générale Durable grâce à l'Informatique Quantique
 
 ## 79.1 Introduction : Au Seuil d\'un Nouvel Horizon Computationnel
 

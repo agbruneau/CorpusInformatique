@@ -1,4 +1,4 @@
-# Chapitre 76 : Études de Cas -- Systèmes Autonomes Assistés par l'Informatique Quantique
+# Chapitre I.76 : Études de Cas -- Systèmes Autonomes Assistés par l'Informatique Quantique
 
 ## 76.1 Introduction : Des Plans à la Pratique
 
