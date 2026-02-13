@@ -2,25 +2,23 @@
 
 ## Contexte
 
-Le corpus contient 177 fichiers Markdown de contenu (1,57M mots, ~5000 pages PDF) répartis en 3 sections (81 + 12 + 84). L'objectif est de publier le corpus comme site web navigable sur GitHub Pages avec MkDocs Material.
+Le corpus contient 177 fichiers Markdown (1,57M mots, ~5000 pages PDF) répartis en 3 sections. Il n'existe aucune infrastructure de documentation, CI/CD, ou configuration de déploiement. L'objectif est de publier le corpus comme site web navigable sur GitHub Pages avec MkDocs Material.
 
-## Fichiers créés
+## Fichiers à créer
 
 ### 1. `mkdocs.yml` (racine du repo)
 
 Configuration principale :
 
-- **docs_dir: `docs`** — répertoire `docs/` contenant des liens symboliques vers le contenu (créés par CI)
-- **Theme** : Material avec langue `fr`, palette light/dark, navigation tabs, `navigation.sections`, `navigation.expand`, `navigation.top`, `toc.integrate`, `search.suggest`, `search.highlight`, `content.code.copy`
+- **docs_dir: `.`** — servir le contenu directement depuis la racine (pas de déplacement de fichiers)
+- **Theme** : Material avec langue `fr`, palette light/dark, navigation tabs
 - **Mermaid** : activé via `pymdownx.superfences` avec custom fence pour mermaid
 - **Search** : plugin search avec `lang: fr`
-- **Navigation** : structure explicite en 3 sections avec sous-sections par volume (177 fichiers)
-- **Extensions** : tables, admonitions, details, highlight, inlinehilite, superfences, tabbed, mark, arithmatex, footnotes, toc (permalink: true)
-- **Exclusions** : `not_in_nav` pour CLAUDE.md et plan.md
-- **extra** : liens sociaux vers le repo GitHub
-- **MathJax** : chargé via extra_javascript (unpkg CDN)
+- **Navigation** : structure explicite en 3 sections avec sous-sections par volume
+- **Extensions** : tables, admonitions (pour les blocs `> **Définition**`), code highlighting, table of contents, footnotes
+- **Exclusions** : exclure CLAUDE.md, .claude/, .github/ du site
 
-Navigation structurée (81 + 12 + 84 = 177 fichiers de contenu) :
+Navigation structurée :
 
 ```
 nav:
@@ -33,7 +31,7 @@ nav:
       - Vol. V — Intelligence Artificielle (I.41–I.50): [10 fichiers]
       - Vol. VI — Technologies Avant-Garde (I.51–I.60): [10 fichiers]
       - Vol. VII — Architecture Cognitivo-Quantique (I.61–I.79): [19 fichiers]
-      - Annexes (I.80–I.81): [2 fichiers]
+      - Annexes: [2 fichiers]
   - II — Interopérabilité: [12 fichiers]
   - III — Entreprise Agentique:
       - Volume I — Fondations (I.1–I.28): [28 fichiers]
@@ -54,7 +52,6 @@ pymdown-extensions>=10.0
 
 ```
 site/
-docs/
 __pycache__/
 .venv/
 ```
@@ -63,39 +60,22 @@ __pycache__/
 
 Workflow GitHub Actions :
 
-- **Trigger** : push sur `main`
-- **Permissions** : `contents: write`
-- **Runner** : `ubuntu-latest`
-- **Steps** :
-  1. `actions/checkout@v4`
-  2. `actions/setup-python@v5` avec Python 3.12
-  3. `pip install -r requirements.txt`
-  4. **Setup docs/** : création de symlinks (`ln -s`) vers les 3 répertoires de contenu et README.md
-  5. `mkdocs gh-deploy --force --clean --verbose`
-- **Déploie** automatiquement sur la branche `gh-pages`
+- Trigger : push sur `main`
+- Steps : checkout → setup Python → install deps → mkdocs gh-deploy --force
+- Déploie automatiquement sur la branche `gh-pages`
 
 ## Approche technique
 
-- **Symlinks au lieu de `docs_dir: .`** : MkDocs interdit que le config file soit dans le docs_dir. Solution : `docs_dir: docs` avec des liens symboliques créés en CI vers les répertoires de contenu réels
-- **Pas de déplacement de fichiers** : les fichiers Markdown restent à leur emplacement d'origine ; seuls des symlinks sont créés dans `docs/`
-- **`docs/` dans `.gitignore`** : le répertoire `docs/` est éphémère, créé à la volée par CI et en local
-- **Chemins avec accents et espaces** : MkDocs gère les chemins avec accents nativement
-- **Mermaid** : rendu côté client via le JavaScript intégré à Material
-- **Admonitions** : les blocs `> **Définition formelle**` existants sont rendus comme des blockquotes stylisés
+- **Pas de déplacement de fichiers** : `docs_dir: .` permet à MkDocs de servir directement depuis la racine du repo
+- **Chemins avec accents et espaces** : MkDocs gère les chemins avec accents nativement ; les espaces dans les noms de répertoires sont supportés
+- **Mermaid** : rendu côté client via le JavaScript intégré à Material, configuré dans `pymdownx.superfences`
+- **Admonitions** : les blocs `> **Définition formelle**` existants seront rendus comme des blockquotes stylisés ; optionnellement convertibles en admonitions `!!! note` plus tard
 - **Code highlighting** : automatique avec `pymdownx.highlight` + `pymdownx.superfences`
-- **Mathématiques** : `pymdownx.arithmatex` avec MathJax pour les notations mathématiques existantes
-- **Chapitres 80–81** : les anciens annexes I.A et I.B sont désormais les chapitres I.80 et I.81, listés sous "Annexes" dans la navigation
 
-## Statut
+## Vérification
 
-- [x] mkdocs.yml créé avec navigation complète (177 fichiers)
-- [x] requirements.txt créé
-- [x] .gitignore créé
-- [x] GitHub Actions workflow créé
-- [x] Build local validé — 178 pages HTML générées (177 + accueil)
-- [ ] Pousser sur main → déclencher GitHub Actions → vérifier GitHub Pages
-
-## Notes
-
-- **100 warnings** sur des liens croisés cassés dans le contenu (anciennes conventions de nommage type `Chapitre_1.29` au lieu de `Chapitre_I.29`). Ce sont des problèmes pré-existants dans le contenu, non causés par la configuration MkDocs. Le build CI utilise le mode non-strict pour éviter l'échec.
-- Pour tester localement : créer les symlinks dans `docs/` puis `mkdocs serve`
+1. **Local** : `pip install -r requirements.txt && mkdocs serve` → vérifier le rendu sur http://localhost:8000
+2. **Navigation** : vérifier que les 177 chapitres sont accessibles
+3. **Mermaid** : vérifier le rendu des 23 diagrammes
+4. **Search** : tester la recherche en français
+5. **Deploy** : pousser sur main → vérifier GitHub Pages
