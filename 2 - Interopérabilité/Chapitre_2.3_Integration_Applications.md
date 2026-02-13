@@ -151,6 +151,66 @@ En contrepartie, l'API Gateway introduit un point de défaillance unique. Si ell
 > * Éviter d'implémenter de la logique métier dans la passerelle; elle doit rester un composant d'infrastructure pur.
 > * Surveiller attentivement la latence ajoutée par la passerelle et optimiser si elle dépasse quelques millisecondes.
 
+#### Exemple de Configuration
+
+L'extrait suivant illustre une configuration déclarative typique d'une API Gateway, dans le style des passerelles modernes telles que Kong ou Apache APISIX. Cette approche déclarative permet de versionner la configuration dans un dépôt Git et de l'appliquer via un pipeline CI/CD, conformément aux principes d'infrastructure en tant que code.
+
+```yaml
+# Configuration API Gateway — Routage des microservices d'un système e-commerce
+services:
+  - name: service-commandes
+    url: http://commandes-api:8080
+    routes:
+      - name: route-commandes
+        paths: ["/api/v1/commandes"]
+        methods: ["GET", "POST", "PUT"]
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 100
+          policy: redis
+          redis_host: redis-cluster
+      - name: jwt
+        config:
+          claims_to_verify: ["exp"]
+      - name: correlation-id
+        config:
+          header_name: X-Correlation-ID
+          generator: uuid
+
+  - name: service-catalogue
+    url: http://catalogue-api:8080
+    routes:
+      - name: route-catalogue
+        paths: ["/api/v1/produits"]
+        methods: ["GET"]
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 500
+      - name: proxy-cache
+        config:
+          content_type: ["application/json"]
+          cache_ttl: 300
+
+  - name: service-clients
+    url: http://clients-api:8080
+    routes:
+      - name: route-clients
+        paths: ["/api/v1/clients"]
+        methods: ["GET", "POST", "PATCH"]
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 200
+      - name: jwt
+      - name: acl
+        config:
+          allow: ["groupe-interne", "groupe-partenaire"]
+```
+
+Cette configuration met en evidence plusieurs bonnes pratiques : la limitation de debit differenciee selon le service (le catalogue public tolere un debit plus eleve), la mise en cache des reponses du catalogue pour reduire la charge en aval, et le controle d'acces par groupes pour le service clients. Le plugin `correlation-id` genere un identifiant de correlation pour chaque requete, facilitant la tracabilite de bout en bout dans les journaux distribues.
+
 #### Exemple d'Usage
 
 Une entreprise de commerce électronique expose son catalogue, son système de commandes et son service client via une API Gateway unique. Les applications mobiles et le site web n'ont qu'un seul point d'entrée à configurer. L'authentification par jeton JWT est vérifiée une seule fois à la passerelle, puis les requêtes sont routées vers les microservices appropriés avec un en-tête interne identifiant l'utilisateur. La limitation de débit protège le système lors des pics de trafic comme le Vendredi fou, tandis que les tableaux de bord centralisés permettent de surveiller la santé de l'ensemble de l'écosystème.

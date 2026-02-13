@@ -19,14 +19,14 @@
 | T1.5 | Mettre à jour CLAUDE.md | lead | ✅ Terminé | Convention unifiée, doublons supprimés, stats actualisées |
 | T2.1 | Rééquilibrer Volume I | writer-agentique | ✅ Terminé | 3-6-3-8-8 → 6-5-6-6-5, 13 fichiers déplacés |
 | T2.2 | Références croisées inter-sections | indexer | ✅ Terminé | 99 références croisées dans 42 fichiers (16 thèmes) |
-| T2.3 | INDEX.md + Glossaire fédéré | indexer | ⏳ En cours | Débloqué par T2.2 |
+| T2.3 | INDEX.md + Glossaire fédéré | indexer | ✅ Terminé | 52 termes de glossaire + navigation complète |
 | T2.4 | Régénérer Consolidés Section 3 | writer-agentique | ✅ Terminé | 5 consolidés régénérés (~4.5 Mo total) |
 | T3.1 | Diagrammes Mermaid Section 1 | writer-cursus | ✅ Terminé | 7 diagrammes dans 7 chapitres |
 | T3.2 | Diagrammes Mermaid Section 2 | writer-interop | ✅ Terminé | 5 diagrammes dans 5 chapitres |
 | T3.3 | Diagrammes Mermaid Section 3 | writer-agentique | ✅ Terminé | 10 diagrammes dans 8 chapitres |
-| T3.4 | Code pratique Sections 2 et 3 | writer-interop + writer-agentique | ⏳ En cours | Débloqué par T3.2, T3.3 |
-| T3.5 | Lacunes thématiques Interopérabilité | writer-interop | ⏳ En cours | Débloqué par T3.2 |
-| T3.6 | Streaming Lakehouse Kafka→Iceberg | writer-agentique | ⏳ En cours | Débloqué par T3.3 |
+| T3.4 | Code pratique Sections 2 et 3 | writer-interop + writer-agentique | ✅ Terminé | 10 blocs de code dans 10 fichiers (YAML, Python, Java) |
+| T3.5 | Lacunes thématiques Interopérabilité | writer-interop | ✅ Terminé | 5 sections dans 4 chapitres (TCO, maturité, MDM, sécurité, échecs) |
+| T3.6 | Streaming Lakehouse Kafka→Iceberg | writer-agentique | ✅ Terminé | 4 sections + diagramme Mermaid dans Ch.IV.12 |
 
 ---
 

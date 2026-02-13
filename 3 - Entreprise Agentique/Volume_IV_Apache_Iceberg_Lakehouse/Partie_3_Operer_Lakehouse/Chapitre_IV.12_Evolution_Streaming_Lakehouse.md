@@ -1750,6 +1750,106 @@ VALUES (source.metric_date, source.user_id, source.late_event_count, source.late
 
 Cette approche hybride combine la faible latence du streaming pour la majorité des données avec la complétude du batch pour les données tardives, offrant le meilleur des deux mondes.
 
+### Architecture de référence du Streaming Lakehouse
+
+L'architecture de référence du Streaming Lakehouse repose sur un pipeline de bout en bout qui unifie l'ingestion événementielle, la transformation en vol et la persistance analytique dans un cadre cohérent. Cette architecture élimine la dichotomie traditionnelle entre les systèmes temps réel et les entrepôts analytiques en établissant un flux continu depuis les sources opérationnelles jusqu'aux couches de requêtage.
+
+Le pipeline canonique s'articule autour de cinq étapes fondamentales. Les **sources de données** — bases transactionnelles, capteurs IoT, événements applicatifs, interactions utilisateur — émettent des événements capturés via Change Data Capture (Debezium), SDK producteur Kafka ou connecteurs natifs. Ces événements transitent par **Apache Kafka**, qui assure le découplage temporel, la durabilité et la distribution ordonnée des flux. La **couche de transformation**, implémentée via Kafka Connect, Apache Flink ou Confluent Tableflow, applique les enrichissements, validations et restructurations nécessaires avant l'écriture. Les données transformées sont matérialisées en **tables Apache Iceberg**, qui garantissent les propriétés ACID, le time travel et l'évolution de schéma sur un stockage objet (S3, GCS, ADLS). Enfin, les **moteurs de requêtes** — Trino, Spark SQL, Dremio, Snowflake — exploitent le catalogue Iceberg pour servir les analyses ad hoc, les tableaux de bord opérationnels et les pipelines d'apprentissage automatique.
+
+Cette architecture unifiée procure des avantages structurels majeurs. Elle élimine la duplication de données et de logique inhérente à l'architecture Lambda. Elle offre une **latence configurable** allant du quasi-temps réel (secondes) au micro-batch (minutes), selon les exigences métier. Elle garantit une **cohérence sémantique** de bout en bout grâce au Schema Registry et aux contrats de données. Enfin, elle permet une **gouvernance centralisée** des données en mouvement et au repos au sein d'un catalogue unifié.
+
+```mermaid
+flowchart LR
+    subgraph Sources["Sources de données"]
+        DB[(Bases transactionnelles)]
+        IoT[Capteurs IoT]
+        Apps[Événements applicatifs]
+        CDC[Change Data Capture]
+    end
+
+    subgraph Kafka["Apache Kafka"]
+        Topics[Topics Kafka]
+        SR[Schema Registry]
+    end
+
+    subgraph Transformation["Couche de transformation"]
+        KC[Kafka Connect\nIceberg Sink]
+        Flink[Apache Flink]
+        TF[Confluent\nTableflow]
+    end
+
+    subgraph Lakehouse["Lakehouse Iceberg"]
+        Bronze[Couche Bronze\nDonnées brutes]
+        Silver[Couche Silver\nDonnées nettoyées]
+        Gold[Couche Gold\nAgrégations métier]
+    end
+
+    subgraph Requetes["Moteurs de requêtes"]
+        Trino[Trino / Presto]
+        SparkSQL[Spark SQL]
+        Dremio[Dremio]
+        Snow[Snowflake]
+    end
+
+    DB --> CDC --> Topics
+    IoT --> Topics
+    Apps --> Topics
+    Topics --> SR
+    Topics --> KC --> Bronze
+    Topics --> Flink --> Silver
+    Topics --> TF --> Bronze
+    Bronze --> Silver --> Gold
+    Gold --> Trino
+    Gold --> SparkSQL
+    Gold --> Dremio
+    Gold --> Snow
+    Silver --> Trino
+    Silver --> SparkSQL
+```
+
+### Patrons de connecteurs Kafka-Iceberg
+
+La matérialisation des flux Kafka en tables Iceberg peut s'effectuer selon plusieurs patrons architecturaux, chacun répondant à des exigences distinctes en termes de complexité opérationnelle, de flexibilité de transformation et de garanties de latence. Le choix du patron approprié conditionne la capacité de l'organisation à évoluer et à maintenir son pipeline de données.
+
+Le **Kafka Connect Iceberg Sink Connector** constitue l'approche la plus éprouvée pour les scénarios d'ingestion directe. Fonctionnant au sein de l'écosystème Kafka Connect, il bénéficie de la gestion native des offsets, de la scalabilité horizontale via les tâches distribuées et de l'intégration transparente avec le Schema Registry. Ce patron convient aux organisations disposant d'une infrastructure Connect existante et dont les besoins de transformation se limitent aux Single Message Transforms (SMT).
+
+**Apache Flink avec sink Iceberg** offre le plus haut degré de flexibilité grâce à ses capacités de traitement stateful, de fenêtrage temporel et de jointures entre flux. Le Dynamic Iceberg Sink, introduit récemment, permet le routage dynamique vers plusieurs tables et l'évolution automatique des schémas. Ce patron est privilégié lorsque les données nécessitent des transformations complexes, des agrégations en temps réel ou un enrichissement par référence croisée avant la persistance.
+
+**Spark Structured Streaming vers Iceberg** s'adresse aux organisations dont l'écosystème analytique repose déjà sur Apache Spark. Ce patron exploite le moteur de micro-batch de Spark pour écrire incrémentalement vers des tables Iceberg, avec le support natif des opérations MERGE pour la gestion des upserts. Il convient particulièrement aux pipelines qui combinent ingestion streaming et retraitement batch au sein du même framework.
+
+**Confluent Tableflow** représente l'approche Zero-ETL, où la matérialisation est entièrement gérée par la plateforme sans code ni configuration de pipeline. Ce patron minimise la charge opérationnelle mais limite les possibilités de transformation pré-écriture.
+
+| Critère | Kafka Connect Sink | Apache Flink | Spark Structured Streaming | Tableflow |
+|---------|-------------------|--------------|---------------------------|-----------|
+| **Complexité de déploiement** | Moyenne | Élevée | Moyenne | Minimale |
+| **Flexibilité de transformation** | Limitée (SMT) | Maximale | Élevée | Aucune |
+| **Latence typique** | 1-5 minutes | Secondes à minutes | 1-10 minutes | 1-5 minutes |
+| **Garantie exactly-once** | Oui (avec config) | Oui (checkpoint) | Oui (WAL + commit) | Oui (natif) |
+| **Évolution de schéma** | Via Schema Registry | Dynamique | Via Spark schema merge | Automatique |
+| **Gestion des offsets** | Native (Connect) | Checkpoint Flink | Checkpoint Spark | Gérée par plateforme |
+| **Scalabilité** | Horizontale (tâches) | Horizontale (slots) | Horizontale (executors) | Élastique (cloud) |
+| **Cas d'usage privilégié** | Ingestion directe | Transformation complexe | Écosystème Spark existant | Matérialisation simple |
+
+### Gestion des schémas entre Kafka et Iceberg
+
+La cohérence des schémas entre Apache Kafka et Apache Iceberg constitue un enjeu architectural critique dans le Streaming Lakehouse. Ces deux systèmes maintiennent des représentations distinctes de la structure des données — le Schema Registry pour Kafka, les métadonnées de table pour Iceberg — et leur synchronisation détermine la fiabilité de l'ensemble du pipeline.
+
+Le **Schema Registry de Confluent** agit comme autorité centrale pour les contrats de données côté streaming. Chaque topic Kafka est associé à un schéma versionné (Avro, Protobuf ou JSON Schema) qui régit la sérialisation et la validation des messages. Côté Lakehouse, **Apache Iceberg** maintient son propre mécanisme d'évolution de schéma, permettant l'ajout, la suppression, le renommage et la réorganisation des colonnes sans réécriture des données existantes. La passerelle entre ces deux mondes repose sur la conversion automatique des types : les schémas Avro ou Protobuf sont traduits en types Iceberg lors de l'écriture, avec une correspondance déterministe (par exemple, `bytes` avec `logicalType: decimal` en Avro devient `DECIMAL(p, s)` en Iceberg).
+
+La **sérialisation Avro ou Protobuf** des messages Kafka est convertie en format **Parquet** lors de la matérialisation en tables Iceberg. Cette conversion préserve la richesse typologique — types logiques, unions, types imbriqués — tout en bénéficiant de la compression colonnaire et du pushdown de prédicats propres à Parquet. Les connecteurs (Kafka Connect Sink, Flink, Tableflow) gèrent cette conversion de manière transparente, mais les cas limites (unions complexes Avro, types `oneof` Protobuf) nécessitent une attention particulière lors de la conception des schémas.
+
+La **gestion de la compatibilité** exige une stratégie coordonnée. Le mode `FULL_TRANSITIVE` du Schema Registry garantit que chaque version de schéma est compatible en lecture et en écriture avec toutes les versions précédentes. Côté Iceberg, les opérations d'évolution — `ADD COLUMN`, `DROP COLUMN`, `RENAME COLUMN` — doivent être alignées avec les règles de compatibilité du Registry. Une pratique recommandée consiste à configurer un webhook ou un processus de synchronisation qui propage automatiquement les évolutions de schéma du Registry vers le catalogue Iceberg, assurant ainsi une cohérence bidirectionnelle permanente.
+
+### Cas d'usage en contexte d'entreprise agentique
+
+Dans le cadre d'une entreprise agentique — où des agents autonomes collaborent pour exécuter des processus métier complexes — le Streaming Lakehouse devient l'infrastructure fondamentale de traçabilité, d'observabilité et d'intelligence analytique. Trois cas d'usage illustrent cette convergence.
+
+**L'ingestion de télémétrie d'agents via Kafka vers Iceberg** constitue le premier pilier. Chaque agent autonome — qu'il s'agisse d'un agent conversationnel, d'un orchestrateur de workflow ou d'un agent décisionnel — émet un flux continu d'événements de télémétrie : invocations de modèles, temps de réponse, tokens consommés, décisions prises, outils appelés. Ces événements sont publiés sur des topics Kafka dédiés (`agents.telemetry.*`), puis matérialisés en tables Iceberg partitionnées par agent, par jour et par type d'événement. Cette architecture permet une analyse rétrospective à granularité fine du comportement de chaque agent, essentielle pour l'optimisation des prompts, la détection de dérives et le capacity planning.
+
+**La piste d'audit décisionnelle en temps réel** répond aux exigences de gouvernance et de conformité réglementaire. Chaque décision prise par un agent — approbation d'un crédit, recommandation d'un produit, escalade vers un humain — est enregistrée dans un flux Kafka immuable avec l'intégralité du contexte décisionnel (entrées, raisonnement, sorties, niveau de confiance). La matérialisation en tables Iceberg avec time travel garantit une auditabilité complète : les régulateurs peuvent reconstituer l'état exact des données et du raisonnement au moment de toute décision passée, conformément aux exigences de la Loi 25 au Québec et de la directive européenne sur l'IA.
+
+**L'analytique comportementale Lakehouse** exploite l'historique accumulé dans les tables Iceberg pour identifier des patrons émergents dans le comportement collectif des agents. Les requêtes analytiques sur les couches Silver et Gold du Lakehouse permettent de détecter des anomalies (un agent qui dévie de sa politique), d'optimiser les stratégies de collaboration inter-agents, et de mesurer l'impact métier des décisions autonomes. Le time travel d'Iceberg facilite les analyses comparatives entre différentes versions de politiques d'agents, transformant le Lakehouse en laboratoire d'expérimentation continue.
+
 ---
 
 ## IV.12.3 Résumé

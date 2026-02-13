@@ -250,6 +250,66 @@ Série en 5 volumes sur l'architecture d'entreprise agentique, de la vision stra
 
 ---
 
+## Glossaire Fédéré
+
+Glossaire transversal des termes clés employés dans l'ensemble du corpus. Chaque entrée renvoie aux chapitres où le concept est traité de manière substantielle.
+
+| Terme | Définition | Chapitres |
+|-------|-----------|-----------|
+| **Agent** | Entité logicielle autonome capable de percevoir son environnement, de raisonner et d'agir en vue d'atteindre des objectifs définis, souvent dans le cadre d'un système multi-agents. | I.13, I.14, I.16, II.12 |
+| **AgentOps** | Discipline d'industrialisation et de sécurisation du cycle de vie des agents intelligents, couvrant le déploiement, le monitoring et la gouvernance opérationnelle. | I.18, II.10, II.11 |
+| **AGI (Intelligence Artificielle Générale)** | Forme hypothétique d'intelligence artificielle dotée de capacités cognitives comparables à celles de l'être humain dans l'ensemble des domaines intellectuels. | 1.56, I.27, 1.62–1.65 |
+| **API (Interface de Programmation)** | Contrat technique définissant les modalités d'interaction entre composants logiciels, servant de vecteur principal d'interopérabilité applicative. | I.5, 2.3, 2.6, III.7 |
+| **API Gateway** | Composant d'infrastructure qui centralise le routage, la sécurisation et la gestion du trafic des appels API au sein d'une architecture distribuée. | I.5, 2.3, 2.9 |
+| **Apache Iceberg** | Format de table ouvert conçu pour les lacs de données analytiques, offrant des transactions ACID, le voyage temporel et une évolution de schéma transparente. | IV.1–IV.16, IV.A, IV.B |
+| **Apache Kafka** | Plateforme distribuée de streaming d'événements permettant la publication, la souscription, le stockage et le traitement de flux de données en temps réel. | II.2, II.3, II.5, III.1–III.12 |
+| **Architecture cognitive** | Paradigme architectural intégrant des capacités d'intelligence artificielle au coeur même de l'infrastructure d'entreprise pour permettre l'adaptation autonome. | I.10–I.12, 1.61–1.79, II.8 |
+| **Architecture événementielle (EDA)** | Style architectural dans lequel la communication entre composants s'effectue par la production, la détection et la consommation d'événements. | I.6, 2.5, II.2, III.1, III.5 |
+| **Architecture réactive** | Approche de conception de systèmes fondée sur les principes de réactivité, de résilience, d'élasticité et de communication par messages (Manifeste Réactif). | I.4, I.6, 2.7 |
+| **Avro** | Format de sérialisation binaire orienté lignes, largement utilisé dans l'écosystème Kafka pour l'encodage compact des messages avec évolution de schéma. | II.4, III.6, IV.6 |
+| **Bus d'événements** | Infrastructure de messagerie assurant le découplage entre producteurs et consommateurs d'événements au sein d'une architecture distribuée. | 2.5, I.6, II.2, II.8 |
+| **Circuit breaker** | Patron de résilience qui interrompt temporairement les appels vers un service défaillant afin de prévenir les défaillances en cascade. | 2.7, I.4, I.9 |
+| **Cloud natif** | Approche de conception et d'exploitation d'applications tirant pleinement parti des modèles de livraison du cloud (conteneurs, microservices, orchestration). | 1.36, II.1, II.14, III.9 |
+| **Confluent** | Plateforme commerciale construite autour d'Apache Kafka, offrant des services managés, un registre de schémas et des connecteurs d'entreprise. | II.2, II.4, II.5, III.1, III.9 |
+| **Constitution agentique** | Cadre de gouvernance formalisé définissant les règles, les contraintes éthiques et les limites d'autonomie régissant le comportement des agents intelligents. | I.17, I.26, II.15 |
+| **Contrat de données** | Accord formel spécifiant la structure, la sémantique, les niveaux de qualité et les conditions d'utilisation des données échangées entre systèmes. | I.7, 2.6, II.4, III.6 |
+| **CQRS (Command Query Responsibility Segregation)** | Patron architectural séparant les modèles de lecture et d'écriture afin d'optimiser indépendamment chaque voie d'accès aux données. | I.6, III.5, III.7 |
+| **Data Lakehouse** | Architecture hybride combinant la flexibilité du lac de données et les garanties transactionnelles de l'entrepôt de données, notamment via Apache Iceberg. | IV.1–IV.3, IV.12, IV.16 |
+| **DevOps** | Culture et ensemble de pratiques unifiant le développement logiciel et les opérations informatiques pour accélérer la livraison fiable de valeur. | 1.29, II.10, II.1 |
+| **Entreprise agentique** | Vision organisationnelle dans laquelle des agents intelligents collaborent avec les humains pour orchestrer les processus métier de manière autonome et adaptative. | 2.11, I.13–I.20, I.21, I.27 |
+| **Event Sourcing** | Patron de persistance où l'état d'une entité est reconstitué à partir de la séquence ordonnée de tous les événements qui l'ont modifié. | I.6, III.5, III.7, 2.5 |
+| **Flink (Apache Flink)** | Moteur de traitement de flux distribué offrant un traitement en temps réel avec garanties exactly-once et gestion avancée du temps événementiel. | II.5, III.8, IV.12 |
+| **Gouvernance** | Ensemble des structures, politiques et processus assurant la direction, le contrôle et la conformité des systèmes d'information et des agents. | I.17, II.4, II.15, IV.13 |
+| **GraphQL** | Langage de requête pour API permettant au client de spécifier précisément les données souhaitées, réduisant ainsi le sur-chargement et le sous-chargement réseau. | I.5, 2.3, 2.6 |
+| **gRPC** | Cadriciel d'appel de procédure à distance haute performance utilisant HTTP/2 et Protocol Buffers pour la communication inter-services. | I.5, 2.3, 2.6 |
+| **Ingestion** | Processus d'acquisition et de chargement de données provenant de sources hétérogènes vers un système de stockage ou de traitement centralisé. | IV.6, II.3, II.5, III.5 |
+| **Intention (architecture d'intentions)** | Paradigme dans lequel les systèmes sont pilotés par l'expression d'objectifs métier de haut niveau plutôt que par des instructions impératives détaillées. | I.19, I.20, I.28 |
+| **Interopérabilité** | Capacité de systèmes hétérogènes à échanger des informations et à en exploiter mutuellement les fonctionnalités de manière cohérente. | 2.1–2.11, I.1–I.3, I.10–I.12 |
+| **Kafka Connect** | Cadriciel de l'écosystème Kafka dédié à l'intégration de données par connecteurs source et puits, permettant le streaming entre Kafka et des systèmes externes. | II.3, III.5, III.9, IV.6 |
+| **Kafka Streams** | Bibliothèque Java de traitement de flux intégrée à Apache Kafka, permettant de construire des applications de streaming sans infrastructure supplémentaire. | II.5, III.8, III.7 |
+| **KRaft** | Mode de consensus natif de Kafka remplaçant la dépendance à ZooKeeper, fondé sur le protocole Raft pour la gestion des métadonnées du cluster. | III.2, III.11, III.12 |
+| **Kubernetes** | Système d'orchestration de conteneurs automatisant le déploiement, la mise à l'échelle et la gestion d'applications conteneurisées. | 1.36, II.1, II.10, II.14 |
+| **Maillage agentique** | Topologie d'interconnexion dans laquelle les agents intelligents communiquent de pair à pair pour collaborer, négocier et coordonner leurs actions. | I.14, I.15, I.16, II.9 |
+| **Master Data Management (MDM)** | Discipline visant à créer et maintenir une source de référence unique et fiable pour les données maîtresses de l'organisation. | 2.4, I.7, IV.7, IV.13 |
+| **Microservices** | Style architectural décomposant une application en services autonomes, faiblement couplés, déployables et évolutifs indépendamment. | 1.27, 2.3, I.4, I.5, III.7 |
+| **Observabilité** | Capacité à inférer l'état interne d'un système à partir de ses sorties externes (métriques, traces, journaux), essentielle à l'exploitation des architectures distribuées. | I.8, 2.7, II.11, III.9 |
+| **Order-to-Cash (O2C)** | Processus métier de bout en bout couvrant le cycle complet depuis la commande client jusqu'à l'encaissement, utilisé comme étude de cas d'intégration. | 2.10, I.9, III.5 |
+| **Parquet (Apache Parquet)** | Format de stockage en colonnes optimisé pour l'analytique, offrant une compression efficace et une lecture sélective des colonnes. | IV.2, IV.5, IV.6 |
+| **Pipeline CI/CD** | Chaîne d'automatisation de l'intégration continue et du déploiement continu, orchestrant les étapes de construction, test et livraison du logiciel. | 1.29, II.10, II.1 |
+| **Protobuf (Protocol Buffers)** | Format de sérialisation binaire développé par Google, offrant un encodage compact, un typage strict et une génération de code multilangage. | II.4, III.6, 2.6 |
+| **RAG (Retrieval-Augmented Generation)** | Technique combinant la recherche d'information dans une base de connaissances et la génération par un grand modèle de langage pour produire des réponses contextualisées. | II.7, II.8, I.11 |
+| **Résilience** | Aptitude d'un système à maintenir un niveau de service acceptable face aux défaillances, surcharges et perturbations imprévues. | 2.7, I.4, I.9, II.14, III.9 |
+| **REST (Representational State Transfer)** | Style architectural fondé sur les principes du web (ressources, représentations, verbes HTTP) pour la conception d'API interopérables. | I.5, 2.3, 2.6 |
+| **Saga** | Patron de gestion de transactions distribuées décomposant une opération longue en étapes compensables, assurant la cohérence éventuelle entre services. | I.6, 2.5, III.7 |
+| **Schema Registry** | Service centralisé de gestion des schémas de données (Avro, Protobuf, JSON Schema) assurant la compatibilité et l'évolution contrôlée des contrats. | II.4, III.6, III.2 |
+| **SDD (Spec-Driven Development)** | Méthodologie de développement dans laquelle la spécification formelle précède et guide l'implémentation, favorisant la rigueur et la communication. | V.4, V.10 |
+| **Streaming (traitement en flux)** | Paradigme de traitement des données en continu, au fil de leur arrivée, par opposition au traitement par lots (batch). | II.5, III.8, IV.12, III.1 |
+| **TCO (Total Cost of Ownership)** | Coût total de possession d'un système, incluant acquisition, exploitation, maintenance et décommissionnement sur l'ensemble de son cycle de vie. | IV.4, III.9, I.22 |
+| **Vertex AI** | Plateforme d'intelligence artificielle managée de Google Cloud intégrant l'entraînement, le déploiement et le monitoring de modèles de ML et d'agents. | II.6, II.7, II.8, II.9 |
+| **Webhook** | Mécanisme de rappel HTTP par lequel un système notifie un autre de la survenue d'un événement, permettant une intégration légère et événementielle. | I.5, 2.3, 2.5 |
+
+---
+
 ## Références Croisées Clés
 
 | Concept | Chapitres concernés |

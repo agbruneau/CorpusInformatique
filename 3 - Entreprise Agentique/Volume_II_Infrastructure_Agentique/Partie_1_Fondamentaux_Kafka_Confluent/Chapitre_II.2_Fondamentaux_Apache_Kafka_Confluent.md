@@ -129,8 +129,125 @@ Avec `acks=1`, le producteur attend la confirmation du leader uniquement. Si le 
 
 Avec `acks=all` (ou `-1`), le producteur attend que tous les répliques in-sync aient confirmé la réception. Cette configuration, combinée avec un facteur de réplication suffisant et un `min.insync.replicas` approprié, offre les garanties de durabilité les plus fortes.
 
-> **Bonnes pratiques**  
+> **Bonnes pratiques**
 > Pour les systèmes agentiques où la perte de messages peut compromettre la cohérence du raisonnement des agents, configurez les producteurs avec `acks=all`, `enable.idempotence=true`, et `min.insync.replicas=2` sur les topics. Cette combinaison assure une livraison exactement-une-fois côté producteur tout en tolérant la perte d'un broker.
+
+#### Configuration Producteur Python pour Agents Cognitifs
+
+L'exemple suivant presente une configuration complete d'un producteur Kafka en Python (bibliotheque `confluent-kafka`), optimisee pour les agents cognitifs. Cette configuration integre le Schema Registry pour la serialisation Avro, l'idempotence pour la fiabilite, et l'observabilite via des callbacks de livraison.
+
+```python
+# Configuration producteur Kafka pour agents cognitifs
+# Bibliothèque : confluent-kafka-python avec support Avro / Schema Registry
+
+from confluent_kafka import Producer
+from confluent_kafka.serialization import SerializationContext, MessageField
+from confluent_kafka.schema_registry import SchemaRegistryClient
+from confluent_kafka.schema_registry.avro import AvroSerializer
+import json
+import uuid
+from datetime import datetime, timezone
+
+# --- Configuration du Schema Registry ---
+schema_registry_conf = {
+    'url': 'https://schema-registry.exemple.ca:8081',
+    'basic.auth.user.info': '${SR_API_KEY}:${SR_API_SECRET}'
+}
+schema_registry_client = SchemaRegistryClient(schema_registry_conf)
+
+# --- Schéma Avro pour les événements d'action d'agent ---
+schema_action_agent = """
+{
+  "type": "record",
+  "name": "ActionAgent",
+  "namespace": "ca.exemple.agents.evenements",
+  "fields": [
+    {"name": "evenement_id", "type": "string"},
+    {"name": "agent_id", "type": "string"},
+    {"name": "type_action", "type": {"type": "enum", "name": "TypeAction",
+        "symbols": ["DECISION", "OUTIL_APPELE", "REPONSE_GENEREE", "ESCALADE"]}},
+    {"name": "horodatage", "type": {"type": "long", "logicalType": "timestamp-millis"}},
+    {"name": "session_id", "type": "string"},
+    {"name": "confiance", "type": ["null", "double"], "default": null},
+    {"name": "payload", "type": "string"},
+    {"name": "duree_ms", "type": "long"},
+    {"name": "modele_llm", "type": "string"},
+    {"name": "version_agent", "type": "string"}
+  ]
+}
+"""
+
+avro_serializer = AvroSerializer(
+    schema_registry_client, schema_action_agent,
+    conf={'auto.register.schemas': True, 'subject.name.strategy': 'topic_name'}
+)
+
+# --- Configuration du producteur Kafka ---
+producer_config = {
+    # Connexion au cluster
+    'bootstrap.servers': 'kafka-broker-1:9092,kafka-broker-2:9092,kafka-broker-3:9092',
+
+    # Fiabilité : garantie exactly-once côté producteur
+    'acks': 'all',
+    'enable.idempotence': True,
+    'max.in.flight.requests.per.connection': 5,
+    'retries': 2147483647,
+
+    # Performance : optimisation du batching
+    'linger.ms': 20,
+    'batch.size': 65536,
+    'compression.type': 'zstd',
+    'buffer.memory': 67108864,
+
+    # Sécurité : SASL/SCRAM avec TLS
+    'security.protocol': 'SASL_SSL',
+    'sasl.mechanism': 'SCRAM-SHA-256',
+    'sasl.username': '${KAFKA_API_KEY}',
+    'sasl.password': '${KAFKA_API_SECRET}',
+
+    # Identification
+    'client.id': 'agent-service-client-prod',
+    'transactional.id': 'agent-service-client-tx-001'
+}
+
+producer = Producer(producer_config)
+
+# --- Fonction de publication d'événement d'agent ---
+def publier_action_agent(agent_id: str, type_action: str, payload: dict,
+                         session_id: str, confiance: float = None,
+                         duree_ms: int = 0):
+    """Publie un événement d'action d'agent sur le topic dédié."""
+    evenement = {
+        'evenement_id': str(uuid.uuid4()),
+        'agent_id': agent_id,
+        'type_action': type_action,
+        'horodatage': int(datetime.now(timezone.utc).timestamp() * 1000),
+        'session_id': session_id,
+        'confiance': confiance,
+        'payload': json.dumps(payload, ensure_ascii=False),
+        'duree_ms': duree_ms,
+        'modele_llm': 'claude-sonnet-4-5-20250929',
+        'version_agent': '2.3.1'
+    }
+
+    topic = 'agents.actions.v1'
+    producer.produce(
+        topic=topic,
+        key=session_id,
+        value=avro_serializer(evenement, SerializationContext(topic, MessageField.VALUE)),
+        on_delivery=callback_livraison
+    )
+    producer.poll(0)
+
+def callback_livraison(err, msg):
+    """Callback de confirmation de livraison pour observabilité."""
+    if err is not None:
+        print(f"ERREUR livraison : {err}")
+    else:
+        print(f"Livré : topic={msg.topic()} partition={msg.partition()} offset={msg.offset()}")
+```
+
+Cette configuration met en oeuvre plusieurs principes essentiels pour les systemes agentiques : l'idempotence du producteur (`enable.idempotence=True`) garantit l'absence de duplication meme en cas de retransmission reseau ; la compression `zstd` optimise la bande passante pour les payloads JSON potentiellement volumineux ; le `transactional.id` prepare le producteur pour les transactions Kafka si le traitement exactly-once de bout en bout est requis. La cle de partition sur `session_id` assure que tous les evenements d'une meme session d'agent arrivent dans l'ordre sur la meme partition.
 
 ### Idempotence du Producteur
 

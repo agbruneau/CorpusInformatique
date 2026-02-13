@@ -562,6 +562,47 @@ Quelle maturité organisationnelle ? Le Data Mesh requiert des équipes autonome
 > **Règle d'or**
 > Commencer simple. Un CDC bien opéré couvre une majorité des besoins de propagation de données. Ajouter de la complexité (CQRS, Data Mesh) uniquement lorsque les limites de l'approche simple sont atteintes et documentées.
 
+### Master Data Management (MDM)
+
+La gestion des données de référence (*Master Data Management* — MDM) constitue une discipline complémentaire aux patrons d'intégration présentés dans ce chapitre. Là où le CDC, le CQRS et le Data Mesh adressent la propagation et la gouvernance des données transactionnelles, le MDM se concentre sur les entités fondamentales qui structurent l'ensemble du système d'information : clients, produits, fournisseurs, employés, localisations. La qualité et la cohérence de ces données de référence conditionnent directement la fiabilité de toutes les intégrations qui s'y appuient.
+
+Le concept central du MDM est le **golden record** — l'enregistrement de référence faisant autorité pour une entité donnée. Dans un écosystème où un même client peut exister dans le CRM, l'ERP, le système de facturation et la plateforme de commerce électronique, chacun avec des attributs légèrement différents (variations orthographiques du nom, adresses périmées, doublons), le golden record représente la version consolidée, vérifiée et faisant autorité. Sa construction exige des algorithmes de rapprochement (*matching*), de fusion (*merging*) et de survivance (*survivorship rules*) qui déterminent, pour chaque attribut, quelle source prévaut en cas de conflit.
+
+La **gouvernance des données** (*data stewardship*) attribue des responsables désignés pour chaque domaine de données de référence. Le *data steward* est le garant de la qualité, de la complétude et de l'exactitude des golden records dans son périmètre. Il arbitre les conflits de données, valide les règles de rapprochement et supervise les processus de nettoyage. Dans une organisation de grande taille, la mise en place d'un réseau de data stewards par domaine métier constitue un facteur critique de succès du MDM.
+
+Trois **patrons de synchronisation** coexistent dans la pratique du MDM, chacun adapté à un contexte organisationnel et technique spécifique :
+
+- Le modèle **hub-and-spoke** centralise les données de référence dans un hub MDM qui fait autorité. Les systèmes périphériques publient leurs modifications vers le hub, qui les consolide, applique les règles de qualité et redistribue le golden record vers tous les consommateurs. Ce modèle offre le contrôle maximal mais crée un point central de dépendance et de latence.
+
+- Le modèle **pair-à-pair** (*peer-to-peer*) permet aux systèmes de synchroniser directement leurs données de référence entre eux, sans hub central. Chaque système maintient sa propre version et la propage aux systèmes partenaires. Ce modèle minimise la latence mais complexifie considérablement la résolution des conflits et la garantie de cohérence globale.
+
+- Le modèle **registre** (*registry*) ne centralise pas les données elles-mêmes mais maintient un index de référence indiquant, pour chaque entité, quel système détient la version faisant autorité. Les consommateurs interrogent le registre pour localiser la source de vérité, puis accèdent directement au système source. Ce modèle préserve l'autonomie des systèmes tout en fournissant un point de découverte centralisé.
+
+```
+PATRONS DE SYNCHRONISATION MDM
+
+Hub-and-Spoke :                  Peer-to-Peer :              Registre :
+
+    ┌───┐                        ┌───┐◄──►┌───┐              ┌───┐
+    │ A │──┐                     │ A │    │ B │              │ A │──┐
+    └───┘  │  ┌─────┐            └───┘    └───┘              └───┘  │  ┌──────────┐
+           ├──│ Hub │                ▲      ▲                       ├──│ Registre │
+    ┌───┐  │  │ MDM │            ┌──┘      └──┐              ┌───┐  │  │ (index)  │
+    │ B │──┤  └─────┘            │            │              │ B │──┤  └──────────┘
+    └───┘  │     │               ┌───┐        │              └───┘  │
+    ┌───┐  │     │               │ C │◄───────┘              ┌───┐  │
+    │ C │──┘     ▼               └───┘                       │ C │──┘
+    └───┘   Distribution                                     └───┘
+```
+
+Les **défis en environnement distribué** sont substantiels. Dans une architecture de microservices où chaque service possède sa propre base de données, la notion même de données de référence centralisées entre en tension avec le principe d'autonomie des services. Le Data Mesh (section 4.2.4) propose une réponse partielle en attribuant la propriété des données de référence au domaine métier concerné (le domaine « Clients » possède le golden record client), mais la consommation de ces données par les autres domaines exige des mécanismes de propagation fiables — typiquement le CDC ou l'Event-Carried State Transfer.
+
+La cohérence éventuelle, acceptable pour les données transactionnelles, pose des difficultés particulières pour les données de référence. Un client renommé dans le CRM mais pas encore propagé au système de facturation peut recevoir une facture avec son ancien nom, créant confusion et mécontentement. Le choix du patron de synchronisation doit donc tenir compte de la tolérance à l'incohérence temporaire pour chaque catégorie de données de référence.
+
+> **Quand utiliser ce patron**
+> *Contexte* : Présence d'entités métier partagées par de multiples systèmes avec des risques de divergence ; exigences réglementaires de qualité des données (KYC, conformité fiscale) ; projets de consolidation post-fusion ou de remplacement de systèmes patrimoniaux.
+> *Alternatives* : Pour les organisations de petite taille avec peu de systèmes, un System of Record désigné par domaine avec propagation CDC peut suffire sans infrastructure MDM dédiée.
+
 ---
 
 ## Conclusion et Transition

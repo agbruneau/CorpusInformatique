@@ -560,6 +560,75 @@ spark.sql("""
 """).show()
 ```
 
+#### Requetes Spark SQL avancees avec Time Travel
+
+Le voyage dans le temps ne se limite pas a la consultation d'un snapshot unique. Spark SQL permet des requetes comparatives entre versions, des audits de changements et des restaurations. Les exemples suivants illustrent les patrons de requete les plus utiles en contexte de production.
+
+```python
+# --- Requêtes avancées de Time Travel avec Spark SQL ---
+
+# 1. Requête par horodatage — consulter l'état à une date précise
+spark.sql("""
+    SELECT province, segment, COUNT(*) as nb_clients,
+           ROUND(SUM(valeur_vie), 2) as valeur_totale
+    FROM nessie.ecommerce.clients
+    TIMESTAMP AS OF '2024-06-01T00:00:00.000Z'
+    GROUP BY province, segment
+    ORDER BY valeur_totale DESC
+""").show()
+
+# 2. Comparaison entre deux versions — détecter les changements
+snapshot_avant = spark.sql("""
+    SELECT snapshot_id FROM nessie.ecommerce.clients.snapshots
+    ORDER BY committed_at ASC LIMIT 1
+""").collect()[0][0]
+
+snapshot_apres = spark.sql("""
+    SELECT snapshot_id FROM nessie.ecommerce.clients.snapshots
+    ORDER BY committed_at DESC LIMIT 1
+""").collect()[0][0]
+
+# Clients dont la valeur vie a changé entre les deux versions
+df_avant = spark.sql(f"""
+    SELECT client_id, prenom, nom, valeur_vie as valeur_avant
+    FROM nessie.ecommerce.clients VERSION AS OF {snapshot_avant}
+""")
+
+df_apres = spark.sql(f"""
+    SELECT client_id, valeur_vie as valeur_apres
+    FROM nessie.ecommerce.clients VERSION AS OF {snapshot_apres}
+""")
+
+df_avant.join(df_apres, "client_id") \
+    .withColumn("variation", col("valeur_apres") - col("valeur_avant")) \
+    .filter("variation != 0") \
+    .orderBy(col("variation").desc()) \
+    .show()
+
+# 3. Audit des changements de données (Iceberg changelog)
+spark.sql("""
+    SELECT operation, snapshot_id,
+           summary['added-records'] as ajouts,
+           summary['deleted-records'] as suppressions,
+           summary['changed-partition-count'] as partitions_modifiees,
+           committed_at
+    FROM nessie.ecommerce.clients.snapshots
+    ORDER BY committed_at DESC
+""").show(truncate=False)
+
+# 4. Restauration à un état antérieur (rollback)
+# ATTENTION : opération irréversible en production
+# spark.sql(f"""
+#     CALL nessie.system.rollback_to_snapshot(
+#         'ecommerce.clients', {snapshot_avant}
+#     )
+# """)
+
+print("Requêtes Time Travel exécutées avec succès")
+```
+
+Ces requetes illustrent la puissance du voyage dans le temps pour trois cas d'usage critiques : la reconstitution d'etat pour conformite reglementaire (Loi 25), l'analyse comparative pour detecter les impacts d'une transformation, et la possibilite de restauration en cas d'erreur operationnelle. En production, il est recommande de conserver suffisamment de snapshots (via la propriete `write.metadata.previous-versions-max`) pour couvrir la fenetre d'audit requise par les obligations reglementaires.
+
 ### Démonstration de l'évolution de schéma
 
 L'évolution de schéma (schema evolution) constitue une autre capacité distinctive d'Apache Iceberg. Ajoutons une nouvelle colonne à notre table sans perturber les données existantes :

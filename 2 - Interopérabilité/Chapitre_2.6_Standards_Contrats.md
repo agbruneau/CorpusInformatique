@@ -1037,6 +1037,107 @@ Les **tests de compatibilité** vérifient qu'une nouvelle version du contrat re
 > * Générer automatiquement les tests à partir des contrats (OpenAPI, AsyncAPI) pour garantir la couverture.
 > * Maintenir un environnement de test où les producteurs et consommateurs peuvent exercer leurs contrats avant la production.
 
+#### Exemple pratique : Contrat de données déclaratif
+
+Au-dela des contrats d'API (OpenAPI, AsyncAPI), le concept de *data contract* formalise les engagements entre producteurs et consommateurs de donnees au sein d'un ecosysteme analytique ou evenementiel. Le contrat suivant, exprime en YAML selon les conventions emergentes du mouvement *Data Contract* (datacontract.com), specifie le schema, les regles de qualite, les SLA et la semantique d'un produit de donnees.
+
+```yaml
+# Contrat de données — Produit de données « Commandes Confirmées »
+dataContractSpecification: 0.9.3
+id: urn:datacontract:domaine-commandes:commandes-confirmees
+info:
+  title: Commandes Confirmées
+  version: 1.2.0
+  status: active
+  description: |
+    Produit de données exposant les commandes confirmées et enrichies.
+    Alimenté par le service de commandes via CDC Debezium.
+    Consommé par les équipes analytique, facturation et BI.
+  owner: equipe-domaine-commandes
+  contact:
+    name: Responsable Données Commandes
+    email: donnees-commandes@exemple.ca
+
+servers:
+  production:
+    type: kafka
+    host: kafka-prod.interne.exemple.ca:9092
+    topic: domaine.commandes.confirmees.v1
+    format: avro
+    schemaRegistryUrl: https://schema-registry.exemple.ca
+
+models:
+  CommandeConfirmee:
+    description: Enregistrement d'une commande après confirmation du paiement
+    type: table
+    fields:
+      - name: commande_id
+        type: string
+        format: uuid
+        required: true
+        unique: true
+        primaryKey: true
+        description: Identifiant unique de la commande
+      - name: client_id
+        type: string
+        format: uuid
+        required: true
+        description: Identifiant du client (clé étrangère vers domaine client)
+      - name: montant_total
+        type: decimal
+        precision: 10
+        scale: 2
+        required: true
+        description: Montant total TTC en devise locale
+      - name: devise
+        type: string
+        enum: [CAD, USD, EUR]
+        required: true
+        description: Code devise ISO 4217
+      - name: date_confirmation
+        type: timestamp
+        required: true
+        description: Horodatage UTC de la confirmation
+      - name: nb_articles
+        type: integer
+        minimum: 1
+        required: true
+      - name: canal
+        type: string
+        enum: [web, mobile, api_partenaire, point_vente]
+        description: Canal d'acquisition de la commande
+
+quality:
+  type: SodaCL
+  specification:
+    checks for CommandeConfirmee:
+      - row_count > 0
+      - missing_count(commande_id) = 0
+      - missing_count(montant_total) = 0
+      - invalid_count(montant_total) = 0:
+          valid min: 0.01
+      - duplicate_count(commande_id) = 0
+      - freshness(date_confirmation) < 4h
+
+servicelevels:
+  availability:
+    description: Disponibilité du flux de données
+    percentage: 99.5%
+  latency:
+    description: Délai maximal entre confirmation et disponibilité
+    threshold: 60s
+    percentile: p99
+  retention:
+    description: Durée de rétention des événements sur le topic
+    period: 30d
+  support:
+    description: Fenêtre de support en cas d'incident
+    time: "Lun-Ven 8h-18h HE"
+    responseTime: 2h
+```
+
+Ce contrat explicite les engagements du producteur envers ses consommateurs sur trois dimensions complementaires : la structure des donnees (schema avec types, contraintes et descriptions), la qualite attendue (regles SodaCL verifiables automatiquement) et les niveaux de service operationnels (disponibilite, latence, retention). L'integration de ce contrat dans le pipeline CI/CD permet de detecter les violations avant la mise en production et de generer automatiquement la documentation consommateur.
+
 ### 6.4.4 Documentation Vivante
 
 Un contrat documenté mais obsolète est pire qu'un contrat non documenté : il induit en erreur. La documentation doit être générée depuis les contrats formels (OpenAPI, AsyncAPI, schémas Protobuf) pour garantir sa synchronisation avec l'implémentation.

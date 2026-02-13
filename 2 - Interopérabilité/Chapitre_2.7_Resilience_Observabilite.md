@@ -111,6 +111,81 @@ Un service de paiement invoque un service de vérification de fraude avant d'aut
 > *Contexte* : Appels vers des services distants susceptibles de défaillir ou de devenir lents ; protection contre les cascades de défaillances.
 > *Alternatives* : Pour des appels internes très rapides (microsecondes), le Circuit Breaker peut être excessif. Pour des dépendances asynchrones, les mécanismes de backpressure des files de messages sont plus appropriés.
 
+#### Configuration Resilience4j : Exemple Complet
+
+La bibliotheque Resilience4j, reference pour l'implementation de patrons de resilience dans l'ecosysteme Java et Spring Boot, permet une configuration declarative des disjoncteurs. L'exemple suivant illustre une configuration de production combinant Circuit Breaker, Retry et Rate Limiter pour proteger les appels vers differents services dependants.
+
+```yaml
+# Configuration Resilience4j — Résilience multi-services (application.yml Spring Boot)
+resilience4j:
+
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 30s
+        permittedNumberOfCallsInHalfOpenState: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        recordExceptions:
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+          - org.springframework.web.client.HttpServerErrorException
+        ignoreExceptions:
+          - org.springframework.web.client.HttpClientErrorException
+
+    instances:
+      service-fraude:
+        baseConfig: default
+        failureRateThreshold: 40
+        waitDurationInOpenState: 60s
+        slidingWindowSize: 30
+      service-inventaire:
+        baseConfig: default
+        slowCallRateThreshold: 80
+        slowCallDurationThreshold: 2s
+      service-notification:
+        baseConfig: default
+        failureRateThreshold: 70
+        waitDurationInOpenState: 15s
+
+  retry:
+    configs:
+      default:
+        maxAttempts: 3
+        waitDuration: 500ms
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2
+        enableRandomizedWait: true
+        randomizedWaitFactor: 0.5
+        retryExceptions:
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+        ignoreExceptions:
+          - org.springframework.web.client.HttpClientErrorException
+
+  ratelimiter:
+    instances:
+      service-fraude:
+        limitForPeriod: 50
+        limitRefreshPeriod: 1s
+        timeoutDuration: 3s
+
+  timelimiter:
+    instances:
+      service-fraude:
+        timeoutDuration: 5s
+        cancelRunningFuture: true
+      service-inventaire:
+        timeoutDuration: 3s
+      service-notification:
+        timeoutDuration: 2s
+```
+
+Cette configuration illustre plusieurs principes architecturaux importants. Le service de fraude, critique et externe, beneficie de seuils plus conservateurs (ouverture a 40 % d'echecs, attente de 60 secondes) et d'un limiteur de debit pour proteger le partenaire. Le service d'inventaire, interne mais sensible a la latence, surveille egalement les appels lents via `slowCallRateThreshold`. Le service de notification, moins critique, tolere un taux d'echec plus eleve (70 %) avant ouverture du circuit, refletant le principe selon lequel les dependances non essentielles doivent etre isolees sans penaliser l'experience utilisateur principale.
+
 ### 7.1.2 Retry with Exponential Backoff
 
 #### Définition
@@ -776,6 +851,28 @@ Plusieurs anti-patrons méritent d'être soulignés pour conclure cette section.
 **Observabilité après coup** : Ajouter l'instrumentation après le déploiement en production, lorsque les problèmes sont déjà survenus et qu'il est trop tard pour collecter les données nécessaires au diagnostic.
 
 **Alertes sur tout** : Configurer des alertes pour chaque métrique sans priorisation, conduisant à la fatigue d'alerte et à l'ignorance des signaux importants.
+
+### Cybersécurité des flux d'intégration
+
+La sécurisation des flux d'intégration constitue une préoccupation transversale qui mérite un traitement dédié. Dans une architecture distribuée où les données traversent de multiples services, brokers de messages et passerelles, chaque point d'intégration représente une surface d'attaque potentielle. Les incidents de sécurité liés aux APIs et aux flux de données figurent parmi les vecteurs d'attaque les plus exploités, comme en témoigne le classement OWASP API Security Top 10 qui identifie les vulnérabilités les plus critiques des interfaces programmatiques.
+
+Le **TLS mutuel** (mutual TLS — mTLS) constitue la première ligne de défense pour les communications inter-services. Contrairement au TLS standard où seul le serveur s'authentifie auprès du client, le mTLS exige que les deux parties présentent un certificat valide. Cette authentification bidirectionnelle garantit que chaque service communique exclusivement avec des homologues légitimes. Dans un environnement Kubernetes, le Service Mesh (Istio, Linkerd) automatise la gestion du mTLS en injectant des certificats éphémères via une autorité de certification interne, éliminant la nécessité pour les équipes de développement de gérer manuellement la PKI. Pour les communications avec les brokers Kafka, le mTLS s'active au niveau des listeners du broker et des configurations clients, assurant que seuls les producteurs et consommateurs autorisés accèdent aux topics.
+
+La **rotation des clés API** est un impératif de sécurité fréquemment négligé. Les clés API statiques, déployées une fois et rarement modifiées, constituent des cibles de choix pour les attaquants. Une politique de rotation rigoureuse impose le renouvellement périodique des clés (typiquement tous les 90 jours), la prise en charge de périodes de chevauchement (deux clés actives simultanément durant la transition) et la révocation immédiate des clés compromises. Les coffres-forts de secrets (HashiCorp Vault, AWS Secrets Manager, Azure Key Vault) automatisent ce processus en générant, distribuant et renouvelant les clés sans intervention manuelle. L'API Gateway joue un rôle central dans cette stratégie en validant les clés à chaque requête et en appliquant les politiques de révocation en temps réel.
+
+Le **chiffrement des charges utiles** (*payload encryption*) complète le chiffrement en transit (TLS) par un chiffrement au repos et de bout en bout. Certaines données sensibles — informations personnelles identifiables (PII), données de santé, numéros de cartes de paiement — exigent un chiffrement qui persiste au-delà du transport réseau. Le chiffrement au niveau du champ (*field-level encryption*) permet de chiffrer sélectivement les attributs sensibles d'un événement Kafka tout en laissant les attributs non sensibles lisibles pour le routage et le monitoring. Cette approche préserve l'efficacité du traitement de flux tout en respectant les exigences réglementaires (RGPD, PCI-DSS, Loi 25).
+
+Les **pistes d'audit** (*audit trails*) des flux d'intégration fournissent la traçabilité indispensable à la conformité réglementaire et à l'investigation des incidents de sécurité. Chaque accès aux données, chaque transformation et chaque transfert doivent être enregistrés de manière immuable avec l'identité de l'appelant, l'horodatage, l'opération effectuée et le résultat. Les topics Kafka avec rétention illimitée et compaction constituent un mécanisme naturel de piste d'audit pour les flux événementiels. Pour les appels API synchrones, l'API Gateway et le Service Mesh collectent automatiquement les journaux d'accès qui alimentent les systèmes SIEM (*Security Information and Event Management*) pour la détection d'anomalies.
+
+Le référentiel **OWASP API Security Top 10** fournit un cadre structuré pour évaluer et renforcer la posture de sécurité des intégrations basées sur les API. Parmi les vulnérabilités les plus pertinentes dans le contexte de l'intégration d'entreprise figurent : l'autorisation déficiente au niveau des objets (BOLA — un service accédant à des ressources d'un autre domaine sans vérification), l'authentification défaillante (jetons JWT non validés ou expirés), l'exposition excessive de données (APIs retournant plus d'attributs que nécessaire) et l'absence de limitation de débit (permettant des attaques par déni de service). L'application systématique de ce référentiel lors des revues d'architecture d'intégration constitue une pratique de gouvernance essentielle.
+
+> **Bonnes pratiques**
+>
+> * Activer le mTLS par défaut pour toutes les communications inter-services ; traiter l'absence de mTLS comme une dérogation nécessitant justification
+> * Automatiser la rotation des clés API avec une période de chevauchement d'au moins 24 heures
+> * Chiffrer les champs sensibles au niveau de l'événement plutôt que de dépendre uniquement du chiffrement en transit
+> * Intégrer l'audit OWASP API Security Top 10 dans le processus de revue d'architecture pour chaque nouveau point d'intégration
+> * Centraliser les pistes d'audit dans un système immuable et surveiller les accès anormaux via des règles de corrélation SIEM
 
 ---
 

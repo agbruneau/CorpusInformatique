@@ -398,8 +398,169 @@ def run_behavioral_evaluation(agent_version: str) -> dict:
     }
 ```
 
-> **Bonnes pratiques**  
+> **Bonnes pratiques**
 > L'évaluation comportementale doit inclure des cas adverses conçus pour tester les limites de l'agent : tentatives de jailbreak, requêtes ambiguës, demandes hors périmètre. Ces cas permettent de valider la robustesse des garde-fous avant le déploiement en production.
+
+### Pipeline GitHub Actions Complet pour le Deploiement d'Agents
+
+Le workflow GitHub Actions suivant illustre un pipeline CI/CD de bout en bout pour le deploiement d'agents cognitifs. Il orchestre la validation des artefacts, les tests, l'evaluation comportementale, le deploiement canary sur Google Kubernetes Engine et la validation post-deploiement avec rollback automatique en cas d'echec.
+
+```yaml
+# .github/workflows/agent-deploy.yaml
+# Pipeline CI/CD complet pour le déploiement d'agents cognitifs
+name: Agent Deployment Pipeline
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'agents/**'
+      - 'shared/**'
+  workflow_dispatch:
+    inputs:
+      agent_name:
+        description: 'Nom de l agent à déployer'
+        required: true
+        type: string
+      deployment_strategy:
+        description: 'Stratégie de déploiement'
+        required: true
+        type: choice
+        options: [canary, blue-green, rolling]
+        default: canary
+
+env:
+  GCP_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
+  GKE_CLUSTER: agents-prod-cluster
+  GKE_ZONE: northamerica-northeast1-a
+  REGISTRY: northamerica-northeast1-docker.pkg.dev
+
+jobs:
+  # --- Phase 1 : Validation des artefacts ---
+  validate:
+    runs-on: ubuntu-latest
+    outputs:
+      agent_version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Déterminer la version de l'agent
+        id: version
+        run: |
+          VERSION=$(python scripts/get_agent_version.py ${{ inputs.agent_name || 'all' }})
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Valider les prompts (YAML lint + schéma)
+        run: |
+          pip install yamllint jsonschema
+          for prompt in agents/*/prompts/*.yaml; do
+            yamllint -c .yamllint.yaml "$prompt"
+            python scripts/validate_prompt_schema.py "$prompt"
+          done
+
+      - name: Vérifier la compatibilité des schémas Avro
+        env:
+          SCHEMA_REGISTRY_URL: ${{ secrets.CONFLUENT_SR_URL }}
+          SCHEMA_REGISTRY_API_KEY: ${{ secrets.CONFLUENT_SR_KEY }}
+          SCHEMA_REGISTRY_API_SECRET: ${{ secrets.CONFLUENT_SR_SECRET }}
+        run: |
+          python scripts/check_schema_compatibility.py \
+            --mode BACKWARD --agents-dir agents/
+
+  # --- Phase 2 : Tests unitaires et d'intégration ---
+  test:
+    needs: validate
+    runs-on: ubuntu-latest
+    services:
+      kafka:
+        image: confluentinc/cp-kafka:7.6.0
+        ports: ['9092:9092']
+        env:
+          KAFKA_NODE_ID: 1
+          KAFKA_PROCESS_ROLES: broker,controller
+          KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
+          CLUSTER_ID: test-cluster-001
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tests unitaires de la logique d'orchestration
+        run: pytest tests/unit/ -v --cov=agents --cov-report=xml
+
+      - name: Tests d'intégration Kafka
+        env:
+          KAFKA_BOOTSTRAP_SERVERS: localhost:9092
+        run: pytest tests/integration/ -v --timeout=120
+
+  # --- Phase 3 : Évaluation comportementale IA ---
+  evaluate:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Évaluation comportementale avec LLM-as-Judge
+        env:
+          VERTEX_AI_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
+          VERTEX_AI_LOCATION: northamerica-northeast1
+        run: |
+          python pipelines/evaluation/behavioral_eval.py \
+            --agent-version ${{ needs.validate.outputs.agent_version }} \
+            --threshold 0.85 \
+            --eval-dataset gs://eval-data/customer-service/v2.yaml
+
+      - name: Vérifier les seuils de qualité
+        run: |
+          python scripts/check_eval_thresholds.py \
+            --results-file evaluation_results.json \
+            --min-groundedness 0.85 \
+            --min-safety 0.99 \
+            --min-tool-accuracy 0.95
+
+  # --- Phase 4 : Build et déploiement canary ---
+  deploy-canary:
+    needs: [validate, evaluate]
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authentification GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Build de l'image Docker de l'agent
+        run: |
+          docker build -t $REGISTRY/$GCP_PROJECT/agents/${{ inputs.agent_name || 'customer-service' }}:${{ needs.validate.outputs.agent_version }} \
+            --build-arg AGENT_VERSION=${{ needs.validate.outputs.agent_version }} \
+            -f agents/${{ inputs.agent_name || 'customer-service' }}/Dockerfile .
+          docker push $REGISTRY/$GCP_PROJECT/agents/${{ inputs.agent_name || 'customer-service' }}:${{ needs.validate.outputs.agent_version }}
+
+      - name: Déploiement canary (10% du trafic)
+        run: |
+          gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE
+          kubectl apply -f k8s/agents/${{ inputs.agent_name || 'customer-service' }}/canary.yaml
+          kubectl set image deployment/agent-canary \
+            agent=$REGISTRY/$GCP_PROJECT/agents/${{ inputs.agent_name || 'customer-service' }}:${{ needs.validate.outputs.agent_version }}
+
+      - name: Validation post-déploiement (15 minutes)
+        run: |
+          python scripts/canary_validation.py \
+            --duration 900 \
+            --error-rate-threshold 0.02 \
+            --latency-p99-threshold 5000 \
+            --rollback-on-failure
+
+      - name: Promotion à 100% ou rollback
+        if: success()
+        run: |
+          kubectl set image deployment/agent-production \
+            agent=$REGISTRY/$GCP_PROJECT/agents/${{ inputs.agent_name || 'customer-service' }}:${{ needs.validate.outputs.agent_version }}
+          kubectl scale deployment/agent-canary --replicas=0
+          echo "Déploiement promu en production avec succès"
+```
+
+Ce pipeline incarne les principes AgentOps decrits dans ce chapitre : validation multi-couche des artefacts (prompts, schemas, politiques), evaluation comportementale avec seuils de qualite non negociables (securite a 99 %), deploiement canary avec validation automatique et rollback, et integration etroite avec l'ecosysteme Confluent (Schema Registry) et Google Cloud (Vertex AI, GKE). Le choix de la region `northamerica-northeast1` (Montreal) repond aux exigences de residence des donnees imposees par la reglementation canadienne.
 
 ### Intégration avec Vertex AI Pipelines
 

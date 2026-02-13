@@ -999,6 +999,37 @@ Le déploiement de cette architecture a généré plusieurs enseignements que Te
 
 **La gouvernance des schémas évite les catastrophes.** L'adoption du Schema Registry avec règles de compatibilité strictes a prévenu plusieurs déploiements qui auraient cassé les consommateurs existants. Le coût initial de rigueur est largement compensé par la stabilité gagnée.
 
+### Patrons d'échec et leçons apprises
+
+L'exploitation en production du processus Order-to-Cash de TechnoCommerce a révélé des modes de défaillance que la conception théorique n'avait pas pleinement anticipés. L'analyse systématique de ces incidents fournit des enseignements précieux pour toute architecture d'intégration distribuée. Quatre patrons d'échec récurrents méritent une attention particulière.
+
+**Dérive de schéma (Schema Drift)**
+
+La dérive de schéma survient lorsqu'un producteur modifie la structure d'un événement sans coordination préalable avec les consommateurs. Chez TechnoCommerce, l'équipe du service Commandes a ajouté un champ `loyaltyPoints` de type entier dans l'événement `OrderCreated`, sans valeur par défaut. Le déploiement, réalisé en dehors des heures de pointe, a provoqué la désérialisation en échec de tous les consommateurs utilisant un schéma Avro strict. Le service de paiement, le service d'inventaire et le service de notification ont simultanément basculé en erreur, alimentant massivement les Dead Letter Queues.
+
+*Leçon apprise* : Le Schema Registry avec règles de compatibilité backward doit être imposé dans le pipeline CI/CD. Tout nouveau champ doit comporter une valeur par défaut. Les tests d'intégration contractuels (Consumer-Driven Contract Testing) doivent valider la compatibilité avant chaque déploiement.
+
+**Perte de messages (Message Loss)**
+
+Un incident de maintenance planifiée sur le cluster Kafka a révélé une configuration inadéquate des connecteurs Debezium. Le slot de réplication PostgreSQL, non surveillé, avait atteint sa limite de rétention WAL. Lors du redémarrage de Debezium, le connecteur a découvert un écart entre sa position enregistrée et les journaux disponibles. Environ 1 200 événements `OrderCreated` ont été perdus, engendrant des commandes payées mais jamais transmises à l'entrepôt.
+
+*Leçon apprise* : Monitorer systématiquement la taille des slots de réplication et le lag des connecteurs CDC. Configurer des alertes sur l'écart entre la position du connecteur et la tête du WAL. Prévoir un mécanisme de réconciliation périodique qui compare l'état des bases sources avec les événements publiés et détecte les écarts.
+
+**Cascades de timeouts (Timeout Cascades)**
+
+Lors d'un pic promotionnel, le service de vérification de crédit externe a vu sa latence passer de 50 ms à 8 secondes. Le service Commandes, configuré avec un timeout de 2 secondes, a commencé à rejeter les appels. Cependant, le BFF mobile, configuré avec un timeout de 10 secondes, accumulait les connexions en attente. L'API Gateway, dont le pool de connexions était dimensionné pour des requêtes rapides, a saturé. En l'espace de trois minutes, l'ensemble du système est devenu inaccessible, y compris les fonctionnalités ne dépendant pas du service de crédit.
+
+*Leçon apprise* : Les timeouts doivent être calibrés de manière cohérente sur l'ensemble de la chaîne d'appel, en respectant le principe de propagation des deadlines. Le Bulkhead doit isoler les dépendances externes des dépendances internes. Le Circuit Breaker sur le service de crédit aurait dû s'ouvrir plus rapidement, et le Fallback (acceptation conditionnelle pour les petits montants) aurait dû être activé automatiquement.
+
+**Incohérence de données (Data Inconsistency)**
+
+Un bogue subtil dans le mécanisme d'idempotence du service de paiement a provoqué des doubles captures. Le champ `event_id` utilisé pour la déduplication était généré par Debezium à partir de la position WAL, mais lors d'un failover PostgreSQL vers le réplica, les positions WAL ont été réinitialisées. Des événements techniquement distincts (positions WAL différentes) correspondaient aux mêmes commandes, contournant ainsi le mécanisme d'idempotence. Trente-sept clients ont été débités deux fois avant la détection du problème.
+
+*Leçon apprise* : L'identifiant d'idempotence ne doit jamais dépendre d'un artefact d'infrastructure (position WAL, offset Kafka). Il doit être un identifiant métier stable (identifiant de commande + type d'opération + version). Un processus de réconciliation quotidien comparant les montants capturés avec les commandes confirmées constitue un filet de sécurité indispensable.
+
+> **Synthèse**
+> Les patrons d'échec observés partagent une caractéristique commune : ils résultent d'hypothèses implicites sur le comportement de l'infrastructure (stabilité des positions WAL, disponibilité continue des brokers, cohérence des timeouts). L'architecture résiliente exige de rendre ces hypothèses explicites, de les tester régulièrement et de prévoir des mécanismes de détection et de réconciliation pour les cas où elles sont violées.
+
 ---
 
 ## Conclusion et Transition

@@ -1,6 +1,8 @@
 # Corpus Informatique
 
-Corpus encyclopédique francophone couvrant les fondements de l'informatique, l'interopérabilité des systèmes d'entreprise et l'émergence de l'entreprise agentique. L'ouvrage est structuré en trois collections totalisant plus de 110 chapitres.
+Corpus encyclopédique francophone couvrant les fondements de l'informatique, l'interopérabilité des systèmes d'entreprise et l'émergence de l'entreprise agentique. L'ouvrage est structuré en trois collections totalisant plus de 170 chapitres, enrichi de diagrammes Mermaid, de blocs de code pratiques et de références croisées inter-sections.
+
+> Consulter l'[INDEX.md](INDEX.md) pour la navigation complète et le glossaire fédéré.
 
 ---
 
@@ -8,37 +10,35 @@ Corpus encyclopédique francophone couvrant les fondements de l'informatique, l'
 
 ### 1 — Cursus : Science et Génie Informatique
 
-Programme complet en sept volumes couvrant l'ensemble du génie informatique, des fondements théoriques aux architectures cognitivo-quantiques.
+Programme complet en sept volumes (83 chapitres individuels) couvrant l'ensemble du génie informatique, des fondements théoriques aux architectures cognitivo-quantiques.
 
-| Volume | Titre |
-|--------|-------|
-| I | Fondations Théoriques de l'Informatique |
-| II | Architecture et Ingénierie Matérielle |
-| III | Systèmes Logiciels et Méthodologies |
-| IV | Données, Réseaux et Sécurité |
-| V | Intelligence Artificielle et Domaines Spécialisés |
-| VI | Technologies Avant-Garde |
-| VII | Architecture Cognitivo-Quantique |
+| Volume | Titre | Chapitres |
+|--------|-------|-----------|
+| I | Fondations Théoriques de l'Informatique | 1.0 – 1.6 |
+| II | Architecture et Ingénierie Matérielle | 1.7 – 1.15 |
+| III | Systèmes Logiciels et Méthodologies | 1.16 – 1.29 |
+| IV | Données, Réseaux et Sécurité | 1.30 – 1.40 |
+| V | Intelligence Artificielle et Domaines Spécialisés | 1.41 – 1.50 |
+| VI | Technologies Avant-Garde | 1.51 – 1.60 |
+| VII | Architecture Cognitivo-Quantique | 1.61 – 1.79 + annexes |
 
 ### 2 — Interopérabilité
 
-Traité sur l'intégration des systèmes d'information en contexte d'entreprise. Défend la thèse de l'interopérabilité comme un **continuum** allant du couplage fort au découplage maximal, à travers trois domaines complémentaires : applications, données et événements.
+Traité sur l'intégration des systèmes d'information en contexte d'entreprise (11 chapitres + annexes). Défend la thèse de l'interopérabilité comme un **continuum** allant du couplage fort au découplage maximal, à travers trois domaines complémentaires : applications, données et événements.
 
 | Chapitre | Sujet |
 |----------|-------|
-| 01 | Introduction et Problématique |
-| 02 | Fondements Théoriques |
-| 03 | Intégration des Applications |
-| 04 | Intégration des Données |
-| 05 | Intégration des Événements |
-| 06 | Standards et Contrats |
-| 07 | Résilience et Observabilité |
-| 08 | Collaboration et Automatisation |
-| 09 | Architecture de Référence |
-| 10 | Order-to-Cash (étude de cas) |
-| 11 | Entreprise Agentique |
-
-Des volumes consolidés (I à V) et des annexes complètent la collection.
+| 2.1 | Introduction et Problématique |
+| 2.2 | Fondements Théoriques |
+| 2.3 | Intégration des Applications |
+| 2.4 | Intégration des Données |
+| 2.5 | Intégration des Événements |
+| 2.6 | Standards et Contrats |
+| 2.7 | Résilience et Observabilité |
+| 2.8 | Collaboration et Automatisation |
+| 2.9 | Architecture de Référence |
+| 2.10 | Order-to-Cash (étude de cas) |
+| 2.11 | Entreprise Agentique |
 
 ### 3 — Entreprise Agentique
 
@@ -48,58 +48,45 @@ Monographie en cinq volumes explorant la transition vers des systèmes d'informa
 
 De la crise de l'intégration systémique à l'architecture intentionnelle : interopérabilité cognitive, maillage agentique, gouvernance constitutionnelle, AgentOps et prospective vers l'AGI d'entreprise.
 
-- **Partie 1** — Crise de l'intégration
-- **Partie 2** — Architecture réactive et écosystème
-- **Partie 3** — Interopérabilité cognitivo-adaptative
-- **Partie 4** — Ère agentique et gouvernance
-- **Partie 5** — Transformation et prospective
+- **Partie 1** — Crise et fondations architecturales
+- **Partie 2** — Infrastructure et écosystème technique
+- **Partie 3** — Interopérabilité cognitive et paradigme agentique
+- **Partie 4** — Opérationnalisation et transformation
+- **Partie 5** — Industrialisation, prospective et synthèse
 
 #### Volume II — Infrastructure Agentique (15 chapitres)
 
 Ingénierie de la plateforme agentique : Apache Kafka, Confluent, Google Vertex AI, RAG, pipelines CI/CD, observabilité comportementale, sécurité et conformité réglementaire.
 
-- **Partie 1** — Fondamentaux Kafka et Confluent
-- **Partie 2** — Vertex AI et patrons avancés
-- **Partie 3** — CI/CD, observabilité et tests
-- **Partie 4** — Sécurité et conformité
-
 #### Volume III — Apache Kafka : Guide de l'Architecte (12 chapitres)
 
 Guide complet couvrant l'architecture du cluster, les clients producteurs et consommateurs, les contrats de données, les patrons d'interaction, le stream processing et les opérations en production.
 
-- **Partie 1** — Architecture et clients Kafka
-- **Partie 2** — Cas d'usage et patrons d'interaction
-- **Partie 3** — Stream processing et gestion
-- **Partie 4** — Opérations et avenir
-
 #### Volume IV — Apache Iceberg Lakehouse (16 chapitres + annexes)
 
-De l'anatomie technique d'Apache Iceberg à l'implémentation d'un lakehouse en production : ingestion, catalogue, fédération, streaming, sécurité, intégration Microsoft Fabric/Power BI et études de cas en contexte canadien.
+De l'anatomie technique d'Apache Iceberg à l'implémentation d'un lakehouse en production : ingestion, catalogue, fédération, streaming lakehouse (Kafka → Iceberg), sécurité, intégration Microsoft Fabric/Power BI et études de cas en contexte canadien.
 
-- **Partie 1** — Valeur du lakehouse et anatomie technique
-- **Partie 2** — Concevoir l'architecture
-- **Partie 3** — Opérer le lakehouse
-- **Partie 4** — Intégrations et perspectives
+#### Volume V — Le Développeur Renaissance (10 chapitres)
 
-#### Volume V — Le Développeur Renaissance (11 chapitres)
-
-Réflexion humaniste sur la pratique du génie logiciel : convergence des âges d'or, curiosité appliquée, pensée systémique, communication, qualité, capital humain et le profil du développeur polymathe.
-
-- **Introduction** — Convergence des âges d'or
-- **Partie 1** — Curiosité et contexte historique
-- **Partie 2** — Pensée systémique et communication
-- **Partie 3** — Qualité et capital humain
-- **Partie 4** — Épilogue et mandats
+Réflexion humaniste sur la pratique du génie logiciel : convergence des âges d'or, curiosité appliquée, pensée systémique, communication, qualité, capital humain, Spec-Driven Development et le profil du développeur polymathe.
 
 ---
+
+## Contenu enrichi
+
+- **22 diagrammes Mermaid** répartis dans les trois sections (architecture Von Neumann, pipeline de compilation, EDA, Kafka, CQRS, Iceberg, Agentic Mesh, SDD, etc.)
+- **10 blocs de code pratiques** (configurations API Gateway, AsyncAPI, PySpark Iceberg, Kafka Producer, CI/CD GitHub Actions, etc.)
+- **99 références croisées** reliant 42 chapitres à travers 16 thèmes transversaux
+- **Glossaire fédéré** de 52 termes dans l'[INDEX.md](INDEX.md)
 
 ## Format et conventions
 
 - **Langue** : français
 - **Format** : Markdown exclusivement
-- **Nommage des fichiers** : `Chapitre_[Volume].[N]_[Sujet].md`
+- **Nommage des fichiers** : `Chapitre_[Section/Volume].[N]_[Sujet].md`
 - **Nommage des répertoires** : `Partie_[N]_[Description]`
-- Chaque volume dispose d'un fichier consolidé (`Volume_[N]_Consolide.md`) regroupant l'ensemble des chapitres
+- Chaque volume de Section 3 dispose d'un fichier consolidé (`Volume_[N]_Consolide.md`)
+- Les diagrammes utilisent la syntaxe Mermaid (rendu natif sur GitHub)
 
 ## Licence
 

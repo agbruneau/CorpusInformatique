@@ -133,6 +133,97 @@ Les opérations de maintenance Iceberg se répartissent en plusieurs catégories
 | Optimisation tri       | Selon besoin       | Élevé (requêtes)     | Élevé       | Variable  |
 | Collecte statistiques  | Après changements | Moyen (optimiseur)      | Moyen         | Haute     |
 
+### Configuration de Reference des Proprietes de Table
+
+La configuration des proprietes de table Iceberg constitue un levier majeur de performance et de gouvernance. Le dictionnaire suivant rassemble les proprietes les plus critiques, organisees par categorie, avec les valeurs recommandees pour differents profils de charge.
+
+```python
+# Configuration de référence des propriétés de table Iceberg
+# Ajustement des paramètres selon le profil de charge (batch, mixte, streaming)
+
+# --- Profil BATCH (ETL quotidien, rapports, migrations) ---
+spark.sql("""
+    ALTER TABLE lakehouse.gold.rapport_ventes SET TBLPROPERTIES (
+        'format-version' = '2',
+
+        -- Écriture : fichiers volumineux pour lectures analytiques
+        'write.format.default' = 'parquet',
+        'write.parquet.compression-codec' = 'zstd',
+        'write.target-file-size-bytes' = '536870912',
+        'write.distribution-mode' = 'hash',
+        'write.parquet.row-group-size-bytes' = '134217728',
+
+        -- Métadonnées : rétention longue pour audit
+        'write.metadata.delete-after-commit.enabled' = 'true',
+        'write.metadata.previous-versions-max' = '200',
+        'history.expire.max-snapshot-age-ms' = '604800000',
+
+        -- Compaction : seuils adaptés au batch
+        'write.spark.fanout.enabled' = 'false',
+        'commit.retry.num-retries' = '4',
+        'commit.retry.min-wait-ms' = '100'
+    )
+""")
+
+# --- Profil STREAMING (ingestion continue Kafka, temps réel) ---
+spark.sql("""
+    ALTER TABLE lakehouse.bronze.evenements_temps_reel SET TBLPROPERTIES (
+        'format-version' = '2',
+
+        -- Écriture : fichiers plus petits, commits fréquents
+        'write.format.default' = 'parquet',
+        'write.parquet.compression-codec' = 'snappy',
+        'write.target-file-size-bytes' = '134217728',
+        'write.distribution-mode' = 'none',
+
+        -- Métadonnées : nettoyage agressif pour limiter l accumulation
+        'write.metadata.delete-after-commit.enabled' = 'true',
+        'write.metadata.previous-versions-max' = '50',
+        'history.expire.max-snapshot-age-ms' = '259200000',
+
+        -- Merge-on-Read pour les mises à jour fréquentes
+        'write.delete.mode' = 'merge-on-read',
+        'write.update.mode' = 'merge-on-read',
+        'write.merge.mode' = 'merge-on-read',
+
+        -- Concurrence : tolérance élevée aux conflits
+        'commit.retry.num-retries' = '10',
+        'commit.retry.min-wait-ms' = '50',
+        'commit.manifest-merge.enabled' = 'true'
+    )
+""")
+
+# --- Profil MIXTE (lecture analytique + écriture incrémentale) ---
+spark.sql("""
+    ALTER TABLE lakehouse.silver.transactions_enrichies SET TBLPROPERTIES (
+        'format-version' = '2',
+
+        -- Écriture : compromis taille/fréquence
+        'write.format.default' = 'parquet',
+        'write.parquet.compression-codec' = 'zstd',
+        'write.target-file-size-bytes' = '268435456',
+        'write.distribution-mode' = 'hash',
+
+        -- Tri pour optimiser les requêtes de filtrage
+        'write.parquet.bloom-filter-enabled.column.client_id' = 'true',
+        'write.parquet.bloom-filter-enabled.column.province' = 'true',
+
+        -- Métadonnées : équilibre rétention/performance
+        'write.metadata.delete-after-commit.enabled' = 'true',
+        'write.metadata.previous-versions-max' = '100',
+        'history.expire.max-snapshot-age-ms' = '432000000',
+
+        -- Copy-on-Write pour lectures rapides
+        'write.delete.mode' = 'copy-on-write',
+        'write.update.mode' = 'copy-on-write'
+    )
+""")
+
+print("Propriétés de table configurées pour les trois profils de charge")
+```
+
+Trois principes directeurs guident le choix des proprietes. Premierement, la taille cible des fichiers doit refleter la frequence d'ecriture : 512 Mo pour le batch (peu de fichiers, lectures efficaces), 128 Mo pour le streaming (commits frequents, compaction ulterieure). Deuxiemement, le choix entre Copy-on-Write et Merge-on-Read depend du ratio lecture/ecriture : CoW pour les tables a lecture dominante (couche Gold), MoR pour les tables a ecriture frequente (couche Bronze streaming). Troisiemement, les filtres Bloom sur les colonnes frequemment utilisees dans les clauses WHERE accelerent significativement les requetes de filtrage sans cout de stockage excessif.
+
 ---
 
 ## Compaction des Fichiers de Données

@@ -143,6 +143,142 @@ Prenons l'exemple d'un système de gestion de commandes. Si la clé de partition
 > **Bonnes pratiques**
 > Choisir comme clé de partitionnement l'identifiant de l'agrégat métier (commande, client, compte) dont l'ordre des événements doit être préservé. Éviter les clés à cardinalité trop faible (risque de partition déséquilibrée) ou trop élevée (ordre perdu entre événements liés).
 
+### 5.2.4 Documenter l'Architecture Événementielle avec AsyncAPI
+
+La documentation formelle des flux événementiels constitue une exigence fondamentale pour la gouvernance d'une architecture distribuée. Le standard AsyncAPI, equivalent d'OpenAPI pour les interfaces asynchrones, permet de decrire les canaux, les messages et les operations d'une API evenementielle de maniere lisible par les humains et les machines. L'exemple suivant illustre la specification d'un flux d'evenements de commande, incluant la definition des canaux Kafka, des schemas de messages et des garanties de livraison.
+
+```yaml
+# Spécification AsyncAPI — Flux événementiel de gestion des commandes
+asyncapi: 3.0.0
+
+info:
+  title: API Événements du Domaine Commandes
+  version: 2.0.0
+  description: |
+    Spécification des flux événementiels émis par le service de
+    gestion des commandes. Ces événements alimentent les services
+    d'inventaire, de facturation, de notification et d'analytique.
+  contact:
+    name: Équipe Architecture d'Intégration
+    email: integration@exemple.ca
+
+servers:
+  production:
+    host: kafka-prod.interne.exemple.ca:9092
+    protocol: kafka
+    description: Cluster Kafka de production (3 brokers, KRaft)
+    security:
+      - sasl_ssl: []
+
+channels:
+  commandes.creees:
+    address: domaine.commandes.creees.v2
+    description: |
+      Événements émis lors de la création d'une commande.
+      Partitionné par client_id pour garantir l'ordre par client.
+      Rétention : 7 jours. Réplication : 3.
+    messages:
+      commandeCreee:
+        $ref: '#/components/messages/CommandeCreee'
+
+  commandes.statut-change:
+    address: domaine.commandes.statut-change.v2
+    description: |
+      Événements émis lors de chaque transition de statut.
+      Clé de partition : commande_id.
+    messages:
+      statutChange:
+        $ref: '#/components/messages/StatutCommandeChange'
+
+operations:
+  publierCommandeCreee:
+    action: send
+    channel:
+      $ref: '#/channels/commandes.creees'
+    summary: Émettre un événement de création de commande
+
+  consommerCommandeCreee:
+    action: receive
+    channel:
+      $ref: '#/channels/commandes.creees'
+    summary: S'abonner aux créations de commandes
+
+components:
+  messages:
+    CommandeCreee:
+      name: CommandeCreee
+      title: Commande Créée
+      contentType: application/json
+      headers:
+        type: object
+        required: [evenement_id, horodatage, source]
+        properties:
+          evenement_id:
+            type: string
+            format: uuid
+          horodatage:
+            type: string
+            format: date-time
+          source:
+            type: string
+            example: "/services/commandes"
+          correlation_id:
+            type: string
+            format: uuid
+      payload:
+        type: object
+        required: [commande_id, client_id, articles, montant_total]
+        properties:
+          commande_id:
+            type: string
+            format: uuid
+          client_id:
+            type: string
+            format: uuid
+          articles:
+            type: array
+            items:
+              type: object
+              properties:
+                produit_id: { type: string }
+                quantite: { type: integer, minimum: 1 }
+                prix_unitaire: { type: number, format: double }
+          montant_total:
+            type: number
+            format: double
+          devise:
+            type: string
+            enum: [CAD, USD, EUR]
+            default: CAD
+
+    StatutCommandeChange:
+      name: StatutCommandeChange
+      title: Statut de Commande Modifié
+      contentType: application/json
+      payload:
+        type: object
+        required: [commande_id, ancien_statut, nouveau_statut]
+        properties:
+          commande_id:
+            type: string
+            format: uuid
+          ancien_statut:
+            type: string
+            enum: [creee, confirmee, expediee, livree, annulee]
+          nouveau_statut:
+            type: string
+            enum: [creee, confirmee, expediee, livree, annulee]
+          raison:
+            type: string
+
+  securitySchemes:
+    sasl_ssl:
+      type: scramSha256
+      description: Authentification SASL/SCRAM-SHA-256 avec TLS
+```
+
+Cette specification joue un role de contrat formel entre les equipes productrices et consommatrices. Elle permet la generation automatique de code client, la validation des messages dans les pipelines CI/CD et la creation de documentation interactive. Les equipes consommatrices peuvent s'abonner aux canaux documentes sans interaction directe avec l'equipe productrice, realisant ainsi le decouplage organisationnel qui accompagne le decouplage technique de l'architecture evenementielle.
+
 ---
 
 ## 5.3 Catalogue des Patrons d'Intégration Événementielle

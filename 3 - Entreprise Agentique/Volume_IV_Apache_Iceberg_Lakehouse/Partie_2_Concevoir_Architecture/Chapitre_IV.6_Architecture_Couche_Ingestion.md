@@ -302,6 +302,47 @@ df_clients \
     .createOrReplace()
 ```
 
+**Creation d'une table Bronze evenementielle** : Pour les architectures alimentees par un backbone Kafka, la couche Bronze recoit les evenements bruts avec un partitionnement temporel adapte au volume de streaming. L'exemple suivant cree une table optimisee pour l'ingestion continue d'evenements metier.
+
+```python
+# Création d'une table Iceberg Bronze pour les événements métier
+# Architecture Medallion — couche Bronze (données brutes événementielles)
+spark.sql("""
+    CREATE TABLE IF NOT EXISTS lakehouse.bronze.evenements (
+        evenement_id STRING COMMENT 'Identifiant unique CloudEvents',
+        type_evenement STRING COMMENT 'Type CloudEvents (ex: com.exemple.commande.creee)',
+        source STRING COMMENT 'URI du service émetteur',
+        horodatage TIMESTAMP COMMENT 'Horodatage UTC de l événement',
+        cle_partition STRING COMMENT 'Clé Kafka utilisée pour le partitionnement',
+        payload STRING COMMENT 'Contenu JSON brut de l événement',
+        en_tetes MAP<STRING, STRING> COMMENT 'En-têtes Kafka et CloudEvents',
+        offset_kafka BIGINT COMMENT 'Offset Kafka pour traçabilité',
+        partition_kafka INT COMMENT 'Partition Kafka source',
+        topic_kafka STRING COMMENT 'Topic Kafka source',
+        date_ingestion TIMESTAMP COMMENT 'Horodatage d ingestion dans le Lakehouse'
+    )
+    USING iceberg
+    PARTITIONED BY (days(horodatage), type_evenement)
+    TBLPROPERTIES (
+        'format-version' = '2',
+        'write.format.default' = 'parquet',
+        'write.parquet.compression-codec' = 'zstd',
+        'write.target-file-size-bytes' = '134217728',
+        'write.distribution-mode' = 'hash',
+        'write.metadata.delete-after-commit.enabled' = 'true',
+        'write.metadata.previous-versions-max' = '50',
+        'commit.retry.num-retries' = '4',
+        'commit.manifest-merge.enabled' = 'true',
+        'read.split.target-size' = '134217728'
+    )
+""")
+
+print("Table Bronze événementielle créée avec succès")
+print("Partitionnement : par jour (horodatage) et par type d'événement")
+```
+
+Le partitionnement par `days(horodatage)` et `type_evenement` optimise deux patrons d'acces frequents : les requetes temporelles (« quels evenements dans les dernieres 24 heures ? ») et les requetes typees (« tous les evenements de commande »). La taille cible de fichier de 128 Mo, plus petite que les 512 Mo habituels en batch, reflete la frequence plus elevee des commits en mode streaming. Les proprietes `commit.retry.num-retries` et `commit.manifest-merge.enabled` renforcent la robustesse face aux ecritures concurrentes.
+
 ### Optimisation des Extractions JDBC
 
 L'extraction depuis les bases de données relationnelles constitue souvent le goulot d'étranglement de l'ingestion batch. Plusieurs stratégies permettent d'optimiser ce processus.

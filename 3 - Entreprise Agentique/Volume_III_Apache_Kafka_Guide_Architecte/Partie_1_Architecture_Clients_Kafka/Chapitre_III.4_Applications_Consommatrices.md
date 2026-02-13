@@ -205,6 +205,128 @@ Les paramètres de configuration du consommateur contrôlent son comportement. L
 
 **`fetch.max.wait.ms`** (défaut 500) : Temps maximal d'attente du broker si `fetch.min.bytes` n'est pas atteint.
 
+#### Configuration complete d'un groupe de consommateurs
+
+L'exemple suivant presente une configuration Java complete et commentee pour un groupe de consommateurs en production. Cette configuration distingue trois profils typiques — traitement transactionnel, analytique en temps reel et ingestion bulk — chacun avec ses compromis entre latence, debit et fiabilite.
+
+```java
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.common.serialization.StringDeserializer;
+import io.confluent.kafka.serializers.KafkaAvroDeserializer;
+import java.util.Properties;
+
+/**
+ * Configurations de référence pour groupes de consommateurs Kafka.
+ * Trois profils adaptés aux cas d'usage les plus courants.
+ */
+public class ConsumerConfigurations {
+
+    /**
+     * Profil TRANSACTIONNEL — Traitement fiable message par message.
+     * Garantie : at-least-once avec commit manuel.
+     * Cas d'usage : traitement de commandes, événements financiers, agents cognitifs.
+     */
+    public static Properties configTransactionnel() {
+        Properties props = new Properties();
+
+        // Connexion et identification
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
+                  "kafka-1:9092,kafka-2:9092,kafka-3:9092");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG,
+                  "groupe-traitement-commandes-v2");
+        props.put(ConsumerConfig.CLIENT_ID_CONFIG,
+                  "consommateur-commandes-instance-1");
+
+        // Désérialisation avec Schema Registry
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
+                  StringDeserializer.class.getName());
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
+                  KafkaAvroDeserializer.class.getName());
+        props.put("schema.registry.url",
+                  "https://schema-registry:8081");
+        props.put("specific.avro.reader", true);
+
+        // Fiabilité : commit manuel, isolation transactionnelle
+        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+        props.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+
+        // Traitement : lots modérés pour équilibrer latence et débit
+        props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 100);
+        props.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 300000);
+        props.put(ConsumerConfig.FETCH_MIN_BYTES_CONFIG, 1);
+        props.put(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, 100);
+
+        // Rééquilibrage : protocole coopératif (Kafka 3.x+)
+        props.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG,
+                  "org.apache.kafka.clients.consumer.CooperativeStickyAssignor");
+        props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 30000);
+        props.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG, 10000);
+
+        // Sécurité SASL/SSL
+        props.put("security.protocol", "SASL_SSL");
+        props.put("sasl.mechanism", "SCRAM-SHA-256");
+        props.put("sasl.jaas.config",
+                  "org.apache.kafka.common.security.scram.ScramLoginModule required "
+                  + "username=\"${KAFKA_USER}\" password=\"${KAFKA_PASSWORD}\";");
+
+        return props;
+    }
+
+    /**
+     * Profil ANALYTIQUE TEMPS RÉEL — Haut débit, latence acceptable.
+     * Garantie : at-least-once avec commit automatique.
+     * Cas d'usage : alimentation data lake, métriques, tableaux de bord.
+     */
+    public static Properties configAnalytique() {
+        Properties props = configTransactionnel(); // Hérite de la base
+
+        props.put(ConsumerConfig.GROUP_ID_CONFIG,
+                  "groupe-analytique-lakehouse-v1");
+
+        // Débit : lots volumineux, attente pour accumulation
+        props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 2000);
+        props.put(ConsumerConfig.FETCH_MIN_BYTES_CONFIG, 1048576);   // 1 Mo
+        props.put(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, 2000);    // 2 sec
+        props.put(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG,
+                  10485760); // 10 Mo
+
+        // Commit automatique acceptable pour l'analytique
+        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
+        props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 5000);
+
+        return props;
+    }
+
+    /**
+     * Profil AGENT COGNITIF — Faible latence, traitement unitaire.
+     * Garantie : exactly-once via transactions.
+     * Cas d'usage : agents IA réactifs, traitement événementiel.
+     */
+    public static Properties configAgentCognitif() {
+        Properties props = configTransactionnel(); // Hérite de la base
+
+        props.put(ConsumerConfig.GROUP_ID_CONFIG,
+                  "groupe-agent-service-client-v2");
+
+        // Réactivité maximale : un message à la fois
+        props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 1);
+        props.put(ConsumerConfig.FETCH_MIN_BYTES_CONFIG, 1);
+        props.put(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, 50);
+
+        // Timeout étendu pour le traitement LLM (inférence longue)
+        props.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 600000);
+
+        // Isolation stricte pour les transactions
+        props.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
+
+        return props;
+    }
+}
+```
+
+Ces trois profils illustrent le principe fondamental selon lequel la configuration du consommateur doit etre alignee avec le patron d'acces aux donnees. Le profil transactionnel privilegie la fiabilite (commit manuel, `read_committed`, lots de 100 messages). Le profil analytique maximise le debit (lots de 2000 messages, `fetch.min.bytes` de 1 Mo, commit automatique). Le profil agent cognitif optimise la reactivite (un seul message par poll, fetch immediat) tout en tolerant les traitements longs via un `max.poll.interval.ms` etendu a 10 minutes, necessaire pour accommoder la latence d'inference des modeles de langage. L'utilisation du `CooperativeStickyAssignor` dans les trois profils garantit un reequilibrage sans interruption lors des mises a l'echelle.
+
 ---
 
 ## III.4.2 Atteindre le Parallélisme : Groupes de Consommateurs
