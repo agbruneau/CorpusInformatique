@@ -1,6 +1,6 @@
 # Corpus Informatique
 
-Corpus encyclopédique francophone couvrant les fondements de l'informatique, l'interopérabilité des systèmes d'entreprise et l'émergence de l'entreprise agentique. L'ouvrage est structuré en trois collections totalisant 177 fichiers Markdown, enrichi de diagrammes Mermaid, de blocs de code pratiques et de références croisées inter-sections.
+Corpus encyclopédique francophone couvrant les fondements de l'informatique, l'interopérabilité des systèmes d'entreprise et l'émergence de l'entreprise agentique. L'ouvrage est structuré en trois collections totalisant 176 fichiers Markdown, enrichi de diagrammes Mermaid, de blocs de code pratiques et de références croisées inter-sections.
 
 ---
 
@@ -8,7 +8,7 @@ Corpus encyclopédique francophone couvrant les fondements de l'informatique, l'
 
 ### I — Cursus : Science et Génie Informatique
 
-Programme complet en sept volumes (81 chapitres) couvrant l'ensemble du génie informatique, des fondements théoriques aux architectures cognitivo-quantiques.
+Programme complet en sept volumes (80 chapitres) couvrant l'ensemble du génie informatique, des fondements théoriques aux architectures cognitivo-quantiques.
 
 | Volume | Titre | Chapitres |
 |--------|-------|-----------|
@@ -18,7 +18,7 @@ Programme complet en sept volumes (81 chapitres) couvrant l'ensemble du génie i
 | IV | Données, Réseaux et Sécurité | I.30 – I.40 |
 | V | Intelligence Artificielle et Domaines Spécialisés | I.41 – I.50 |
 | VI | Technologies Avant-Garde | I.51 – I.60 |
-| VII | Architecture Cognitivo-Quantique | I.61 – I.81 |
+| VII | Architecture Cognitivo-Quantique | I.61 – I.80 |
 
 ### II — Interopérabilité
 

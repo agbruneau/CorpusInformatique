@@ -71,13 +71,13 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ## Project Overview
 
-**CorpusInformatique** is a multi-volume French-language educational and reference corpus covering computer science, enterprise system integration, and modern platform engineering. The repository contains 177 Markdown content files across 3 sections, plus a MkDocs Material build pipeline with GitHub Actions deployment to GitHub Pages.
+**CorpusInformatique** is a multi-volume French-language educational and reference corpus covering computer science, enterprise system integration, and modern platform engineering. The repository contains 176 Markdown content files across 3 sections, plus a MkDocs Material build pipeline with GitHub Actions deployment to GitHub Pages.
 
 ## Repository Structure
 
 ```
 CorpusInformatique/
-├── I - Science et Genie Informatique/               # 81 files (flat)
+├── I - Science et Genie Informatique/               # 80 files (flat)
 ├── II - Interopérabilité/                            # 12 files (flat)
 ├── III - Entreprise Agentique/                       # 5 volume subdirectories
 │   ├── Volume_I_Fondations_Entreprise_Agentique/     #   28 chapters
@@ -97,9 +97,9 @@ CorpusInformatique/
 
 All sections use a flat structure — chapters are stored directly in their section or volume directory with no subdirectories.
 
-### Section I — Science et Génie Informatique (7 volumes, 81 files)
+### Section I — Science et Génie Informatique (7 volumes, 80 files)
 
-Foundational CS curriculum: theoretical foundations (Vol. I), hardware architecture (Vol. II), software methodologies (Vol. III), data/networks/security (Vol. IV), AI (Vol. V), cutting-edge technologies (Vol. VI), cognitive-quantum architecture (Vol. VII). Chapters I.1–I.81.
+Foundational CS curriculum: theoretical foundations (Vol. I), hardware architecture (Vol. II), software methodologies (Vol. III), data/networks/security (Vol. IV), AI (Vol. V), cutting-edge technologies (Vol. VI), cognitive-quantum architecture (Vol. VII). Chapters I.1–I.80.
 
 | Volume | Chapitres    | Thème                                  | Nombre |
 | ------ | ------------ | --------------------------------------- | ------ |
@@ -109,7 +109,7 @@ Foundational CS curriculum: theoretical foundations (Vol. I), hardware architect
 | IV     | I.30 – I.40 | Données, réseaux et sécurité        | 11     |
 | V      | I.41 – I.50 | Intelligence artificielle               | 10     |
 | VI     | I.51 – I.60 | Technologies avant-garde                | 10     |
-| VII    | I.61 – I.81 | Architecture cognitivo-quantique        | 21     |
+| VII    | I.61 – I.80 | Architecture cognitivo-quantique        | 20     |
 
 ### Section II — Interopérabilité (12 files: 11 chapters + annexes)
 
@@ -175,7 +175,7 @@ The repository uses **MkDocs Material** to generate a documentation site deploye
 | `.github/workflows/deploy-docs.yml` | GitHub Actions: on push to `main`, builds and deploys via `mkdocs gh-deploy` |
 | `.gitignore` | Excludes generated `site/` and `docs/` directories |
 
-The build copies content into a temporary `docs/` directory, then MkDocs renders it. The `mkdocs.yml` nav section maps all 177 chapters to the site structure.
+The build copies content into a temporary `docs/` directory, then MkDocs renders it. The `mkdocs.yml` nav section maps all 176 chapters to the site structure.
 
 ## Working with This Repository
 
