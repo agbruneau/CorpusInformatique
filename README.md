@@ -74,15 +74,16 @@ Réflexion humaniste sur la pratique du génie logiciel : convergence des âges 
 ## Contenu enrichi
 
 - **23 diagrammes Mermaid** répartis dans les trois sections (architecture ISA, pipeline de compilation, EDA, Kafka, CQRS, Iceberg, Agentic Mesh, SDD, etc.)
-- **785 blocs de code** dans 45 fichiers couvrant 17 langages (Python, SQL, Java, YAML, JSON, Bash, Properties, Avro, HCL, Protobuf, XML, GraphQL, etc.)
-- **102 références croisées** reliant 43 chapitres à travers les trois sections
+- **~1 069 blocs de code** dans 64 fichiers couvrant 11+ langages (Python, SQL, Java, YAML, JSON, Bash, Markdown, Avro, HCL, XML, Go, etc.)
+- **196 références croisées** reliant 43 chapitres à travers les trois sections
 
 ## Format et conventions
 
 - **Langue** : français
-- **Format** : Markdown exclusivement
+- **Format** : Markdown avec infrastructure MkDocs Material
 - **Nommage des fichiers** : `Chapitre_[Section/Volume].[N]_[Sujet].md` (préfixes en chiffres romains)
 - Les diagrammes utilisent la syntaxe Mermaid (rendu natif sur GitHub)
+- **Déploiement** : GitHub Actions → GitHub Pages via `mkdocs gh-deploy`
 
 ## Licence
 
