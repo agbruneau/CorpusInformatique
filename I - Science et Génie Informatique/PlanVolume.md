@@ -1,5 +1,21 @@
 # Restructuration Section I en 9 Volumes — Plan d'implémentation
 
+## Tableau de suivi de réalisation
+
+| Tâche | Description | Statut | Date |
+|-------|-------------|--------|------|
+| 1 | Créer les 9 répertoires de volumes | Complété | 2026-02-15 |
+| 2 | Déplacer les chapitres dans leurs volumes (git mv) | En attente | — |
+| 3 | Mettre à jour mkdocs.yml (navigation) | En attente | — |
+| 4 | Mettre à jour les références croisées entrantes (Sections II/III → Section I) | En attente | — |
+| 5 | Mettre à jour les références croisées sortantes (Section I → Sections II/III) | En attente | — |
+| 6 | Mettre à jour les références croisées internes (Section I → Section I) | En attente | — |
+| 7 | Mettre à jour CLAUDE.md | En attente | — |
+| 8 | Vérifier le build MkDocs | En attente | — |
+| 9 | Commit final et vérification | En attente | — |
+
+---
+
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
 **Goal:** Restructurer la Section I « Science et Génie Informatique » d'une structure plate (80 fichiers) en 9 sous-répertoires de volumes, conformément à `Structure_Volumes_80_Chapitres.md`, puis mettre à jour toutes les références croisées, la navigation MkDocs et le CLAUDE.md.
