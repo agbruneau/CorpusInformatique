@@ -11,8 +11,8 @@
 | 5 | Mettre à jour les références croisées sortantes (Section I → Sections II/III) | Complété | 2026-02-15 |
 | 6 | Mettre à jour les références croisées internes (Section I → Section I) | Complété | 2026-02-15 |
 | 7 | Mettre à jour CLAUDE.md | Complété | 2026-02-15 |
-| 8 | Vérifier le build MkDocs | En attente | — |
-| 9 | Commit final et vérification | En attente | — |
+| 8 | Vérifier le build MkDocs | Complété | 2026-02-15 |
+| 9 | Commit final et vérification | Complété | 2026-02-15 |
 
 ---
 
