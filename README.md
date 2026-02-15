@@ -1,6 +1,6 @@
 # Corpus Informatique
 
-Corpus encyclopédique francophone couvrant les fondements de l'informatique, l'interopérabilité des systèmes d'entreprise et l'émergence de l'entreprise agentique. L'ouvrage est structuré en trois collections totalisant 176 fichiers Markdown, enrichi de diagrammes Mermaid, de blocs de code pratiques et de références croisées inter-sections.
+Corpus encyclopédique francophone couvrant les fondements de l'informatique, créer à titre de projet académique en science information sur l'interopérabilité des systèmes d'entreprise et l'émergence de l'entreprise agentique. L'ouvrage est structuré en trois collections totalisant 176 fichiers Markdown, enrichi de diagrammes Mermaid, de blocs de code pratiques et de références croisées inter-sections.
 
 ---
 
@@ -10,36 +10,36 @@ Corpus encyclopédique francophone couvrant les fondements de l'informatique, l'
 
 Programme complet en neuf volumes (80 chapitres) couvrant l'ensemble du génie informatique, des fondements théoriques aux applications de la convergence AGI-quantique.
 
-| Volume | Titre | Chapitres |
-|--------|-------|-----------|
-| I | Fondements Mathématiques et Théorie de l'Informatique | I.1 – I.6 |
-| II | Architecture des Ordinateurs et Systèmes Numériques | I.7 – I.15 |
-| III | Systèmes d'Exploitation, Langages et Environnements | I.16 – I.21 |
-| IV | Structures de Données, Algorithmique et Génie Logiciel | I.22 – I.29 |
-| V | Données, Réseaux, Cloud et Sécurité | I.30 – I.40 |
-| VI | Intelligence Artificielle et Systèmes Interactifs | I.41 – I.50 |
-| VII | Technologies Émergentes et Frontières | I.51 – I.60 |
-| VIII | Convergence AGI–Quantique : Fondements et Algorithmes | I.61 – I.70 |
-| IX | Convergence AGI–Quantique : Applications et Perspectives | I.71 – I.80 |
+| Volume | Titre                                                     | Chapitres    |
+| ------ | --------------------------------------------------------- | ------------ |
+| I      | Fondements Mathématiques et Théorie de l'Informatique   | I.1 – I.6   |
+| II     | Architecture des Ordinateurs et Systèmes Numériques     | I.7 – I.15  |
+| III    | Systèmes d'Exploitation, Langages et Environnements      | I.16 – I.21 |
+| IV     | Structures de Données, Algorithmique et Génie Logiciel  | I.22 – I.29 |
+| V      | Données, Réseaux, Cloud et Sécurité                   | I.30 – I.40 |
+| VI     | Intelligence Artificielle et Systèmes Interactifs        | I.41 – I.50 |
+| VII    | Technologies Émergentes et Frontières                   | I.51 – I.60 |
+| VIII   | Convergence AGI–Quantique : Fondements et Algorithmes    | I.61 – I.70 |
+| IX     | Convergence AGI–Quantique : Applications et Perspectives | I.71 – I.80 |
 
 ### II — Interopérabilité
 
 Traité sur l'intégration des systèmes d'information en contexte d'entreprise (11 chapitres + annexes = 12 fichiers). Défend la thèse de l'interopérabilité comme un **continuum** allant du couplage fort au découplage maximal, à travers trois domaines complémentaires : applications, données et événements.
 
-| Chapitre | Sujet |
-|----------|-------|
-| II.1 | Introduction et Problématique |
-| II.2 | Fondements Théoriques |
-| II.3 | Intégration des Applications |
-| II.4 | Intégration des Données |
-| II.5 | Intégration des Événements |
-| II.6 | Standards et Contrats |
-| II.7 | Résilience et Observabilité |
-| II.8 | Collaboration et Automatisation |
-| II.9 | Architecture de Référence |
-| II.10 | Order-to-Cash (étude de cas) |
-| II.11 | Entreprise Agentique |
-| II.A | Annexes |
+| Chapitre | Sujet                           |
+| -------- | ------------------------------- |
+| II.1     | Introduction et Problématique  |
+| II.2     | Fondements Théoriques          |
+| II.3     | Intégration des Applications   |
+| II.4     | Intégration des Données       |
+| II.5     | Intégration des Événements   |
+| II.6     | Standards et Contrats           |
+| II.7     | Résilience et Observabilité   |
+| II.8     | Collaboration et Automatisation |
+| II.9     | Architecture de Référence     |
+| II.10    | Order-to-Cash (étude de cas)   |
+| II.11    | Entreprise Agentique            |
+| II.A     | Annexes                         |
 
 ### III — Entreprise Agentique
 
