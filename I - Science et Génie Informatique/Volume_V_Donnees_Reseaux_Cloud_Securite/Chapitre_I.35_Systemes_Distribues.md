@@ -703,5 +703,5 @@ Le choix d\'un modèle de consistance n\'est pas une décision purement techniqu
 
 ### Références croisées
 
-- **Apache Kafka et ecosysteme Confluent** : voir aussi [Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md)
-- **Architecture de reference convergente** : voir aussi [Chapitre 2.9 -- Architecture de Reference Convergente](../II - Interopérabilité/Chapitre_II.9_Architecture_Reference.md)
+- **Apache Kafka et ecosysteme Confluent** : voir aussi [Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent](../../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent.md)
+- **Architecture de reference convergente** : voir aussi [Chapitre 2.9 -- Architecture de Reference Convergente](../../II - Interopérabilité/Chapitre_II.9_Architecture_Reference.md)

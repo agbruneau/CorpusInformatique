@@ -1475,4 +1475,4 @@ Le chapitre suivant approfondira la dimension des tests et de l'évaluation, com
 ### Références croisées
 
 - **Resilience et observabilite en entreprise** : voir aussi [Chapitre 2.7 -- Patrons Transversaux de Resilience et Observabilite](../../II - Interopérabilité/Chapitre_II.7_Resilience_Observabilite.md)
-- **Pratiques modernes DevOps et SRE** : voir aussi [Chapitre 1.29 -- Pratiques Modernes de Developpement (DevOps et SRE)](../../I - Science et Génie Informatique/Chapitre_I.29_DevOps_SRE.md)
+- **Pratiques modernes DevOps et SRE** : voir aussi [Chapitre 1.29 -- Pratiques Modernes de Developpement (DevOps et SRE)](../../I - Science et Génie Informatique/Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.29_DevOps_SRE.md)

@@ -190,5 +190,5 @@ Ce chapitre a posé les fondements conceptuels de l'ère agentique, première é
 ### Références croisées
 
 - **Entreprise agentique -- perspectives d'interoperabilite** : voir aussi [Chapitre 2.11 -- Conclusion : Vers l'Entreprise Agentique](../../II - Interopérabilité/Chapitre_II.11_Entreprise_Agentique.md)
-- **Modeles fondateurs et IA a grande echelle** : voir aussi [Chapitre 1.55 -- Modeles Fondateurs et Ingenierie de l'IA a Grande Echelle](../../I - Science et Génie Informatique/Chapitre_I.55_Modeles_Fondateurs_IA.md)
-- **Vers l'AGI : alignement, securite et raisonnement** : voir aussi [Chapitre 1.56 -- Vers l'AGI : Alignement, Securite et Raisonnement Avance](../../I - Science et Génie Informatique/Chapitre_I.56_AGI_Alignement_Securite.md)
+- **Modeles fondateurs et IA a grande echelle** : voir aussi [Chapitre 1.55 -- Modeles Fondateurs et Ingenierie de l'IA a Grande Echelle](../../I - Science et Génie Informatique/Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.55_Modeles_Fondateurs_IA.md)
+- **Vers l'AGI : alignement, securite et raisonnement** : voir aussi [Chapitre 1.56 -- Vers l'AGI : Alignement, Securite et Raisonnement Avance](../../I - Science et Génie Informatique/Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.56_AGI_Alignement_Securite.md)

@@ -633,5 +633,5 @@ Ces exemples illustrent un principe fondamental : l\'Edge, le Fog et le Cloud ne
 
 ### Références croisées
 
-- **Ingenierie de plateforme agentique** : voir aussi [Chapitre II.1 -- Ingenierie de Plateforme](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.1_Ingenierie_Plateforme.md)
-- **Google Cloud Vertex AI** : voir aussi [Chapitre II.6 -- Google Cloud Vertex AI](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.6_Google_Cloud_Vertex_AI.md)
+- **Ingenierie de plateforme agentique** : voir aussi [Chapitre II.1 -- Ingenierie de Plateforme](../../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.1_Ingenierie_Plateforme.md)
+- **Google Cloud Vertex AI** : voir aussi [Chapitre II.6 -- Google Cloud Vertex AI](../../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.6_Google_Cloud_Vertex_AI.md)

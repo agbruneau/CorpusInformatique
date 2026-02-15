@@ -2378,5 +2378,5 @@ La sécurité et la gouvernance ne sont pas des projets ponctuels mais des prati
 
 ### Références croisées
 
-- **Fondements de la securite informatique** : voir aussi [Chapitre 1.37 -- Fondements de la Securite Informatique](../../I - Science et Génie Informatique/Chapitre_I.37_Fondements_Securite.md)
+- **Fondements de la securite informatique** : voir aussi [Chapitre 1.37 -- Fondements de la Securite Informatique](../../I - Science et Génie Informatique/Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.37_Fondements_Securite.md)
 - **Conformite reglementaire et confidentialite** : voir aussi [Chapitre II.15 -- Conformite Reglementaire et Gestion de la Confidentialite](../Volume_II_Infrastructure_Agentique/Chapitre_II.15_Conformite_Reglementaire_Gestion_Confidentialite.md)

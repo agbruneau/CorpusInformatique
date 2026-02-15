@@ -77,7 +77,17 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 ```
 CorpusInformatique/
-├── I - Science et Genie Informatique/               # 80 files (flat)
+├── I - Science et Genie Informatique/               # 80 files in 9 volume subdirectories
+│   ├── Volume_I_Fondements_Mathematiques_Theorie/    #   6 chapters (I.1–I.6)
+│   ├── Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/ #   9 chapters (I.7–I.15)
+│   ├── Volume_III_Systemes_Exploitation_Langages_Environnements/ #   6 chapters (I.16–I.21)
+│   ├── Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/ #   8 chapters (I.22–I.29)
+│   ├── Volume_V_Donnees_Reseaux_Cloud_Securite/      #   11 chapters (I.30–I.40)
+│   ├── Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/ #   10 chapters (I.41–I.50)
+│   ├── Volume_VII_Technologies_Emergentes_Frontieres/ #   10 chapters (I.51–I.60)
+│   ├── Volume_VIII_Convergence_AGI_Quantique_Fondements/ #   10 chapters (I.61–I.70)
+│   ├── Volume_IX_Convergence_AGI_Quantique_Applications/ #   10 chapters (I.71–I.80)
+│   └── Structure_Volumes_80_Chapitres.md             #   Index/reference file
 ├── II - Interopérabilité/                            # 12 files (flat)
 ├── III - Entreprise Agentique/                       # 5 volume subdirectories
 │   ├── Volume_I_Fondations_Entreprise_Agentique/     #   28 chapters
@@ -95,21 +105,23 @@ CorpusInformatique/
 └── .gitignore
 ```
 
-All sections use a flat structure — chapters are stored directly in their section or volume directory with no subdirectories.
+Sections I and III use volume subdirectories. Section II uses a flat structure. Within each volume, chapters are stored directly with no further nesting.
 
-### Section I — Science et Génie Informatique (7 volumes, 80 files)
+### Section I — Science et Génie Informatique (9 volumes, 80 files)
 
-Foundational CS curriculum: theoretical foundations (Vol. I), hardware architecture (Vol. II), software methodologies (Vol. III), data/networks/security (Vol. IV), AI (Vol. V), cutting-edge technologies (Vol. VI), cognitive-quantum architecture (Vol. VII). Chapters I.1–I.80.
+Foundational CS curriculum organized in 9 volumes with chapter files stored in volume subdirectories. Chapters I.1–I.80.
 
-| Volume | Chapitres    | Thème                                  | Nombre |
-| ------ | ------------ | --------------------------------------- | ------ |
-| I      | I.1 – I.6   | Fondations théoriques                  | 6      |
-| II     | I.7 – I.15  | Architecture et ingénierie matérielle | 9      |
-| III    | I.16 – I.29 | Systèmes logiciels et méthodologies   | 14     |
-| IV     | I.30 – I.40 | Données, réseaux et sécurité        | 11     |
-| V      | I.41 – I.50 | Intelligence artificielle               | 10     |
-| VI     | I.51 – I.60 | Technologies avant-garde                | 10     |
-| VII    | I.61 – I.80 | Architecture cognitivo-quantique        | 20     |
+| Volume | Chapitres    | Thème                                                  | Nombre |
+| ------ | ------------ | ------------------------------------------------------- | ------ |
+| I      | I.1 – I.6   | Fondements Mathématiques et Théorie de l'Informatique | 6      |
+| II     | I.7 – I.15  | Architecture des Ordinateurs et Systèmes Numériques   | 9      |
+| III    | I.16 – I.21 | Systèmes d'Exploitation, Langages et Environnements   | 6      |
+| IV     | I.22 – I.29 | Structures de Données, Algorithmique et Génie Logiciel | 8      |
+| V      | I.30 – I.40 | Données, Réseaux, Cloud et Sécurité                  | 11     |
+| VI     | I.41 – I.50 | Intelligence Artificielle et Systèmes Interactifs      | 10     |
+| VII    | I.51 – I.60 | Technologies Émergentes et Frontières                  | 10     |
+| VIII   | I.61 – I.70 | Convergence AGI–Quantique : Fondements et Algorithmes  | 10     |
+| IX     | I.71 – I.80 | Convergence AGI–Quantique : Applications et Perspectives | 10    |
 
 ### Section II — Interopérabilité (12 files: 11 chapters + annexes)
 

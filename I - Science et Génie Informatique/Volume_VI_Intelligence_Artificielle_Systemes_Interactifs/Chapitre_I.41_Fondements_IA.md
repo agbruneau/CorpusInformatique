@@ -689,6 +689,6 @@ Les concepts et algorithmes présentés dans ce chapitre --- de la formalisation
 
 ### Références croisées
 
-- **IA comme moteur d'interoperabilite** : voir aussi [Chapitre I.11 -- L'IA comme Moteur de l'Interoperabilite](../III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.11_IA_Moteur_Interoperabilite.md)
-- **Ere de l'IA agentique** : voir aussi [Chapitre I.13 -- L'Ere de l'IA Agentique](../III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.13_Ere_IA_Agentique_Modele_Travailleur_Numerique.md)
-- **Google Cloud Vertex AI** : voir aussi [Chapitre II.6 -- Google Cloud Vertex AI](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.6_Google_Cloud_Vertex_AI.md)
+- **IA comme moteur d'interoperabilite** : voir aussi [Chapitre I.11 -- L'IA comme Moteur de l'Interoperabilite](../../III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.11_IA_Moteur_Interoperabilite.md)
+- **Ere de l'IA agentique** : voir aussi [Chapitre I.13 -- L'Ere de l'IA Agentique](../../III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.13_Ere_IA_Agentique_Modele_Travailleur_Numerique.md)
+- **Google Cloud Vertex AI** : voir aussi [Chapitre II.6 -- Google Cloud Vertex AI](../../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.6_Google_Cloud_Vertex_AI.md)

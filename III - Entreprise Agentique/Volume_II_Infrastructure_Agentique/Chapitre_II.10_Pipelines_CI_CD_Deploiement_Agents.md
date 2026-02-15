@@ -1262,5 +1262,5 @@ Le chapitre suivant prolongera cette exploration opérationnelle en abordant l'o
 
 ### Références croisées
 
-- **Pratiques modernes DevOps et SRE** : voir aussi [Chapitre 1.29 -- Pratiques Modernes de Developpement (DevOps et SRE)](../../I - Science et Génie Informatique/Chapitre_I.29_DevOps_SRE.md)
-- **Qualite logicielle, test et maintenance** : voir aussi [Chapitre 1.28 -- Qualite Logicielle : Test et Maintenance](../../I - Science et Génie Informatique/Chapitre_I.28_Qualite_Test_Maintenance.md)
+- **Pratiques modernes DevOps et SRE** : voir aussi [Chapitre 1.29 -- Pratiques Modernes de Developpement (DevOps et SRE)](../../I - Science et Génie Informatique/Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.29_DevOps_SRE.md)
+- **Qualite logicielle, test et maintenance** : voir aussi [Chapitre 1.28 -- Qualite Logicielle : Test et Maintenance](../../I - Science et Génie Informatique/Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.28_Qualite_Test_Maintenance.md)

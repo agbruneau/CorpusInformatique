@@ -646,5 +646,5 @@ Les VAE et les GAN incarnent deux philosophies distinctes de la génération. Le
 
 ### Références croisées
 
-- **Modeles fondateurs et IA a grande echelle** : voir aussi [Chapitre 1.55 -- Modeles Fondateurs et Ingenierie de l'IA a Grande Echelle](Chapitre_I.55_Modeles_Fondateurs_IA.md)
-- **Google Cloud Vertex AI** : voir aussi [Chapitre II.6 -- Google Cloud Vertex AI](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.6_Google_Cloud_Vertex_AI.md)
+- **Modeles fondateurs et IA a grande echelle** : voir aussi [Chapitre 1.55 -- Modeles Fondateurs et Ingenierie de l'IA a Grande Echelle](../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.55_Modeles_Fondateurs_IA.md)
+- **Google Cloud Vertex AI** : voir aussi [Chapitre II.6 -- Google Cloud Vertex AI](../../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.6_Google_Cloud_Vertex_AI.md)

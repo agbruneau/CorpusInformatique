@@ -829,5 +829,5 @@ Au-delà de l'étude de cas, cette architecture de référence prépare le terra
 
 ### Références croisées
 
-- **Conception et architecture logicielle** : voir aussi [Chapitre 1.27 -- Conception et Architecture Logicielle](../I - Science et Génie Informatique/Chapitre_I.27_Architecture_Logicielle.md)
+- **Conception et architecture logicielle** : voir aussi [Chapitre 1.27 -- Conception et Architecture Logicielle](../I - Science et Génie Informatique/Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.27_Architecture_Logicielle.md)
 - **Principes d'architecture reactive** : voir aussi [Chapitre I.4 -- Principes d'Architecture Reactive](../III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.4_Principes_Architecture_Reactive.md)

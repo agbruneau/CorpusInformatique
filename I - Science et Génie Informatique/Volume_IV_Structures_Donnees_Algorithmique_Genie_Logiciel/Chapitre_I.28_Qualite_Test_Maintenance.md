@@ -1009,5 +1009,5 @@ En définitive, la gestion de la dette technique est le moteur économique qui u
 
 ### Références croisées
 
-- **Tests et simulation des systemes multi-agents** : voir aussi [Chapitre II.12 -- Tests, Evaluation et Simulation des Systemes Multi-Agents](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.12_Tests_Evaluation_Simulation_Systemes_Multi_Agents.md)
-- **Imperatif qualite et responsabilite** : voir aussi [Chapitre V.5 -- L'Imperatif Qualite et Responsabilite](../III - Entreprise Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.5_Imperatif_Qualite_Responsabilite.md)
+- **Tests et simulation des systemes multi-agents** : voir aussi [Chapitre II.12 -- Tests, Evaluation et Simulation des Systemes Multi-Agents](../../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.12_Tests_Evaluation_Simulation_Systemes_Multi_Agents.md)
+- **Imperatif qualite et responsabilite** : voir aussi [Chapitre V.5 -- L'Imperatif Qualite et Responsabilite](../../III - Entreprise Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.5_Imperatif_Qualite_Responsabilite.md)

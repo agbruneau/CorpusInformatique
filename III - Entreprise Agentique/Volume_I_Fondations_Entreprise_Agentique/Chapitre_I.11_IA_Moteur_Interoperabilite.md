@@ -248,6 +248,6 @@ Ce chapitre a exploré comment l'intelligence artificielle transforme l'interop�
 
 ### Références croisées
 
-- **Fondements de l'intelligence artificielle** : voir aussi [Chapitre 1.41 -- Fondements de l'Intelligence Artificielle](../../I - Science et Génie Informatique/Chapitre_I.41_Fondements_IA.md)
-- **Apprentissage automatique (ML) -- Fondements** : voir aussi [Chapitre 1.43 -- Apprentissage Automatique (ML) -- Fondements](../../I - Science et Génie Informatique/Chapitre_I.43_ML_Fondements.md)
-- **Modeles fondateurs et IA a grande echelle** : voir aussi [Chapitre 1.55 -- Modeles Fondateurs et IA a Grande Echelle](../../I - Science et Génie Informatique/Chapitre_I.55_Modeles_Fondateurs_IA.md)
+- **Fondements de l'intelligence artificielle** : voir aussi [Chapitre 1.41 -- Fondements de l'Intelligence Artificielle](../../I - Science et Génie Informatique/Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.41_Fondements_IA.md)
+- **Apprentissage automatique (ML) -- Fondements** : voir aussi [Chapitre 1.43 -- Apprentissage Automatique (ML) -- Fondements](../../I - Science et Génie Informatique/Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.43_ML_Fondements.md)
+- **Modeles fondateurs et IA a grande echelle** : voir aussi [Chapitre 1.55 -- Modeles Fondateurs et IA a Grande Echelle](../../I - Science et Génie Informatique/Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.55_Modeles_Fondateurs_IA.md)

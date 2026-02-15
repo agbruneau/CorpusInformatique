@@ -5,12 +5,12 @@
 | Tâche | Description | Statut | Date |
 |-------|-------------|--------|------|
 | 1 | Créer les 9 répertoires de volumes | Complété | 2026-02-15 |
-| 2 | Déplacer les chapitres dans leurs volumes (git mv) | En attente | — |
-| 3 | Mettre à jour mkdocs.yml (navigation) | En attente | — |
-| 4 | Mettre à jour les références croisées entrantes (Sections II/III → Section I) | En attente | — |
-| 5 | Mettre à jour les références croisées sortantes (Section I → Sections II/III) | En attente | — |
-| 6 | Mettre à jour les références croisées internes (Section I → Section I) | En attente | — |
-| 7 | Mettre à jour CLAUDE.md | En attente | — |
+| 2 | Déplacer les chapitres dans leurs volumes (git mv) | Complété | 2026-02-15 |
+| 3 | Mettre à jour mkdocs.yml (navigation) | Complété | 2026-02-15 |
+| 4 | Mettre à jour les références croisées entrantes (Sections II/III → Section I) | Complété | 2026-02-15 |
+| 5 | Mettre à jour les références croisées sortantes (Section I → Sections II/III) | Complété | 2026-02-15 |
+| 6 | Mettre à jour les références croisées internes (Section I → Section I) | Complété | 2026-02-15 |
+| 7 | Mettre à jour CLAUDE.md | Complété | 2026-02-15 |
 | 8 | Vérifier le build MkDocs | En attente | — |
 | 9 | Commit final et vérification | En attente | — |
 

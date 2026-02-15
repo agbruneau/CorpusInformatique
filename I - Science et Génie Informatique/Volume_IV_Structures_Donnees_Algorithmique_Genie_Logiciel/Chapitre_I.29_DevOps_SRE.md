@@ -746,5 +746,5 @@ Ces évolutions confirment que les principes décrits dans ce chapitre ne sont p
 
 ### Références croisées
 
-- **Pipelines CI/CD pour le deploiement d'agents** : voir aussi [Chapitre II.10 -- Pipelines CI/CD et Deploiement des Agents](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.10_Pipelines_CI_CD_Deploiement_Agents.md)
-- **Observabilite comportementale et monitoring** : voir aussi [Chapitre II.11 -- Observabilite Comportementale et Monitoring](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.11_Observabilite_Comportementale_Monitoring.md)
+- **Pipelines CI/CD pour le deploiement d'agents** : voir aussi [Chapitre II.10 -- Pipelines CI/CD et Deploiement des Agents](../../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.10_Pipelines_CI_CD_Deploiement_Agents.md)
+- **Observabilite comportementale et monitoring** : voir aussi [Chapitre II.11 -- Observabilite Comportementale et Monitoring](../../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.11_Observabilite_Comportementale_Monitoring.md)

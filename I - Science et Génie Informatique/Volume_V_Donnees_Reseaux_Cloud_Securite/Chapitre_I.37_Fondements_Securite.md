@@ -544,6 +544,6 @@ Cette évolution est au cœur des architectures de sécurité modernes, notammen
 
 ### Références croisées
 
-- **Securite des systemes agentiques** : voir aussi [Chapitre II.13 -- Paysage des Menaces et Securite des Systemes Agentiques](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.13_Paysage_Menaces_Securite_Systemes_Agentiques.md)
-- **Securisation de l'infrastructure agentique** : voir aussi [Chapitre II.14 -- Securisation de l'Infrastructure](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.14_Securisation_Infrastructure.md)
-- **Securite et gouvernance du Lakehouse** : voir aussi [Chapitre IV.13 -- Securite, Gouvernance et Conformite](../III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.13_Securite_Gouvernance_Conformite.md)
+- **Securite des systemes agentiques** : voir aussi [Chapitre II.13 -- Paysage des Menaces et Securite des Systemes Agentiques](../../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.13_Paysage_Menaces_Securite_Systemes_Agentiques.md)
+- **Securisation de l'infrastructure agentique** : voir aussi [Chapitre II.14 -- Securisation de l'Infrastructure](../../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.14_Securisation_Infrastructure.md)
+- **Securite et gouvernance du Lakehouse** : voir aussi [Chapitre IV.13 -- Securite, Gouvernance et Conformite](../../III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.13_Securite_Gouvernance_Conformite.md)

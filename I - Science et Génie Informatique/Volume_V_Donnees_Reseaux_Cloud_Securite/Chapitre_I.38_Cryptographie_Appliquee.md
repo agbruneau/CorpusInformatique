@@ -738,5 +738,5 @@ Les ZKP, initialement une curiosité théorique, sont devenus une brique technol
 
 ### Références croisées
 
-- **Securisation de l'infrastructure agentique** : voir aussi [Chapitre II.14 -- Securisation de l'Infrastructure](../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.14_Securisation_Infrastructure.md)
+- **Securisation de l'infrastructure agentique** : voir aussi [Chapitre II.14 -- Securisation de l'Infrastructure](../../III - Entreprise Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.14_Securisation_Infrastructure.md)
 - **Fondements de la securite informatique** : voir aussi [Chapitre 1.37 -- Fondements de la Securite Informatique](Chapitre_I.37_Fondements_Securite.md)

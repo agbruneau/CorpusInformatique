@@ -442,5 +442,5 @@ Enfin, l\'intelligence artificielle et l\'apprentissage automatique (Machine Lea
 
 ### Références croisées
 
-- **Integration des donnees en entreprise** : voir aussi [Chapitre 2.4 -- Integration des Donnees](../II - Interopérabilité/Chapitre_II.4_Integration_Donnees.md)
-- **Apache Iceberg et le monde Lakehouse** : voir aussi [Chapitre IV.1 -- Le Monde du Lakehouse et d'Apache Iceberg](../III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.1_Monde_Lakehouse_Iceberg.md)
+- **Integration des donnees en entreprise** : voir aussi [Chapitre 2.4 -- Integration des Donnees](../../II - Interopérabilité/Chapitre_II.4_Integration_Donnees.md)
+- **Apache Iceberg et le monde Lakehouse** : voir aussi [Chapitre IV.1 -- Le Monde du Lakehouse et d'Apache Iceberg](../../III - Entreprise Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.1_Monde_Lakehouse_Iceberg.md)

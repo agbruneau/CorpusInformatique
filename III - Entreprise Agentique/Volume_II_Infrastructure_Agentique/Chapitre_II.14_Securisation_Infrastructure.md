@@ -605,5 +605,5 @@ La sécurisation de l'infrastructure agentique représente un investissement sig
 
 ### Références croisées
 
-- **Fondements de la securite informatique** : voir aussi [Chapitre 1.37 -- Fondements de la Securite Informatique](../../I - Science et Génie Informatique/Chapitre_I.37_Fondements_Securite.md)
-- **Cryptographie appliquee** : voir aussi [Chapitre 1.38 -- Cryptographie Appliquee](../../I - Science et Génie Informatique/Chapitre_I.38_Cryptographie_Appliquee.md)
+- **Fondements de la securite informatique** : voir aussi [Chapitre 1.37 -- Fondements de la Securite Informatique](../../I - Science et Génie Informatique/Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.37_Fondements_Securite.md)
+- **Cryptographie appliquee** : voir aussi [Chapitre 1.38 -- Cryptographie Appliquee](../../I - Science et Génie Informatique/Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.38_Cryptographie_Appliquee.md)

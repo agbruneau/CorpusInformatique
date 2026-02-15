@@ -770,4 +770,4 @@ L'architecte averti notera que les frontières entre ces domaines ne sont pas é
 ### Références croisées
 
 - **Ecosysteme API et strategie produit** : voir aussi [Chapitre I.5 -- Ecosysteme API : Protocoles Modernes et Strategie Produit](../III - Entreprise Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.5_Ecosysteme_API.md)
-- **Conception et architecture logicielle** : voir aussi [Chapitre 1.27 -- Conception et Architecture Logicielle](../I - Science et Génie Informatique/Chapitre_I.27_Architecture_Logicielle.md)
+- **Conception et architecture logicielle** : voir aussi [Chapitre 1.27 -- Conception et Architecture Logicielle](../I - Science et Génie Informatique/Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.27_Architecture_Logicielle.md)
