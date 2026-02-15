@@ -8,17 +8,19 @@ Corpus encyclopédique francophone couvrant les fondements de l'informatique, l'
 
 ### I — Cursus : Science et Génie Informatique
 
-Programme complet en sept volumes (80 chapitres) couvrant l'ensemble du génie informatique, des fondements théoriques aux architectures cognitivo-quantiques.
+Programme complet en neuf volumes (80 chapitres) couvrant l'ensemble du génie informatique, des fondements théoriques aux applications de la convergence AGI-quantique.
 
 | Volume | Titre | Chapitres |
 |--------|-------|-----------|
-| I | Fondations Théoriques de l'Informatique | I.1 – I.6 |
-| II | Architecture et Ingénierie Matérielle | I.7 – I.15 |
-| III | Systèmes Logiciels et Méthodologies | I.16 – I.29 |
-| IV | Données, Réseaux et Sécurité | I.30 – I.40 |
-| V | Intelligence Artificielle et Domaines Spécialisés | I.41 – I.50 |
-| VI | Technologies Avant-Garde | I.51 – I.60 |
-| VII | Architecture Cognitivo-Quantique | I.61 – I.80 |
+| I | Fondements Mathématiques et Théorie de l'Informatique | I.1 – I.6 |
+| II | Architecture des Ordinateurs et Systèmes Numériques | I.7 – I.15 |
+| III | Systèmes d'Exploitation, Langages et Environnements | I.16 – I.21 |
+| IV | Structures de Données, Algorithmique et Génie Logiciel | I.22 – I.29 |
+| V | Données, Réseaux, Cloud et Sécurité | I.30 – I.40 |
+| VI | Intelligence Artificielle et Systèmes Interactifs | I.41 – I.50 |
+| VII | Technologies Émergentes et Frontières | I.51 – I.60 |
+| VIII | Convergence AGI–Quantique : Fondements et Algorithmes | I.61 – I.70 |
+| IX | Convergence AGI–Quantique : Applications et Perspectives | I.71 – I.80 |
 
 ### II — Interopérabilité
 
