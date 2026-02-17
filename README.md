@@ -1,6 +1,6 @@
 # Corpus Informatique
 
-Corpus encyclopédique francophone couvrant les fondements de l'informatique, disponible https://agbruneau.github.io/CorpusInformatique/, créer à titre de projet académique en science information sur l'interopérabilité des systèmes d'entreprise et l'émergence de l'entreprise agentique. L'ouvrage est structuré en trois collections totalisant 176 fichiers Markdown, enrichi de diagrammes Mermaid, de blocs de code pratiques et de références croisées inter-sections.
+Corpus encyclopédique francophone couvrant les fondements de l'informatique, disponible sur https://agbruneau.github.io/CorpusInformatique/, créer à titre de projet académique en science information sur l'interopérabilité des systèmes d'entreprise et l'émergence de l'entreprise agentique. L'ouvrage est structuré en trois collections totalisant 176 fichiers Markdown, enrichi de diagrammes Mermaid, de blocs de code pratiques et de références croisées inter-sections.
 
 ---
 
