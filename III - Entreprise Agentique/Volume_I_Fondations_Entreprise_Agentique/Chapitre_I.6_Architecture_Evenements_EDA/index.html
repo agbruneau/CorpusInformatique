@@ -1,0 +1,7318 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corpus encyclopédique francophone — science informatique, interopérabilité et entreprise agentique">
+      
+      
+        <meta name="author" content="André-Guy Bruneau">
+      
+      
+        <link rel="canonical" href="https://agbruneau.github.io/CorpusInformatique/III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.6_Architecture_Evenements_EDA/">
+      
+      
+        <link rel="prev" href="../Chapitre_I.5_Ecosysteme_API/">
+      
+      
+        <link rel="next" href="../Chapitre_I.7_Contrats_Donnees/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>I.6 — Architecture événements (EDA) - Corpus Informatique</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapitre-i6-architecture-orientee-evenements-eda-et-le-maillage-devenements" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../../.." title="Corpus Informatique" class="md-header__button md-logo" aria-label="Corpus Informatique" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corpus Informatique
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              I.6 — Architecture événements (EDA)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Passer au mode sombre"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer au mode sombre" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Passer au mode clair"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer au mode clair" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/agbruneau/CorpusInformatique" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    agbruneau/CorpusInformatique
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.1_Fondements_Logiques_Raisonnement/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  I — Science et Génie Informatique
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.1_Introduction_Problematique/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  II — Interopérabilité
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Chapitre_I.1_Crise_Integration_Systemique/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  III — Entreprise Agentique
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Corpus Informatique" class="md-nav__button md-logo" aria-label="Corpus Informatique" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Corpus Informatique
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/agbruneau/CorpusInformatique" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    agbruneau/CorpusInformatique
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I — Science et Génie Informatique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    I — Science et Génie Informatique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume I — Fondements Mathématiques et Théorie de l'Informatique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume I — Fondements Mathématiques et Théorie de l'Informatique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.1_Fondements_Logiques_Raisonnement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.1 — Fondements logiques et raisonnement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.2_Structures_Discretes_Combinatoire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.2 — Structures discrètes et combinatoire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.3_Theorie_Graphes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.3 — Théorie des graphes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.4_Langages_Formels_Automates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.4 — Langages formels et automates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.5_Calculabilite_Decidabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.5 — Calculabilité et décidabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.6_Theorie_Complexite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.6 — Théorie de la complexité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume II — Architecture des Ordinateurs et Systèmes Numériques
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume II — Architecture des Ordinateurs et Systèmes Numériques
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.7_Systemes_Numeriques_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.7 — Systèmes numériques et données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.8_Circuits_Combinatoires/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.8 — Circuits combinatoires
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.9_Circuits_Sequentiels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.9 — Circuits séquentiels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.10_Conception_Systeme_HDL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.10 — Conception système HDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.11_Architecture_ISA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.11 — Architecture ISA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.12_Conception_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.12 — Conception CPU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.13_Parallelisme_ILP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.13 — Parallélisme ILP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.14_Hierarchie_Memoire_Stockage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.14 — Hiérarchie mémoire et stockage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.15_Systemes_IO_Accelere/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.15 — Systèmes I/O accélérés
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume III — Systèmes d'Exploitation, Langages et Environnements
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume III — Systèmes d'Exploitation, Langages et Environnements
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.16_Systemes_Exploitation_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.16 — Systèmes d'exploitation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.17_Gestion_Concurrence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.17 — Gestion de la concurrence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.18_Gestion_Memoire_Fichiers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.18 — Gestion mémoire et fichiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.19_Conception_Langages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.19 — Conception des langages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.20_Compilation_Interpretation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.20 — Compilation et interprétation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.21_Environnements_Virtualisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.21 — Environnements et virtualisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume IV — Structures de Données, Algorithmique et Génie Logiciel
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume IV — Structures de Données, Algorithmique et Génie Logiciel
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.22_Structures_Donnees_Fondamentales/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.22 — Structures de données fondamentales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.23_Structures_Donnees_Avancees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.23 — Structures de données avancées
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.24_Conception_Analyse_Algorithmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.24 — Conception et analyse d'algorithmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.25_Algorithmes_Graphes_Avances/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.25 — Algorithmes de graphes avancés
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.26_Processus_Developpement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.26 — Processus de développement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.27_Architecture_Logicielle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.27 — Architecture logicielle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.28_Qualite_Test_Maintenance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.28 — Qualité, test et maintenance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.29_DevOps_SRE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.29 — DevOps et SRE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume V — Données, Réseaux, Cloud et Sécurité
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume V — Données, Réseaux, Cloud et Sécurité
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.30_SGBD_Fondements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.30 — SGBD fondements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.31_SGBD_Implementation_Transactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.31 — SGBD implémentation et transactions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.32_Donnees_Modernes_BigData/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.32 — Données modernes et Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.33_Fondements_Reseaux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.33 — Fondements des réseaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.34_Protocoles_Internetworking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.34 — Protocoles et internetworking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.35_Systemes_Distribues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.35 — Systèmes distribués
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.36_Cloud_Infrastructures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.36 — Cloud et infrastructures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.37_Fondements_Securite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.37 — Fondements de la sécurité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.38_Cryptographie_Appliquee/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.38 — Cryptographie appliquée
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.39_Securite_Reseaux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.39 — Sécurité des réseaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.40_Securite_Systemes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.40 — Sécurité des systèmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume VI — Intelligence Artificielle et Systèmes Interactifs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume VI — Intelligence Artificielle et Systèmes Interactifs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.41_Fondements_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.41 — Fondements de l'IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.42_Connaissance_Raisonnement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.42 — Connaissance et raisonnement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.43_ML_Fondements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.43 — ML fondements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.44_DeepLearning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.44 — Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.45_Reinforcement_Learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.45 — Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.46_TALN_NLP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.46 — TALN / NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.47_Vision_Ordinateur/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.47 — Vision par ordinateur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.48_Infographie_Visualisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.48 — Infographie et visualisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.49_IHM_HCI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.49 — IHM / HCI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.50_Robotique_IoT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.50 — Robotique et IoT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume VII — Technologies Émergentes et Frontières
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume VII — Technologies Émergentes et Frontières
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.51_Informatique_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.51 — Informatique quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.52_Algorithmes_Cryptographie_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.52 — Algorithmes et cryptographie quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.53_HPC_Exascale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.53 — HPC et exascale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.54_Architectures_Post_Moore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.54 — Architectures post-Moore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.55_Modeles_Fondateurs_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.55 — Modèles fondateurs IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.56_AGI_Alignement_Securite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.56 — AGI, alignement et sécurité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.57_Sciences_Computationnelles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.57 — Sciences computationnelles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.58_CyberPhysiques_Jumeaux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.58 — Systèmes cyber-physiques et jumeaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.59_Web3_Decentralise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.59 — Web3 et décentralisé
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.60_Synthese_Frontieres/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.60 — Synthèse et frontières
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume VIII — Convergence AGI–Quantique : Fondements et Algorithmes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume VIII — Convergence AGI–Quantique : Fondements et Algorithmes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.61_Introduction_Informatique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.61 — Introduction à l'informatique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.62_Convergence_AGI_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.62 — Convergence AGI-quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.63_Evolution_IA_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.63 — Évolution IA-quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.64_Reseaux_Neuronaux_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.64 — Réseaux neuronaux quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.65_Algorithmes_Evolutionnaires_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.65 — Algorithmes évolutionnaires quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.66_Renforcement_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.66 — Renforcement quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.67_Architectures_Hybrides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.67 — Architectures hybrides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.68_SVM_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.68 — SVM quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.69_Codage_Donnees_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.69 — Codage de données quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.70_Scalabilite_Correction_Erreurs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.70 — Scalabilité et correction d'erreurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume IX — Convergence AGI–Quantique : Applications et Perspectives
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume IX — Convergence AGI–Quantique : Applications et Perspectives
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.71_TALN_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.71 — TALN quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.72_Securite_Confidentialite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.72 — Sécurité et confidentialité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.73_Ethique_Reglementaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.73 — Éthique et réglementaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.74_Implementation_Materielle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.74 — Implémentation matérielle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.75_Middleware_Software/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.75 — Middleware et software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.76_Etudes_Cas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.76 — Études de cas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.77_Durabilite_Energie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.77 — Durabilité et énergie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.78_Metriques_Bancs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.78 — Métriques et bancs d'essai
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.79_Perspectives_Avenir/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.79 — Perspectives d'avenir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.80_Infrastructure_Centres_Donnees_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.80 — Infrastructure et centres de données IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II — Interopérabilité
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    II — Interopérabilité
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.1_Introduction_Problematique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.1 — Introduction et problématique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.2_Fondements_Theoriques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.2 — Fondements théoriques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.3_Integration_Applications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.3 — Intégration des applications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.4_Integration_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.4 — Intégration des données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.5_Integration_Evenements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.5 — Intégration des événements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.6_Standards_Contrats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.6 — Standards et contrats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.7_Resilience_Observabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.7 — Résilience et observabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.8_Collaboration_Automatisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.8 — Collaboration et automatisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.9_Architecture_Reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.9 — Architecture de référence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.10_Order_to_Cash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.10 — Order-to-Cash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.11_Entreprise_Agentique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.11 — Entreprise agentique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.12_Securite_Identite_Conformite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.12 — Sécurité, identité et conformité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.A_Annexes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annexes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III — Entreprise Agentique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    III — Entreprise Agentique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume I — Fondations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume I — Fondations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.1_Crise_Integration_Systemique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.1 — Crise d'intégration systémique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.2_Fondements_Dimensions_Interoperabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.2 — Fondements et dimensions de l'interopérabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.3_Cadres_Reference_Standards_Maturite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.3 — Cadres de référence, standards et maturité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.4_Principes_Architecture_Reactive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.4 — Principes d'architecture réactive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.5_Ecosysteme_API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.5 — Écosystème API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.6 — Architecture événements (EDA)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.6 — Architecture événements (EDA)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i60-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I.6.0 Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i61-le-paradigme-eda-decouplage-reactivite-et-conscience-situationnelle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I.6.1 Le Paradigme EDA : Découplage, Réactivité et Conscience Situationnelle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i62-concepts-fondamentaux-du-streaming-de-donnees-kafkaconfluent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I.6.2 Concepts Fondamentaux du Streaming de Données (Kafka/Confluent)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i63-modelisation-des-interactions-asynchrones-avec-asyncapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I.6.3 Modélisation des Interactions Asynchrones avec AsyncAPI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i64-levolution-vers-les-architectures-event-native" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I.6.4 L'Évolution vers les Architectures Event-Native
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i65-le-maillage-devenements-event-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I.6.5 Le Maillage d'Événements (Event Mesh)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i66-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I.6.6 Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i67-resume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I.6.7 Résumé
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I.6.7 Résumé">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#references-croisees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Références croisées
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.7_Contrats_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.7 — Contrats de données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.8_Conception_Implementation_Observabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.8 — Conception et implémentation de l'observabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.9_Etudes_Cas_Architecturales/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.9 — Études de cas architecturales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.10_Limites_Interoperabilite_Semantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.10 — Limites de l'interopérabilité sémantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.11_IA_Moteur_Interoperabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.11 — IA moteur d'interopérabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.12_Definition_Interoperabilite_Cognitivo_Adaptative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.12 — Définition de l'interopérabilité cognitivo-adaptative
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.13_Ere_IA_Agentique_Modele_Travailleur_Numerique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.13 — Ère IA agentique et modèle du travailleur numérique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.14_Maillage_Agentique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.14 — Maillage agentique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.15_Ingenierie_Systemes_Cognitifs_Protocoles_Interaction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.15 — Ingénierie des systèmes cognitifs et protocoles d'interaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.16_Modele_Operationnel_Symbiose_Humain_Agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.16 — Modèle opérationnel de symbiose humain-agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.17_Gouvernance_Constitutionnelle_Alignement_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.17 — Gouvernance constitutionnelle et alignement IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.18_AgentOps_Industrialisation_Securisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.18 — AgentOps : industrialisation et sécurisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.19_Architecte_Intentions_Role_Sociotechnique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.19 — Architecte des intentions : rôle sociotechnique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.20_Cockpit_Berger_Intention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.20 — Cockpit du berger d'intention
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.21_Feuille_Route_Transformation_Agentique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.21 — Feuille de route de la transformation agentique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.22_Gestion_Strategique_Portefeuille_Applicatif_APM_Cognitif/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.22 — Gestion stratégique du portefeuille applicatif (APM cognitif)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.23_Patrons_Modernisation_Agentification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.23 — Patrons de modernisation et agentification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.24_Industrialisation_Ingenierie_Plateforme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.24 — Industrialisation et ingénierie de plateforme
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.25_Economie_Cognitive_Diplomatie_Algorithmique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.25 — Économie cognitive et diplomatie algorithmique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.26_Gestion_Risques_Systemiques_Superalignement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.26 — Gestion des risques systémiques et superalignement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.27_Prospective_Agent_Auto_Architecturant_AGI_Entreprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.27 — Prospective : agent auto-architecturant et AGI d'entreprise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.28_Conclusion_Architecture_Intentionnelle_Sagesse_Collective/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.28 — Conclusion : architecture intentionnelle et sagesse collective
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume II — Infrastructure Agentique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume II — Infrastructure Agentique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.1_Ingenierie_Plateforme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.1 — Ingénierie de plateforme
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.2 — Fondamentaux Apache Kafka et Confluent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.3_Conception_Modelisation_Flux_Evenements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.3 — Conception et modélisation des flux d'événements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.4_Contrats_Donnees_Gouvernance_Semantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.4 — Contrats de données et gouvernance sémantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.5_Flux_Temps_Reel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.5 — Flux temps réel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.6_Google_Cloud_Vertex_AI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.6 — Google Cloud et Vertex AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.7_Ingenierie_Contexte_RAG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.7 — Ingénierie de contexte et RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.8_Integration_Backbone_Evenementiel_Couche_Cognitive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.8 — Intégration backbone événementiel et couche cognitive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.9_Patrons_Architecturaux_Avances_AEM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.9 — Patrons architecturaux avancés (AEM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.10_Pipelines_CI_CD_Deploiement_Agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.10 — Pipelines CI/CD et déploiement d'agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.11_Observabilite_Comportementale_Monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.11 — Observabilité comportementale et monitoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.12_Tests_Evaluation_Simulation_Systemes_Multi_Agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.12 — Tests, évaluation et simulation de systèmes multi-agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.13_Paysage_Menaces_Securite_Systemes_Agentiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.13 — Paysage des menaces et sécurité des systèmes agentiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.14_Securisation_Infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.14 — Sécurisation de l'infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.15_Conformite_Reglementaire_Gestion_Confidentialite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.15 — Conformité réglementaire et gestion de la confidentialité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume III — Apache Kafka : Guide de l'Architecte
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume III — Apache Kafka : Guide de l'Architecte
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.1_Decouvrir_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.1 — Découvrir Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.2_Architecture_Cluster_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.2 — Architecture du cluster Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.3_Clients_Kafka_Production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.3 — Clients Kafka en production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.4_Applications_Consommatrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.4 — Applications consommatrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.5_Cas_Utilisation_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.5 — Cas d'utilisation Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.6_Contrats_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.6 — Contrats de données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.7_Patrons_Interaction_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.7 — Patrons d'interaction Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.8_Conception_Application_Streaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.8 — Conception d'application streaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.9_Gestion_Kafka_Entreprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.9 — Gestion Kafka en entreprise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.10_Organisation_Projet_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.10 — Organisation d'un projet Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.11_Operer_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.11 — Opérer Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.12_Avenir_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.12 — L'avenir de Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume IV — Apache Iceberg et Lakehouse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume IV — Apache Iceberg et Lakehouse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.1_Monde_Lakehouse_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.1 — Le monde Lakehouse et Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.2_Anatomie_Technique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.2 — Anatomie technique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.3_Mise_Pratique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.3 — Mise en pratique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.4_Preparer_Passage_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.4 — Préparer le passage à Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.5_Selection_Couche_Stockage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.5 — Sélection de la couche de stockage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.6_Architecture_Couche_Ingestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.6 — Architecture de la couche d'ingestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.7_Implementation_Couche_Catalogue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.7 — Implémentation de la couche catalogue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.8_Conception_Couche_Federation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.8 — Conception de la couche de fédération
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.9_Comprendre_Couche_Consommation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.9 — Comprendre la couche de consommation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.10_Maintenir_Lakehouse_Production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.10 — Maintenir le Lakehouse en production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.11_Operationnaliser_Apache_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.11 — Opérationnaliser Apache Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.12_Evolution_Streaming_Lakehouse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.12 — Évolution du streaming Lakehouse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.13_Securite_Gouvernance_Conformite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.13 — Sécurité, gouvernance et conformité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.14_Integration_Microsoft_Fabric_PowerBI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.14 — Intégration Microsoft Fabric et Power BI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.15_Contexte_Canadien_Etudes_Cas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.15 — Contexte canadien et études de cas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.16_Conclusion_Perspectives_2026_2030/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.16 — Conclusion et perspectives 2026-2030
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.Annexe_A_Specification_Apache_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annexe A — Spécification Apache Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.Annexe_B_Glossaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annexe B — Glossaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume V — Développeur Renaissance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume V — Développeur Renaissance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Developpeur_Renaissance/Chapitre_V.0_Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.0 — Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Developpeur_Renaissance/Chapitre_V.1_Convergence_Ages_Or/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.1 — Convergence des âges d'or
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Developpeur_Renaissance/Chapitre_V.2_Curiosite_Appliquee/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.2 — Curiosité appliquée
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Developpeur_Renaissance/Chapitre_V.3_Pensee_Systemique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.3 — Pensée systémique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Developpeur_Renaissance/Chapitre_V.4_Nouvelle_Communication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.4 — Nouvelle communication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Developpeur_Renaissance/Chapitre_V.5_Imperatif_Qualite_Responsabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.5 — Impératif qualité et responsabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Developpeur_Renaissance/Chapitre_V.6_Capital_Humain_Profil_Polymathe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.6 — Capital humain et profil polymathe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Developpeur_Renaissance/Chapitre_V.7_Art_Batir_Futur/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.7 — L'art de bâtir le futur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Developpeur_Renaissance/Chapitre_V.8_Bibliotheque_Developpeur_Renaissance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.8 — Bibliothèque du développeur Renaissance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Developpeur_Renaissance/Chapitre_V.9_Mandat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.9 — Mandat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Developpeur_Renaissance/Chapitre_V.10_Spec_Driven_Development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.10 — Spec-Driven Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chapitre-i6-architecture-orientee-evenements-eda-et-le-maillage-devenements">Chapitre I.6 — Architecture Orientée Événements (EDA) et le Maillage d'Événements<a class="headerlink" href="#chapitre-i6-architecture-orientee-evenements-eda-et-le-maillage-devenements" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="i60-introduction">I.6.0 Introduction<a class="headerlink" href="#i60-introduction" title="Permanent link">&para;</a></h2>
+<p>Le chapitre précédent a exploré l'écosystème des API synchrones. Ce chapitre aborde le second pilier de la symbiose : l'architecture orientée événements (Event-Driven Architecture ou EDA). Si les API constituent les interfaces de commande et de requête du système nerveux numérique, les événements en forment le flux nerveux — la circulation continue d'informations qui confère à l'organisme sa conscience situationnelle.</p>
+<p>L'architecture orientée événements représente un changement de paradigme profond dans la conception des systèmes d'information. Au lieu de systèmes qui s'interrogent mutuellement pour connaître l'état du monde, l'EDA fait circuler les faits dès qu'ils se produisent. Cette inversion — du « pull » au « push » — transforme la dynamique des interactions et ouvre des possibilités architecturales inédites.</p>
+<p>Ce chapitre explore le paradigme EDA dans toutes ses dimensions. Nous examinerons d'abord les principes fondamentaux : découplage, réactivité, conscience situationnelle. Nous plongerons ensuite dans les concepts techniques du streaming de données avec Apache Kafka. Nous aborderons la modélisation des interfaces asynchrones avec AsyncAPI. Enfin, nous présenterons le concept de maillage d'événements (Event Mesh) qui unifie les flux à l'échelle de l'entreprise et au-delà.</p>
+<h2 id="i61-le-paradigme-eda-decouplage-reactivite-et-conscience-situationnelle">I.6.1 Le Paradigme EDA : Découplage, Réactivité et Conscience Situationnelle<a class="headerlink" href="#i61-le-paradigme-eda-decouplage-reactivite-et-conscience-situationnelle" title="Permanent link">&para;</a></h2>
+<p>L'architecture orientée événements repose sur une idée simple mais aux conséquences profondes : les systèmes communiquent en émettant des événements qui décrivent ce qui s'est produit, plutôt qu'en s'invoquant mutuellement pour demander des actions. Cette inversion du flux de contrôle transforme la nature des dépendances entre composants.</p>
+<blockquote>
+<p><strong>Définition formelle</strong></p>
+<p><em>Événement : Enregistrement immuable d'un fait qui s'est produit dans le domaine métier. Un événement capture le « quoi » (ce qui s'est passé), le « quand » (horodatage), le « qui » (source) et le « contexte » (données associées). Contrairement à une commande qui demande une action, un événement constate un fait accompli.</em></p>
+</blockquote>
+<p>Le <strong>découplage</strong> est le premier bénéfice de l'EDA. Dans une architecture synchrone, l'appelant doit connaître l'appelé : son adresse, son interface, sa disponibilité. Dans une architecture événementielle, le producteur d'événements ignore tout de ses consommateurs. Il publie un fait; quiconque est intéressé peut s'y abonner. Ce découplage opère sur trois dimensions : temporelle (pas de synchronisation requise), spatiale (pas d'adressage direct) et logique (pas de connaissance mutuelle).</p>
+<p>Ce triple découplage a des implications architecturales majeures. Les composants peuvent évoluer indépendamment : ajouter un nouveau consommateur n'impacte pas le producteur. Les défaillances restent localisées : l'indisponibilité d'un consommateur n'affecte pas les autres. L'échelle se gère naturellement : les consommateurs peuvent être multipliés pour absorber la charge sans modifier les producteurs.</p>
+<p>La <strong>réactivité</strong> émerge de la nature « push » de l'EDA. Les systèmes n'ont plus besoin de « poller » périodiquement pour détecter les changements; ils sont notifiés dès qu'un événement se produit. Cette réactivité immédiate est fondamentale pour les cas d'usage en temps réel : détection de fraude, personnalisation instantanée, coordination logistique, alertes opérationnelles.</p>
+<blockquote>
+<p><strong>Exemple concret</strong></p>
+<p><em>Considérons une plateforme de commerce électronique. Dans une architecture synchrone, le service d'inventaire doit être interrogé avant chaque affichage de disponibilité. Dans une architecture événementielle, chaque mouvement de stock émet un événement « StockModifié ». Les services intéressés maintiennent leur propre vue de l'inventaire, mise à jour en temps réel. Le résultat : latence réduite, charge diminuée sur le service source, résilience accrue si ce service est temporairement indisponible.</em></p>
+</blockquote>
+<p>La <strong>conscience situationnelle</strong> représente peut-être le bénéfice le plus stratégique de l'EDA. Lorsque tous les faits métier significatifs circulent sous forme d'événements, l'organisation dispose d'une visibilité sans précédent sur son fonctionnement. Les flux d'événements constituent une « radiographie en temps réel » de l'activité : commandes passées, paiements reçus, expéditions effectuées, anomalies détectées.</p>
+<p>Cette conscience situationnelle ouvre la voie à l'analyse en temps réel (stream processing), à la détection d'anomalies, à l'optimisation dynamique des opérations. Elle constitue également le fondement de l'entreprise agentique : les agents cognitifs s'alimentent des flux d'événements pour comprendre le contexte et déclencher leurs actions.</p>
+<blockquote>
+<p><strong>Perspective stratégique</strong></p>
+<p><em>L'EDA transforme les données d'un actif statique en flux vivant. Au lieu de données entreposées dans des bases que l'on interroge périodiquement, les faits métier circulent en continu et peuvent être traités au moment où ils se produisent. Cette transformation — du « data at rest » au « data in motion » — est fondamentale pour la compétitivité à l'ère du temps réel.</em></p>
+</blockquote>
+<h2 id="i62-concepts-fondamentaux-du-streaming-de-donnees-kafkaconfluent">I.6.2 Concepts Fondamentaux du Streaming de Données (Kafka/Confluent)<a class="headerlink" href="#i62-concepts-fondamentaux-du-streaming-de-donnees-kafkaconfluent" title="Permanent link">&para;</a></h2>
+<p>Apache Kafka s'est imposé comme la plateforme de référence pour l'architecture orientée événements à grande échelle. Né chez LinkedIn pour gérer les flux massifs de données d'activité, Kafka combine les caractéristiques d'un système de messagerie et d'un système de stockage distribué, créant une nouvelle catégorie : le journal distribué (distributed log).</p>
+<blockquote>
+<p><strong>Définition formelle</strong></p>
+<p><em>Apache Kafka : Plateforme de streaming d'événements distribuée, conçue pour la haute disponibilité, la durabilité et le débit massif. Kafka organise les événements en topics partitionnés, garantit l'ordre au sein de chaque partition, et conserve les événements pour une durée configurable, permettant le rejeu historique.</em></p>
+</blockquote>
+<p>Le <strong>topic</strong> est l'unité logique d'organisation des événements dans Kafka. Un topic peut être vu comme une catégorie ou un flux d'événements du même type : « commandes », « paiements », « mouvements-stock ». Les producteurs publient vers des topics; les consommateurs s'abonnent aux topics qui les intéressent.</p>
+<p>Le <strong>partitionnement</strong> est le mécanisme fondamental de scalabilité de Kafka. Chaque topic est divisé en partitions, qui sont les unités de parallélisme. Les événements sont distribués entre partitions selon une clé de partitionnement (par exemple, l'identifiant client). L'ordre est garanti au sein d'une partition mais pas entre partitions, ce qui permet le traitement parallèle tout en préservant l'ordre pour les événements liés.</p>
+<p>Le tableau suivant résume les concepts fondamentaux de Kafka :</p>
+<table>
+<thead>
+<tr>
+<th><strong>Concept</strong></th>
+<th><strong>Description et rôle</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Topic</strong></td>
+<td>Catégorie logique d'événements; flux nommé auquel producteurs et consommateurs se connectent</td>
+</tr>
+<tr>
+<td><strong>Partition</strong></td>
+<td>Subdivision ordonnée d'un topic; unité de parallélisme et de distribution</td>
+</tr>
+<tr>
+<td><strong>Offset</strong></td>
+<td>Position d'un événement dans une partition; permet le rejeu et le suivi de progression</td>
+</tr>
+<tr>
+<td><strong>Producer</strong></td>
+<td>Application qui publie des événements vers un ou plusieurs topics</td>
+</tr>
+<tr>
+<td><strong>Consumer</strong></td>
+<td>Application qui lit des événements depuis un ou plusieurs topics</td>
+</tr>
+<tr>
+<td><strong>Consumer Group</strong></td>
+<td>Ensemble de consommateurs partageant la charge de lecture d'un topic</td>
+</tr>
+<tr>
+<td><strong>Broker</strong></td>
+<td>Serveur Kafka stockant les partitions et servant les requêtes producteurs/consommateurs</td>
+</tr>
+<tr>
+<td><strong>Cluster</strong></td>
+<td>Ensemble de brokers formant une unité de déploiement résiliente</td>
+</tr>
+</tbody>
+</table>
+<p>La <strong>Confluent Platform</strong> étend Apache Kafka avec des composants essentiels pour l'entreprise. Le <strong>Schema Registry</strong> centralise la gestion des schémas d'événements et garantit la compatibilité lors des évolutions. <strong>Kafka Connect</strong> fournit des connecteurs pré-construits pour intégrer bases de données, systèmes legacy et services cloud. <strong>ksqlDB</strong> permet l'analyse en temps réel via un langage SQL familier.</p>
+<blockquote>
+<p><strong>Exemple concret</strong></p>
+<p><em>LinkedIn, berceau de Kafka, traite aujourd'hui plus de 7 billions de messages par jour sur ses clusters Kafka. Chaque interaction utilisateur — vue de profil, clic sur une offre d'emploi, message envoyé — génère des événements qui alimentent la personnalisation du fil d'actualité, les recommandations de connexions, la détection de spam et des dizaines d'autres cas d'usage. Cette échelle serait impossible avec une architecture traditionnelle basée sur des requêtes synchrones.</em></p>
+</blockquote>
+<p>La <strong>rétention des événements</strong> distingue Kafka des systèmes de messagerie traditionnels. Alors qu'une file de messages supprime typiquement un message après sa consommation, Kafka conserve les événements pour une durée configurable (jours, semaines, voire indéfiniment). Cette persistance permet le rejeu historique : un nouveau consommateur peut « remonter le temps » pour reconstituer son état à partir des événements passés. Cette capacité est fondamentale pour l'Event Sourcing et la reconstruction des vues matérialisées.</p>
+<h2 id="i63-modelisation-des-interactions-asynchrones-avec-asyncapi">I.6.3 Modélisation des Interactions Asynchrones avec AsyncAPI<a class="headerlink" href="#i63-modelisation-des-interactions-asynchrones-avec-asyncapi" title="Permanent link">&para;</a></h2>
+<p>Si OpenAPI a standardisé la documentation des API REST, le monde événementiel manquait d'un équivalent. AsyncAPI comble ce vide en proposant une spécification pour décrire les interfaces asynchrones : quels événements sont produits ou consommés, quelle est leur structure, quels protocoles de transport sont utilisés.</p>
+<blockquote>
+<p><strong>Définition formelle</strong></p>
+<p><em>AsyncAPI : Spécification ouverte permettant de documenter les API asynchrones et événementielles. Elle décrit les canaux (channels) de communication, les messages échangés, leurs schémas et les protocoles de transport (Kafka, AMQP, WebSocket, etc.). AsyncAPI permet la génération de documentation, de code et de tests.</em></p>
+</blockquote>
+<p>AsyncAPI adopte une structure familière aux utilisateurs d'OpenAPI. Un document AsyncAPI définit les métadonnées de l'API (titre, version, description), les serveurs (brokers) auxquels se connecter, les canaux (topics) disponibles, et les messages qui y circulent avec leurs schémas. Cette standardisation apporte plusieurs bénéfices.</p>
+<p>La <strong>documentation générée</strong> offre aux développeurs une vue claire des événements disponibles. Au lieu de consulter le code source ou de deviner la structure des messages, ils disposent d'une référence à jour. Les portails développeurs peuvent intégrer cette documentation aux côtés des API REST, offrant une vision unifiée des interfaces de l'organisation.</p>
+<p>La <strong>génération de code</strong> accélère le développement. À partir d'une spécification AsyncAPI, des outils peuvent générer les classes de messages, les producteurs et consommateurs squelettes, les configurations de sérialisation. Les développeurs se concentrent sur la logique métier plutôt que sur la plomberie technique.</p>
+<p>La <strong>validation des contrats</strong> garantit la cohérence. Les messages publiés peuvent être validés contre le schéma déclaré. Les incompatibilités sont détectées avant le déploiement. Cette discipline contractuelle, analogue à celle des API REST avec OpenAPI, est essentielle pour maintenir la fiabilité à grande échelle.</p>
+<blockquote>
+<p><strong>Perspective stratégique</strong></p>
+<p><em>L'adoption d'AsyncAPI s'inscrit dans la démarche « Contract-First » évoquée au chapitre précédent. Les équipes définissent le contrat d'événement avant l'implémentation, permettant le développement parallèle des producteurs et consommateurs. Cette approche réduit les frictions d'intégration et accélère les cycles de livraison.</em></p>
+</blockquote>
+<p>La combinaison d'AsyncAPI avec le Schema Registry de Confluent crée un écosystème de gouvernance robuste. AsyncAPI documente l'interface pour les humains; le Schema Registry enforce les schémas pour les machines. Les évolutions sont tracées, les compatibilités vérifiées, les ruptures de contrat bloquées automatiquement.</p>
+<h2 id="i64-levolution-vers-les-architectures-event-native">I.6.4 L'Évolution vers les Architectures Event-Native<a class="headerlink" href="#i64-levolution-vers-les-architectures-event-native" title="Permanent link">&para;</a></h2>
+<p>L'adoption de l'EDA suit typiquement une trajectoire de maturité. Les organisations commencent par ajouter des événements à une architecture existante (« event-enabled »), puis évoluent vers une architecture où les événements sont la modalité principale de communication (« event-first »), pour finalement atteindre une architecture véritablement native des événements (« event-native »).</p>
+<p>L'approche <strong>event-enabled</strong> ajoute des événements à une architecture synchrone existante. Les systèmes continuent de communiquer principalement via des API, mais certains faits métier sont également publiés comme événements pour des besoins spécifiques : alimentation d'un data lake, synchronisation d'un cache, notification d'un système externe. Les événements sont un complément, non le fondement.</p>
+<p>L'approche <strong>event-first</strong> fait des événements la modalité privilégiée pour les flux internes. Les services communiquent principalement via le backbone événementiel; les API REST sont réservées aux interactions externes et aux requêtes nécessitant une réponse synchrone. L'état des services est reconstruit à partir des événements (Event Sourcing). Le flux d'événements devient la source de vérité.</p>
+<p>L'approche <strong>event-native</strong> représente la maturité ultime. L'organisation pense naturellement en termes d'événements. La modélisation des domaines identifie les faits métier significatifs. Les équipes sont organisées autour des flux d'événements. Les outils et les pratiques sont optimisés pour le paradigme événementiel. Cette évolution culturelle est aussi importante que l'évolution technique.</p>
+<blockquote>
+<p><strong>Exemple concret</strong></p>
+<p><em>Zalando, le géant européen de la mode en ligne, a fait ce parcours en moins de cinq ans. Partant d'une architecture monolithique, ils ont d'abord ajouté Kafka pour synchroniser certains flux. Progressivement, les événements sont devenus le mode principal de communication entre leurs centaines de microservices. Aujourd'hui, leur plateforme traite des milliards d'événements quotidiens, et les équipes modélisent naturellement les problèmes métier en termes de flux d'événements.</em></p>
+</blockquote>
+<p>Pour l'entreprise agentique, l'architecture event-native est particulièrement pertinente. Les agents cognitifs s'alimentent naturellement des flux d'événements pour maintenir leur compréhension du contexte. Ils publient leurs observations et décisions sous forme d'événements, créant une traçabilité complète. Le backbone événementiel devient le « tableau noir » (blackboard) partagé où les agents coordonnent leurs actions de manière émergente.</p>
+<h2 id="i65-le-maillage-devenements-event-mesh">I.6.5 Le Maillage d'Événements (Event Mesh)<a class="headerlink" href="#i65-le-maillage-devenements-event-mesh" title="Permanent link">&para;</a></h2>
+<p>À mesure que l'adoption de l'EDA s'étend, un nouveau défi émerge : comment connecter les flux d'événements à travers les frontières — entre équipes, entre centres de données, entre clouds, entre organisations? Le concept de maillage d'événements (Event Mesh) répond à ce besoin d'unification.</p>
+<blockquote>
+<p><strong>Définition formelle</strong></p>
+<p><em>Event Mesh (Maillage d'événements) : Infrastructure de connectivité qui permet le routage dynamique des événements entre applications, services et systèmes distribués géographiquement ou technologiquement. Le mesh abstrait la topologie physique et offre une connectivité universelle basée sur les topics et les abonnements.</em></p>
+</blockquote>
+<p>Le maillage d'événements peut être vu comme l'équivalent événementiel du Service Mesh popularisé par Istio et Linkerd pour les communications synchrones. Là où le Service Mesh gère le routage, la sécurité et l'observabilité des appels inter-services, l'Event Mesh assure les mêmes fonctions pour les flux d'événements.</p>
+<p>Le <strong>routage dynamique</strong> est la fonction centrale du maillage. Un producteur publie sur un topic logique; le mesh achemine l'événement vers tous les consommateurs intéressés, où qu'ils se trouvent. Si un consommateur est dans un autre centre de données, le mesh s'occupe de la réplication. Si un consommateur utilise un protocole différent (AMQP au lieu de Kafka), le mesh effectue la conversion.</p>
+<p>La <strong>fédération multi-cluster</strong> permet de connecter plusieurs clusters Kafka (ou d'autres brokers) en une infrastructure logiquement unifiée. Les événements peuvent circuler entre clusters selon des règles configurables : réplication complète, routage sélectif selon les topics, agrégation de flux. Cette fédération est essentielle pour les organisations géographiquement distribuées ou utilisant une stratégie multi-cloud.</p>
+<p>Le tableau suivant compare les principales solutions de maillage d'événements :</p>
+<table>
+<thead>
+<tr>
+<th><strong>Solution</strong></th>
+<th><strong>Caractéristiques</strong></th>
+<th><strong>Cas d'usage idéal</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Confluent Cloud</strong></td>
+<td>Kafka managé avec liens de cluster, Schema Registry global</td>
+<td>Multi-cloud natif Kafka</td>
+</tr>
+<tr>
+<td><strong>Solace PubSub+</strong></td>
+<td>Mesh propriétaire multi-protocole, edge computing</td>
+<td>Hybride IoT/entreprise</td>
+</tr>
+<tr>
+<td><strong>Cluster Linking</strong></td>
+<td>Réplication native Kafka entre clusters</td>
+<td>Fédération Kafka pure</td>
+</tr>
+<tr>
+<td><strong>MirrorMaker 2</strong></td>
+<td>Open source, réplication asynchrone Kafka</td>
+<td>Disaster recovery, migration</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Perspective stratégique</strong></p>
+<p><em>Le maillage d'événements est particulièrement pertinent pour l'économie cognitive explorée au Chapitre I.25. Lorsque des agents cognitifs de différentes organisations doivent collaborer, le mesh fournit l'infrastructure de communication. Les « constellations de valeur » inter-organisationnelles s'appuient sur des maillages d'événements fédérés pour coordonner leurs actions tout en préservant l'autonomie de chaque participant.</em></p>
+</blockquote>
+<h2 id="i66-conclusion">I.6.6 Conclusion<a class="headerlink" href="#i66-conclusion" title="Permanent link">&para;</a></h2>
+<p>Ce chapitre a exploré l'architecture orientée événements comme second pilier du système nerveux numérique. Si les API constituent les interfaces de commande et de requête, le backbone événementiel est le canal par lequel circule la conscience de l'organisation : chaque fait métier significatif, chaque changement d'état, chaque signal qui mérite attention.</p>
+<p>Le paradigme EDA apporte des bénéfices fondamentaux. Le découplage libère les composants de leurs dépendances directes. La réactivité permet la réponse immédiate aux événements du monde réel. La conscience situationnelle offre une visibilité sans précédent sur le fonctionnement de l'organisation.</p>
+<p>Apache Kafka et la Confluent Platform fournissent l'infrastructure technique : stockage durable, débit massif, scalabilité horizontale, écosystème riche de connecteurs et d'outils. AsyncAPI apporte la rigueur contractuelle nécessaire à la gouvernance. Le maillage d'événements étend ces capacités au-delà des frontières organisationnelles.</p>
+<p>Pour l'entreprise agentique, le backbone événementiel joue un rôle central. Il constitue le <strong>« blackboard numérique »</strong> sur lequel les agents cognitifs observent le monde et publient leurs conclusions. Cette architecture — agents réactifs connectés par un flux d'événements — est précisément celle du <strong>maillage agentique (Agentic Mesh)</strong> que nous détaillerons au Chapitre I.14.</p>
+<p>Le chapitre suivant abordera un élément crucial qui sous-tend tant les API que les événements : les contrats de données. Ces contrats formalisent les interfaces entre producteurs et consommateurs, garantissant la fiabilité des échanges et permettant l'évolution maîtrisée des systèmes distribués.</p>
+<h2 id="i67-resume">I.6.7 Résumé<a class="headerlink" href="#i67-resume" title="Permanent link">&para;</a></h2>
+<p>Ce chapitre a exploré l'architecture orientée événements comme backbone asynchrone du système nerveux numérique :</p>
+<p><strong>Le paradigme EDA</strong> transforme la dynamique des interactions entre systèmes. Le découplage (temporel, spatial, logique) libère les composants de leurs dépendances directes. La réactivité « push » permet la réponse immédiate. La conscience situationnelle offre une visibilité temps réel sur l'activité de l'organisation.</p>
+<p><strong>Apache Kafka et Confluent</strong> fournissent l'infrastructure de streaming à grande échelle. Le journal distribué combine messagerie et stockage. Le partitionnement assure la scalabilité. Le Schema Registry gouverne les schémas d'événements. L'écosystème de connecteurs intègre les systèmes existants.</p>
+<p><strong>AsyncAPI</strong> standardise la documentation des interfaces asynchrones. Il permet la génération de documentation, de code et la validation des contrats. Combiné au Schema Registry, il établit une gouvernance contractuelle robuste pour les événements.</p>
+<p><strong>L'évolution event-native</strong> représente la maturité architecturale et culturelle. De l'ajout ponctuel d'événements (event-enabled) à la pensée native en termes de flux (event-native), cette transformation prépare l'organisation à l'ère agentique.</p>
+<p><strong>Le maillage d'événements (Event Mesh)</strong> unifie les flux à travers les frontières : clusters, clouds, organisations. Il constitue l'infrastructure des « constellations de valeur » inter-organisationnelles de l'économie cognitive.</p>
+<p><strong>Tableau de synthèse : Les composantes de l'architecture événementielle</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Composante</strong></th>
+<th><strong>Fonction</strong></th>
+<th><strong>Technologies clés</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Broker / Plateforme</strong></td>
+<td>Stockage et distribution des événements</td>
+<td>Apache Kafka, Confluent Platform</td>
+</tr>
+<tr>
+<td><strong>Schema Registry</strong></td>
+<td>Gouvernance des schémas</td>
+<td>Confluent Schema Registry, Apicurio</td>
+</tr>
+<tr>
+<td><strong>Spécification</strong></td>
+<td>Documentation des interfaces</td>
+<td>AsyncAPI</td>
+</tr>
+<tr>
+<td><strong>Connecteurs</strong></td>
+<td>Intégration des systèmes</td>
+<td>Kafka Connect, Debezium</td>
+</tr>
+<tr>
+<td><strong>Stream Processing</strong></td>
+<td>Traitement temps réel</td>
+<td>ksqlDB, Kafka Streams, Flink</td>
+</tr>
+<tr>
+<td><strong>Event Mesh</strong></td>
+<td>Fédération multi-cluster</td>
+<td>Cluster Linking, MirrorMaker 2</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Chapitre suivant : Chapitre I.7 — Contrats de Données : Pilier de la Fiabilité et du Data Mesh</em></p>
+<hr />
+<h3 id="references-croisees">Références croisées<a class="headerlink" href="#references-croisees" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Integration des evenements en entreprise</strong> : voir aussi <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.5_Integration_Evenements/">Chapitre 2.5 -- Integration des Evenements</a></li>
+<li><strong>Fondamentaux Apache Kafka</strong> : voir aussi <a href="../../Volume_II_Infrastructure_Agentique/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent/">Chapitre II.2 -- Fondamentaux Apache Kafka et Confluent</a></li>
+<li><strong>Patrons d'interaction Kafka</strong> : voir aussi <a href="../../Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.7_Patrons_Interaction_Kafka/">Chapitre III.7 -- Patrons d'Interaction Kafka</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/agbruneau/CorpusInformatique" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,7802 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corpus encyclopédique francophone — science informatique, interopérabilité et entreprise agentique">
+      
+      
+        <meta name="author" content="André-Guy Bruneau">
+      
+      
+        <link rel="canonical" href="https://agbruneau.github.io/CorpusInformatique/I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.4_Langages_Formels_Automates/">
+      
+      
+        <link rel="prev" href="../Chapitre_I.3_Theorie_Graphes/">
+      
+      
+        <link rel="next" href="../Chapitre_I.5_Calculabilite_Decidabilite/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>I.4 — Langages formels et automates - Corpus Informatique</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapitre-i4-langages-formels-et-automates" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../../.." title="Corpus Informatique" class="md-header__button md-logo" aria-label="Corpus Informatique" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corpus Informatique
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              I.4 — Langages formels et automates
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Passer au mode sombre"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer au mode sombre" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Passer au mode clair"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer au mode clair" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/agbruneau/CorpusInformatique" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    agbruneau/CorpusInformatique
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Chapitre_I.1_Fondements_Logiques_Raisonnement/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  I — Science et Génie Informatique
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.1_Introduction_Problematique/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  II — Interopérabilité
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.1_Crise_Integration_Systemique/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  III — Entreprise Agentique
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Corpus Informatique" class="md-nav__button md-logo" aria-label="Corpus Informatique" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Corpus Informatique
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/agbruneau/CorpusInformatique" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    agbruneau/CorpusInformatique
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I — Science et Génie Informatique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    I — Science et Génie Informatique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume I — Fondements Mathématiques et Théorie de l'Informatique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume I — Fondements Mathématiques et Théorie de l'Informatique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.1_Fondements_Logiques_Raisonnement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.1 — Fondements logiques et raisonnement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.2_Structures_Discretes_Combinatoire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.2 — Structures discrètes et combinatoire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.3_Theorie_Graphes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.3 — Théorie des graphes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.4 — Langages formels et automates
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.4 — Langages formels et automates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41-introduction-la-structure-du-langage-et-de-la-computation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Introduction : La Structure du Langage et de la Computation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Introduction : La Structure du Langage et de la Computation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411-definitions-preliminaires-alphabets-mots-langages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.1 Définitions Préliminaires : Alphabets, Mots, Langages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412-le-concept-de-grammaire-formelle-un-mecanisme-generatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.2 Le concept de Grammaire Formelle : Un Mécanisme Génératif
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#413-le-processus-de-derivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.3 Le Processus de Dérivation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#414-presentation-de-la-hierarchie-de-chomsky-une-feuille-de-route-pour-la-complexite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.4 Présentation de la Hiérarchie de Chomsky : Une feuille de route pour la complexité
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-type-3-langages-reguliers-et-automates-a-etats-finis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Type-3 : Langages Réguliers et Automates à États Finis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 Type-3 : Langages Réguliers et Automates à États Finis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#421-le-modele-de-lautomate-fini-deterministe-afd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.1 Le Modèle de l\'Automate Fini Déterministe (AFD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#422-le-non-determinisme-lautomate-fini-non-deterministe-afn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.2 Le Non-déterminisme : L\'Automate Fini Non-déterministe (AFN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#423-theoreme-dequivalence-la-construction-par-sous-ensembles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.3 Théorème d\'Équivalence : La Construction par Sous-Ensembles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#424-expressions-regulieres-un-formalisme-declaratif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.4 Expressions Régulières : Un Formalisme Déclaratif
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#425-le-theoreme-de-kleene-lunification-des-langages-reguliers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.5 Le Théorème de Kleene : L\'Unification des Langages Réguliers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#426-grammaires-regulieres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.6 Grammaires Régulières
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#427-proprietes-des-langages-reguliers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.7 Propriétés des Langages Réguliers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#428-applications-pratiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.8 Applications Pratiques
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-type-2-langages-hors-contexte-et-automates-a-pile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Type-2 : Langages Hors-Contexte et Automates à Pile
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 Type-2 : Langages Hors-Contexte et Automates à Pile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431-au-dela-de-la-regularite-introduction-aux-grammaires-hors-contexte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1 Au-delà de la Régularité : Introduction aux Grammaires Hors-Contexte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#432-arbres-de-derivation-et-le-probleme-de-lambiguite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.2 Arbres de Dérivation et le Problème de l\'Ambiguïté
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#433-simplification-et-formes-normales-la-forme-normale-de-chomsky-fnc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.3 Simplification et Formes Normales : La Forme Normale de Chomsky (FNC)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#434-le-modele-de-lautomate-a-pile-ap-une-memoire-lifo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.4 Le Modèle de l\'Automate à Pile (AP) : Une Mémoire LIFO
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#435-equivalence-des-grammaires-hors-contexte-et-des-automates-a-pile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.5 Équivalence des Grammaires Hors-Contexte et des Automates à Pile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#436-le-determinisme-dans-les-automates-a-pile-et-ses-limites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.6 Le Déterminisme dans les Automates à Pile et ses Limites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#437-proprietes-des-langages-hors-contexte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.7 Propriétés des Langages Hors-Contexte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#438-applications-pratiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.8 Applications Pratiques
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-type-1-langages-contextuels-et-automates-lineairement-bornes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Type-1 : Langages Contextuels et Automates Linéairement Bornés
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4 Type-1 : Langages Contextuels et Automates Linéairement Bornés">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#441-la-notion-de-contexte-grammaires-contextuelles-et-croissantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.1 La Notion de Contexte : Grammaires Contextuelles et Croissantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#442-le-modele-de-lautomate-lineairement-borne-alb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.2 Le Modèle de l\'Automate Linéairement Borné (ALB)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#443-equivalence-des-grammaires-contextuelles-et-des-alb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.3 Équivalence des Grammaires Contextuelles et des ALB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#444-proprietes-et-complexite-de-la-reconnaissance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.4 Propriétés et Complexité de la Reconnaissance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-type-0-langages-recursivement-enumerables-et-la-machine-de-turing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Type-0 : Langages Récursivement Énumérables et la Machine de Turing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.5 Type-0 : Langages Récursivement Énumérables et la Machine de Turing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#451-grammaires-generales-le-pouvoir-de-reecriture-illimite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.1 Grammaires Générales : Le Pouvoir de Réécriture Illimité
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#452-la-machine-de-turing-le-modele-universel-de-calcul" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.2 La Machine de Turing : Le Modèle Universel de Calcul
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#453-la-these-de-church-turing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.3 La Thèse de Church-Turing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#454-les-limites-du-calcul-decidabilite-et-le-probleme-de-larret" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.4 Les Limites du Calcul : Décidabilité et le Problème de l\'Arrêt
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-synthese-la-hierarchie-en-perspective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 Synthèse : La Hiérarchie en Perspective
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.6 Synthèse : La Hiérarchie en Perspective">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#461-recapitulatif-des-classes-de-langages-et-de-leurs-proprietes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6.1 Récapitulatif des Classes de Langages et de leurs Propriétés
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#462-linteraction-entre-expressivite-puissance-de-reconnaissance-et-decidabilite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6.2 L\'Interaction entre Expressivité, Puissance de Reconnaissance et Décidabilité
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#463-lheritage-de-la-hierarchie-de-chomsky-en-informatique-fondamentale-et-appliquee" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6.3 L\'Héritage de la Hiérarchie de Chomsky en Informatique Fondamentale et Appliquée
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.5_Calculabilite_Decidabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.5 — Calculabilité et décidabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.6_Theorie_Complexite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.6 — Théorie de la complexité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume II — Architecture des Ordinateurs et Systèmes Numériques
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume II — Architecture des Ordinateurs et Systèmes Numériques
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.7_Systemes_Numeriques_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.7 — Systèmes numériques et données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.8_Circuits_Combinatoires/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.8 — Circuits combinatoires
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.9_Circuits_Sequentiels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.9 — Circuits séquentiels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.10_Conception_Systeme_HDL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.10 — Conception système HDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.11_Architecture_ISA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.11 — Architecture ISA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.12_Conception_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.12 — Conception CPU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.13_Parallelisme_ILP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.13 — Parallélisme ILP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.14_Hierarchie_Memoire_Stockage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.14 — Hiérarchie mémoire et stockage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.15_Systemes_IO_Accelere/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.15 — Systèmes I/O accélérés
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume III — Systèmes d'Exploitation, Langages et Environnements
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume III — Systèmes d'Exploitation, Langages et Environnements
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.16_Systemes_Exploitation_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.16 — Systèmes d'exploitation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.17_Gestion_Concurrence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.17 — Gestion de la concurrence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.18_Gestion_Memoire_Fichiers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.18 — Gestion mémoire et fichiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.19_Conception_Langages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.19 — Conception des langages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.20_Compilation_Interpretation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.20 — Compilation et interprétation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.21_Environnements_Virtualisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.21 — Environnements et virtualisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume IV — Structures de Données, Algorithmique et Génie Logiciel
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume IV — Structures de Données, Algorithmique et Génie Logiciel
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.22_Structures_Donnees_Fondamentales/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.22 — Structures de données fondamentales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.23_Structures_Donnees_Avancees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.23 — Structures de données avancées
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.24_Conception_Analyse_Algorithmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.24 — Conception et analyse d'algorithmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.25_Algorithmes_Graphes_Avances/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.25 — Algorithmes de graphes avancés
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.26_Processus_Developpement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.26 — Processus de développement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.27_Architecture_Logicielle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.27 — Architecture logicielle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.28_Qualite_Test_Maintenance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.28 — Qualité, test et maintenance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.29_DevOps_SRE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.29 — DevOps et SRE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume V — Données, Réseaux, Cloud et Sécurité
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume V — Données, Réseaux, Cloud et Sécurité
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.30_SGBD_Fondements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.30 — SGBD fondements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.31_SGBD_Implementation_Transactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.31 — SGBD implémentation et transactions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.32_Donnees_Modernes_BigData/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.32 — Données modernes et Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.33_Fondements_Reseaux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.33 — Fondements des réseaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.34_Protocoles_Internetworking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.34 — Protocoles et internetworking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.35_Systemes_Distribues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.35 — Systèmes distribués
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.36_Cloud_Infrastructures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.36 — Cloud et infrastructures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.37_Fondements_Securite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.37 — Fondements de la sécurité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.38_Cryptographie_Appliquee/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.38 — Cryptographie appliquée
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.39_Securite_Reseaux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.39 — Sécurité des réseaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.40_Securite_Systemes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.40 — Sécurité des systèmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume VI — Intelligence Artificielle et Systèmes Interactifs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume VI — Intelligence Artificielle et Systèmes Interactifs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.41_Fondements_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.41 — Fondements de l'IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.42_Connaissance_Raisonnement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.42 — Connaissance et raisonnement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.43_ML_Fondements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.43 — ML fondements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.44_DeepLearning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.44 — Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.45_Reinforcement_Learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.45 — Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.46_TALN_NLP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.46 — TALN / NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.47_Vision_Ordinateur/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.47 — Vision par ordinateur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.48_Infographie_Visualisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.48 — Infographie et visualisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.49_IHM_HCI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.49 — IHM / HCI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.50_Robotique_IoT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.50 — Robotique et IoT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume VII — Technologies Émergentes et Frontières
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume VII — Technologies Émergentes et Frontières
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.51_Informatique_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.51 — Informatique quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.52_Algorithmes_Cryptographie_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.52 — Algorithmes et cryptographie quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.53_HPC_Exascale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.53 — HPC et exascale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.54_Architectures_Post_Moore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.54 — Architectures post-Moore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.55_Modeles_Fondateurs_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.55 — Modèles fondateurs IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.56_AGI_Alignement_Securite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.56 — AGI, alignement et sécurité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.57_Sciences_Computationnelles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.57 — Sciences computationnelles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.58_CyberPhysiques_Jumeaux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.58 — Systèmes cyber-physiques et jumeaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.59_Web3_Decentralise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.59 — Web3 et décentralisé
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.60_Synthese_Frontieres/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.60 — Synthèse et frontières
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume VIII — Convergence AGI–Quantique : Fondements et Algorithmes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume VIII — Convergence AGI–Quantique : Fondements et Algorithmes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.61_Introduction_Informatique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.61 — Introduction à l'informatique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.62_Convergence_AGI_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.62 — Convergence AGI-quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.63_Evolution_IA_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.63 — Évolution IA-quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.64_Reseaux_Neuronaux_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.64 — Réseaux neuronaux quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.65_Algorithmes_Evolutionnaires_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.65 — Algorithmes évolutionnaires quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.66_Renforcement_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.66 — Renforcement quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.67_Architectures_Hybrides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.67 — Architectures hybrides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.68_SVM_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.68 — SVM quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.69_Codage_Donnees_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.69 — Codage de données quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.70_Scalabilite_Correction_Erreurs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.70 — Scalabilité et correction d'erreurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume IX — Convergence AGI–Quantique : Applications et Perspectives
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume IX — Convergence AGI–Quantique : Applications et Perspectives
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.71_TALN_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.71 — TALN quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.72_Securite_Confidentialite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.72 — Sécurité et confidentialité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.73_Ethique_Reglementaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.73 — Éthique et réglementaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.74_Implementation_Materielle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.74 — Implémentation matérielle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.75_Middleware_Software/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.75 — Middleware et software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.76_Etudes_Cas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.76 — Études de cas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.77_Durabilite_Energie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.77 — Durabilité et énergie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.78_Metriques_Bancs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.78 — Métriques et bancs d'essai
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.79_Perspectives_Avenir/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.79 — Perspectives d'avenir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.80_Infrastructure_Centres_Donnees_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.80 — Infrastructure et centres de données IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II — Interopérabilité
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    II — Interopérabilité
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.1_Introduction_Problematique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.1 — Introduction et problématique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.2_Fondements_Theoriques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.2 — Fondements théoriques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.3_Integration_Applications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.3 — Intégration des applications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.4_Integration_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.4 — Intégration des données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.5_Integration_Evenements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.5 — Intégration des événements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.6_Standards_Contrats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.6 — Standards et contrats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.7_Resilience_Observabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.7 — Résilience et observabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.8_Collaboration_Automatisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.8 — Collaboration et automatisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.9_Architecture_Reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.9 — Architecture de référence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.10_Order_to_Cash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.10 — Order-to-Cash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.11_Entreprise_Agentique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.11 — Entreprise agentique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.12_Securite_Identite_Conformite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.12 — Sécurité, identité et conformité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.A_Annexes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annexes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III — Entreprise Agentique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    III — Entreprise Agentique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume I — Fondations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume I — Fondations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.1_Crise_Integration_Systemique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.1 — Crise d'intégration systémique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.2_Fondements_Dimensions_Interoperabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.2 — Fondements et dimensions de l'interopérabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.3_Cadres_Reference_Standards_Maturite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.3 — Cadres de référence, standards et maturité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.4_Principes_Architecture_Reactive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.4 — Principes d'architecture réactive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.5_Ecosysteme_API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.5 — Écosystème API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.6_Architecture_Evenements_EDA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.6 — Architecture événements (EDA)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.7_Contrats_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.7 — Contrats de données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.8_Conception_Implementation_Observabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.8 — Conception et implémentation de l'observabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.9_Etudes_Cas_Architecturales/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.9 — Études de cas architecturales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.10_Limites_Interoperabilite_Semantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.10 — Limites de l'interopérabilité sémantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.11_IA_Moteur_Interoperabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.11 — IA moteur d'interopérabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.12_Definition_Interoperabilite_Cognitivo_Adaptative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.12 — Définition de l'interopérabilité cognitivo-adaptative
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.13_Ere_IA_Agentique_Modele_Travailleur_Numerique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.13 — Ère IA agentique et modèle du travailleur numérique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.14_Maillage_Agentique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.14 — Maillage agentique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.15_Ingenierie_Systemes_Cognitifs_Protocoles_Interaction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.15 — Ingénierie des systèmes cognitifs et protocoles d'interaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.16_Modele_Operationnel_Symbiose_Humain_Agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.16 — Modèle opérationnel de symbiose humain-agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.17_Gouvernance_Constitutionnelle_Alignement_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.17 — Gouvernance constitutionnelle et alignement IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.18_AgentOps_Industrialisation_Securisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.18 — AgentOps : industrialisation et sécurisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.19_Architecte_Intentions_Role_Sociotechnique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.19 — Architecte des intentions : rôle sociotechnique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.20_Cockpit_Berger_Intention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.20 — Cockpit du berger d'intention
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.21_Feuille_Route_Transformation_Agentique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.21 — Feuille de route de la transformation agentique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.22_Gestion_Strategique_Portefeuille_Applicatif_APM_Cognitif/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.22 — Gestion stratégique du portefeuille applicatif (APM cognitif)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.23_Patrons_Modernisation_Agentification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.23 — Patrons de modernisation et agentification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.24_Industrialisation_Ingenierie_Plateforme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.24 — Industrialisation et ingénierie de plateforme
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.25_Economie_Cognitive_Diplomatie_Algorithmique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.25 — Économie cognitive et diplomatie algorithmique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.26_Gestion_Risques_Systemiques_Superalignement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.26 — Gestion des risques systémiques et superalignement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.27_Prospective_Agent_Auto_Architecturant_AGI_Entreprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.27 — Prospective : agent auto-architecturant et AGI d'entreprise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.28_Conclusion_Architecture_Intentionnelle_Sagesse_Collective/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.28 — Conclusion : architecture intentionnelle et sagesse collective
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume II — Infrastructure Agentique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume II — Infrastructure Agentique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.1_Ingenierie_Plateforme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.1 — Ingénierie de plateforme
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.2 — Fondamentaux Apache Kafka et Confluent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.3_Conception_Modelisation_Flux_Evenements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.3 — Conception et modélisation des flux d'événements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.4_Contrats_Donnees_Gouvernance_Semantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.4 — Contrats de données et gouvernance sémantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.5_Flux_Temps_Reel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.5 — Flux temps réel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.6_Google_Cloud_Vertex_AI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.6 — Google Cloud et Vertex AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.7_Ingenierie_Contexte_RAG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.7 — Ingénierie de contexte et RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.8_Integration_Backbone_Evenementiel_Couche_Cognitive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.8 — Intégration backbone événementiel et couche cognitive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.9_Patrons_Architecturaux_Avances_AEM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.9 — Patrons architecturaux avancés (AEM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.10_Pipelines_CI_CD_Deploiement_Agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.10 — Pipelines CI/CD et déploiement d'agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.11_Observabilite_Comportementale_Monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.11 — Observabilité comportementale et monitoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.12_Tests_Evaluation_Simulation_Systemes_Multi_Agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.12 — Tests, évaluation et simulation de systèmes multi-agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.13_Paysage_Menaces_Securite_Systemes_Agentiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.13 — Paysage des menaces et sécurité des systèmes agentiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.14_Securisation_Infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.14 — Sécurisation de l'infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.15_Conformite_Reglementaire_Gestion_Confidentialite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.15 — Conformité réglementaire et gestion de la confidentialité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume III — Apache Kafka : Guide de l'Architecte
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume III — Apache Kafka : Guide de l'Architecte
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.1_Decouvrir_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.1 — Découvrir Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.2_Architecture_Cluster_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.2 — Architecture du cluster Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.3_Clients_Kafka_Production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.3 — Clients Kafka en production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.4_Applications_Consommatrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.4 — Applications consommatrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.5_Cas_Utilisation_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.5 — Cas d'utilisation Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.6_Contrats_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.6 — Contrats de données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.7_Patrons_Interaction_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.7 — Patrons d'interaction Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.8_Conception_Application_Streaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.8 — Conception d'application streaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.9_Gestion_Kafka_Entreprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.9 — Gestion Kafka en entreprise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.10_Organisation_Projet_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.10 — Organisation d'un projet Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.11_Operer_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.11 — Opérer Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.12_Avenir_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.12 — L'avenir de Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume IV — Apache Iceberg et Lakehouse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume IV — Apache Iceberg et Lakehouse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.1_Monde_Lakehouse_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.1 — Le monde Lakehouse et Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.2_Anatomie_Technique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.2 — Anatomie technique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.3_Mise_Pratique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.3 — Mise en pratique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.4_Preparer_Passage_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.4 — Préparer le passage à Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.5_Selection_Couche_Stockage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.5 — Sélection de la couche de stockage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.6_Architecture_Couche_Ingestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.6 — Architecture de la couche d'ingestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.7_Implementation_Couche_Catalogue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.7 — Implémentation de la couche catalogue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.8_Conception_Couche_Federation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.8 — Conception de la couche de fédération
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.9_Comprendre_Couche_Consommation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.9 — Comprendre la couche de consommation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.10_Maintenir_Lakehouse_Production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.10 — Maintenir le Lakehouse en production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.11_Operationnaliser_Apache_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.11 — Opérationnaliser Apache Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.12_Evolution_Streaming_Lakehouse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.12 — Évolution du streaming Lakehouse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.13_Securite_Gouvernance_Conformite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.13 — Sécurité, gouvernance et conformité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.14_Integration_Microsoft_Fabric_PowerBI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.14 — Intégration Microsoft Fabric et Power BI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.15_Contexte_Canadien_Etudes_Cas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.15 — Contexte canadien et études de cas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.16_Conclusion_Perspectives_2026_2030/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.16 — Conclusion et perspectives 2026-2030
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.Annexe_A_Specification_Apache_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annexe A — Spécification Apache Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.Annexe_B_Glossaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annexe B — Glossaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume V — Développeur Renaissance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume V — Développeur Renaissance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.0_Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.0 — Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.1_Convergence_Ages_Or/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.1 — Convergence des âges d'or
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.2_Curiosite_Appliquee/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.2 — Curiosité appliquée
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.3_Pensee_Systemique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.3 — Pensée systémique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.4_Nouvelle_Communication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.4 — Nouvelle communication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.5_Imperatif_Qualite_Responsabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.5 — Impératif qualité et responsabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.6_Capital_Humain_Profil_Polymathe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.6 — Capital humain et profil polymathe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.7_Art_Batir_Futur/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.7 — L'art de bâtir le futur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.8_Bibliotheque_Developpeur_Renaissance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.8 — Bibliothèque du développeur Renaissance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.9_Mandat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.9 — Mandat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.10_Spec_Driven_Development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.10 — Spec-Driven Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chapitre-i4-langages-formels-et-automates">Chapitre I.4 : Langages Formels et Automates<a class="headerlink" href="#chapitre-i4-langages-formels-et-automates" title="Permanent link">&para;</a></h1>
+<h2 id="41-introduction-la-structure-du-langage-et-de-la-computation">4.1 Introduction : La Structure du Langage et de la Computation<a class="headerlink" href="#41-introduction-la-structure-du-langage-et-de-la-computation" title="Permanent link">&para;</a></h2>
+<p>La théorie des langages formels et des automates constitue le socle mathématique sur lequel repose une grande partie de l\'informatique, de la conception des compilateurs à l\'intelligence artificielle, en passant par la vérification de systèmes complexes. Elle offre un cadre rigoureux pour étudier les notions fondamentales de description, de reconnaissance et de calcul. Ce chapitre explore la relation intime entre les langages, définis par des règles de génération (les grammaires), et les machines abstraites conçues pour les reconnaître (les automates). Cette dualité est au cœur de la hiérarchie de Chomsky, une classification élégante qui organise les langages selon leur complexité structurelle et la puissance de calcul nécessaire pour les manipuler.</p>
+<h3 id="411-definitions-preliminaires-alphabets-mots-langages">4.1.1 Définitions Préliminaires : Alphabets, Mots, Langages<a class="headerlink" href="#411-definitions-preliminaires-alphabets-mots-langages" title="Permanent link">&para;</a></h3>
+<p>Avant de construire des structures complexes, il est essentiel de définir leurs composants les plus élémentaires.</p>
+<ul>
+<li>
+<p><strong>Alphabet</strong> : Un alphabet, noté Σ, est un ensemble fini et non vide de symboles, aussi appelés lettres. Par exemple, l\'alphabet binaire est\
+  Σ={0,1}, et l\'alphabet des lettres latines minuscules est Σ={a,b,c,...,z}.</p>
+</li>
+<li>
+<p><strong>Mot</strong> : Un mot (ou une chaîne de caractères) sur un alphabet Σ est une suite finie de symboles de Σ. La\
+  <strong>longueur</strong> d\'un mot w, notée ∣w∣, est le nombre de symboles qui le composent. Le <strong>mot vide</strong>, noté ε, est l\'unique mot de longueur zéro. L\'ensemble de tous les mots possibles sur un alphabet\
+  Σ est noté Σ∗.</p>
+</li>
+<li>
+<p><strong>Concaténation</strong> : L\'opération fondamentale sur les mots est la concaténation, qui consiste à juxtaposer deux mots. Si u=a1​...an​ et v=b1​...bm​, alors leur concaténation est uv=a1​...an​b1​...bm​. Cette opération est associative et possède le mot vide ε comme élément neutre (wε=εw=w). L\'ensemble Σ∗ muni de la concaténation forme une structure algébrique appelée <strong>monoïde libre</strong>.</p>
+</li>
+<li>
+<p><strong>Langage Formel</strong> : Un langage formel L sur un alphabet Σ est simplement un sous-ensemble de Σ∗, c\'est-à-dire un ensemble de mots. Ce peut être un ensemble fini, comme\
+  L={chat,chien,souris}, ou un ensemble infini, comme l\'ensemble de tous les programmes C++ valides.</p>
+</li>
+</ul>
+<h3 id="412-le-concept-de-grammaire-formelle-un-mecanisme-generatif">4.1.2 Le concept de Grammaire Formelle : Un Mécanisme Génératif<a class="headerlink" href="#412-le-concept-de-grammaire-formelle-un-mecanisme-generatif" title="Permanent link">&para;</a></h3>
+<p>Comment définir rigoureusement un langage, surtout s\'il est infini? Une approche consiste à utiliser un mécanisme génératif : une grammaire formelle. Intuitivement, une grammaire est un ensemble de règles de réécriture qui permettent de construire toutes les \"phrases\" correctes d\'un langage, et uniquement celles-ci.</p>
+<p>Formellement, une grammaire est un quadruplet G=(V,T,P,S).</p>
+<ul>
+<li>
+<p>V (ou VN​) est un ensemble fini de <strong>symboles non terminaux</strong> ou <strong>variables</strong>. Ces symboles représentent des concepts syntaxiques abstraits, comme \&lt;phrase&gt;, \&lt;nom&gt; ou \&lt;verbe&gt;.</p>
+</li>
+<li>
+<p>T (ou Σ, VT​) est un alphabet fini de <strong>symboles terminaux</strong>, disjoint de V. Ce sont les symboles qui composent les mots finaux du langage.</p>
+</li>
+<li>
+<p>P est un ensemble fini de <strong>règles de production</strong> (ou de réécriture). Chaque règle est de la forme u→v, où u et v sont des chaînes de symboles de (V∪T)∗, et u doit contenir au moins un symbole non terminal.</p>
+</li>
+<li>
+<p>S∈V est un non-terminal particulier appelé l\'<strong>axiome</strong> ou le <strong>symbole de départ</strong>. C\'est le point de départ de toute construction.</p>
+</li>
+</ul>
+<h3 id="413-le-processus-de-derivation">4.1.3 Le Processus de Dérivation<a class="headerlink" href="#413-le-processus-de-derivation" title="Permanent link">&para;</a></h3>
+<p>Une grammaire engendre un langage par un processus appelé dérivation.</p>
+<ul>
+<li>
+<p><strong>Dérivation directe</strong> : On dit qu\'une chaîne x dérive directement en une chaîne y, noté x⇒y, s\'il existe une règle u→v dans P et des chaînes α,β telles que x=αuβ et y=αvβ. L\'application d\'une règle consiste à remplacer une occurrence de sa partie gauche par sa partie droite. Il est crucial de distinguer le symbole\
+  →, qui définit une règle, du symbole ⇒, qui dénote son application.</p>
+</li>
+<li>
+<p><strong>Dérivation</strong> : La relation ⇒∗ est la fermeture réflexive et transitive de ⇒. On écrit x⇒∗y si y peut être obtenue à partir de x en zéro ou plusieurs étapes de dérivation directe.</p>
+</li>
+<li>
+<p><strong>Langage engendré</strong> : Le langage engendré par une grammaire G, noté L(G), est l\'ensemble de tous les mots composés uniquement de symboles terminaux qui peuvent être dérivés à partir de l\'axiome S. Formellement : L(G)={w∈T∗∣S⇒∗w}.</p>
+</li>
+</ul>
+<h3 id="414-presentation-de-la-hierarchie-de-chomsky-une-feuille-de-route-pour-la-complexite">4.1.4 Présentation de la Hiérarchie de Chomsky : Une feuille de route pour la complexité<a class="headerlink" href="#414-presentation-de-la-hierarchie-de-chomsky-une-feuille-de-route-pour-la-complexite" title="Permanent link">&para;</a></h3>
+<p>En 1956, le linguiste Noam Chomsky a proposé une classification des grammaires formelles qui est devenue un pilier de l\'informatique théorique. Cette classification, connue sous le nom de</p>
+<p><strong>hiérarchie de Chomsky</strong>, organise les grammaires (et donc les langages qu\'elles engendrent) en quatre types, numérotés de 0 à 3, en fonction de restrictions croissantes sur la forme de leurs règles de production.</p>
+<p>Le principe fondamental est celui d\'une <strong>hiérarchie de confinement</strong> : tout langage de type i est aussi un langage de type i−1. Ainsi, les langages de Type-3 sont un sous-ensemble des langages de Type-2, qui sont eux-mêmes un sous-ensemble des langages de Type-1, et ainsi de suite.</p>
+<p>La beauté de cette hiérarchie réside dans sa dualité : à chaque type de grammaire, qui est un modèle <em>génératif</em>, correspond une classe de machines abstraites, les <strong>automates</strong>, qui agissent comme des modèles de <em>reconnaissance</em> de puissance équivalente.</p>
+<p>Cette structure n\'est pas une simple taxonomie. Elle incarne un principe fondamental de l\'informatique : un compromis constant entre la <strong>puissance expressive</strong> d\'un formalisme et la <strong>décidabilité</strong> des problèmes qui lui sont associés. Plus une classe de grammaires est restrictive (plus on descend dans la hiérarchie, de 0 vers 3), moins elle peut décrire de langages complexes. En contrepartie, les questions fondamentales comme \"ce mot appartient-il au langage?\" deviennent algorithmiquement plus simples à résoudre. Le Type-0, au sommet, peut décrire tout ce qui est calculable, mais au prix de l\'indécidabilité de presque toutes les questions intéressantes, comme le fameux problème de l\'arrêt. À l\'inverse, le Type-3 est très limité dans son expressivité, mais le problème de l\'appartenance y est résoluble de manière très efficace. La hiérarchie de Chomsky est donc une cartographie de ce compromis fondamental.</p>
+<p>Le tableau suivant synthétise cette organisation, qui servira de fil conducteur pour le reste de ce chapitre.</p>
+<p><strong>Tableau 4.1 : La Hiérarchie de Chomsky - Synthèse</strong></p>
+<hr />
+<p>Type         Nom du Langage                      Forme des Règles de Grammaire (A,B∈V, a∈T, w∈(V∪T)∗, u,v∈(V∪T)+)   Automate de Reconnaissance   Décidabilité de l\'Appartenance           Exemple Canonique</p>
+<p><strong>Type-3</strong>   Régulier                            A→aB ou A→a (linéaire à droite)                                    Automate Fini (AF)           Décidable (temps linéaire)                a∗b</p>
+<p><strong>Type-2</strong>   Hors-Contexte (Algébrique)          A→w                                                                Automate à Pile (AP)         Décidable (temps polynomial, ex: O(n3))   $\{a\^nb\^n \| n \ge 0\$</p>
+<p><strong>Type-1</strong>   Contextuel (Sensible au contexte)   $                                                                 u                            \le                                      v</p>
+<p><strong>Type-0</strong>   Récursivement Énumérable            u→v (aucune restriction)                                           Machine de Turing (MT)       Semi-décidable                            Langage de l\'arrêt</p>
+<hr />
+<p>Sources pour le tableau :</p>
+<h2 id="42-type-3-langages-reguliers-et-automates-a-etats-finis">4.2 Type-3 : Langages Réguliers et Automates à États Finis<a class="headerlink" href="#42-type-3-langages-reguliers-et-automates-a-etats-finis" title="Permanent link">&para;</a></h2>
+<p>La classe la plus simple et la plus fondamentale de la hiérarchie est celle des langages réguliers. Bien que limités en expressivité, ils sont omniprésents en informatique pratique, notamment pour la reconnaissance de motifs et l\'analyse lexicale. Ils sont caractérisés par des machines à mémoire finie : les automates finis.</p>
+<h3 id="421-le-modele-de-lautomate-fini-deterministe-afd">4.2.1 Le Modèle de l\'Automate Fini Déterministe (AFD)<a class="headerlink" href="#421-le-modele-de-lautomate-fini-deterministe-afd" title="Permanent link">&para;</a></h3>
+<p>Un automate fini déterministe (AFD) est une machine abstraite qui lit un mot d\'entrée, symbole par symbole, et change d\'état en fonction du symbole lu. Il ne dispose d\'aucune mémoire supplémentaire au-delà de son état courant.</p>
+<p>Un AFD est formellement défini comme un quintuplet A=(Q,Σ,δ,q0​,F) où  :</p>
+<ul>
+<li>
+<p>Q est un ensemble fini d\'<strong>états</strong>.</p>
+</li>
+<li>
+<p>Σ est l\'<strong>alphabet</strong> d\'entrée.</p>
+</li>
+<li>
+<p>δ:Q×Σ→Q est la <strong>fonction de transition</strong>. Le caractère \"déterministe\" vient du fait que pour chaque couple (état, symbole), il existe une et une seule transition possible.</p>
+</li>
+<li>
+<p>q0​∈Q est l\'<strong>état initial</strong> unique.</p>
+</li>
+<li>
+<p>F⊆Q est l\'ensemble des <strong>états finaux</strong> ou acceptants.</p>
+</li>
+</ul>
+<p>Le fonctionnement de l\'automate est formalisé par la <strong>fonction de transition étendue</strong>, δ∗:Q×Σ∗→Q, qui calcule l\'état final après la lecture d\'un mot entier. Le <strong>langage reconnu</strong> par l\'AFD A est l\'ensemble des mots qui mènent l\'automate d\'un état initial à un état final : L(A)={w∈Σ∗∣δ∗(q0​,w)∈F}. Un AFD peut être représenté visuellement par un</p>
+<p><strong>diagramme d\'états</strong> (un graphe orienté) ou par une <strong>table de transitions</strong>.</p>
+<h3 id="422-le-non-determinisme-lautomate-fini-non-deterministe-afn">4.2.2 Le Non-déterminisme : L\'Automate Fini Non-déterministe (AFN)<a class="headerlink" href="#422-le-non-determinisme-lautomate-fini-non-deterministe-afn" title="Permanent link">&para;</a></h3>
+<p>Un automate fini non-déterministe (AFN) est une généralisation de l\'AFD qui autorise l\'ambiguïté dans ses transitions. À une étape donnée, plusieurs chemins de calcul peuvent être possibles.</p>
+<p>Un AFN est formellement défini comme un quintuplet A=(Q,Σ,δ,I,F). Les différences clés avec l\'AFD sont :</p>
+<ul>
+<li>
+<p>La fonction de transition δ est de la forme Q×(Σ∪{ε})→P(Q) (où P(Q) est l\'ensemble des parties de Q). Cela signifie que pour un état et un symbole donnés, l\'automate peut transiter vers un <em>ensemble</em> d\'états. De plus, il peut effectuer des <strong>ε-transitions</strong>, c\'est-à-dire des changements d\'état spontanés sans consommer de symbole d\'entrée.</p>
+</li>
+<li>
+<p>I⊆Q est un <em>ensemble</em> d\'états initiaux (bien que souvent, par convention, on utilise un seul état initial).</p>
+</li>
+</ul>
+<p>Un mot w est accepté par un AFN s\'il existe <strong>au moins un</strong> chemin de calcul possible, partant d\'un état initial, qui consomme w et se termine dans un état final.</p>
+<h3 id="423-theoreme-dequivalence-la-construction-par-sous-ensembles">4.2.3 Théorème d\'Équivalence : La Construction par Sous-Ensembles<a class="headerlink" href="#423-theoreme-dequivalence-la-construction-par-sous-ensembles" title="Permanent link">&para;</a></h3>
+<p>Le non-déterminisme semble intuitivement plus puissant, car il permet à la machine d\'\"explorer\" plusieurs possibilités en parallèle. Cependant, pour les automates finis, cette puissance apparente est une illusion. Le <strong>théorème de Rabin-Scott</strong> stipule que pour tout AFN, il existe un AFD qui reconnaît exactement le même langage.</p>
+<p>La preuve de ce théorème est constructive et repose sur l\'<strong>algorithme de construction par sous-ensembles</strong> (ou déterminisation). L\'idée centrale est de construire un AFD où chaque état correspond à un</p>
+<p><em>ensemble d\'états</em> de l\'AFN. Un état {q1​,...,qk​} dans l\'AFD signifie que l\'AFN, après avoir lu une certaine partie du mot, pourrait se trouver dans n\'importe lequel des états q1​,...,qk​. L\'état initial de l\'AFD est l\'ensemble des états de l\'AFN atteignables depuis les états initiaux par des ε-transitions (la <strong>ε-clôture</strong>). Les états finaux de l\'AFD sont tous les ensembles d\'états qui contiennent au moins un état final de l\'AFN.</p>
+<p>Puisque l\'ensemble des états de l\'AFN est fini (Q), le nombre de sous-ensembles possibles est également fini (2∣Q∣), bien que potentiellement beaucoup plus grand. L\'AFD simule donc l\'exploration parallèle de tous les chemins de l\'AFN en maintenant à chaque étape l\'ensemble des \"fronts d\'onde\" du calcul. Cette simulation prouve que la puissance de reconnaissance est identique.</p>
+<p>Enfin, pour un langage régulier donné, il existe un AFD unique ayant un nombre minimal d\'états. Cet automate minimal peut être obtenu à partir de n\'importe quel AFD reconnaissant le langage en fusionnant les états \"indiscernables\" (qui se comportent de la même manière pour le reste de n\'importe quel mot).</p>
+<h3 id="424-expressions-regulieres-un-formalisme-declaratif">4.2.4 Expressions Régulières : Un Formalisme Déclaratif<a class="headerlink" href="#424-expressions-regulieres-un-formalisme-declaratif" title="Permanent link">&para;</a></h3>
+<p>Les expressions régulières (ER), ou expressions rationnelles, offrent une manière algébrique et déclarative de décrire les langages réguliers. Elles sont à la base des outils de recherche de motifs (comme grep).</p>
+<p>Une expression régulière sur un alphabet Σ est définie inductivement  :</p>
+<ul>
+<li>
+<p><strong>Cas de base</strong> : ∅ (dénote le langage vide), ε (dénote le langage {ε}), et a pour tout a∈Σ (dénote le langage {a}) sont des expressions régulières.</p>
+</li>
+<li>
+<p><strong>Cas inductifs</strong> : Si R et S sont des expressions régulières, alors :</p>
+</li>
+<li>
+<p>(R∣S) ou (R+S) (l\'<strong>union</strong>) est une ER dénotant L(R)∪L(S).</p>
+</li>
+<li>
+<p>(RS) (la <strong>concaténation</strong>) est une ER dénotant L(R)L(S).</p>
+</li>
+<li>
+<p>(R∗) (l\'<strong>étoile de Kleene</strong>) est une ER dénotant L(R)∗.</p>
+</li>
+</ul>
+<h3 id="425-le-theoreme-de-kleene-lunification-des-langages-reguliers">4.2.5 Le Théorème de Kleene : L\'Unification des Langages Réguliers<a class="headerlink" href="#425-le-theoreme-de-kleene-lunification-des-langages-reguliers" title="Permanent link">&para;</a></h3>
+<p>Le <strong>théorème de Kleene</strong> est un résultat majeur qui établit l\'unité de la classe des langages réguliers. Il affirme qu\'un langage est régulier (reconnaissable par un automate fini) si et seulement s\'il peut être décrit par une expression régulière.</p>
+<p>La preuve est constructive et fournit des algorithmes pour passer d\'une représentation à l\'autre :</p>
+<ol>
+<li>
+<p><strong>ER → AFN (Algorithme de Thompson)</strong> : Cet algorithme construit un AFN avec ε-transitions à partir d\'une ER, en suivant la structure inductive de l\'expression. Il existe des constructions simples pour les cas de base (∅,ε,a) et pour combiner des automates existants pour les opérations d\'union, de concaténation et d\'étoile.</p>
+</li>
+<li>
+<p><strong>AF → ER (Méthode d\'élimination d\'états)</strong> : Cet algorithme transforme un automate en une expression régulière en éliminant progressivement ses états. À chaque élimination, les transitions sont ré-étiquetées avec des expressions régulières qui décrivent les chemins qui passaient par l\'état supprimé. Le processus se termine lorsqu\'il ne reste que les états initial et final, reliés par une transition dont l\'étiquette est l\'ER recherchée.</p>
+</li>
+</ol>
+<h3 id="426-grammaires-regulieres">4.2.6 Grammaires Régulières<a class="headerlink" href="#426-grammaires-regulieres" title="Permanent link">&para;</a></h3>
+<p>Les grammaires de Type-3, dites <strong>régulières</strong>, sont les grammaires les plus restrictives de la hiérarchie. Leurs règles de production doivent être de la forme A→aB ou A→a (grammaire <strong>linéaire à droite</strong>), ou bien de la forme A→Ba ou A→a (grammaire <strong>linéaire à gauche</strong>). Il est crucial de ne pas mélanger les deux formes dans une même grammaire.</p>
+<p>Il existe une équivalence directe entre ces grammaires et les automates finis : les langages qu\'elles engendrent sont précisément les langages réguliers. On peut construire un AFN à partir d\'une grammaire régulière (les non-terminaux deviennent des états) et inversement (les états deviennent des non-terminaux).</p>
+<h3 id="427-proprietes-des-langages-reguliers">4.2.7 Propriétés des Langages Réguliers<a class="headerlink" href="#427-proprietes-des-langages-reguliers" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Propriétés de fermeture</strong> : La classe des langages réguliers est fermée pour un grand nombre d\'opérations : union, concaténation, étoile (par définition), mais aussi <strong>intersection</strong>, <strong>complémentation</strong> et <strong>image miroir</strong>. La fermeture par intersection et complémentation se démontre élégamment en utilisant les AFD (pour le complément, il suffit d\'inverser les états finaux et non-finaux d\'un AFD complet ; pour l\'intersection, on utilise une construction appelée produit d\'automates).</p>
+</li>
+<li>
+<p><strong>Le Lemme de l\'Étoile (Pumping Lemma)</strong> : C\'est un outil puissant pour prouver qu\'un langage n\'est <em>pas</em> régulier. Il formalise la limitation fondamentale des automates finis : leur mémoire finie.\
+  <strong>Théorème</strong> : Pour tout langage régulier L, il existe une constante p≥1 (la longueur de pompage) telle que tout mot w∈L de longueur ∣w∣≥p peut être décomposé en trois parties, w=xyz, satisfaisant les conditions suivantes :</p>
+</li>
+<li>
+<p>∣y∣&gt;0 (la partie à \"pomper\" n\'est pas vide).</p>
+</li>
+<li>
+<p>∣xy∣≤p (la boucle apparaît au début du mot).</p>
+</li>
+<li>
+<p>Pour tout entier i≥0, le mot xyiz est aussi dans L.\
+      \</p>
+</li>
+</ul>
+<p>La preuve de ce lemme repose sur le <strong>principe des tiroirs</strong> : si un AFD à p états lit un mot de longueur p ou plus, il doit nécessairement visiter au moins un état deux fois. Le chemin entre les deux occurrences de cet état forme une boucle, dont l\'étiquette est le mot y. Cette boucle peut alors être parcourue zéro fois (i=0), une fois (i=1), ou plusieurs fois, générant une famille infinie de mots qui doivent tous être dans le langage. Le lemme capture donc l\'idée que la mémoire finie de l\'automate l\'empêche de \"compter\" au-delà dep.Pour montrer qu\'un langage n\'est pas régulier, on suppose par l\'absurde qu\'il l\'est, on applique le lemme, et on montre qu\'en \"pompant\" un mot bien choisi, on génère un mot qui n\'est pas dans le langage, ce qui est une contradiction. L\'exemple canonique est de prouver que L={anbn∣n≥0} n\'est pas régulier.</p>
+<h3 id="428-applications-pratiques">4.2.8 Applications Pratiques<a class="headerlink" href="#428-applications-pratiques" title="Permanent link">&para;</a></h3>
+<p>Les langages réguliers et leurs formalismes sont fondamentaux dans de nombreux domaines pratiques :</p>
+<ul>
+<li>
+<p><strong>Analyse lexicale</strong> : La première étape d\'un compilateur, la \"tokenization\", consiste à découper le code source en unités lexicales (identifiants, mots-clés, opérateurs) à l\'aide d\'expressions régulières.</p>
+</li>
+<li>
+<p><strong>Recherche de motifs</strong> : Les outils comme grep et les fonctions de recherche dans les éditeurs de texte utilisent des moteurs d\'expressions régulières pour localiser des motifs dans de grands volumes de texte.</p>
+</li>
+<li>
+<p><strong>Validation de données</strong> : Vérification que des entrées utilisateur respectent un format précis (adresses e-mail, numéros de téléphone, URLs).</p>
+</li>
+</ul>
+<h2 id="43-type-2-langages-hors-contexte-et-automates-a-pile">4.3 Type-2 : Langages Hors-Contexte et Automates à Pile<a class="headerlink" href="#43-type-2-langages-hors-contexte-et-automates-a-pile" title="Permanent link">&para;</a></h2>
+<p>Les langages réguliers, malgré leur utilité, ne peuvent pas modéliser des structures imbriquées ou récursives, comme les paires de parenthèses bien formées ou la structure des blocs dans les langages de programmation. Pour cela, il faut monter d\'un cran dans la hiérarchie de Chomsky vers les langages de Type-2.</p>
+<h3 id="431-au-dela-de-la-regularite-introduction-aux-grammaires-hors-contexte">4.3.1 Au-delà de la Régularité : Introduction aux Grammaires Hors-Contexte<a class="headerlink" href="#431-au-dela-de-la-regularite-introduction-aux-grammaires-hors-contexte" title="Permanent link">&para;</a></h3>
+<p>La limitation des langages réguliers est illustrée par le langage L={anbn∣n≥0}, qui n\'est pas régulier car un automate fini ne peut pas \"se souvenir\" du nombre de a lus pour le comparer au nombre de b. Les grammaires hors-contexte (GHC), aussi appelées grammaires algébriques, surmontent cette limitation.</p>
+<p>Une grammaire est dite <strong>hors-contexte</strong> (ou de Type-2) si toutes ses règles de production sont de la forme A→w, où A est un unique symbole non terminal et w est une chaîne quelconque de terminaux et/ou de non-terminaux (w∈(V∪T)∗). Le terme \"hors-contexte\" signifie que la règle de remplacement pour</p>
+<p>A peut être appliquée indépendamment des symboles qui l\'entourent (son contexte).</p>
+<p>Par exemple, la grammaire G=({S},{a,b},{S→aSb,S→ε},S) est hors-contexte et engendre précisément le langage {anbn∣n≥0}.</p>
+<h3 id="432-arbres-de-derivation-et-le-probleme-de-lambiguite">4.3.2 Arbres de Dérivation et le Problème de l\'Ambiguïté<a class="headerlink" href="#432-arbres-de-derivation-et-le-probleme-de-lambiguite" title="Permanent link">&para;</a></h3>
+<p>Une dérivation dans une GHC peut être représentée visuellement par un <strong>arbre de dérivation</strong> (ou arbre d\'analyse syntaxique), dont les nœuds internes sont des non-terminaux, les feuilles sont des terminaux, et la descendance d\'un nœud correspond à l\'application d\'une règle de production. Cet arbre révèle la structure syntaxique sous-jacente du mot engendré.</p>
+<p>Une grammaire est dite <strong>ambiguë</strong> si au moins un mot de son langage peut être engendré par plusieurs arbres de dérivation distincts. L\'ambiguïté est un problème majeur en compilation, car elle implique qu\'un même programme pourrait avoir plusieurs interprétations sémantiques. Des exemples classiques incluent les grammaires pour les expressions arithmétiques (l\'expression</p>
+<p>3+4*5 peut être interprétée comme (3+4)*5 ou 3+(4*5))  et le problème du \"dangling else\" dans les instructions conditionnelles.</p>
+<p>Certains langages, dits <strong>inhéremment ambigus</strong>, ne peuvent être décrits par aucune grammaire non ambiguë. C\'est le cas, par exemple, du langage {aibjck∣i=j ou j=k}.</p>
+<h3 id="433-simplification-et-formes-normales-la-forme-normale-de-chomsky-fnc">4.3.3 Simplification et Formes Normales : La Forme Normale de Chomsky (FNC)<a class="headerlink" href="#433-simplification-et-formes-normales-la-forme-normale-de-chomsky-fnc" title="Permanent link">&para;</a></h3>
+<p>Pour faciliter l\'analyse algorithmique des GHC, il est souvent utile de les convertir en une forme standardisée. La <strong>Forme Normale de Chomsky (FNC)</strong> est l\'une des plus importantes. Une grammaire est en FNC si toutes ses règles sont de l\'une des deux formes suivantes :</p>
+<ul>
+<li>
+<p>A→BC (un non-terminal se réécrit en deux non-terminaux)</p>
+</li>
+<li>
+<p>A→a (un non-terminal se réécrit en un terminal)\
+  où A,B,C sont des non-terminaux et a est un terminal.14 La règle\
+  S→ε est autorisée si l\'axiome S n\'apparaît jamais en partie droite d\'une règle.</p>
+</li>
+</ul>
+<p>Il est prouvé que tout langage hors-contexte ne contenant pas le mot vide peut être engendré par une grammaire en FNC. Un algorithme systématique permet de convertir n\'importe quelle GHC en FNC en éliminant d\'abord les ε-productions et les règles unitaires (A→B), puis en restructurant les règles restantes.</p>
+<h3 id="434-le-modele-de-lautomate-a-pile-ap-une-memoire-lifo">4.3.4 Le Modèle de l\'Automate à Pile (AP) : Une Mémoire LIFO<a class="headerlink" href="#434-le-modele-de-lautomate-a-pile-ap-une-memoire-lifo" title="Permanent link">&para;</a></h3>
+<p>L\'automate capable de reconnaître les langages hors-contexte est l\'<strong>automate à pile</strong> (AP). Il s\'agit d\'un automate fini non-déterministe auquel on a ajouté une mémoire auxiliaire : une <strong>pile</strong>, qui fonctionne selon le principe LIFO (Last-In, First-Out).</p>
+<p>Un automate à pile est formellement un 7-uplet A=(Q,Σ,Γ,δ,q0​,Z0​,F)  :</p>
+<ul>
+<li>
+<p>Q,Σ,q0​,F sont définis comme pour un AFN.</p>
+</li>
+<li>
+<p>Γ est l\'<strong>alphabet de pile</strong>, l\'ensemble des symboles pouvant être stockés dans la pile.</p>
+</li>
+<li>
+<p>Z0​∈Γ est le <strong>symbole initial de pile</strong>.</p>
+</li>
+<li>
+<p>δ:Q×(Σ∪{ε})×Γ→P(Q×Γ∗) est la fonction de transition. Une transition dépend non seulement de l\'état courant et du symbole d\'entrée, mais aussi du symbole au sommet de la pile. L\'action consiste à changer d\'état et à remplacer le symbole au sommet de la pile par une chaîne de symboles de pile (empiler, dépiler ou laisser inchangé).</p>
+</li>
+</ul>
+<p>La pile est la matérialisation de la capacité récursive des GHC. Pour reconnaître {anbn}, l\'automate peut empiler un symbole pour chaque a lu, puis dépiler un symbole pour chaque b lu. La pile sert de compteur non borné, ce qui était impossible pour un automate fini.</p>
+<h3 id="435-equivalence-des-grammaires-hors-contexte-et-des-automates-a-pile">4.3.5 Équivalence des Grammaires Hors-Contexte et des Automates à Pile<a class="headerlink" href="#435-equivalence-des-grammaires-hors-contexte-et-des-automates-a-pile" title="Permanent link">&para;</a></h3>
+<p>Un théorème fondamental établit que les GHC et les AP ont la même puissance expressive : un langage est hors-contexte si et seulement s\'il est reconnu par un automate à pile.</p>
+<ul>
+<li>
+<p><strong>GHC → AP</strong> : On peut construire un AP qui simule une dérivation (gauche, par exemple) d\'une grammaire. L\'automate utilise sa pile pour mémoriser la séquence de terminaux et de non-terminaux à engendrer. Si le sommet de la pile est un non-terminal, l\'automate choisit (de manière non déterministe) une règle pour le remplacer. Si c\'est un terminal, il le compare avec le symbole d\'entrée courant.</p>
+</li>
+<li>
+<p><strong>AP → GHC</strong> : La construction inverse est plus complexe. L\'idée est de créer des non-terminaux de la forme [p,X,q] qui représentent la capacité de l\'automate à passer de l\'état p à l\'état q en consommant une partie de l\'entrée et en dépilant le symbole X. Les règles de la grammaire simulent alors les transitions de l\'automate.</p>
+</li>
+</ul>
+<h3 id="436-le-determinisme-dans-les-automates-a-pile-et-ses-limites">4.3.6 Le Déterminisme dans les Automates à Pile et ses Limites<a class="headerlink" href="#436-le-determinisme-dans-les-automates-a-pile-et-ses-limites" title="Permanent link">&para;</a></h3>
+<p>Un automate à pile est <strong>déterministe</strong> (APD) si, pour toute configuration (état, symbole d\'entrée, symbole de pile), il existe au plus une transition possible.</p>
+<p>Ici, une différence fondamentale apparaît avec les automates finis : les automates à pile déterministes sont <strong>strictement moins puissants</strong> que leurs homologues non déterministes. Le non-déterminisme devient une source de puissance expressive. Par exemple, le langage des palindromes sur</p>
+<p>{a,b} n\'est pas reconnaissable par un APD. L\'automate doit \"deviner\" où se trouve le milieu du mot pour inverser son comportement (passer de l\'empilement au dépilement). Un APN peut faire cette \"divination\" en explorant les deux possibilités (continuer à empiler ou commencer à dépiler) via une ε-transition. Un APD, ne pouvant faire de choix, est incapable de reconnaître ce langage.</p>
+<h3 id="437-proprietes-des-langages-hors-contexte">4.3.7 Propriétés des Langages Hors-Contexte<a class="headerlink" href="#437-proprietes-des-langages-hors-contexte" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Propriétés de fermeture</strong> : Les langages hors-contexte sont fermés par union, concaténation et étoile de Kleene. Cependant, ils ne sont <strong>pas fermés par intersection ni par complémentation</strong>.</p>
+</li>
+<li>
+<p><strong>Lemme d\'itération pour les langages hors-contexte</strong> (parfois appelé lemme de Bar-Hillel, Perles et Shamir, ou lemme d\'Ogden) : C\'est une généralisation du lemme de l\'étoile. Il stipule que pour tout mot suffisamment long w d\'un langage hors-contexte, on peut le décomposer en w=uvxyz de telle sorte que les deux sous-chaînes v et y (non toutes deux vides) peuvent être \"pompées\" simultanément : uvixyiz appartient au langage pour tout i≥0. Ce lemme est utilisé pour prouver que des langages comme\
+  {anbncn∣n≥0} ne sont pas hors-contexte.</p>
+</li>
+</ul>
+<h3 id="438-applications-pratiques">4.3.8 Applications Pratiques<a class="headerlink" href="#438-applications-pratiques" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Analyse syntaxique (Parsing)</strong> : Les GHC sont le fondement de l\'analyse syntaxique dans les compilateurs. Un analyseur syntaxique (parser) prend une séquence de tokens (produite par l\'analyseur lexical) et tente de construire un arbre de dérivation selon les règles de la grammaire du langage de programmation.</p>
+</li>
+<li>
+<p><strong>Définition de formats structurés</strong> : Des formats comme XML ou JSON peuvent être décrits par des grammaires hors-contexte.</p>
+</li>
+<li>
+<p><strong>Linguistique computationnelle</strong> : Modélisation de la structure syntaxique des langues naturelles.</p>
+</li>
+</ul>
+<h2 id="44-type-1-langages-contextuels-et-automates-lineairement-bornes">4.4 Type-1 : Langages Contextuels et Automates Linéairement Bornés<a class="headerlink" href="#44-type-1-langages-contextuels-et-automates-lineairement-bornes" title="Permanent link">&para;</a></h2>
+<p>Les langages de Type-1, ou contextuels, ajoutent une couche de complexité par rapport aux langages hors-contexte. Ils permettent de modéliser des dépendances qui ne sont pas purement imbriquées, comme celles requises par le langage de référence {anbncn∣n≥1}, qui n\'est pas hors-contexte.</p>
+<h3 id="441-la-notion-de-contexte-grammaires-contextuelles-et-croissantes">4.4.1 La Notion de Contexte : Grammaires Contextuelles et Croissantes<a class="headerlink" href="#441-la-notion-de-contexte-grammaires-contextuelles-et-croissantes" title="Permanent link">&para;</a></h3>
+<p>Une grammaire est dite <strong>contextuelle</strong> (ou sensible au contexte, Type-1) si ses règles de production sont de la forme αAβ→αγβ, où A est un non-terminal, α et β sont des chaînes quelconques (le \"contexte\"), et γ est une chaîne non vide. Cette forme stipule que</p>
+<p>A ne peut être remplacé par γ que s\'il est entouré par α et β.</p>
+<p>Une définition équivalente et plus simple à manipuler est celle de <strong>grammaire croissante</strong> (ou non contractante). Dans une telle grammaire, pour chaque règle u→v, la longueur de la partie gauche est inférieure ou égale à celle de la partie droite : ∣u∣≤∣v∣. Ces grammaires engendrent la même classe de langages que les grammaires contextuelles (à l\'exception possible du mot vide).</p>
+<h3 id="442-le-modele-de-lautomate-lineairement-borne-alb">4.4.2 Le Modèle de l\'Automate Linéairement Borné (ALB)<a class="headerlink" href="#442-le-modele-de-lautomate-lineairement-borne-alb" title="Permanent link">&para;</a></h3>
+<p>L\'automate correspondant aux langages contextuels est l\'<strong>automate linéairement borné</strong> (ALB, ou LBA en anglais). Il s\'agit d\'une machine de Turing non déterministe dont la capacité de mémoire est restreinte : la tête de lecture/écriture ne peut pas se déplacer au-delà des cases du ruban qui contenaient initialement le mot d\'entrée. La mémoire de travail est donc bornée par une fonction linéaire de la taille de l\'entrée.</p>
+<h3 id="443-equivalence-des-grammaires-contextuelles-et-des-alb">4.4.3 Équivalence des Grammaires Contextuelles et des ALB<a class="headerlink" href="#443-equivalence-des-grammaires-contextuelles-et-des-alb" title="Permanent link">&para;</a></h3>
+<p>Le <strong>théorème de Kuroda (1964)</strong> établit l\'équivalence entre ces deux formalismes : un langage est contextuel si et seulement s\'il est reconnu par un ALB.</p>
+<ul>
+<li>
+<p><strong>GCS → ALB</strong> : La preuve de cette direction est intuitive. Pour vérifier si un mot w appartient à L(G), un ALB peut simuler la dérivation à l\'envers, en partant de w et en essayant de le réduire à l\'axiome S. Comme les règles de la grammaire sont non contractantes, chaque étape de cette réduction inverse ne peut pas allonger la chaîne. Par conséquent, tout le processus de calcul peut s\'effectuer dans l\'espace initialement occupé par w.</p>
+</li>
+<li>
+<p><strong>ALB → GCS</strong> : La construction inverse est plus technique. Elle consiste à construire une grammaire dont les règles simulent les transitions de l\'ALB. Les non-terminaux encodent les configurations complètes de l\'ALB (état, position de la tête, contenu du ruban).</p>
+</li>
+</ul>
+<h3 id="444-proprietes-et-complexite-de-la-reconnaissance">4.4.4 Propriétés et Complexité de la Reconnaissance<a class="headerlink" href="#444-proprietes-et-complexite-de-la-reconnaissance" title="Permanent link">&para;</a></h3>
+<p>La contrainte de non-contraction a une conséquence majeure : elle rend le problème de l\'appartenance décidable. Pour un mot w donné, une dérivation ne peut pas passer par des chaînes intermédiaires de longueur infinie. Le nombre de chaînes de longueur au plus ∣w∣ est fini. On peut donc, en théorie, énumérer toutes les dérivations possibles sans entrer dans une boucle infinie de chaînes de plus en plus courtes, ce qui garantit la terminaison de l\'algorithme de reconnaissance.</p>
+<p>Cette décidabilité est la conséquence directe de la borne sur la mémoire de l\'automate. Un ALB travaillant sur un mot de longueur n possède un nombre de configurations total qui, bien qu\'exponentiel en n (∣Q∣×n×∣Γ∣n), est fini. Un calcul qui dure plus longtemps que ce nombre doit nécessairement répéter une configuration, entrant dans une boucle détectable. C\'est la suppression de cette borne qui mène à l\'indécidabilité pour les machines de Turing.</p>
+<p>Cependant, \"décidable\" ne signifie pas \"efficace\". Le problème de l\'appartenance pour les langages contextuels est <strong>PSPACE-complet</strong>, ce qui le place parmi les problèmes considérés comme très difficiles et intraitables en pratique. De plus, contrairement au problème de l\'appartenance, le</p>
+<p><strong>problème du vide</strong> (savoir si L(G) est vide) est indécidable pour les grammaires contextuelles.</p>
+<p>Une question longtemps ouverte était de savoir si les langages contextuels étaient fermés par complémentation. La réponse est affirmative, un résultat profond connu sous le nom de <strong>théorème d\'Immerman-Szelepcsényi</strong> (1987). Une autre question majeure reste ouverte : les ALB déterministes sont-ils aussi puissants que les non-déterministes? En termes de classes de complexité, cela revient à se demander si NSPACE(O(n)) = DSPACE(O(n)).</p>
+<h2 id="45-type-0-langages-recursivement-enumerables-et-la-machine-de-turing">4.5 Type-0 : Langages Récursivement Énumérables et la Machine de Turing<a class="headerlink" href="#45-type-0-langages-recursivement-enumerables-et-la-machine-de-turing" title="Permanent link">&para;</a></h2>
+<p>Au sommet de la hiérarchie se trouvent les grammaires de Type-0 et leur automate équivalent, la machine de Turing. Cette classe représente la limite de ce qui peut être décrit par un formalisme de réécriture et de ce qui peut être calculé par un algorithme.</p>
+<h3 id="451-grammaires-generales-le-pouvoir-de-reecriture-illimite">4.5.1 Grammaires Générales : Le Pouvoir de Réécriture Illimité<a class="headerlink" href="#451-grammaires-generales-le-pouvoir-de-reecriture-illimite" title="Permanent link">&para;</a></h3>
+<p>Les grammaires de Type-0, aussi appelées <strong>non contraintes</strong> ou <strong>générales</strong>, sont les plus permissives. Leurs règles de production sont de la forme u→v, avec pour seule contrainte que u ne soit pas le mot vide et contienne au moins un non-terminal. La possibilité d\'avoir des règles \"raccourcissantes\" (</p>
+<p>∣u∣&gt;∣v∣) est ce qui leur confère leur pleine puissance et est la source de l\'indécidabilité des problèmes les concernant.</p>
+<h3 id="452-la-machine-de-turing-le-modele-universel-de-calcul">4.5.2 La Machine de Turing : Le Modèle Universel de Calcul<a class="headerlink" href="#452-la-machine-de-turing-le-modele-universel-de-calcul" title="Permanent link">&para;</a></h3>
+<p>La <strong>machine de Turing (MT)</strong> est le modèle d\'automate équivalent aux grammaires de Type-0. Conçue par Alan Turing, elle est constituée d\'un automate fini (l\'unité de contrôle) et d\'un</p>
+<p><strong>ruban infini</strong> qui sert à la fois d\'entrée, de sortie et de mémoire de travail. À chaque étape, en fonction de son état et du symbole lu sur le ruban, la machine peut changer d\'état, écrire un nouveau symbole sur le ruban et déplacer sa tête de lecture/écriture d\'une case vers la gauche ou la droite.</p>
+<p>Le passage de l\'ALB à la MT consiste à lever la restriction sur la mémoire. Ce simple changement fait passer d\'une machine puissante mais décidable à un modèle de calcul universel, capable de simuler n\'importe quel autre processus algorithmique, y compris d\'autres machines de Turing (via le concept de machine de Turing universelle).</p>
+<p>Les langages reconnus par les machines de Turing sont appelés <strong>langages récursivement énumérables</strong>.</p>
+<h3 id="453-la-these-de-church-turing">4.5.3 La Thèse de Church-Turing<a class="headerlink" href="#453-la-these-de-church-turing" title="Permanent link">&para;</a></h3>
+<p>La machine de Turing n\'est pas juste un modèle parmi d\'autres. La <strong>thèse de Church-Turing</strong> (une thèse et non un théorème, car elle relie un concept formel à une notion intuitive) postule que toute fonction calculable par un algorithme peut être calculée par une machine de Turing. Autrement dit, la MT capture formellement la notion même de \"calculabilité effective\".</p>
+<h3 id="454-les-limites-du-calcul-decidabilite-et-le-probleme-de-larret">4.5.4 Les Limites du Calcul : Décidabilité et le Problème de l\'Arrêt<a class="headerlink" href="#454-les-limites-du-calcul-decidabilite-et-le-probleme-de-larret" title="Permanent link">&para;</a></h3>
+<p>La puissance universelle de la machine de Turing a un prix : l\'existence de problèmes fondamentalement insolubles par un algorithme.</p>
+<ul>
+<li>
+<p><strong>Langages récursifs vs. récursivement énumérables</strong> :</p>
+</li>
+<li>
+<p>Un langage est <strong>récursivement énumérable</strong> si une MT existe qui s\'arrête et accepte tout mot du langage. Si un mot n\'est pas dans le langage, la machine peut soit s\'arrêter et le rejeter, soit boucler indéfiniment. On parle de <strong>semi-décideur</strong>.</p>
+</li>
+<li>
+<p>Un langage est <strong>récursif</strong> (ou décidable) si une MT existe qui s\'arrête <em>pour toute entrée</em>, en acceptant ou en rejetant le mot. On parle de <strong>décideur</strong>. La classe des langages récursifs est un sous-ensemble strict de celle des langages récursivement énumérables.</p>
+</li>
+<li>
+<p><strong>Le problème de l\'arrêt</strong> : C\'est le problème indécidable le plus célèbre. Il n\'existe aucun algorithme (aucune MT) capable de déterminer, pour une MT M et une entrée w arbitraires, si le calcul de M sur w finira par s\'arrêter. Le langage correspondant à ce problème est récursivement énumérable (on peut simuler M sur w et s\'arrêter si la simulation s\'arrête), mais il n\'est pas récursif.</p>
+</li>
+<li>
+<p><strong>Théorème de Rice</strong> : Ce théorème généralise l\'indécidabilité du problème de l\'arrêt. Il affirme que toute propriété <em>non triviale</em> (c\'est-à-dire qui n\'est pas vraie pour tous les langages RE ou pour aucun) des langages récursivement énumérables est indécidable. Par exemple, il est indécidable de savoir si le langage reconnu par une MT est vide, fini, régulier, ou contextuel.</p>
+</li>
+</ul>
+<h2 id="46-synthese-la-hierarchie-en-perspective">4.6 Synthèse : La Hiérarchie en Perspective<a class="headerlink" href="#46-synthese-la-hierarchie-en-perspective" title="Permanent link">&para;</a></h2>
+<h3 id="461-recapitulatif-des-classes-de-langages-et-de-leurs-proprietes">4.6.1 Récapitulatif des Classes de Langages et de leurs Propriétés<a class="headerlink" href="#461-recapitulatif-des-classes-de-langages-et-de-leurs-proprietes" title="Permanent link">&para;</a></h3>
+<p>La hiérarchie de Chomsky offre une vision structurée et profonde de la relation entre la description des langages et la complexité de leur reconnaissance. Chaque niveau, du Type-3 au Type-0, représente une classe de langages aux propriétés bien définies, caractérisée par une forme de grammaire et un modèle d\'automate équivalent. Les inclusions entre ces classes sont strictes, signifiant qu\'à chaque niveau, on gagne en puissance expressive, capable de décrire des structures linguistiques que le niveau inférieur ne pouvait pas capturer.</p>
+<h3 id="462-linteraction-entre-expressivite-puissance-de-reconnaissance-et-decidabilite">4.6.2 L\'Interaction entre Expressivité, Puissance de Reconnaissance et Décidabilité<a class="headerlink" href="#462-linteraction-entre-expressivite-puissance-de-reconnaissance-et-decidabilite" title="Permanent link">&para;</a></h3>
+<p>Le fil conducteur de ce chapitre a été le compromis fondamental entre la capacité d\'un formalisme à décrire des motifs complexes et la possibilité de répondre algorithmiquement à des questions simples à son sujet.</p>
+<ul>
+<li>
+<p>Les <strong>langages réguliers (Type-3)</strong>, avec leur mémoire finie, sont simples, efficaces à analyser et leurs propriétés sont toutes décidables.</p>
+</li>
+<li>
+<p>Les <strong>langages hors-contexte (Type-2)</strong>, en ajoutant une pile (mémoire LIFO), permettent de modéliser la récursivité et les structures imbriquées, au prix d\'une complexité d\'analyse plus élevée et de la perte de certaines propriétés de fermeture.</p>
+</li>
+<li>
+<p>Les <strong>langages contextuels (Type-1)</strong>, avec une mémoire linéairement bornée, capturent des dépendances croisées plus complexes tout en conservant la décidabilité du problème de l\'appartenance, bien que ce dernier devienne intraitable en pratique.</p>
+</li>
+<li>
+<p>Les <strong>langages récursivement énumérables (Type-0)</strong>, avec une mémoire infinie, atteignent la limite de la calculabilité, capables de décrire tout ce qu\'un algorithme peut générer, mais au détriment de la décidabilité de la plupart des problèmes, y compris le plus fondamental : celui de l\'arrêt.</p>
+</li>
+</ul>
+<h3 id="463-lheritage-de-la-hierarchie-de-chomsky-en-informatique-fondamentale-et-appliquee">4.6.3 L\'Héritage de la Hiérarchie de Chomsky en Informatique Fondamentale et Appliquée<a class="headerlink" href="#463-lheritage-de-la-hierarchie-de-chomsky-en-informatique-fondamentale-et-appliquee" title="Permanent link">&para;</a></h3>
+<p>Loin d\'être une simple curiosité théorique, la hiérarchie de Chomsky est un cadre conceptuel qui a profondément influencé l\'informatique.</p>
+<ul>
+<li>
+<p>Elle fournit les fondements théoriques de la <strong>théorie de la compilation</strong>, où l\'analyse lexicale est basée sur les automates finis (Type-3) et l\'analyse syntaxique sur les automates à pile et les grammaires hors-contexte (Type-2).</p>
+</li>
+<li>
+<p>Elle a guidé la <strong>conception des langages de programmation</strong>, en définissant ce qui peut être analysé efficacement.</p>
+</li>
+<li>
+<p>Elle établit un lien direct avec la <strong>théorie de la complexité</strong>, où les classes de complexité basées sur les ressources (temps, espace) trouvent des équivalents dans les modèles d\'automates (par exemple, les langages contextuels correspondent à la classe d\'espace non déterministe NSPACE(O(n))).</p>
+</li>
+<li>
+<p>Ses concepts ont été adaptés à de nombreux autres domaines, de la <strong>linguistique computationnelle</strong> à la <strong>bio-informatique</strong>, pour modéliser et analyser des séquences et des structures complexes.</p>
+</li>
+</ul>
+<p>En somme, la hiérarchie de Chomsky n\'est pas seulement une classification des langages, mais une carte des frontières de la computation elle-même, délimitant ce qui est simple, ce qui est complexe, ce qui est calculable, et ce qui est hors de portée de tout algorithme.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/agbruneau/CorpusInformatique" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

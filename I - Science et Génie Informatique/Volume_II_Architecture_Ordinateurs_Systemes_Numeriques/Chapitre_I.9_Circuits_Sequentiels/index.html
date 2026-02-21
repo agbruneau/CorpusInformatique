@@ -1,0 +1,7880 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corpus encyclopédique francophone — science informatique, interopérabilité et entreprise agentique">
+      
+      
+        <meta name="author" content="André-Guy Bruneau">
+      
+      
+        <link rel="canonical" href="https://agbruneau.github.io/CorpusInformatique/I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.9_Circuits_Sequentiels/">
+      
+      
+        <link rel="prev" href="../Chapitre_I.8_Circuits_Combinatoires/">
+      
+      
+        <link rel="next" href="../Chapitre_I.10_Conception_Systeme_HDL/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>I.9 — Circuits séquentiels - Corpus Informatique</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapitre-i9-conception-de-circuits-sequentiels" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../../.." title="Corpus Informatique" class="md-header__button md-logo" aria-label="Corpus Informatique" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corpus Informatique
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              I.9 — Circuits séquentiels
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Passer au mode sombre"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer au mode sombre" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Passer au mode clair"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer au mode clair" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/agbruneau/CorpusInformatique" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    agbruneau/CorpusInformatique
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.1_Fondements_Logiques_Raisonnement/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  I — Science et Génie Informatique
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.1_Introduction_Problematique/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  II — Interopérabilité
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.1_Crise_Integration_Systemique/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  III — Entreprise Agentique
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Corpus Informatique" class="md-nav__button md-logo" aria-label="Corpus Informatique" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Corpus Informatique
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/agbruneau/CorpusInformatique" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    agbruneau/CorpusInformatique
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I — Science et Génie Informatique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    I — Science et Génie Informatique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume I — Fondements Mathématiques et Théorie de l'Informatique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume I — Fondements Mathématiques et Théorie de l'Informatique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.1_Fondements_Logiques_Raisonnement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.1 — Fondements logiques et raisonnement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.2_Structures_Discretes_Combinatoire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.2 — Structures discrètes et combinatoire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.3_Theorie_Graphes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.3 — Théorie des graphes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.4_Langages_Formels_Automates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.4 — Langages formels et automates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.5_Calculabilite_Decidabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.5 — Calculabilité et décidabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.6_Theorie_Complexite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.6 — Théorie de la complexité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume II — Architecture des Ordinateurs et Systèmes Numériques
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume II — Architecture des Ordinateurs et Systèmes Numériques
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.7_Systemes_Numeriques_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.7 — Systèmes numériques et données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.8_Circuits_Combinatoires/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.8 — Circuits combinatoires
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.9 — Circuits séquentiels
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.9 — Circuits séquentiels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#91-introduction-a-la-logique-sequentielle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Introduction à la Logique Séquentielle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.1 Introduction à la Logique Séquentielle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#911-au-dela-de-la-logique-combinatoire-le-concept-detat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1.1 Au-delà de la Logique Combinatoire : Le Concept d\'État
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#912-systemes-synchrones-et-asynchrones-le-role-de-lhorloge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1.2 Systèmes Synchrones et Asynchrones : Le Rôle de l\'Horloge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#913-modele-general-dun-circuit-sequentiel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1.3 Modèle Général d\'un Circuit Séquentiel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#92-elements-de-memorisation-verrous-et-bascules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Éléments de Mémorisation : Verrous et Bascules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.2 Éléments de Mémorisation : Verrous et Bascules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#921-le-verrou-latch-memorisation-sensible-au-niveau" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.1 Le Verrou (Latch) : Mémorisation Sensible au Niveau
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.2.1 Le Verrou (Latch) : Mémorisation Sensible au Niveau">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-verrou-sr-set-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le Verrou SR (Set-Reset)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-verrou-d-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le Verrou D (Data)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#922-la-bascule-flip-flop-memorisation-declenchee-par-front" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.2 La Bascule (Flip-Flop) : Mémorisation Déclenchée par Front
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#923-tables-caracteristiques-et-tables-dexcitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.3 Tables Caractéristiques et Tables d\'Excitation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#93-modelisation-par-machines-a-etats-finis-fsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Modélisation par Machines à États Finis (FSM)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.3 Modélisation par Machines à États Finis (FSM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#931-la-machine-de-moore-sorties-associees-aux-etats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3.1 La Machine de Moore : Sorties Associées aux États
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#932-la-machine-de-mealy-sorties-associees-aux-transitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3.2 La Machine de Mealy : Sorties Associées aux Transitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#933-comparaison-et-equivalence-des-modeles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3.3 Comparaison et Équivalence des Modèles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#934-conversion-entre-machines-de-mealy-et-de-moore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3.4 Conversion entre Machines de Mealy et de Moore
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#94-analyse-des-circuits-sequentiels-synchrones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 Analyse des Circuits Séquentiels Synchrones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.4 Analyse des Circuits Séquentiels Synchrones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#941-procedure-danalyse-systematique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4.1 Procédure d\'Analyse Systématique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#942-derivation-des-equations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4.2 Dérivation des Équations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#943-construction-de-la-table-et-du-diagramme-detats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4.3 Construction de la Table et du Diagramme d\'États
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#944-exemple-danalyse-dun-circuit-inconnu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4.4 Exemple d\'Analyse d\'un Circuit Inconnu
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#95-synthese-des-circuits-sequentiels-synchrones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5 Synthèse des Circuits Séquentiels Synchrones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.5 Synthèse des Circuits Séquentiels Synchrones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#951-la-demarche-de-conception-du-cahier-des-charges-au-circuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5.1 La Démarche de Conception : du Cahier des Charges au Circuit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#952-etape-1-creation-du-diagramme-detats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5.2 Étape 1 : Création du Diagramme d\'États
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#953-etape-2-minimisation-du-nombre-detats-methode-de-la-table-dimplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5.3 Étape 2 : Minimisation du Nombre d\'États (Méthode de la Table d\'Implication)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#954-etape-3-codage-des-etats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5.4 Étape 3 : Codage des États
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#955-et-956-choix-des-bascules-derivation-des-equations-et-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5.5 et 9.5.6 : Choix des Bascules, Dérivation des Équations et Implémentation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#957-etude-de-cas-complete-conception-dun-detecteur-de-sequence-1011" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5.7 Étude de Cas Complète : Conception d\'un Détecteur de Séquence \"1011\"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#96-conception-de-modules-sequentiels-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.6 Conception de Modules Séquentiels Standards
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.6 Conception de Modules Séquentiels Standards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#961-les-registres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.6.1 Les Registres
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#962-les-compteurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.6.2 Les Compteurs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#97-contraintes-temporelles-dans-les-circuits-synchrones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.7 Contraintes Temporelles dans les Circuits Synchrones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.7 Contraintes Temporelles dans les Circuits Synchrones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#971-temps-de-pre-positionnement-setup-et-de-maintien-hold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.7.1 Temps de Pré-positionnement (Setup) et de Maintien (Hold)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#972-temps-de-propagation-et-frequence-maximale-dhorloge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.7.2 Temps de Propagation et Fréquence Maximale d\'Horloge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#973-le-phenomene-de-metastabilite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.7.3 Le Phénomène de Métastabilité
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.10_Conception_Systeme_HDL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.10 — Conception système HDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.11_Architecture_ISA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.11 — Architecture ISA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.12_Conception_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.12 — Conception CPU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.13_Parallelisme_ILP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.13 — Parallélisme ILP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.14_Hierarchie_Memoire_Stockage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.14 — Hiérarchie mémoire et stockage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.15_Systemes_IO_Accelere/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.15 — Systèmes I/O accélérés
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume III — Systèmes d'Exploitation, Langages et Environnements
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume III — Systèmes d'Exploitation, Langages et Environnements
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.16_Systemes_Exploitation_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.16 — Systèmes d'exploitation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.17_Gestion_Concurrence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.17 — Gestion de la concurrence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.18_Gestion_Memoire_Fichiers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.18 — Gestion mémoire et fichiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.19_Conception_Langages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.19 — Conception des langages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.20_Compilation_Interpretation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.20 — Compilation et interprétation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.21_Environnements_Virtualisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.21 — Environnements et virtualisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume IV — Structures de Données, Algorithmique et Génie Logiciel
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume IV — Structures de Données, Algorithmique et Génie Logiciel
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.22_Structures_Donnees_Fondamentales/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.22 — Structures de données fondamentales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.23_Structures_Donnees_Avancees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.23 — Structures de données avancées
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.24_Conception_Analyse_Algorithmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.24 — Conception et analyse d'algorithmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.25_Algorithmes_Graphes_Avances/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.25 — Algorithmes de graphes avancés
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.26_Processus_Developpement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.26 — Processus de développement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.27_Architecture_Logicielle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.27 — Architecture logicielle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.28_Qualite_Test_Maintenance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.28 — Qualité, test et maintenance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.29_DevOps_SRE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.29 — DevOps et SRE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume V — Données, Réseaux, Cloud et Sécurité
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume V — Données, Réseaux, Cloud et Sécurité
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.30_SGBD_Fondements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.30 — SGBD fondements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.31_SGBD_Implementation_Transactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.31 — SGBD implémentation et transactions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.32_Donnees_Modernes_BigData/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.32 — Données modernes et Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.33_Fondements_Reseaux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.33 — Fondements des réseaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.34_Protocoles_Internetworking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.34 — Protocoles et internetworking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.35_Systemes_Distribues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.35 — Systèmes distribués
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.36_Cloud_Infrastructures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.36 — Cloud et infrastructures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.37_Fondements_Securite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.37 — Fondements de la sécurité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.38_Cryptographie_Appliquee/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.38 — Cryptographie appliquée
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.39_Securite_Reseaux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.39 — Sécurité des réseaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.40_Securite_Systemes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.40 — Sécurité des systèmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume VI — Intelligence Artificielle et Systèmes Interactifs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume VI — Intelligence Artificielle et Systèmes Interactifs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.41_Fondements_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.41 — Fondements de l'IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.42_Connaissance_Raisonnement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.42 — Connaissance et raisonnement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.43_ML_Fondements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.43 — ML fondements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.44_DeepLearning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.44 — Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.45_Reinforcement_Learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.45 — Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.46_TALN_NLP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.46 — TALN / NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.47_Vision_Ordinateur/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.47 — Vision par ordinateur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.48_Infographie_Visualisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.48 — Infographie et visualisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.49_IHM_HCI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.49 — IHM / HCI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.50_Robotique_IoT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.50 — Robotique et IoT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume VII — Technologies Émergentes et Frontières
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume VII — Technologies Émergentes et Frontières
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.51_Informatique_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.51 — Informatique quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.52_Algorithmes_Cryptographie_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.52 — Algorithmes et cryptographie quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.53_HPC_Exascale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.53 — HPC et exascale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.54_Architectures_Post_Moore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.54 — Architectures post-Moore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.55_Modeles_Fondateurs_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.55 — Modèles fondateurs IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.56_AGI_Alignement_Securite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.56 — AGI, alignement et sécurité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.57_Sciences_Computationnelles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.57 — Sciences computationnelles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.58_CyberPhysiques_Jumeaux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.58 — Systèmes cyber-physiques et jumeaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.59_Web3_Decentralise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.59 — Web3 et décentralisé
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.60_Synthese_Frontieres/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.60 — Synthèse et frontières
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume VIII — Convergence AGI–Quantique : Fondements et Algorithmes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume VIII — Convergence AGI–Quantique : Fondements et Algorithmes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.61_Introduction_Informatique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.61 — Introduction à l'informatique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.62_Convergence_AGI_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.62 — Convergence AGI-quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.63_Evolution_IA_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.63 — Évolution IA-quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.64_Reseaux_Neuronaux_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.64 — Réseaux neuronaux quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.65_Algorithmes_Evolutionnaires_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.65 — Algorithmes évolutionnaires quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.66_Renforcement_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.66 — Renforcement quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.67_Architectures_Hybrides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.67 — Architectures hybrides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.68_SVM_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.68 — SVM quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.69_Codage_Donnees_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.69 — Codage de données quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.70_Scalabilite_Correction_Erreurs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.70 — Scalabilité et correction d'erreurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume IX — Convergence AGI–Quantique : Applications et Perspectives
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume IX — Convergence AGI–Quantique : Applications et Perspectives
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.71_TALN_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.71 — TALN quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.72_Securite_Confidentialite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.72 — Sécurité et confidentialité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.73_Ethique_Reglementaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.73 — Éthique et réglementaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.74_Implementation_Materielle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.74 — Implémentation matérielle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.75_Middleware_Software/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.75 — Middleware et software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.76_Etudes_Cas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.76 — Études de cas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.77_Durabilite_Energie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.77 — Durabilité et énergie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.78_Metriques_Bancs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.78 — Métriques et bancs d'essai
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.79_Perspectives_Avenir/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.79 — Perspectives d'avenir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.80_Infrastructure_Centres_Donnees_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.80 — Infrastructure et centres de données IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II — Interopérabilité
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    II — Interopérabilité
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.1_Introduction_Problematique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.1 — Introduction et problématique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.2_Fondements_Theoriques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.2 — Fondements théoriques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.3_Integration_Applications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.3 — Intégration des applications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.4_Integration_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.4 — Intégration des données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.5_Integration_Evenements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.5 — Intégration des événements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.6_Standards_Contrats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.6 — Standards et contrats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.7_Resilience_Observabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.7 — Résilience et observabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.8_Collaboration_Automatisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.8 — Collaboration et automatisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.9_Architecture_Reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.9 — Architecture de référence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.10_Order_to_Cash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.10 — Order-to-Cash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.11_Entreprise_Agentique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.11 — Entreprise agentique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.12_Securite_Identite_Conformite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.12 — Sécurité, identité et conformité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.A_Annexes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annexes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III — Entreprise Agentique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    III — Entreprise Agentique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume I — Fondations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume I — Fondations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.1_Crise_Integration_Systemique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.1 — Crise d'intégration systémique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.2_Fondements_Dimensions_Interoperabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.2 — Fondements et dimensions de l'interopérabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.3_Cadres_Reference_Standards_Maturite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.3 — Cadres de référence, standards et maturité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.4_Principes_Architecture_Reactive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.4 — Principes d'architecture réactive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.5_Ecosysteme_API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.5 — Écosystème API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.6_Architecture_Evenements_EDA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.6 — Architecture événements (EDA)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.7_Contrats_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.7 — Contrats de données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.8_Conception_Implementation_Observabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.8 — Conception et implémentation de l'observabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.9_Etudes_Cas_Architecturales/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.9 — Études de cas architecturales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.10_Limites_Interoperabilite_Semantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.10 — Limites de l'interopérabilité sémantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.11_IA_Moteur_Interoperabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.11 — IA moteur d'interopérabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.12_Definition_Interoperabilite_Cognitivo_Adaptative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.12 — Définition de l'interopérabilité cognitivo-adaptative
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.13_Ere_IA_Agentique_Modele_Travailleur_Numerique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.13 — Ère IA agentique et modèle du travailleur numérique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.14_Maillage_Agentique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.14 — Maillage agentique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.15_Ingenierie_Systemes_Cognitifs_Protocoles_Interaction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.15 — Ingénierie des systèmes cognitifs et protocoles d'interaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.16_Modele_Operationnel_Symbiose_Humain_Agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.16 — Modèle opérationnel de symbiose humain-agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.17_Gouvernance_Constitutionnelle_Alignement_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.17 — Gouvernance constitutionnelle et alignement IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.18_AgentOps_Industrialisation_Securisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.18 — AgentOps : industrialisation et sécurisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.19_Architecte_Intentions_Role_Sociotechnique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.19 — Architecte des intentions : rôle sociotechnique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.20_Cockpit_Berger_Intention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.20 — Cockpit du berger d'intention
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.21_Feuille_Route_Transformation_Agentique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.21 — Feuille de route de la transformation agentique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.22_Gestion_Strategique_Portefeuille_Applicatif_APM_Cognitif/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.22 — Gestion stratégique du portefeuille applicatif (APM cognitif)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.23_Patrons_Modernisation_Agentification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.23 — Patrons de modernisation et agentification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.24_Industrialisation_Ingenierie_Plateforme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.24 — Industrialisation et ingénierie de plateforme
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.25_Economie_Cognitive_Diplomatie_Algorithmique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.25 — Économie cognitive et diplomatie algorithmique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.26_Gestion_Risques_Systemiques_Superalignement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.26 — Gestion des risques systémiques et superalignement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.27_Prospective_Agent_Auto_Architecturant_AGI_Entreprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.27 — Prospective : agent auto-architecturant et AGI d'entreprise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.28_Conclusion_Architecture_Intentionnelle_Sagesse_Collective/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.28 — Conclusion : architecture intentionnelle et sagesse collective
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume II — Infrastructure Agentique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume II — Infrastructure Agentique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.1_Ingenierie_Plateforme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.1 — Ingénierie de plateforme
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.2 — Fondamentaux Apache Kafka et Confluent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.3_Conception_Modelisation_Flux_Evenements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.3 — Conception et modélisation des flux d'événements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.4_Contrats_Donnees_Gouvernance_Semantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.4 — Contrats de données et gouvernance sémantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.5_Flux_Temps_Reel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.5 — Flux temps réel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.6_Google_Cloud_Vertex_AI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.6 — Google Cloud et Vertex AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.7_Ingenierie_Contexte_RAG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.7 — Ingénierie de contexte et RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.8_Integration_Backbone_Evenementiel_Couche_Cognitive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.8 — Intégration backbone événementiel et couche cognitive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.9_Patrons_Architecturaux_Avances_AEM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.9 — Patrons architecturaux avancés (AEM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.10_Pipelines_CI_CD_Deploiement_Agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.10 — Pipelines CI/CD et déploiement d'agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.11_Observabilite_Comportementale_Monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.11 — Observabilité comportementale et monitoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.12_Tests_Evaluation_Simulation_Systemes_Multi_Agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.12 — Tests, évaluation et simulation de systèmes multi-agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.13_Paysage_Menaces_Securite_Systemes_Agentiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.13 — Paysage des menaces et sécurité des systèmes agentiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.14_Securisation_Infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.14 — Sécurisation de l'infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.15_Conformite_Reglementaire_Gestion_Confidentialite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.15 — Conformité réglementaire et gestion de la confidentialité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume III — Apache Kafka : Guide de l'Architecte
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume III — Apache Kafka : Guide de l'Architecte
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.1_Decouvrir_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.1 — Découvrir Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.2_Architecture_Cluster_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.2 — Architecture du cluster Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.3_Clients_Kafka_Production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.3 — Clients Kafka en production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.4_Applications_Consommatrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.4 — Applications consommatrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.5_Cas_Utilisation_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.5 — Cas d'utilisation Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.6_Contrats_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.6 — Contrats de données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.7_Patrons_Interaction_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.7 — Patrons d'interaction Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.8_Conception_Application_Streaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.8 — Conception d'application streaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.9_Gestion_Kafka_Entreprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.9 — Gestion Kafka en entreprise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.10_Organisation_Projet_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.10 — Organisation d'un projet Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.11_Operer_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.11 — Opérer Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.12_Avenir_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.12 — L'avenir de Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume IV — Apache Iceberg et Lakehouse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume IV — Apache Iceberg et Lakehouse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.1_Monde_Lakehouse_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.1 — Le monde Lakehouse et Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.2_Anatomie_Technique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.2 — Anatomie technique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.3_Mise_Pratique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.3 — Mise en pratique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.4_Preparer_Passage_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.4 — Préparer le passage à Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.5_Selection_Couche_Stockage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.5 — Sélection de la couche de stockage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.6_Architecture_Couche_Ingestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.6 — Architecture de la couche d'ingestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.7_Implementation_Couche_Catalogue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.7 — Implémentation de la couche catalogue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.8_Conception_Couche_Federation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.8 — Conception de la couche de fédération
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.9_Comprendre_Couche_Consommation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.9 — Comprendre la couche de consommation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.10_Maintenir_Lakehouse_Production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.10 — Maintenir le Lakehouse en production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.11_Operationnaliser_Apache_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.11 — Opérationnaliser Apache Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.12_Evolution_Streaming_Lakehouse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.12 — Évolution du streaming Lakehouse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.13_Securite_Gouvernance_Conformite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.13 — Sécurité, gouvernance et conformité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.14_Integration_Microsoft_Fabric_PowerBI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.14 — Intégration Microsoft Fabric et Power BI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.15_Contexte_Canadien_Etudes_Cas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.15 — Contexte canadien et études de cas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.16_Conclusion_Perspectives_2026_2030/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.16 — Conclusion et perspectives 2026-2030
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.Annexe_A_Specification_Apache_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annexe A — Spécification Apache Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.Annexe_B_Glossaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annexe B — Glossaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume V — Développeur Renaissance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume V — Développeur Renaissance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.0_Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.0 — Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.1_Convergence_Ages_Or/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.1 — Convergence des âges d'or
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.2_Curiosite_Appliquee/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.2 — Curiosité appliquée
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.3_Pensee_Systemique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.3 — Pensée systémique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.4_Nouvelle_Communication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.4 — Nouvelle communication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.5_Imperatif_Qualite_Responsabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.5 — Impératif qualité et responsabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.6_Capital_Humain_Profil_Polymathe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.6 — Capital humain et profil polymathe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.7_Art_Batir_Futur/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.7 — L'art de bâtir le futur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.8_Bibliotheque_Developpeur_Renaissance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.8 — Bibliothèque du développeur Renaissance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.9_Mandat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.9 — Mandat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.10_Spec_Driven_Development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.10 — Spec-Driven Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chapitre-i9-conception-de-circuits-sequentiels">Chapitre I.9 : Conception de Circuits Séquentiels<a class="headerlink" href="#chapitre-i9-conception-de-circuits-sequentiels" title="Permanent link">&para;</a></h1>
+<h2 id="91-introduction-a-la-logique-sequentielle">9.1 Introduction à la Logique Séquentielle<a class="headerlink" href="#91-introduction-a-la-logique-sequentielle" title="Permanent link">&para;</a></h2>
+<h3 id="911-au-dela-de-la-logique-combinatoire-le-concept-detat">9.1.1 Au-delà de la Logique Combinatoire : Le Concept d\'État<a class="headerlink" href="#911-au-dela-de-la-logique-combinatoire-le-concept-detat" title="Permanent link">&para;</a></h3>
+<p>L\'univers des circuits logiques se divise en deux grandes familles : les circuits combinatoires et les circuits séquentiels. Un circuit combinatoire, tel qu\'un additionneur ou un multiplexeur, possède une caractéristique fondamentale : ses sorties à un instant donné dépendent <em>uniquement</em> des valeurs de ses entrées à ce même instant. Il est sans mémoire ; une même combinaison d\'entrées produira toujours la même sortie, indépendamment de ce qui a pu se passer auparavant.</p>
+<p>La logique séquentielle transcende cette limitation en introduisant la notion de <strong>mémoire</strong>. Dans un circuit séquentiel, les sorties ne dépendent pas seulement des entrées actuelles, mais également de la séquence des entrées passées. Cette capacité à \"se souvenir\" de l\'historique est encapsulée dans le concept d\'</p>
+<p><strong>état interne</strong> du circuit. L\'état représente une synthèse de toutes les informations passées pertinentes nécessaires pour déterminer le comportement futur du circuit.</p>
+<p>Structurellement, cette capacité de mémorisation émerge de l\'introduction d\'une <strong>boucle de rétroaction</strong> (<em>feedback loop</em>), où une ou plusieurs sorties du circuit sont réinjectées en entrée. Cette dépendance cyclique est l\'essence même de la logique séquentielle. Un exemple simple est une porte OU dont la sortie est rebouclée sur l\'une de ses entrées : une fois que la sortie passe à 1, elle se maintient à 1 indéfiniment, mémorisant ainsi l\'événement \"une entrée a été à 1 au moins une fois\". L\'état du circuit est matérialisé par des</p>
+<p><strong>variables internes</strong>, aussi appelées variables secondaires, qui sont les signaux portés par ces boucles de rétroaction.</p>
+<p>Cette rétroaction est à la fois la source de la puissance des circuits séquentiels --- leur permettant de mémoriser des données, de compter des événements, et d\'exécuter des algorithmes complexes --- et la source de leur complexité de conception. Sans un mécanisme de contrôle rigoureux, une rétroaction peut engendrer des oscillations incontrôlées ou des comportements imprévisibles dus aux délais de propagation des signaux, un phénomène connu sous le nom de condition de course (<em>race condition</em>). La logique séquentielle n\'est donc pas simplement une \"logique combinatoire avec de la mémoire\", mais plutôt une \"logique combinatoire avec une rétroaction contrôlée\".</p>
+<p>Le tableau suivant synthétise les distinctions fondamentales entre ces deux paradigmes.</p>
+<p><strong>Table 9.1 : Comparaison des Logiques Combinatoire et Séquentielle</strong></p>
+<hr />
+<p>Caractéristique              Logique Combinatoire                       Logique Séquentielle</p>
+<p><strong>Dépendance des sorties</strong>   Uniquement des entrées actuelles           Entrées actuelles ET état(s) antérieur(s)</p>
+<p><strong>Présence de mémoire</strong>      Aucune                                     Oui, matérialisée par l\'état interne</p>
+<p><strong>Structure</strong>                Acyclique (pas de boucle de rétroaction)   Cyclique (présence de boucles de rétroaction)</p>
+<p><strong>Sensibilité au temps</strong>     Insensible à l\'ordre des entrées          Sensible à la séquence temporelle des entrées</p>
+<p><strong>Exemples de circuits</strong>     Additionneur, décodeur, multiplexeur       Compteur, registre, mémoire, processeur</p>
+<hr />
+<h3 id="912-systemes-synchrones-et-asynchrones-le-role-de-lhorloge">9.1.2 Systèmes Synchrones et Asynchrones : Le Rôle de l\'Horloge<a class="headerlink" href="#912-systemes-synchrones-et-asynchrones-le-role-de-lhorloge" title="Permanent link">&para;</a></h3>
+<p>Le défi posé par la rétroaction est la gestion du temps. Les circuits séquentiels se classent en deux catégories selon la manière dont ils abordent ce défi : les systèmes asynchrones et les systèmes synchrones.</p>
+<ul>
+<li>
+<p><strong>Systèmes Asynchrones</strong> : Dans un circuit asynchrone, l\'état du système peut changer à n\'importe quel moment, en réponse directe et immédiate à un changement sur ses entrées. La mémorisation est réalisée par de simples boucles de rétroaction, comme des verrous. Bien que potentiellement plus rapides pour traiter des événements apériodiques et sporadiques, ces circuits sont notoirement difficiles à concevoir et à vérifier. Chaque changement d\'entrée se propage à travers le circuit à une vitesse qui dépend des délais physiques des portes logiques, créant des risques d\'aléas (\
+  <em>hazards</em>) et de conditions de course qui peuvent mener à des états incorrects.</p>
+</li>
+<li>
+<p><strong>Systèmes Synchrones</strong> : Pour maîtriser cette complexité, la quasi-totalité des systèmes numériques modernes adopte une approche synchrone. Dans un circuit synchrone, l\'évolution de l\'état est rigoureusement contrôlée et ne peut se produire qu\'à des instants précis, dictés par un signal global appelé <strong>horloge</strong> (<em>clock</em>). Ce signal est typiquement une onde carrée périodique. Les éléments de mémorisation utilisés sont des bascules synchrones, qui ne sont sensibles qu\'aux transitions du signal d\'horloge (les fronts montants ou descendants).</p>
+</li>
+</ul>
+<p>Le signal d\'horloge agit comme un mécanisme de discrétisation du temps. Il transforme le flux temporel continu en une séquence d\'instants discrets, les \"cycles d\'horloge\". En forçant tous les changements d\'état à se produire simultanément sur un front d\'horloge, on garantit que les entrées des blocs de logique combinatoire sont stables pendant qu\'ils calculent les nouvelles sorties et le prochain état. Cette <strong>abstraction synchrone</strong> élimine les problèmes de synchronisation liés aux délais de propagation variables et permet aux concepteurs de raisonner sur le comportement du circuit cycle par cycle, simplifiant radicalement le processus de conception. Ce chapitre se concentrera exclusivement sur la conception des circuits séquentiels synchrones.</p>
+<h3 id="913-modele-general-dun-circuit-sequentiel">9.1.3 Modèle Général d\'un Circuit Séquentiel<a class="headerlink" href="#913-modele-general-dun-circuit-sequentiel" title="Permanent link">&para;</a></h3>
+<p>Tout circuit séquentiel synchrone peut être représenté par un modèle canonique, illustré ci-dessous. Ce modèle décompose le circuit en deux parties fonctionnelles distinctes.</p>
+<p>Figure 9.1 : Modèle Général d\'un Circuit Séquentiel Synchrone</p>
+<ol>
+<li>
+<p><strong>Un bloc de logique combinatoire</strong> : Ce bloc est responsable du calcul. Il reçoit en entrée les <strong>entrées externes</strong> du circuit (vecteur E) et l\'<strong>état présent</strong> (vecteur Q) fourni par les éléments de mémorisation. À partir de ces informations, il génère deux ensembles de signaux : les <strong>sorties externes</strong> du circuit (vecteur S) et l\'<strong>état suivant</strong> (vecteur Q+), qui représente l\'état que le circuit devra adopter au prochain cycle d\'horloge.</p>
+</li>
+<li>
+<p><strong>Un ensemble d\'éléments de mémorisation</strong> : Généralement un <strong>registre d\'état</strong> composé de bascules (typiquement des bascules D). Ce registre a pour rôle de stocker l\'état présent Q. Au front actif de l\'horloge (CLK), il capture la valeur de l\'état suivant Q+ calculée par le bloc combinatoire et la met à disposition sur sa sortie Q, la maintenant stable jusqu\'au prochain front d\'horloge.</p>
+</li>
+</ol>
+<p>Le fonctionnement se déroule en deux phases par cycle d\'horloge :</p>
+<ul>
+<li>
+<p><strong>Phase d\'évaluation</strong> : Entre deux fronts d\'horloge, le registre d\'état maintient Q stable. Le bloc combinatoire dispose de ce temps pour calculer les nouvelles valeurs de S et Q+ à partir de E et Q.</p>
+</li>
+<li>
+<p><strong>Phase de mise à jour</strong> : Sur le front actif de l\'horloge, le registre d\'état se met à jour, Q prenant la valeur de Q+. Ce nouvel état Q est alors présenté au bloc combinatoire, et un nouveau cycle d\'évaluation commence.</p>
+</li>
+</ul>
+<h2 id="92-elements-de-memorisation-verrous-et-bascules">9.2 Éléments de Mémorisation : Verrous et Bascules<a class="headerlink" href="#92-elements-de-memorisation-verrous-et-bascules" title="Permanent link">&para;</a></h2>
+<p>Les briques de base de la mémorisation dans les circuits séquentiels sont les verrous (<em>latches</em>) et les bascules (<em>flip-flops</em>). Bien que les termes soient parfois utilisés de manière interchangeable, ils désignent des composants au comportement temporel distinct.</p>
+<h3 id="921-le-verrou-latch-memorisation-sensible-au-niveau">9.2.1 Le Verrou (Latch) : Mémorisation Sensible au Niveau<a class="headerlink" href="#921-le-verrou-latch-memorisation-sensible-au-niveau" title="Permanent link">&para;</a></h3>
+<p>Le verrou est un élément de mémoire dont l\'état de la sortie peut changer pendant toute la durée où son entrée de validation est active. On dit qu\'il est sensible au niveau (<em>level-sensitive</em>).</p>
+<h4 id="le-verrou-sr-set-reset">Le Verrou SR (Set-Reset)<a class="headerlink" href="#le-verrou-sr-set-reset" title="Permanent link">&para;</a></h4>
+<p>Le verrou SR est l\'élément de mémorisation le plus fondamental, construit à partir de deux portes logiques interconnectées en boucle. Il existe en deux versions principales :</p>
+<ul>
+<li>
+<p><strong>Verrou SR à portes NOR</strong> : Il possède deux entrées, S (Set) et R (Reset), et deux sorties complémentaires, Q et Qˉ​.</p>
+</li>
+<li>
+<p><strong>Mémorisation (S=0,R=0)</strong> : Les sorties conservent leur état précédent.</p>
+</li>
+<li>
+<p><strong>Mise à 1 (Set, S=1,R=0)</strong> : La sortie Q est forcée à 1.</p>
+</li>
+<li>
+<p><strong>Mise à 0 (Reset, S=0,R=1)</strong> : La sortie Q est forcée à 0.</p>
+</li>
+<li>
+<p><strong>État interdit (S=1,R=1)</strong> : Les deux sorties Q et Qˉ​ sont forcées à 0, ce qui contredit leur complémentarité. Si S et R retournent à 0 simultanément, l\'état futur du verrou est imprévisible. Cette combinaison est donc à proscrire.</p>
+</li>
+<li>
+<p><strong>Verrou SˉRˉ à portes NAND</strong> : Le fonctionnement est similaire, mais les entrées sont actives à l\'état bas. L\'état de mémorisation est Sˉ=1,Rˉ=1, et l\'état interdit est Sˉ=0,Rˉ=0.</p>
+</li>
+</ul>
+<h4 id="le-verrou-d-data">Le Verrou D (Data)<a class="headerlink" href="#le-verrou-d-data" title="Permanent link">&para;</a></h4>
+<p>Pour pallier le problème de l\'état interdit du verrou SR, le verrou D a été conçu. Il possède une entrée de donnée</p>
+<p>D et une entrée de validation E (Enable). Sa structure interne garantit que les conditions Set et Reset ne sont jamais activées simultanément.</p>
+<p>Son fonctionnement est le suivant :</p>
+<ul>
+<li>
+<p><strong>Mode transparent (E=1)</strong> : Le verrou est dit \"transparent\". La sortie Q recopie en permanence la valeur de l\'entrée D. Tout changement sur D est immédiatement répercuté sur Q.</p>
+</li>
+<li>
+<p><strong>Mode maintien (E=0)</strong> : Le verrou mémorise la dernière valeur que D avait juste avant que E ne passe à 0. La sortie Q reste stable, insensible à tout changement sur D.</p>
+</li>
+</ul>
+<p>La transparence des verrous est une caractéristique à double tranchant. Si elle est utile pour capturer des données de manière asynchrone, elle est problématique dans les grands circuits synchrones. Si la sortie d\'un verrou est connectée, via un bloc combinatoire, à l\'entrée d\'un autre verrou validé par le même signal d\'horloge, un changement sur la première entrée peut se propager à travers plusieurs étages de logique et de verrous au sein d\'un même cycle d\'horloge. Ce phénomène de \"ruissellement\" recrée les difficultés de synchronisation des circuits asynchrones. C\'est pour briser cette transparence et imposer une discrétisation temporelle stricte que les bascules déclenchées par front ont été développées.</p>
+<h3 id="922-la-bascule-flip-flop-memorisation-declenchee-par-front">9.2.2 La Bascule (Flip-Flop) : Mémorisation Déclenchée par Front<a class="headerlink" href="#922-la-bascule-flip-flop-memorisation-declenchee-par-front" title="Permanent link">&para;</a></h3>
+<p>La bascule est l\'élément de mémorisation fondamental des systèmes synchrones. Contrairement au verrou, la bascule ne met à jour sa sortie qu\'à un instant précis et très bref : une transition du signal d\'horloge, appelée</p>
+<p><strong>front</strong>. On parle de <strong>front montant</strong> (<em>rising edge</em>) pour une transition de 0 à 1, et de <strong>front descendant</strong> (<em>falling edge</em>) pour une transition de 1 à 0. On dit qu\'elle est sensible au front (</p>
+<p><em>edge-triggered</em>).</p>
+<p>Une méthode classique pour construire une bascule est la structure <strong>maître-esclave</strong>, qui consiste à mettre en cascade deux verrous (le maître et l\'esclave) commandés par des signaux d\'horloge inversés. Lorsque l\'horloge est basse, le verrou maître est transparent et capture la donnée d\'entrée, tandis que l\'esclave est en mode maintien et conserve la sortie stable. Lorsque l\'horloge passe à l\'état haut, le maître se verrouille et l\'esclave devient transparent, propageant la valeur capturée par le maître vers la sortie. La sortie ne change donc qu\'au moment de la transition de l\'horloge.</p>
+<p>Il existe plusieurs types de bascules, se distinguant par leurs entrées de commande.</p>
+<ul>
+<li>
+<p><strong>La Bascule D (Data)</strong> : C\'est la plus simple et la plus utilisée dans les conceptions modernes. Elle possède une seule entrée de donnée, D. Sa fonction est de recopier la valeur de D sur sa sortie Q au front actif de l\'horloge, et de la maintenir jusqu\'au front suivant. Son comportement est résumé par l\'équation Q(t+1)=D.</p>
+</li>
+<li>
+<p><strong>La Bascule JK</strong> : C\'est historiquement la bascule la plus polyvalente. Elle possède deux entrées,\
+  J (analogue à Set) et K (analogue à Reset).</p>
+</li>
+<li>
+<p>J=0,K=0 : Mémorisation (l\'état ne change pas).</p>
+</li>
+<li>
+<p>J=0,K=1 : Remise à 0 (Reset).</p>
+</li>
+<li>
+<p>J=1,K=0 : Mise à 1 (Set).</p>
+</li>
+<li>
+<p>J=1,K=1 : <strong>Basculement (Toggle)</strong>. La sortie s\'inverse : Q(t+1)=Q(t)​.</p>
+</li>
+<li>
+<p><strong>La Bascule T (Toggle)</strong> : C\'est une version simplifiée de la bascule JK où les entrées J et K sont reliées ensemble pour former une seule entrée T.</p>
+</li>
+<li>
+<p>T=0 : Mémorisation.</p>
+</li>
+<li>
+<p>T=1 : Basculement (Toggle).\
+    Elle est particulièrement adaptée à la construction de compteurs.</p>
+</li>
+</ul>
+<p>La bascule JK est souvent qualifiée d\'universelle car elle peut être configurée pour émuler les autres types de bascules. Par exemple, en reliant J et K, on obtient une bascule T. En connectant l\'entrée K à l\'inverse de l\'entrée J, on obtient une bascule D. Bien que cette flexibilité l\'ait rendue très populaire dans les conceptions à base de circuits intégrés discrets, les outils de synthèse modernes pour les circuits logiques programmables (FPGA) et les circuits intégrés à application spécifique (ASIC) utilisent quasi exclusivement la bascule D comme brique de base. Les comportements JK ou T sont alors implémentés par la logique combinatoire qui précède l\'entrée D de la bascule.</p>
+<h3 id="923-tables-caracteristiques-et-tables-dexcitation">9.2.3 Tables Caractéristiques et Tables d\'Excitation<a class="headerlink" href="#923-tables-caracteristiques-et-tables-dexcitation" title="Permanent link">&para;</a></h3>
+<p>Pour analyser et concevoir des circuits séquentiels, deux types de tables sont indispensables pour décrire le comportement des bascules.</p>
+<ul>
+<li>
+<p><strong>La table caractéristique</strong> décrit le fonctionnement de la bascule. Elle exprime l\'état futur, Q(t+1), en fonction de l\'état présent, Q(t), et des entrées de commande. Elle répond à la question : \"Étant donné l\'état actuel et les entrées, quel sera le prochain état?\". C\'est l\'outil privilégié pour l\'<strong>analyse</strong> d\'un circuit.</p>
+</li>
+<li>
+<p><strong>La table d\'excitation</strong> est la réciproque de la table caractéristique. Elle indique les valeurs que les entrées de commande doivent prendre pour provoquer une transition d\'un état présent Q(t) vers un état futur désiré Q(t+1). Elle répond à la question : \"Pour passer de l\'état A à l\'état B, quelles entrées dois-je appliquer?\". C\'est l\'outil fondamental pour la <strong>synthèse</strong> d\'un circuit.</p>
+</li>
+</ul>
+<p>Les tables ci-dessous présentent ces deux vues pour les principaux types de bascules.</p>
+<p><strong>Table 9.2 : Bascule D</strong></p>
+<hr />
+<p><strong>Table Caractéristique</strong>                        <strong>Table d\'Excitation</strong></p>
+<p><strong>D</strong>                       <strong>Q(t+1)</strong>           <strong>Q(t)</strong></p>
+<p>0                           0                    0</p>
+<p>1                           1                    0</p>
+<div class="highlight"><pre><span></span><code>                                               1
+
+                                               1
+</code></pre></div>
+<hr />
+<p><strong>Table 9.3 : Bascule T</strong></p>
+<hr />
+<p><strong>Table Caractéristique</strong>                                   <strong>Table d\'Excitation</strong></p>
+<p><strong>T</strong>                       <strong>Q(t)</strong>        <strong>Q(t+1)</strong>      <strong>Q(t)</strong></p>
+<p>0                           0               0               0</p>
+<p>0                           1               1               0</p>
+<p>1                           0               1               1</p>
+<p>1                           1               0               1</p>
+<hr />
+<p><strong>Table 9.4 : Bascule JK</strong></p>
+<hr />
+<p><strong>Table Caractéristique</strong>                                          <strong>Table d\'Excitation</strong></p>
+<p><strong>J</strong>                       <strong>K</strong>        <strong>Q(t)</strong>     <strong>Q(t+1)</strong>   <strong>Q(t)</strong></p>
+<p>0                           0            0            0            0</p>
+<p>0                           0            1            1            0</p>
+<p>0                           1            0            0            1</p>
+<p>0                           1            1            0            1</p>
+<p>1                           0            0            1            </p>
+<p>1                           0            1            1            </p>
+<p>1                           1            0            1            </p>
+<p>1                           1            1            0            </p>
+<hr />
+<p>La présence de conditions indifférentes (<em>Don\'t Care</em>, notées X) dans la table d\'excitation de la bascule JK est particulièrement importante. Elles représentent une flexibilité pour le concepteur : pour une transition donnée, l\'une des entrées peut être à 0 ou à 1 sans affecter le résultat. Par exemple, pour maintenir un état 0 (Q(t)=0→Q(t+1)=0), il faut que J=0, mais la valeur de K n\'a pas d\'importance (si K=0, on est en mode mémorisation ; si K=1, on est en mode Reset, ce qui force aussi la sortie à 0). Cette flexibilité peut être exploitée lors de la phase de simplification des équations logiques (par exemple, avec des tables de Karnaugh) pour obtenir un circuit combinatoire plus simple.</p>
+<h2 id="93-modelisation-par-machines-a-etats-finis-fsm">9.3 Modélisation par Machines à États Finis (FSM)<a class="headerlink" href="#93-modelisation-par-machines-a-etats-finis-fsm" title="Permanent link">&para;</a></h2>
+<p>Les machines à états finis (<em>Finite State Machines</em>, FSM), ou automates finis, sont un modèle mathématique abstrait qui permet de décrire le comportement de n\'importe quel circuit séquentiel. Une FSM est définie par un ensemble d\'états, des transitions entre ces états déclenchées par des entrées, et des sorties générées par le système. Il existe deux modèles principaux pour les FSM, qui se distinguent par la manière dont les sorties sont générées : le modèle de Moore et le modèle de Mealy.</p>
+<h3 id="931-la-machine-de-moore-sorties-associees-aux-etats">9.3.1 La Machine de Moore : Sorties Associées aux États<a class="headerlink" href="#931-la-machine-de-moore-sorties-associees-aux-etats" title="Permanent link">&para;</a></h3>
+<p>Une machine de Moore est formellement définie comme un 6-uplet (Q,Σ,Δ,δ,λ,q0​) où  :</p>
+<ul>
+<li>
+<p>Q est un ensemble fini d\'états.</p>
+</li>
+<li>
+<p>Σ est l\'alphabet d\'entrée.</p>
+</li>
+<li>
+<p>Δ est l\'alphabet de sortie.</p>
+</li>
+<li>
+<p>δ:Q×Σ→Q est la fonction de transition, qui détermine l\'état suivant à partir de l\'état présent et de l\'entrée.</p>
+</li>
+<li>
+<p>λ:Q→Δ est la fonction de sortie.</p>
+</li>
+<li>
+<p>q0​ est l\'état initial.</p>
+</li>
+</ul>
+<p>La caractéristique fondamentale de la machine de Moore est que <strong>la sortie dépend uniquement de l\'état présent</strong>. Les sorties sont donc stables pendant toute la durée d\'un état et ne changent qu\'au moment d\'une transition d\'état, de manière synchrone avec l\'horloge.</p>
+<p>Dans un <strong>diagramme d\'états</strong> de Moore, les états sont représentés par des cercles. À l\'intérieur de chaque cercle, on indique le nom de l\'état et la valeur de la sortie associée à cet état (ex: EtatA / SortieX). Les transitions sont représentées par des flèches entre les états, étiquetées avec la condition d\'entrée qui les provoque.</p>
+<h3 id="932-la-machine-de-mealy-sorties-associees-aux-transitions">9.3.2 La Machine de Mealy : Sorties Associées aux Transitions<a class="headerlink" href="#932-la-machine-de-mealy-sorties-associees-aux-transitions" title="Permanent link">&para;</a></h3>
+<p>Une machine de Mealy est également définie par un 6-uplet, mais sa fonction de sortie est différente  :</p>
+<ul>
+<li>λ:Q×Σ→Δ est la fonction de sortie.</li>
+</ul>
+<p>Ici, <strong>la sortie dépend à la fois de l\'état présent et de l\'entrée actuelle</strong>. Cela signifie que les sorties sont générées</p>
+<p><em>pendant</em> les transitions. Une conséquence majeure est qu\'un changement sur une entrée peut se propager immédiatement à la sortie (à travers le bloc de logique combinatoire) sans attendre le prochain front d\'horloge. La sortie est donc potentiellement asynchrone par rapport à l\'horloge.</p>
+<p>Dans un <strong>diagramme d\'états</strong> de Mealy, les sorties sont écrites sur les flèches de transition, à côté de l\'entrée qui les génère, sous le format entrée / sortie.</p>
+<h3 id="933-comparaison-et-equivalence-des-modeles">9.3.3 Comparaison et Équivalence des Modèles<a class="headerlink" href="#933-comparaison-et-equivalence-des-modeles" title="Permanent link">&para;</a></h3>
+<p>Sur le plan de la puissance de calcul, les deux modèles sont équivalents : toute fonction réalisable par une machine de Moore peut l\'être par une machine de Mealy, et vice-versa. Le choix entre les deux modèles est donc une question de conception qui implique des compromis.</p>
+<p>Une machine de Mealy réagit plus rapidement aux entrées, car la sortie peut changer au cours du même cycle d\'horloge que l\'entrée, sans attendre le front suivant. Elle peut également nécessiter moins d\'états pour implémenter une même fonction. Cependant, cette réactivité a un coût : si les entrées du circuit sont bruitées ou ne sont pas parfaitement synchronisées avec l\'horloge du système, ces \"glitches\" peuvent se propager directement aux sorties. La machine de Moore, en revanche, a une sortie qui est par nature \"enregistrée\" et synchronisée avec l\'état. Elle est donc insensible aux aléas sur les entrées qui se produisent entre les fronts d\'horloge. Sa sortie est plus \"propre\", mais elle présente une latence d\'un cycle d\'horloge par rapport à une machine de Mealy équivalente.</p>
+<p><strong>Table 9.5 : Comparaison des Modèles de Moore et de Mealy</strong></p>
+<hr />
+<p>Critère                              Machine de Moore                                          Machine de Mealy</p>
+<p><strong>Dépendance de la sortie</strong>          Uniquement de l\'état présent                             État présent ET entrée actuelle</p>
+<p><strong>Synchronisation de la sortie</strong>     Synchrone avec l\'horloge (enregistrée)                   Potentiellement asynchrone (combinatoire)</p>
+<p><strong>Vitesse de réaction</strong>              Réagit au cycle d\'horloge suivant (latence de 1 cycle)   Réagit dans le même cycle d\'horloge</p>
+<p><strong>Nombre d\'états typique</strong>          Potentiellement plus élevé                                Potentiellement plus faible</p>
+<p><strong>Robustesse aux aléas d\'entrée</strong>   Élevée (les aléas sont filtrés par les bascules)          Faible (les aléas peuvent se propager aux sorties)</p>
+<p><strong>Représentation</strong>                   Sortie dans l\'état (cercle)                              Sortie sur la transition (flèche)</p>
+<hr />
+<h3 id="934-conversion-entre-machines-de-mealy-et-de-moore">9.3.4 Conversion entre Machines de Mealy et de Moore<a class="headerlink" href="#934-conversion-entre-machines-de-mealy-et-de-moore" title="Permanent link">&para;</a></h3>
+<p>Il est toujours possible de convertir un modèle en l\'autre de manière algorithmique.</p>
+<ul>
+<li>
+<p><strong>Conversion de Moore vers Mealy</strong> : Cette conversion est directe. Le nombre d\'états ne change pas. Pour chaque transition de l\'état Qi​ vers l\'état Qj​ sur une entrée Ek​, la sortie associée à cette transition dans la machine de Mealy est simplement la sortie qui était associée à l\'état de destination Qj​ dans la machine de Moore.</p>
+</li>
+<li>
+<p><strong>Conversion de Mealy vers Moore</strong> : Cette conversion est plus complexe et peut entraîner une augmentation du nombre d\'états. Si plusieurs transitions arrivant à un même état Qi​ dans la machine de Mealy ont des sorties différentes, cet état Qi​ doit être dupliqué dans la machine de Moore. On crée un nouvel état pour chaque sortie unique associée aux transitions entrantes. Par exemple, si des transitions vers Qi​ produisent les sorties S1​ et S2​, on créera deux états Qi1​ et Qi2​ dans la machine de Moore, avec les sorties respectives S1​ et S2​. Toutes les transitions qui arrivaient en Qi​ avec la sortie S1​ sont redirigées vers Qi1​, et celles avec la sortie S2​ vers Qi2​. Toutes les transitions qui partaient de Qi​ doivent être dupliquées pour partir de Qi1​ et Qi2​.</p>
+</li>
+</ul>
+<h2 id="94-analyse-des-circuits-sequentiels-synchrones">9.4 Analyse des Circuits Séquentiels Synchrones<a class="headerlink" href="#94-analyse-des-circuits-sequentiels-synchrones" title="Permanent link">&para;</a></h2>
+<p>L\'analyse d\'un circuit séquentiel est la démarche qui consiste, à partir de son schéma logique, à déterminer son comportement fonctionnel. L\'objectif final est d\'obtenir une description de haut niveau de sa fonction, généralement sous la forme d\'un diagramme d\'états.</p>
+<h3 id="941-procedure-danalyse-systematique">9.4.1 Procédure d\'Analyse Systématique<a class="headerlink" href="#941-procedure-danalyse-systematique" title="Permanent link">&para;</a></h3>
+<p>La procédure d\'analyse d\'un circuit séquentiel synchrone est une méthode rigoureuse qui se décompose en plusieurs étapes  :</p>
+<ol>
+<li>
+<p><strong>Identification</strong> : Identifier les entrées externes, les sorties externes et les variables d\'état (les sorties Q de chaque bascule).</p>
+</li>
+<li>
+<p><strong>Équations d\'excitation et de sortie</strong> : Établir les expressions logiques pour les entrées de commande de chaque bascule (par exemple, DA​,JB​,KB​, etc.) en fonction des entrées externes et des variables d\'état. Établir également les expressions pour chaque sortie externe.</p>
+</li>
+<li>
+<p><strong>Équations d\'état</strong> : Pour chaque bascule, utiliser son équation d\'excitation et sa table caractéristique pour dériver l\'équation d\'état, qui exprime l\'état futur de la bascule (Q+) en fonction de son état présent (Q) et des entrées externes. Pour une bascule D, c\'est direct : Q+=D. Pour une bascule JK, l\'équation est Q+=JQˉ​+KˉQ.</p>
+</li>
+<li>
+<p><strong>Table d\'états</strong> : Construire une table de transition (ou table d\'états) qui répertorie, pour chaque état présent possible et chaque combinaison d\'entrées externes, l\'état suivant et les sorties correspondantes.</p>
+</li>
+<li>
+<p><strong>Diagramme d\'états</strong> : Traduire la table d\'états en une représentation graphique, le diagramme d\'états, qui illustre de manière intuitive les transitions et le comportement global du circuit.</p>
+</li>
+</ol>
+<h3 id="942-derivation-des-equations">9.4.2 Dérivation des Équations<a class="headerlink" href="#942-derivation-des-equations" title="Permanent link">&para;</a></h3>
+<p>Cette étape consiste à traiter le circuit comme un ensemble de blocs combinatoires. Le premier bloc calcule les entrées des bascules. Par exemple, pour un circuit avec deux bascules A et B de type D, et une entrée externe X, on écrira les équations :</p>
+<p>DA​=fA​(A,B,X)</p>
+<p>DB​=fB​(A,B,X)</p>
+<p>Le second bloc calcule les sorties. Pour une sortie Y :</p>
+<p>Y=g(A,B,X)</p>
+<h3 id="943-construction-de-la-table-et-du-diagramme-detats">9.4.3 Construction de la Table et du Diagramme d\'États<a class="headerlink" href="#943-construction-de-la-table-et-du-diagramme-detats" title="Permanent link">&para;</a></h3>
+<p>La table d\'états est le cœur de l\'analyse. Elle possède des lignes pour chaque état binaire possible (pour n bascules, il y a 2n états) et des colonnes pour chaque combinaison d\'entrées. Chaque cellule de la table indique l\'état suivant et la sortie, calculés à partir des équations d\'état et de sortie.</p>
+<p>Une fois la table complète, le diagramme d\'états est dessiné. Chaque ligne de la table correspond à un état (un cercle dans le diagramme). Pour chaque état, on trace des flèches vers les états suivants indiqués dans la table, en étiquetant chaque flèche avec la combinaison d\'entrées/sorties correspondante (modèle de Mealy) ou simplement les entrées (modèle de Moore).</p>
+<h3 id="944-exemple-danalyse-dun-circuit-inconnu">9.4.4 Exemple d\'Analyse d\'un Circuit Inconnu<a class="headerlink" href="#944-exemple-danalyse-dun-circuit-inconnu" title="Permanent link">&para;</a></h3>
+<p>Considérons un circuit simple avec deux bascules JK, A et B, une entrée X et une sortie Y. Supposons que l\'analyse des schémas nous donne les équations suivantes :</p>
+<p>JA​=B⋅X</p>
+<p>KA​=B⋅Xˉ</p>
+<p>JB​=Aˉ⋅X</p>
+<p>KB​=A+Xˉ</p>
+<p>Y=A⋅B</p>
+<p>En appliquant les équations d\'état Q+=JQˉ​+KˉQ, nous pouvons construire la table d\'états, puis le diagramme, et finalement interpréter la fonction du circuit (par exemple, un détecteur d\'une séquence particulière).</p>
+<h2 id="95-synthese-des-circuits-sequentiels-synchrones">9.5 Synthèse des Circuits Séquentiels Synchrones<a class="headerlink" href="#95-synthese-des-circuits-sequentiels-synchrones" title="Permanent link">&para;</a></h2>
+<p>La synthèse est le processus de conception qui, partant d\'une description fonctionnelle (un cahier des charges), aboutit à un schéma logique complet. C\'est la démarche inverse de l\'analyse.</p>
+<h3 id="951-la-demarche-de-conception-du-cahier-des-charges-au-circuit">9.5.1 La Démarche de Conception : du Cahier des Charges au Circuit<a class="headerlink" href="#951-la-demarche-de-conception-du-cahier-des-charges-au-circuit" title="Permanent link">&para;</a></h3>
+<p>La conception d\'un circuit séquentiel suit une méthodologie structurée pour garantir que le circuit final implémente correctement le comportement désiré.</p>
+<ol>
+<li>
+<p><strong>Modélisation</strong> : Traduire la description textuelle du problème en un diagramme d\'états formel (FSM).</p>
+</li>
+<li>
+<p><strong>Minimisation</strong> : Réduire le nombre d\'états du diagramme pour simplifier le circuit final.</p>
+</li>
+<li>
+<p><strong>Codage</strong> : Assigner un code binaire unique à chaque état.</p>
+</li>
+<li>
+<p>Implémentation :\
+    a. Choisir le type de bascules à utiliser.\
+    b. Construire la table d\'excitation du circuit.\
+    c. Dériver les équations logiques simplifiées pour les entrées des bascules et les sorties.\
+    d. Dessiner le schéma logique final.</p>
+</li>
+</ol>
+<h3 id="952-etape-1-creation-du-diagramme-detats">9.5.2 Étape 1 : Création du Diagramme d\'États<a class="headerlink" href="#952-etape-1-creation-du-diagramme-detats" title="Permanent link">&para;</a></h3>
+<p>C\'est l\'étape la plus créative et la moins formalisée. Elle requiert une compréhension profonde du problème pour définir un ensemble d\'états qui capturent l\'historique nécessaire. Chaque état doit correspondre à une situation unique dans la séquence de fonctionnement. Par exemple, pour un détecteur de la séquence \"101\", on aura besoin d\'un état initial (\"rien détecté\"), d\'un état \"1 détecté\", et d\'un état \"10 détecté\".</p>
+<h3 id="953-etape-2-minimisation-du-nombre-detats-methode-de-la-table-dimplication">9.5.3 Étape 2 : Minimisation du Nombre d\'États (Méthode de la Table d\'Implication)<a class="headerlink" href="#953-etape-2-minimisation-du-nombre-detats-methode-de-la-table-dimplication" title="Permanent link">&para;</a></h3>
+<p>Un diagramme d\'états initial peut contenir des états redondants. Deux états sont dits <strong>équivalents</strong> s\'il est impossible de les distinguer de l\'extérieur en observant les sorties produites en réponse à n\'importe quelle séquence d\'entrées. La minimisation consiste à fusionner les états équivalents pour obtenir le plus petit automate réalisant la même fonction. La</p>
+<p><strong>table d\'implication</strong> est un algorithme systématique pour trouver ces équivalences.</p>
+<p>La procédure est la suivante :</p>
+<ol>
+<li>
+<p><strong>Construire la table</strong> : Créer une grille triangulaire avec une case pour chaque paire d\'états distincts (Qi​,Qj​).</p>
+</li>
+<li>
+<p><strong>Passe 1 (Sorties)</strong> : Pour chaque case (Qi​,Qj​), comparer les sorties des états Qi​ et Qj​ pour chaque entrée. Si les sorties diffèrent pour au moins une entrée, les états ne sont pas équivalents. Marquer la case d\'une croix (×).</p>
+</li>
+<li>
+<p><strong>Passe 1 (Implications)</strong> : Si les sorties sont identiques pour toutes les entrées, les états Qi​ et Qj​ sont potentiellement équivalents. Pour qu\'ils le soient, leurs états suivants doivent aussi être équivalents pour chaque entrée. Inscrire dans la case (Qi​,Qj​) les paires d\'états suivants impliquées. Si les états suivants sont identiques (Qk​,Qk​), l\'implication est triviale et n\'est pas notée.</p>
+</li>
+<li>
+<p><strong>Passes suivantes (Propagation)</strong> : Parcourir la table. Si une case (Qi​,Qj​) contient une paire impliquée (Qk​,Ql​) et que la case (Qk​,Ql​) est déjà marquée d\'une croix, alors l\'implication est fausse. Marquer la case (Qi​,Qj​) d\'une croix. Répéter cette passe jusqu\'à ce qu\'aucune nouvelle croix ne puisse être ajoutée.</p>
+</li>
+<li>
+<p><strong>Conclusion</strong> : Les cases qui ne sont pas marquées d\'une croix à la fin du processus représentent des paires d\'états équivalents. On peut alors fusionner ces états.</p>
+</li>
+</ol>
+<h3 id="954-etape-3-codage-des-etats">9.5.4 Étape 3 : Codage des États<a class="headerlink" href="#954-etape-3-codage-des-etats" title="Permanent link">&para;</a></h3>
+<p>Après minimisation, chaque état symbolique (ex: EtatA, EtatB) doit se voir assigner un code binaire unique. Le nombre de bascules n nécessaires pour N états est tel que 2n≥N. Les deux stratégies de codage les plus courantes sont  :</p>
+<ul>
+<li>
+<p><strong>Codage binaire naturel</strong> : Assignation séquentielle des nombres binaires (00, 01, 10,...). C\'est le plus économique en nombre de bascules (n=⌈log2​N⌉).</p>
+</li>
+<li>
+<p><strong>Codage \"One-Hot\"</strong> : Utilise N bascules pour N états. Chaque état est codé par un mot binaire où un seul bit est à \'1\'. Par exemple, pour 4 états : 0001, 0010, 0100, 1000. Ce codage peut considérablement simplifier la logique combinatoire, au prix d\'un plus grand nombre de bascules.</p>
+</li>
+</ul>
+<h3 id="955-et-956-choix-des-bascules-derivation-des-equations-et-implementation">9.5.5 et 9.5.6 : Choix des Bascules, Dérivation des Équations et Implémentation<a class="headerlink" href="#955-et-956-choix-des-bascules-derivation-des-equations-et-implementation" title="Permanent link">&para;</a></h3>
+<p>Une fois la table d\'états codée obtenue, on choisit un type de bascule. On construit alors la table d\'excitation du circuit en utilisant la table d\'excitation de la bascule choisie. Cette table liste, pour chaque transition d\'état, les entrées requises pour les bascules. À partir de cette table, on utilise des outils de simplification (comme les tables de Karnaugh) pour dériver les équations logiques minimales pour les entrées de chaque bascule et pour les sorties externes. La dernière étape consiste à dessiner le schéma logique correspondant à ces équations.</p>
+<h3 id="957-etude-de-cas-complete-conception-dun-detecteur-de-sequence-1011">9.5.7 Étude de Cas Complète : Conception d\'un Détecteur de Séquence \"1011\"<a class="headerlink" href="#957-etude-de-cas-complete-conception-dun-detecteur-de-sequence-1011" title="Permanent link">&para;</a></h3>
+<p>Appliquons cette méthodologie à un problème classique : la conception d\'un circuit qui détecte la séquence \"1011\" dans un flux de bits en série. Une sortie Z doit passer à 1 lorsque la séquence est reconnue. Nous considérerons le cas avec chevauchement (<em>overlapping</em>), où le dernier bit d\'une séquence peut être le premier d\'une nouvelle séquence.</p>
+<ol>
+<li>
+<p><strong>Diagramme d\'états (Modèle de Mealy)</strong> :</p>
+<ul>
+<li>
+<p>S0 (état initial) : Rien de la séquence n\'a été vu. Si l\'entrée est 0, on reste en S0. Si c\'est 1, on a le début de la séquence, on va en S1. Sortie Z=0.</p>
+</li>
+<li>
+<p>S1 (\"1\" vu) : Si l\'entrée est 1, on a \"11\", ce n\'est pas le début de \"1011\" mais le dernier \'1\' peut être un nouveau début. On reste en S1. Si l\'entrée est 0, on a \"10\", on progresse vers S2. Sortie Z=0.</p>
+</li>
+<li>
+<p>S2 (\"10\" vu) : Si l\'entrée est 0, on a \"100\", la séquence est rompue, on retourne en S0. Si l\'entrée est 1, on a \"101\", on progresse vers S3. Sortie Z=0.</p>
+</li>
+<li>
+<p>S3 (\"101\" vu) : Si l\'entrée est 0, on a \"1010\", la séquence est rompue mais se termine par \"10\", on retourne donc en S2. Si l\'entrée est 1, on a \"1011\", la séquence est détectée! La sortie Z passe à 1. Le dernier \'1\' étant un début de séquence, on retourne en S1.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Minimisation</strong> : Le diagramme a 4 états. Une analyse montrerait qu\'aucun état n\'est équivalent.</p>
+</li>
+<li>
+<p><strong>Codage</strong> : 4 états nécessitent 2 bascules (Q1​,Q0​). Codage binaire : S0=00, S1=01, S2=10, S3=11.</p>
+</li>
+<li>
+<p>Implémentation (avec des bascules D) :\
+    On construit la table d\'excitation. Les entrées des bascules (D1​,D0​) sont simplement les bits de l\'état suivant.</p>
+</li>
+</ol>
+<hr />
+<p>État Présent   Entrée       État Suivant   Sortie       Entrées Bascules</p>
+<p>Q1​Q0​           X            Q1+​Q0+​         Z            D1​D0​</p>
+<p>00             0            00             0            00</p>
+<p>00             1            01             0            01</p>
+<p>01             0            10             0            10</p>
+<p>01             1            01             0            01</p>
+<p>10             0            00             0            00</p>
+<p>10             1            11             0            11</p>
+<p>11             0            10             0            10</p>
+<p>11             1            01             1            01</p>
+<hr />
+<p>À partir de cette table, on peut utiliser des tables de Karnaugh pour trouver les équations simplifiées pour $D_1$, $D_0$ et $Z$ en fonction de $Q_1, Q_0$ et $X$, puis dessiner le circuit.</p>
+<h2 id="96-conception-de-modules-sequentiels-standards">9.6 Conception de Modules Séquentiels Standards<a class="headerlink" href="#96-conception-de-modules-sequentiels-standards" title="Permanent link">&para;</a></h2>
+<p>La méthodologie de synthèse des FSM permet de concevoir n\'importe quel circuit séquentiel. Cependant, certains modules sont si courants qu\'ils existent sous forme de composants standards. Les registres et les compteurs en sont les principaux exemples.</p>
+<h3 id="961-les-registres">9.6.1 Les Registres<a class="headerlink" href="#961-les-registres" title="Permanent link">&para;</a></h3>
+<p>Un registre est un ensemble de bascules, généralement de type D, partageant une horloge commune, conçu pour mémoriser un mot binaire de n bits. Les registres à décalage ajoutent la capacité de déplacer les bits stockés d\'une position à une autre à chaque coup d\'horloge.</p>
+<ul>
+<li>
+<p><strong>Types de Registres à Décalage</strong>  :</p>
+</li>
+<li>
+<p><strong>SISO (Serial-In, Serial-Out)</strong> : Les données entrent et sortent bit par bit. Ils sont utilisés comme lignes à retard numériques.</p>
+</li>
+<li>
+<p><strong>SIPO (Serial-In, Parallel-Out)</strong> : Les données entrent en série et sont disponibles simultanément sur toutes les sorties. Ils servent à la conversion de données série en parallèle, par exemple dans les récepteurs de communication.</p>
+</li>
+<li>
+<p><strong>PISO (Parallel-In, Serial-Out)</strong> : Les données sont chargées simultanément sur toutes les entrées et sont lues en série, bit par bit. Ils réalisent la conversion parallèle-série, utile pour la transmission de données.</p>
+</li>
+<li>
+<p><strong>PIPO (Parallel-In, Parallel-Out)</strong> : Les données sont chargées et lues en parallèle. Ils servent principalement à la mémorisation temporaire (buffer).</p>
+</li>
+<li>
+<p><strong>Conception d\'un Registre Universel</strong> : Un registre universel est un circuit flexible qui combine toutes les fonctionnalités précédentes. Des entrées de commande permettent de sélectionner le mode de fonctionnement : maintien, décalage à gauche, décalage à droite ou chargement parallèle. Sa conception repose sur l\'utilisation de multiplexeurs à l\'entrée de chaque bascule. Chaque multiplexeur sélectionne la source de la donnée pour l\'entrée Di​ de la bascule i : la sortie de la bascule voisine de gauche (Qi+1​ pour un décalage à gauche), la sortie de la bascule voisine de droite (Qi−1​ pour un décalage à droite), l\'entrée parallèle correspondante (Ei​), ou sa propre sortie (Qi​ pour le maintien).</p>
+</li>
+</ul>
+<h3 id="962-les-compteurs">9.6.2 Les Compteurs<a class="headerlink" href="#962-les-compteurs" title="Permanent link">&para;</a></h3>
+<p>Un compteur est un circuit séquentiel qui parcourt une séquence prédéfinie d\'états à chaque impulsion d\'horloge.</p>
+<ul>
+<li>
+<p>Compteurs Asynchrones (à Propagation) :\
+  Dans cette structure, seule la première bascule est connectée à l\'horloge externe. La sortie de chaque bascule sert d\'horloge pour la bascule suivante.69</p>
+</li>
+<li>
+<p><strong>Avantages</strong> : Conception extrêmement simple.</p>
+</li>
+<li>
+<p><strong>Inconvénients</strong> : Le principal défaut est le délai de propagation qui s\'accumule à travers les étages. Le changement d\'état de la dernière bascule est décalé par rapport à la première, ce qui limite la fréquence maximale de comptage et peut générer des états transitoires erronés (glitches) lors du décodage des sorties.</p>
+</li>
+<li>
+<p>Compteurs Synchrones :\
+  Toutes les bascules sont connectées à la même horloge et commutent donc simultanément.72 Une logique combinatoire est nécessaire pour calculer les entrées de chaque bascule afin de produire la séquence de comptage correcte.</p>
+</li>
+<li>
+<p><strong>Avantages</strong> : Absence de délai de propagation cumulé, fonctionnement beaucoup plus rapide et fiable, pas de glitches de sortie.</p>
+</li>
+<li>
+<p><strong>Inconvénients</strong> : La logique de commande est plus complexe que pour un compteur asynchrone.</p>
+</li>
+<li>
+<p>Synthèse de Compteurs sur Mesure :\
+  La méthode de synthèse FSM est idéale pour concevoir des compteurs dont la séquence n\'est pas binaire naturelle.</p>
+</li>
+<li>
+<p><strong>Compteur BCD (Binary-Coded Decimal)</strong> : C\'est un compteur modulo 10 qui parcourt les états de 0000 à 1001, puis retourne à 0000. Sa synthèse implique de définir ce cycle dans un diagramme d\'états, puis de dériver la logique qui force la transition de l\'état 9 (1001) à l\'état 0 (0000) au lieu de l\'état 10 (1010).</p>
+</li>
+<li>
+<p><strong>Compteur en Code Gray</strong> : Ce code a la particularité qu\'un seul bit change entre deux valeurs consécutives. Un compteur en code Gray est très utile dans les systèmes d\'interface avec le monde physique (ex: capteurs de position) pour éviter les lectures erronées pendant les transitions. Sa conception suit la démarche FSM : on définit la séquence d\'états désirée (000, 001, 011, 010, 110,...) et on synthétise la logique de transition correspondante.</p>
+</li>
+</ul>
+<h2 id="97-contraintes-temporelles-dans-les-circuits-synchrones">9.7 Contraintes Temporelles dans les Circuits Synchrones<a class="headerlink" href="#97-contraintes-temporelles-dans-les-circuits-synchrones" title="Permanent link">&para;</a></h2>
+<p>Le modèle synchrone idéal suppose que les changements d\'état sont instantanés et que les signaux se propagent sans délai. En réalité, les circuits physiques ont des contraintes temporelles qui doivent être scrupuleusement respectées pour garantir un fonctionnement fiable.</p>
+<h3 id="971-temps-de-pre-positionnement-setup-et-de-maintien-hold">9.7.1 Temps de Pré-positionnement (Setup) et de Maintien (Hold)<a class="headerlink" href="#971-temps-de-pre-positionnement-setup-et-de-maintien-hold" title="Permanent link">&para;</a></h3>
+<p>Ces deux paramètres sont des caractéristiques fondamentales de toute bascule et définissent une \"fenêtre temporelle\" autour du front actif de l\'horloge pendant laquelle l\'entrée de donnée doit être stable.</p>
+<ul>
+<li>
+<p><strong>Temps de pré-positionnement (tsetup​)</strong> : C\'est la durée minimale pendant laquelle l\'entrée de donnée doit être stable et valide <em>avant</em> l\'arrivée du front actif de l\'horloge. Si la donnée change pendant cet intervalle, la bascule risque de ne pas la capturer correctement.</p>
+</li>
+<li>
+<p><strong>Temps de maintien (thold​)</strong> : C\'est la durée minimale pendant laquelle l\'entrée de donnée doit rester stable et valide <em>après</em> le front actif de l\'horloge. Si la donnée change trop tôt après le front, la bascule pourrait ne pas avoir eu le temps de mémoriser de manière fiable l\'ancienne valeur.</p>
+</li>
+</ul>
+<p>Ces contraintes proviennent du fonctionnement physique interne de la bascule, qui a besoin d\'un certain temps pour capturer et isoler la nouvelle donnée.</p>
+<h3 id="972-temps-de-propagation-et-frequence-maximale-dhorloge">9.7.2 Temps de Propagation et Fréquence Maximale d\'Horloge<a class="headerlink" href="#972-temps-de-propagation-et-frequence-maximale-dhorloge" title="Permanent link">&para;</a></h3>
+<p>Une fois qu\'un front d\'horloge actif se produit, la sortie de la bascule ne change pas instantanément. Le <strong>temps de propagation (tpcq​)</strong> est le délai entre le front d\'horloge et le moment où la sortie Q devient stable à sa nouvelle valeur.</p>
+<p>Dans un circuit séquentiel synchrone, le signal doit avoir le temps de se propager de la sortie d\'un registre, à travers le bloc de logique combinatoire, et d\'arriver à l\'entrée du registre suivant en respectant son temps de pré-positionnement. Cela impose une contrainte sur la période minimale de l\'horloge, Tclk​. Le chemin qui prend le plus de temps entre deux registres est appelé le <strong>chemin critique</strong>. La période de l\'horloge doit être au moins aussi longue que ce délai maximal :</p>
+<p>Tclk​≥tpcq​+tpd(max)​+tsetup​</p>
+<p>où tpd(max)​ est le délai de propagation maximal du bloc de logique combinatoire.</p>
+<p>Cette équation fondamentale dicte la performance d\'un système synchrone. La fréquence maximale de fonctionnement, fmax​, est l\'inverse de cette période minimale (fmax​=1/Tclk(min)​). La vitesse du circuit est donc limitée par son chemin le plus lent. L\'optimisation des circuits séquentiels vise souvent à réduire le délai du chemin critique pour augmenter la fréquence d\'horloge.</p>
+<h3 id="973-le-phenomene-de-metastabilite">9.7.3 Le Phénomène de Métastabilité<a class="headerlink" href="#973-le-phenomene-de-metastabilite" title="Permanent link">&para;</a></h3>
+<p>Violer les contraintes de temps de pré-positionnement ou de maintien peut plonger une bascule dans un état <strong>métastable</strong>. Dans cet état, la sortie de la bascule est indéfinie : elle peut osciller ou se stabiliser à une tension intermédiaire, ni un 0 logique, ni un 1 logique. Bien que la bascule finisse par se résoudre à un état stable (0 ou 1), le temps nécessaire pour cette résolution est non borné et imprévisible.</p>
+<p>Dans un système synchrone, où des milliers de bascules lisent cette sortie, un état métastable peut conduire à une défaillance catastrophique, car différentes parties du circuit peuvent interpréter la tension ambiguë différemment. Le respect strict de la discipline de synchronisation, et en particulier des temps de pré-positionnement et de maintien, est donc une condition non négociable pour la conception de systèmes numériques fiables.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/agbruneau/CorpusInformatique" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

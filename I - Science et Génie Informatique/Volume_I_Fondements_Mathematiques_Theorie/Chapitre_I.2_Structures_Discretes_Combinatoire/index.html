@@ -1,0 +1,8383 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Corpus encyclopédique francophone — science informatique, interopérabilité et entreprise agentique">
+      
+      
+        <meta name="author" content="André-Guy Bruneau">
+      
+      
+        <link rel="canonical" href="https://agbruneau.github.io/CorpusInformatique/I%20-%20Science%20et%20G%C3%A9nie%20Informatique/Volume_I_Fondements_Mathematiques_Theorie/Chapitre_I.2_Structures_Discretes_Combinatoire/">
+      
+      
+        <link rel="prev" href="../Chapitre_I.1_Fondements_Logiques_Raisonnement/">
+      
+      
+        <link rel="next" href="../Chapitre_I.3_Theorie_Graphes/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>I.2 — Structures discrètes et combinatoire - Corpus Informatique</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapitre-i2-structures-discretes-et-combinatoire" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../../.." title="Corpus Informatique" class="md-header__button md-logo" aria-label="Corpus Informatique" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corpus Informatique
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              I.2 — Structures discrètes et combinatoire
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Passer au mode sombre"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer au mode sombre" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Passer au mode clair"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer au mode clair" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/agbruneau/CorpusInformatique" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    agbruneau/CorpusInformatique
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Chapitre_I.1_Fondements_Logiques_Raisonnement/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  I — Science et Génie Informatique
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.1_Introduction_Problematique/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  II — Interopérabilité
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.1_Crise_Integration_Systemique/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  III — Entreprise Agentique
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Corpus Informatique" class="md-nav__button md-logo" aria-label="Corpus Informatique" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Corpus Informatique
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/agbruneau/CorpusInformatique" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    agbruneau/CorpusInformatique
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I — Science et Génie Informatique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    I — Science et Génie Informatique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume I — Fondements Mathématiques et Théorie de l'Informatique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume I — Fondements Mathématiques et Théorie de l'Informatique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.1_Fondements_Logiques_Raisonnement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.1 — Fondements logiques et raisonnement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.2 — Structures discrètes et combinatoire
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.2 — Structures discrètes et combinatoire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-1-les-fondements-la-theorie-des-ensembles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 1 : Les Fondements -- La Théorie des Ensembles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 1 : Les Fondements -- La Théorie des Ensembles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-ensembles-et-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Ensembles et Éléments
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 Ensembles et Éléments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definitions-formelles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Définitions formelles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notations-et-concepts-de-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notations et concepts de base
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ensembles-specifiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ensembles spécifiques
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-operations-sur-les-ensembles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Opérations sur les Ensembles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-proprietes-des-operations-ensemblistes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Propriétés des Opérations Ensemblistes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Propriétés des Opérations Ensemblistes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#distributivite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Distributivité
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lois-de-de-morgan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lois de De Morgan
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2-relations-et-fonctions-structurer-linformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 2 : Relations et Fonctions -- Structurer l\'Information
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 2 : Relations et Fonctions -- Structurer l\&#39;Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-relations-binaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Relations Binaires
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Relations Binaires">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proprietes-des-relations-binaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Propriétés des relations binaires
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-relations-dequivalence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Relations d\'Équivalence
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Relations d\&#39;Équivalence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classes-dequivalence-et-partition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes d\'équivalence et Partition
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-relations-dordre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Relations d\'Ordre
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Relations d\&#39;Ordre">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagrammes-de-hasse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagrammes de Hasse
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-fonctions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Fonctions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 Fonctions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#injection-surjection-bijection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Injection, Surjection, Bijection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#composition-et-fonction-inverse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Composition et Fonction Inverse
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-3-lart-du-denombrement-analyse-combinatoire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 3 : L\'Art du Dénombrement -- Analyse Combinatoire
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 3 : L\&#39;Art du Dénombrement -- Analyse Combinatoire">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-principes-fondamentaux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Principes Fondamentaux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-permutations-et-arrangements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Permutations et Arrangements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-combinaisons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Combinaisons
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-le-binome-de-newton" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Le Binôme de Newton
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 Le Binôme de Newton">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identite-et-triangle-de-pascal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identité et Triangle de Pascal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formule-du-binome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formule du binôme
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-4-arithmetique-et-algorithmique-les-nombres-au-cur-du-calcul" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 4 : Arithmétique et Algorithmique -- Les Nombres au Cœur du Calcul
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 4 : Arithmétique et Algorithmique -- Les Nombres au Cœur du Calcul">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-divisibilite-et-nombres-premiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Divisibilité et Nombres Premiers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-arithmetique-modulaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Arithmétique Modulaire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-lalgorithme-deuclide-etendu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 L\'Algorithme d\'Euclide Étendu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-theoremes-de-fermat-et-deuler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Théorèmes de Fermat et d\'Euler
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-5-concepts-avances-et-applications-aux-systemes-complexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section 5 : Concepts Avancés et Applications aux Systèmes Complexes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section 5 : Concepts Avancés et Applications aux Systèmes Complexes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-cardinalite-et-calculabilite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Cardinalité et Calculabilité
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 Cardinalité et Calculabilité">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cardinalite-des-ensembles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cardinalité des ensembles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#largument-de-la-diagonale-de-cantor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L\'argument de la diagonale de Cantor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implications-pour-la-calculabilite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implications pour la calculabilité
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-suites-recurrentes-et-fonctions-generatrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Suites Récurrentes et Fonctions Génératrices
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-introduction-aux-probabilites-discretes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Introduction aux Probabilités Discrètes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-etude-de-cas-cryptographie-a-cle-publique-rsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Étude de Cas -- Cryptographie à Clé Publique (RSA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.3_Theorie_Graphes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.3 — Théorie des graphes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.4_Langages_Formels_Automates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.4 — Langages formels et automates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.5_Calculabilite_Decidabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.5 — Calculabilité et décidabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapitre_I.6_Theorie_Complexite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.6 — Théorie de la complexité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume II — Architecture des Ordinateurs et Systèmes Numériques
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume II — Architecture des Ordinateurs et Systèmes Numériques
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.7_Systemes_Numeriques_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.7 — Systèmes numériques et données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.8_Circuits_Combinatoires/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.8 — Circuits combinatoires
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.9_Circuits_Sequentiels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.9 — Circuits séquentiels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.10_Conception_Systeme_HDL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.10 — Conception système HDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.11_Architecture_ISA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.11 — Architecture ISA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.12_Conception_CPU/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.12 — Conception CPU
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.13_Parallelisme_ILP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.13 — Parallélisme ILP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.14_Hierarchie_Memoire_Stockage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.14 — Hiérarchie mémoire et stockage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_II_Architecture_Ordinateurs_Systemes_Numeriques/Chapitre_I.15_Systemes_IO_Accelere/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.15 — Systèmes I/O accélérés
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume III — Systèmes d'Exploitation, Langages et Environnements
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume III — Systèmes d'Exploitation, Langages et Environnements
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.16_Systemes_Exploitation_OS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.16 — Systèmes d'exploitation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.17_Gestion_Concurrence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.17 — Gestion de la concurrence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.18_Gestion_Memoire_Fichiers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.18 — Gestion mémoire et fichiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.19_Conception_Langages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.19 — Conception des langages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.20_Compilation_Interpretation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.20 — Compilation et interprétation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_III_Systemes_Exploitation_Langages_Environnements/Chapitre_I.21_Environnements_Virtualisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.21 — Environnements et virtualisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume IV — Structures de Données, Algorithmique et Génie Logiciel
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume IV — Structures de Données, Algorithmique et Génie Logiciel
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.22_Structures_Donnees_Fondamentales/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.22 — Structures de données fondamentales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.23_Structures_Donnees_Avancees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.23 — Structures de données avancées
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.24_Conception_Analyse_Algorithmes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.24 — Conception et analyse d'algorithmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.25_Algorithmes_Graphes_Avances/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.25 — Algorithmes de graphes avancés
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.26_Processus_Developpement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.26 — Processus de développement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.27_Architecture_Logicielle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.27 — Architecture logicielle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.28_Qualite_Test_Maintenance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.28 — Qualité, test et maintenance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IV_Structures_Donnees_Algorithmique_Genie_Logiciel/Chapitre_I.29_DevOps_SRE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.29 — DevOps et SRE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume V — Données, Réseaux, Cloud et Sécurité
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume V — Données, Réseaux, Cloud et Sécurité
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.30_SGBD_Fondements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.30 — SGBD fondements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.31_SGBD_Implementation_Transactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.31 — SGBD implémentation et transactions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.32_Donnees_Modernes_BigData/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.32 — Données modernes et Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.33_Fondements_Reseaux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.33 — Fondements des réseaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.34_Protocoles_Internetworking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.34 — Protocoles et internetworking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.35_Systemes_Distribues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.35 — Systèmes distribués
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.36_Cloud_Infrastructures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.36 — Cloud et infrastructures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.37_Fondements_Securite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.37 — Fondements de la sécurité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.38_Cryptographie_Appliquee/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.38 — Cryptographie appliquée
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.39_Securite_Reseaux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.39 — Sécurité des réseaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_V_Donnees_Reseaux_Cloud_Securite/Chapitre_I.40_Securite_Systemes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.40 — Sécurité des systèmes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume VI — Intelligence Artificielle et Systèmes Interactifs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume VI — Intelligence Artificielle et Systèmes Interactifs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.41_Fondements_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.41 — Fondements de l'IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.42_Connaissance_Raisonnement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.42 — Connaissance et raisonnement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.43_ML_Fondements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.43 — ML fondements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.44_DeepLearning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.44 — Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.45_Reinforcement_Learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.45 — Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.46_TALN_NLP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.46 — TALN / NLP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.47_Vision_Ordinateur/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.47 — Vision par ordinateur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.48_Infographie_Visualisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.48 — Infographie et visualisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.49_IHM_HCI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.49 — IHM / HCI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VI_Intelligence_Artificielle_Systemes_Interactifs/Chapitre_I.50_Robotique_IoT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.50 — Robotique et IoT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume VII — Technologies Émergentes et Frontières
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume VII — Technologies Émergentes et Frontières
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.51_Informatique_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.51 — Informatique quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.52_Algorithmes_Cryptographie_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.52 — Algorithmes et cryptographie quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.53_HPC_Exascale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.53 — HPC et exascale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.54_Architectures_Post_Moore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.54 — Architectures post-Moore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.55_Modeles_Fondateurs_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.55 — Modèles fondateurs IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.56_AGI_Alignement_Securite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.56 — AGI, alignement et sécurité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.57_Sciences_Computationnelles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.57 — Sciences computationnelles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.58_CyberPhysiques_Jumeaux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.58 — Systèmes cyber-physiques et jumeaux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.59_Web3_Decentralise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.59 — Web3 et décentralisé
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VII_Technologies_Emergentes_Frontieres/Chapitre_I.60_Synthese_Frontieres/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.60 — Synthèse et frontières
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume VIII — Convergence AGI–Quantique : Fondements et Algorithmes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume VIII — Convergence AGI–Quantique : Fondements et Algorithmes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.61_Introduction_Informatique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.61 — Introduction à l'informatique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.62_Convergence_AGI_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.62 — Convergence AGI-quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.63_Evolution_IA_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.63 — Évolution IA-quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.64_Reseaux_Neuronaux_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.64 — Réseaux neuronaux quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.65_Algorithmes_Evolutionnaires_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.65 — Algorithmes évolutionnaires quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.66_Renforcement_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.66 — Renforcement quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.67_Architectures_Hybrides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.67 — Architectures hybrides
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.68_SVM_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.68 — SVM quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.69_Codage_Donnees_Quantiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.69 — Codage de données quantiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_VIII_Convergence_AGI_Quantique_Fondements/Chapitre_I.70_Scalabilite_Correction_Erreurs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.70 — Scalabilité et correction d'erreurs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume IX — Convergence AGI–Quantique : Applications et Perspectives
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume IX — Convergence AGI–Quantique : Applications et Perspectives
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.71_TALN_Quantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.71 — TALN quantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.72_Securite_Confidentialite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.72 — Sécurité et confidentialité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.73_Ethique_Reglementaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.73 — Éthique et réglementaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.74_Implementation_Materielle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.74 — Implémentation matérielle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.75_Middleware_Software/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.75 — Middleware et software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.76_Etudes_Cas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.76 — Études de cas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.77_Durabilite_Energie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.77 — Durabilité et énergie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.78_Metriques_Bancs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.78 — Métriques et bancs d'essai
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.79_Perspectives_Avenir/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.79 — Perspectives d'avenir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Volume_IX_Convergence_AGI_Quantique_Applications/Chapitre_I.80_Infrastructure_Centres_Donnees_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.80 — Infrastructure et centres de données IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II — Interopérabilité
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    II — Interopérabilité
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.1_Introduction_Problematique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.1 — Introduction et problématique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.2_Fondements_Theoriques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.2 — Fondements théoriques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.3_Integration_Applications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.3 — Intégration des applications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.4_Integration_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.4 — Intégration des données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.5_Integration_Evenements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.5 — Intégration des événements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.6_Standards_Contrats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.6 — Standards et contrats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.7_Resilience_Observabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.7 — Résilience et observabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.8_Collaboration_Automatisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.8 — Collaboration et automatisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.9_Architecture_Reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.9 — Architecture de référence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.10_Order_to_Cash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.10 — Order-to-Cash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.11_Entreprise_Agentique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.11 — Entreprise agentique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.12_Securite_Identite_Conformite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.12 — Sécurité, identité et conformité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../II%20-%20Interop%C3%A9rabilit%C3%A9/Chapitre_II.A_Annexes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annexes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III — Entreprise Agentique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    III — Entreprise Agentique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume I — Fondations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume I — Fondations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.1_Crise_Integration_Systemique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.1 — Crise d'intégration systémique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.2_Fondements_Dimensions_Interoperabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.2 — Fondements et dimensions de l'interopérabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.3_Cadres_Reference_Standards_Maturite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.3 — Cadres de référence, standards et maturité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.4_Principes_Architecture_Reactive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.4 — Principes d'architecture réactive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.5_Ecosysteme_API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.5 — Écosystème API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.6_Architecture_Evenements_EDA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.6 — Architecture événements (EDA)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.7_Contrats_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.7 — Contrats de données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.8_Conception_Implementation_Observabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.8 — Conception et implémentation de l'observabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.9_Etudes_Cas_Architecturales/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.9 — Études de cas architecturales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.10_Limites_Interoperabilite_Semantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.10 — Limites de l'interopérabilité sémantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.11_IA_Moteur_Interoperabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.11 — IA moteur d'interopérabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.12_Definition_Interoperabilite_Cognitivo_Adaptative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.12 — Définition de l'interopérabilité cognitivo-adaptative
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.13_Ere_IA_Agentique_Modele_Travailleur_Numerique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.13 — Ère IA agentique et modèle du travailleur numérique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.14_Maillage_Agentique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.14 — Maillage agentique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.15_Ingenierie_Systemes_Cognitifs_Protocoles_Interaction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.15 — Ingénierie des systèmes cognitifs et protocoles d'interaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.16_Modele_Operationnel_Symbiose_Humain_Agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.16 — Modèle opérationnel de symbiose humain-agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.17_Gouvernance_Constitutionnelle_Alignement_IA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.17 — Gouvernance constitutionnelle et alignement IA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.18_AgentOps_Industrialisation_Securisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.18 — AgentOps : industrialisation et sécurisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.19_Architecte_Intentions_Role_Sociotechnique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.19 — Architecte des intentions : rôle sociotechnique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.20_Cockpit_Berger_Intention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.20 — Cockpit du berger d'intention
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.21_Feuille_Route_Transformation_Agentique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.21 — Feuille de route de la transformation agentique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.22_Gestion_Strategique_Portefeuille_Applicatif_APM_Cognitif/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.22 — Gestion stratégique du portefeuille applicatif (APM cognitif)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.23_Patrons_Modernisation_Agentification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.23 — Patrons de modernisation et agentification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.24_Industrialisation_Ingenierie_Plateforme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.24 — Industrialisation et ingénierie de plateforme
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.25_Economie_Cognitive_Diplomatie_Algorithmique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.25 — Économie cognitive et diplomatie algorithmique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.26_Gestion_Risques_Systemiques_Superalignement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.26 — Gestion des risques systémiques et superalignement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.27_Prospective_Agent_Auto_Architecturant_AGI_Entreprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.27 — Prospective : agent auto-architecturant et AGI d'entreprise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_I_Fondations_Entreprise_Agentique/Chapitre_I.28_Conclusion_Architecture_Intentionnelle_Sagesse_Collective/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I.28 — Conclusion : architecture intentionnelle et sagesse collective
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume II — Infrastructure Agentique
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume II — Infrastructure Agentique
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.1_Ingenierie_Plateforme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.1 — Ingénierie de plateforme
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.2_Fondamentaux_Apache_Kafka_Confluent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.2 — Fondamentaux Apache Kafka et Confluent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.3_Conception_Modelisation_Flux_Evenements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.3 — Conception et modélisation des flux d'événements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.4_Contrats_Donnees_Gouvernance_Semantique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.4 — Contrats de données et gouvernance sémantique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.5_Flux_Temps_Reel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.5 — Flux temps réel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.6_Google_Cloud_Vertex_AI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.6 — Google Cloud et Vertex AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.7_Ingenierie_Contexte_RAG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.7 — Ingénierie de contexte et RAG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.8_Integration_Backbone_Evenementiel_Couche_Cognitive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.8 — Intégration backbone événementiel et couche cognitive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.9_Patrons_Architecturaux_Avances_AEM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.9 — Patrons architecturaux avancés (AEM)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.10_Pipelines_CI_CD_Deploiement_Agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.10 — Pipelines CI/CD et déploiement d'agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.11_Observabilite_Comportementale_Monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.11 — Observabilité comportementale et monitoring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.12_Tests_Evaluation_Simulation_Systemes_Multi_Agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.12 — Tests, évaluation et simulation de systèmes multi-agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.13_Paysage_Menaces_Securite_Systemes_Agentiques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.13 — Paysage des menaces et sécurité des systèmes agentiques
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.14_Securisation_Infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.14 — Sécurisation de l'infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_II_Infrastructure_Agentique/Chapitre_II.15_Conformite_Reglementaire_Gestion_Confidentialite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    II.15 — Conformité réglementaire et gestion de la confidentialité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume III — Apache Kafka : Guide de l'Architecte
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume III — Apache Kafka : Guide de l'Architecte
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.1_Decouvrir_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.1 — Découvrir Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.2_Architecture_Cluster_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.2 — Architecture du cluster Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.3_Clients_Kafka_Production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.3 — Clients Kafka en production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.4_Applications_Consommatrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.4 — Applications consommatrices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.5_Cas_Utilisation_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.5 — Cas d'utilisation Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.6_Contrats_Donnees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.6 — Contrats de données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.7_Patrons_Interaction_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.7 — Patrons d'interaction Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.8_Conception_Application_Streaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.8 — Conception d'application streaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.9_Gestion_Kafka_Entreprise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.9 — Gestion Kafka en entreprise
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.10_Organisation_Projet_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.10 — Organisation d'un projet Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.11_Operer_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.11 — Opérer Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_III_Apache_Kafka_Guide_Architecte/Chapitre_III.12_Avenir_Kafka/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    III.12 — L'avenir de Kafka
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume IV — Apache Iceberg et Lakehouse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume IV — Apache Iceberg et Lakehouse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.1_Monde_Lakehouse_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.1 — Le monde Lakehouse et Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.2_Anatomie_Technique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.2 — Anatomie technique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.3_Mise_Pratique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.3 — Mise en pratique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.4_Preparer_Passage_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.4 — Préparer le passage à Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.5_Selection_Couche_Stockage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.5 — Sélection de la couche de stockage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.6_Architecture_Couche_Ingestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.6 — Architecture de la couche d'ingestion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.7_Implementation_Couche_Catalogue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.7 — Implémentation de la couche catalogue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.8_Conception_Couche_Federation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.8 — Conception de la couche de fédération
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.9_Comprendre_Couche_Consommation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.9 — Comprendre la couche de consommation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.10_Maintenir_Lakehouse_Production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.10 — Maintenir le Lakehouse en production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.11_Operationnaliser_Apache_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.11 — Opérationnaliser Apache Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.12_Evolution_Streaming_Lakehouse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.12 — Évolution du streaming Lakehouse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.13_Securite_Gouvernance_Conformite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.13 — Sécurité, gouvernance et conformité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.14_Integration_Microsoft_Fabric_PowerBI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.14 — Intégration Microsoft Fabric et Power BI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.15_Contexte_Canadien_Etudes_Cas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.15 — Contexte canadien et études de cas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.16_Conclusion_Perspectives_2026_2030/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IV.16 — Conclusion et perspectives 2026-2030
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.Annexe_A_Specification_Apache_Iceberg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annexe A — Spécification Apache Iceberg
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_IV_Apache_Iceberg_Lakehouse/Chapitre_IV.Annexe_B_Glossaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annexe B — Glossaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume V — Développeur Renaissance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volume V — Développeur Renaissance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.0_Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.0 — Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.1_Convergence_Ages_Or/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.1 — Convergence des âges d'or
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.2_Curiosite_Appliquee/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.2 — Curiosité appliquée
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.3_Pensee_Systemique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.3 — Pensée systémique
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.4_Nouvelle_Communication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.4 — Nouvelle communication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.5_Imperatif_Qualite_Responsabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.5 — Impératif qualité et responsabilité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.6_Capital_Humain_Profil_Polymathe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.6 — Capital humain et profil polymathe
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.7_Art_Batir_Futur/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.7 — L'art de bâtir le futur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.8_Bibliotheque_Developpeur_Renaissance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.8 — Bibliothèque du développeur Renaissance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.9_Mandat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.9 — Mandat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../III%20-%20Entreprise%20Agentique/Volume_V_Developpeur_Renaissance/Chapitre_V.10_Spec_Driven_Development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V.10 — Spec-Driven Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chapitre-i2-structures-discretes-et-combinatoire">Chapitre I.2 : Structures Discrètes et Combinatoire<a class="headerlink" href="#chapitre-i2-structures-discretes-et-combinatoire" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Les sciences et le génie informatiques reposent sur la manipulation d\'informations et l\'exécution de processus qui sont, par leur nature même, fondamentalement discrets. Contrairement aux mathématiques du continu, telles que l\'analyse et le calcul infinitésimal qui décrivent des phénomènes fluides et ininterrompus, les mathématiques discrètes s\'attachent à l\'étude d\'objets distincts et dénombrables. Un programme informatique est une séquence finie d\'instructions ; les données sont stockées dans des structures composées d\'un nombre fini d\'éléments (bits, octets, enregistrements) ; les réseaux de communication sont des ensembles de nœuds interconnectés par des liens. Chacun de ces exemples illustre un système dont les composantes peuvent être comptées, énumérées et traitées comme des unités individuelles.</p>
+<p>Ce chapitre se consacre à l\'exploration des structures discrètes et de la combinatoire, qui constituent le langage formel et l\'arsenal d\'outils indispensables à la modélisation et à l\'analyse des systèmes informatiques complexes. Les structures discrètes, telles que les ensembles, les relations et les fonctions, fournissent le cadre conceptuel pour organiser l\'information, tandis que la combinatoire, l\'art du dénombrement, nous permet de quantifier les configurations possibles, d\'évaluer la complexité des algorithmes et de fonder la théorie des probabilités sur des bases solides.</p>
+<p>Notre parcours débutera par les fondements les plus élémentaires : la théorie des ensembles. Nous établirons comment ce langage, avec ses opérations et ses propriétés, correspond de manière profonde à la logique propositionnelle qui sous-tend tout calcul. Nous explorerons ensuite comment les relations et les fonctions permettent d\'imposer une structure à ces ensembles, créant des notions aussi fondamentales que l\'équivalence et l\'ordre, essentielles à la classification et à l\'optimisation.</p>
+<p>Armés de ces outils structurels, nous nous tournerons vers l\'analyse combinatoire pour apprendre à compter de manière systématique et efficace. Ces techniques de dénombrement nous mèneront naturellement à l\'arithmétique modulaire et à la théorie des nombres, domaines dont l\'élégance théorique se révèle d\'une importance pratique capitale, notamment en cryptographie.</p>
+<p>Enfin, le chapitre culminera avec l\'étude de concepts avancés qui illustrent la puissance de l\'approche discrète. Nous aborderons la notion de cardinalité pour comparer la taille des infinis, ce qui nous conduira à l\'une des limitations les plus profondes de l\'informatique : l\'existence de problèmes non calculables. Nous introduirons les relations de récurrence et les fonctions génératrices, des outils puissants pour l\'analyse d\'algorithmes. Une introduction aux probabilités discrètes nous permettra de formaliser l\'analyse en cas moyen et le raisonnement en présence d\'incertitude. Pour synthétiser l\'ensemble de ces connaissances, nous conclurons par une étude de cas détaillée de l\'algorithme de cryptographie RSA, un système complexe dont la conception, la validité et la sécurité reposent entièrement sur les principes des structures discrètes et de la théorie des nombres explorés dans ce chapitre.</p>
+<h2 id="section-1-les-fondements-la-theorie-des-ensembles">Section 1 : Les Fondements -- La Théorie des Ensembles<a class="headerlink" href="#section-1-les-fondements-la-theorie-des-ensembles" title="Permanent link">&para;</a></h2>
+<p>La théorie des ensembles est le socle sur lequel reposent les mathématiques modernes et, par extension, une grande partie de l\'informatique théorique. Elle fournit un langage formel pour décrire des collections d\'objets et des opérations logiques sur ces collections. La maîtrise de ce langage est un prérequis essentiel, car il permet de définir avec précision les structures de données, les espaces d\'états d\'un système ou encore les domaines de validité d\'un algorithme.</p>
+<h3 id="11-ensembles-et-elements">1.1 Ensembles et Éléments<a class="headerlink" href="#11-ensembles-et-elements" title="Permanent link">&para;</a></h3>
+<h4 id="definitions-formelles">Définitions formelles<a class="headerlink" href="#definitions-formelles" title="Permanent link">&para;</a></h4>
+<p>Un <strong>ensemble</strong> est une collection d\'objets bien définis et distincts, appelés ses <strong>éléments</strong>. La notion d\'ensemble est primitive, c\'est-à-dire qu\'on ne la définit pas à partir de concepts plus simples, mais on l\'appréhende par ses propriétés. Le caractère \"bien défini\" signifie que pour n\'importe quel objet, on doit pouvoir déterminer sans ambiguïté s\'il appartient ou non à l\'ensemble. Le caractère \"distinct\" signifie qu\'un élément ne peut pas apparaître plus d\'une fois dans un ensemble.</p>
+<p>Il existe deux manières principales de décrire un ensemble  :</p>
+<ol>
+<li>
+<p><strong>En extension :</strong> en énumérant tous ses éléments entre accolades. Par exemple, l\'ensemble A des voyelles de l\'alphabet français s\'écrit A={a,e,i,o,u,y}. L\'ordre des éléments n\'a pas d\'importance : {a,e,i}={i,a,e}.</p>
+</li>
+<li>
+<p><strong>En compréhension :</strong> en décrivant une propriété commune à tous ses éléments. On utilise la notation {x∣P(x)}, qui se lit \"l\'ensemble des x tels que la propriété P(x) est vraie\". Par exemple, l\'ensemble B des entiers naturels pairs peut s\'écrire B={x∈N∣∃k∈N,x=2k}.</p>
+</li>
+</ol>
+<h4 id="notations-et-concepts-de-base">Notations et concepts de base<a class="headerlink" href="#notations-et-concepts-de-base" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>Appartenance :</strong> Si un objet x est un élément de l\'ensemble E, on note x∈E. Dans le cas contraire, on note x∈/E.</p>
+</li>
+<li>
+<p><strong>Inclusion :</strong> Un ensemble A est <strong>inclus</strong> dans un ensemble B, ou est un <strong>sous-ensemble</strong> de B, si tous les éléments de A sont aussi des éléments de B. On note A⊆B. Formellement : A⊆B⟺(∀x,x∈A⟹x∈B). La notation\
+  A⊂B est souvent utilisée pour signifier la même chose, mais peut parfois désigner une inclusion stricte (A⊆B et A=B).</p>
+</li>
+<li>
+<p><strong>Égalité :</strong> Deux ensembles A et B sont égaux s\'ils ont exactement les mêmes éléments. Cela se démontre par le principe de <strong>double inclusion</strong> : A=B⟺(A⊆B∧B⊆A).</p>
+</li>
+</ul>
+<p>Il est crucial de distinguer l\'appartenance de l\'inclusion. Par exemple, si E={1,2,3}, alors 2∈E, mais {2}⊆E. L\'élément 2 n\'est pas un ensemble, tandis que {2} est un ensemble (un singleton).</p>
+<h4 id="ensembles-specifiques">Ensembles spécifiques<a class="headerlink" href="#ensembles-specifiques" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>L\'ensemble vide :</strong> C\'est l\'ensemble qui ne contient aucun élément. Il est noté ∅ ou {}. Pour tout ensemble\
+  A, on a toujours ∅⊆A.</p>
+</li>
+<li>
+<p><strong>Le singleton :</strong> C\'est un ensemble qui ne contient qu\'un seul élément, comme {x}.</p>
+</li>
+<li>
+<p><strong>L\'ensemble des parties :</strong> Pour tout ensemble E, l\'ensemble de tous les sous-ensembles de E est appelé <strong>l\'ensemble des parties</strong> de E, et est noté P(E). Formellement,\
+  P(E)={A∣A⊆E}. Par exemple, si E={1,2}, alors P(E)={∅,{1},{2},{1,2}}. Il est important de noter que si\
+  x∈E, alors {x}∈P(E). Si un ensemble\
+  E est fini et contient n éléments, son ensemble des parties P(E) contient 2n éléments.</p>
+</li>
+</ul>
+<h3 id="12-operations-sur-les-ensembles">1.2 Opérations sur les Ensembles<a class="headerlink" href="#12-operations-sur-les-ensembles" title="Permanent link">&para;</a></h3>
+<p>À partir d\'ensembles existants, on peut en construire de nouveaux à l\'aide d\'opérations fondamentales, souvent visualisées à l\'aide de diagrammes de Venn.</p>
+<ul>
+<li>
+<p><strong>Union (ou Réunion) :</strong> L\'union de deux ensembles A et B, notée A∪B, est l\'ensemble de tous les éléments qui appartiennent à A, ou à B, ou aux deux.\
+  A∪B={x∣x∈A∨x∈B}</p>
+</li>
+<li>
+<p><strong>Intersection :</strong> L\'intersection de deux ensembles A et B, notée A∩B, est l\'ensemble de tous les éléments qui appartiennent à la fois à A et à B.\
+  A∩B={x∣x∈A∧x∈B}\
+  \
+  Si A∩B=∅, on dit que les ensembles A et B sont disjoints.5</p>
+</li>
+<li>
+<p><strong>Complémentaire :</strong> Si A est un sous-ensemble d\'un ensemble universel U, le complémentaire de A dans U, noté Ac ou ∁U​A, est l\'ensemble de tous les éléments de U qui n\'appartiennent pas à A.\
+  Ac={x∈U∣x∈/A}</p>
+</li>
+<li>
+<p><strong>Différence :</strong> La différence de A et B, notée A∖B, est l\'ensemble des éléments qui sont dans A mais pas dans B. On a\
+  A∖B=A∩Bc.</p>
+</li>
+<li>
+<p><strong>Différence symétrique :</strong> La différence symétrique de A et B, notée AΔB, est l\'ensemble des éléments qui appartiennent à A ou à B, mais pas aux deux. On a\
+  AΔB=(A∖B)∪(B∖A)=(A∪B)∖(A∩B).</p>
+</li>
+<li>
+<p><strong>Produit cartésien :</strong> Le produit cartésien de deux ensembles A et B, noté A×B, est l\'ensemble de tous les <strong>couples ordonnés</strong> (a,b) où a∈A et b∈B.\
+  A×B={(a,b)∣a∈A∧b∈B}\
+  \
+  L\'ordre dans un couple est primordial : si a=b, alors (a,b)=(b,a), contrairement à la paire {a,b}={b,a}.3 Le plan cartésien\
+  R×R=R2 est l\'exemple le plus connu de produit cartésien.</p>
+</li>
+</ul>
+<h3 id="13-proprietes-des-operations-ensemblistes">1.3 Propriétés des Opérations Ensemblistes<a class="headerlink" href="#13-proprietes-des-operations-ensemblistes" title="Permanent link">&para;</a></h3>
+<p>Les opérations ensemblistes obéissent à un ensemble de règles algébriques qui structurent leur manipulation et sont essentielles pour les démonstrations formelles. Ces règles sont analogues à celles de l\'algèbre des nombres, mais avec des spécificités propres.</p>
+<ul>
+<li>
+<p><strong>Commutativité :</strong> L\'ordre des opérandes ne change pas le résultat.</p>
+</li>
+<li>
+<p>A∪B=B∪A</p>
+</li>
+<li>
+<p>A∩B=B∩A</p>
+</li>
+<li>
+<p><strong>Associativité :</strong> Le groupement des opérations ne change pas le résultat, ce qui permet d\'omettre les parenthèses dans des expressions comme A∪B∪C.</p>
+</li>
+<li>
+<p>(A∪B)∪C=A∪(B∪C)</p>
+</li>
+<li>
+<p>(A∩B)∩C=A∩(B∩C)</p>
+</li>
+<li>
+<p><strong>Idempotence :</strong> Opérer un ensemble avec lui-même ne le change pas.</p>
+</li>
+<li>
+<p>A∪A=A</p>
+</li>
+<li>
+<p>A∩A=A</p>
+</li>
+<li>
+<p><strong>Absorption :</strong> Une opération peut \"absorber\" l\'autre dans certaines conditions.</p>
+</li>
+<li>
+<p>A∪(A∩B)=A</p>
+</li>
+<li>
+<p>A∩(A∪B)=A</p>
+</li>
+<li>
+<p><strong>Éléments neutres :</strong> L\'ensemble vide est l\'élément neutre de l\'union, et l\'ensemble universel U est celui de l\'intersection.</p>
+</li>
+<li>
+<p>A∪∅=A</p>
+</li>
+<li>
+<p>A∩U=A</p>
+</li>
+</ul>
+<p>Deux propriétés particulièrement importantes sont la distributivité et les lois de De Morgan. Elles établissent un pont direct entre la théorie des ensembles et la logique propositionnelle, révélant que ces deux formalismes sont deux facettes d\'une même structure sous-jacente : une algèbre de Boole. Chaque opération ensembliste (∪, ∩, \^c) correspond à un connecteur logique (∨ pour OU, ∧ pour ET, ¬ pour NON). Ainsi, une preuve d\'identité ensembliste peut être directement traduite en une preuve d\'équivalence logique, et vice-versa. Cette correspondance est fondamentale en informatique, où la manipulation de données (ensembles) et l\'exécution de conditions logiques sont omniprésentes.</p>
+<h4 id="distributivite">Distributivité<a class="headerlink" href="#distributivite" title="Permanent link">&para;</a></h4>
+<p>L\'intersection est distributive par rapport à l\'union, et l\'union est distributive par rapport à l\'intersection.</p>
+<ol>
+<li>
+<p><strong>Distributivité de l\'intersection sur l\'union :</strong> A∩(B∪C)=(A∩B)∪(A∩C)</p>
+</li>
+<li>
+<p><strong>Distributivité de l\'union sur l\'intersection :</strong> A∪(B∩C)=(A∪B)∩(A∪C)</p>
+</li>
+</ol>
+<p>Démonstration de la première loi de distributivité :</p>
+<p>Pour prouver l\'égalité A∩(B∪C)=(A∩B)∪(A∩C), nous utilisons le principe de double inclusion.9</p>
+<ul>
+<li>
+<p>Première inclusion : Montrons que A∩(B∪C)⊆(A∩B)∪(A∩C).\
+  Soit x∈A∩(B∪C). Par définition de l\'intersection, cela signifie que (x∈A)∧(x∈B∪C).\
+  Par définition de l\'union, x∈B∪C signifie (x∈B)∨(x∈C).\
+  Donc, nous avons x∈A∧(x∈B∨x∈C).\
+  En logique, l\'opérateur ET (∧) est distributif sur l\'opérateur OU (∨), donc cette proposition est équivalente à (x∈A∧x∈B)∨(x∈A∧x∈C).\
+  La première partie, (x∈A∧x∈B), signifie x∈A∩B.\
+  La seconde partie, (x∈A∧x∈C), signifie x∈A∩C.\
+  La proposition complète devient donc (x∈A∩B)∨(x∈A∩C), ce qui, par définition de l\'union, signifie x∈(A∩B)∪(A∩C).\
+  Ainsi, tout élément du premier ensemble est aussi dans le second, ce qui prouve l\'inclusion.15</p>
+</li>
+<li>
+<p>Seconde inclusion : Montrons que (A∩B)∪(A∩C)⊆A∩(B∪C).\
+  Soit x∈(A∩B)∪(A∩C). Par définition de l\'union, cela signifie que (x∈A∩B)∨(x∈A∩C).</p>
+</li>
+<li>
+<p><strong>Cas 1 :</strong> x∈A∩B. Alors x∈A et x∈B. Si x∈B, alors il est aussi dans B∪C. Comme x est aussi dans A, on a x∈A∩(B∪C).</p>
+</li>
+<li>
+<p>Cas 2 : x∈A∩C. Alors x∈A et x∈C. Si x∈C, alors il est aussi dans B∪C. Comme x est aussi dans A, on a x∈A∩(B∪C).\
+    Dans les deux cas, x appartient à A∩(B∪C). L\'inclusion est donc prouvée.15</p>
+</li>
+</ul>
+<p>Les deux inclusions étant vérifiées, l\'égalité est démontrée. La preuve de la distributivité de l\'union sur l\'intersection suit un raisonnement analogue.</p>
+<h4 id="lois-de-de-morgan">Lois de De Morgan<a class="headerlink" href="#lois-de-de-morgan" title="Permanent link">&para;</a></h4>
+<p>Les lois de De Morgan décrivent comment le complémentaire interagit avec l\'union et l\'intersection.</p>
+<ol>
+<li>
+<p>∁(A∪B)=∁A∩∁B</p>
+</li>
+<li>
+<p>∁(A∩B)=∁A∪∁B</p>
+</li>
+</ol>
+<p>Démonstration de la première loi de De Morgan :</p>
+<p>Nous allons prouver l\'égalité par équivalences logiques successives, ce qui est plus direct que la double inclusion.17</p>
+<p>Un élément x appartient au complémentaire de A∪B si et seulement s\'il n\'appartient pas à A∪B.</p>
+<p>\begin{align*} x \in \complement(A \cup B) &amp; \iff x \notin (A \cup B) \ &amp; \iff \neg(x \in A \cup B) \ &amp; \iff \neg(x \in A \lor x \in B) \quad \text{(par définition de l\'union)} \ &amp; \iff (\neg(x \in A)) \land (\neg(x \in B)) \quad \text{(par la loi de De Morgan en logique)} \ &amp; \iff (x \notin A) \land (x \notin B) \ &amp; \iff (x \in \complement A) \land (x \in \complement B) \quad \text{(par définition du complémentaire)} \ &amp; \iff x \in (\complement A \cap \complement B) \quad \text{(par définition de l\'intersection)} \end{align*}</p>
+<p>Comme l\'appartenance à l\'ensemble de gauche est logiquement équivalente à l\'appartenance à l\'ensemble de droite pour n\'importe quel élément x, les deux ensembles sont égaux.17 La démonstration de la seconde loi est similaire.</p>
+<h2 id="section-2-relations-et-fonctions-structurer-linformation">Section 2 : Relations et Fonctions -- Structurer l\'Information<a class="headerlink" href="#section-2-relations-et-fonctions-structurer-linformation" title="Permanent link">&para;</a></h2>
+<p>Si les ensembles permettent de regrouper des objets, les <strong>relations</strong> et les <strong>fonctions</strong> permettent d\'établir des liens et des correspondances entre ces objets. Elles sont le fondement de la modélisation de presque toutes les structures en informatique, des bases de données relationnelles aux graphes de dépendances, en passant par les hiérarchies de classes en programmation orientée objet.</p>
+<h3 id="21-relations-binaires">2.1 Relations Binaires<a class="headerlink" href="#21-relations-binaires" title="Permanent link">&para;</a></h3>
+<p>Une <strong>relation binaire</strong> R d\'un ensemble A vers un ensemble B est formellement définie comme un sous-ensemble du produit cartésien A×B. Si (a,b)∈R, on dit que \"a est en relation avec b\" et on note aRb. Lorsque</p>
+<p>A=B, on parle de relation binaire sur l\'ensemble A.</p>
+<h4 id="proprietes-des-relations-binaires">Propriétés des relations binaires<a class="headerlink" href="#proprietes-des-relations-binaires" title="Permanent link">&para;</a></h4>
+<p>Les relations binaires peuvent posséder plusieurs propriétés fondamentales qui déterminent leur nature et leurs applications. Soit R une relation sur un ensemble E.</p>
+<ul>
+<li>
+<p>Réflexivité : R est réflexive si chaque élément est en relation avec lui-même.\
+  \
+  ∀x∈E,xRx</p>
+</li>
+<li>
+<p><strong>Exemple :</strong> La relation \"inférieur ou égal à\" (≤) sur R est réflexive car x≤x pour tout réel x. L\'inclusion (\
+    ⊆) sur P(E) est aussi réflexive car A⊆A pour toute partie A.</p>
+</li>
+<li>
+<p><strong>Contre-exemple :</strong> La relation \"strictement inférieur à\" (\&lt;) sur R n\'est pas réflexive car x\&lt;x est faux.</p>
+</li>
+<li>
+<p>Symétrie : R est symétrique si, lorsque x est en relation avec y, alors y est aussi en relation avec x.\
+  \
+  ∀x,y∈E,(xRy⟹yRx)</p>
+</li>
+<li>
+<p><strong>Exemple :</strong> La relation d\'égalité (=) sur N est symétrique car si m=n, alors n=m. La relation \"est marié(e) à\" sur un ensemble de personnes est symétrique.</p>
+</li>
+<li>
+<p><strong>Contre-exemple :</strong> La relation ≤ sur R n\'est pas symétrique. Par exemple, 3≤5 mais 5≤3.</p>
+</li>
+<li>
+<p>Antisymétrie : R est antisymétrique si les seuls éléments qui sont mutuellement en relation sont les éléments égaux à eux-mêmes.\
+  \
+  ∀x,y∈E,((xRy∧yRx)⟹x=y)</p>
+</li>
+<li>
+<p><strong>Exemple :</strong> La relation de divisibilité sur N∗ est antisymétrique. Si a divise b et b divise a, alors a=b. La relation ≤ sur R est également antisymétrique, car si x≤y et y≤x, alors x=y.</p>
+</li>
+<li>
+<p><strong>Contre-exemple :</strong> La relation \"différent de\" (=) sur N n\'est pas antisymétrique. On a 0=1 et 1=0, mais 0=1.</p>
+</li>
+<li>
+<p>Transitivité : R est transitive si un lien entre x et y et un lien entre y et z impliquent un lien direct entre x et z.\
+  \
+  ∀x,y,z∈E,((xRy∧yRz)⟹xRz)</p>
+</li>
+<li>
+<p><strong>Exemple :</strong> La relation de divisibilité sur N est transitive. Si a divise b et b divise c, alors a divise c. L\'inclusion est aussi transitive.</p>
+</li>
+<li>
+<p><strong>Contre-exemple :</strong> La relation \"est l\'ami(e) de\" n\'est pas transitive. La relation = sur N n\'est pas transitive : 0=1 et 1=0, mais 0=0 est faux.</p>
+</li>
+</ul>
+<p>Ces propriétés ne sont pas de simples classifications ; elles agissent comme des axiomes qui, une fois combinés, définissent des structures mathématiques de première importance. La symétrie et l\'antisymétrie, par exemple, sont des propriétés presque mutuellement exclusives (une relation peut être les deux seulement si son graphe est un sous-ensemble de la diagonale ). Cette distinction crée une bifurcation fondamentale dans la nature des relations : celles qui modélisent une forme de \"similitude\" ou d\' \"interchangeabilité\" (les relations d\'équivalence) et celles qui modélisent une \"précedence\" ou une \"hiérarchie\" (les relations d\'ordre). Cette dualité est au cœur de nombreux paradigmes algorithmiques : les algorithmes de regroupement (clustering) cherchent à identifier des classes d\'équivalence, tandis que les algorithmes de tri ou de planification topologique cherchent à établir une relation d\'ordre.</p>
+<hr />
+<p>Relation                Ensemble          Réflexive   Symétrique            Antisymétrique                           Transitive</p>
+<p>Égalité (=)             Z                 Oui         Oui                   Oui                                      Oui</p>
+<p>Inférieur ou égal (≤)   R                 Oui         Non (3≤5 mais 5≤3)   Oui                                      Oui</p>
+<p>Divisibilité ($        $)               N∗          Oui                   Non ($2                                 4$ mais 4∤2)</p>
+<p>Congruence (≡(modn))    Z                 Oui         Oui                   Non (2≡5(mod3) et 5≡2(mod3) mais 2=5)   Oui</p>
+<p>Inclusion (⊆)           P(E)              Oui         Non                   Oui                                      Oui</p>
+<p>Perpendicularité (⊥)    Droites du plan   Non         Oui                   Non                                      Non (d1​⊥d2​ et d2​⊥d3​⟹d1​∥d3​)</p>
+<hr />
+<h3 id="22-relations-dequivalence">2.2 Relations d\'Équivalence<a class="headerlink" href="#22-relations-dequivalence" title="Permanent link">&para;</a></h3>
+<p>Une <strong>relation d\'équivalence</strong> est une relation binaire qui est à la fois <strong>réflexive, symétrique et transitive</strong> (RST). Elle généralise la notion d\'égalité et permet de regrouper des éléments qui partagent une propriété commune.</p>
+<ul>
+<li>
+<p><strong>Exemples :</strong></p>
+</li>
+<li>
+<p>L\'égalité sur n\'importe quel ensemble.</p>
+</li>
+<li>
+<p>La congruence modulo n sur Z : a≡b(modn) si n divise a−b.</p>
+</li>
+<li>
+<p>La relation \"avoir la même parité\" sur N.</p>
+</li>
+<li>
+<p>La relation \"être parallèle à\" sur l\'ensemble des droites du plan.</p>
+</li>
+</ul>
+<h4 id="classes-dequivalence-et-partition">Classes d\'équivalence et Partition<a class="headerlink" href="#classes-dequivalence-et-partition" title="Permanent link">&para;</a></h4>
+<p>Le concept central associé à une relation d\'équivalence ∼ sur un ensemble E est celui de <strong>classe d\'équivalence</strong>. Pour tout élément x∈E, sa classe d\'équivalence, notée [x] ou xˉ, est l\'ensemble de tous les éléments de E qui sont équivalents à x.</p>
+<p>[x]={y∈E∣x∼y}</p>
+<p>Les classes d\'équivalence possèdent une propriété fondamentale : pour deux éléments quelconques x et y de E, leurs classes [x] et [y] sont soit strictement identiques, soit totalement disjointes.26</p>
+<p>∀x,y∈E,([x]=[y])∨([x]∩[y]=∅)</p>
+<p>Cette propriété découle directement des axiomes RST. Si deux classes [x] et [y] ont un élément commun z, alors x∼z et y∼z. Par symétrie, z∼y. Par transitivité, x∼y. On peut alors montrer que tout élément de [x] est dans [y] et vice-versa, prouvant que [x]=[y].29</p>
+<p>Il en résulte qu\'une relation d\'équivalence induit une <strong>partition</strong> de l\'ensemble E, c\'est-à-dire une décomposition de E en une collection de sous-ensembles non vides, deux à deux disjoints, dont l\'union est E tout entier. Chaque sous-ensemble de la partition est une classe d\'équivalence.</p>
+<p>L\'ensemble de toutes les classes d\'équivalence est appelé l\'<strong>ensemble quotient</strong> de E par ∼, noté E/∼. Par exemple, pour la congruence modulo 3 sur Z, il y a trois classes d\'équivalence : $ = {\dots, -3, 0, 3, 6, \dots}$, $ = \{\dots, -2, 1, 4, 7, \dots\}$, et $ = {\dots, -1, 2, 5, 8, \dots}$. L\'ensemble quotient est Z/3Z={,,}.</p>
+<h3 id="23-relations-dordre">2.3 Relations d\'Ordre<a class="headerlink" href="#23-relations-dordre" title="Permanent link">&para;</a></h3>
+<p>Une <strong>relation d\'ordre</strong> est une relation binaire qui est <strong>réflexive, antisymétrique et transitive</strong> (RAT). Elle formalise la notion intuitive de comparaison ou de hiérarchie. Un ensemble muni d\'une relation d\'ordre est appelé un</p>
+<p><strong>ensemble partiellement ordonné</strong> (en anglais, <em>partially ordered set</em> ou <strong>poset</strong>).</p>
+<ul>
+<li>
+<p><strong>Ordre partiel et ordre total :</strong></p>
+</li>
+<li>
+<p>Un ordre est dit <strong>partiel</strong> si certains éléments peuvent être incomparables. C\'est-à-dire, il peut exister x,y∈E tels que x≤y et y≤x.</p>
+<ul>
+<li><strong>Exemple :</strong> La relation de divisibilité sur N∗. Les entiers 2 et 3 sont incomparables car 2 ne divise pas 3 et 3 ne divise pas 2. L\'inclusion sur\
+  P({a,b,c}) est un ordre partiel : {a} et {b} sont incomparables.</li>
+</ul>
+</li>
+<li>
+<p>Un ordre est dit <strong>total</strong> (ou linéaire) si tous les éléments sont comparables. Un ensemble muni d\'un ordre total est appelé une <strong>chaîne</strong>.</p>
+<ul>
+<li><strong>Exemple :</strong> La relation ≤ sur R est un ordre total.</li>
+</ul>
+</li>
+<li>
+<p><strong>Éléments remarquables dans un poset (E,≤) :</strong></p>
+</li>
+<li>
+<p>Un élément m∈E est <strong>minimal</strong> si aucun autre élément n\'est strictement plus petit que lui (∀x∈E,x≤m⟹x=m).</p>
+</li>
+<li>
+<p>Un élément M∈E est <strong>maximal</strong> si aucun autre élément n\'est strictement plus grand que lui (∀x∈E,m≤x⟹x=m).</p>
+</li>
+<li>
+<p>Un élément m0​∈E est le <strong>plus petit élément</strong> (ou minimum) s\'il est plus petit que tous les autres éléments (∀x∈E,m0​≤x). S\'il existe, il est unique et est le seul élément minimal.</p>
+</li>
+<li>
+<p>Un élément M0​∈E est le <strong>plus grand élément</strong> (ou maximum) s\'il est plus grand que tous les autres éléments (∀x∈E,x≤M0​). S\'il existe, il est unique et est le seul élément maximal.</p>
+</li>
+</ul>
+<h4 id="diagrammes-de-hasse">Diagrammes de Hasse<a class="headerlink" href="#diagrammes-de-hasse" title="Permanent link">&para;</a></h4>
+<p>Pour visualiser la structure d\'un ensemble ordonné <strong>fini</strong>, on utilise un <strong>diagramme de Hasse</strong>. C\'est une représentation graphique simplifiée de la relation d\'ordre qui élimine les informations redondantes. La construction suit trois règles  :</p>
+<ol>
+<li>
+<p>Les éléments de l\'ensemble sont représentés par des points (ou sommets).</p>
+</li>
+<li>
+<p>Si x\&lt;y, le point représentant y est placé plus haut que celui représentant x.</p>
+</li>
+<li>
+<p>Un segment de droite relie x à y si et seulement si y <strong>recouvre</strong> x, c\'est-à-dire x\&lt;y et il n\'existe aucun z tel que x\&lt;z\&lt;y.</p>
+</li>
+</ol>
+<p>Grâce à ces conventions, les arêtes dues à la réflexivité (boucles sur chaque sommet) et à la transitivité (raccourcis) sont omises, et l\'orientation des arêtes est implicite (toujours de bas en haut).</p>
+<p><strong>Exemple :</strong> Le diagramme de Hasse pour la relation de divisibilité sur l\'ensemble des diviseurs de 12, D12​={1,2,3,4,6,12}, est le suivant  :</p>
+<blockquote>
+<p>Extrait de code</p>
+</blockquote>
+<p>graph TD\
+1 --&gt; 2;\
+1 --&gt; 3;\
+2 --&gt; 4;\
+2 --&gt; 6;\
+3 --&gt; 6;\
+4 --&gt; 12;\
+6 --&gt; 12;</p>
+<p>Ce diagramme montre que 1 est le plus petit élément, 12 est le plus grand. Les éléments 4 et 6 sont maximaux dans le sous-ensemble {1,2,3,4,6}, mais ne sont pas comparables entre eux.</p>
+<h3 id="24-fonctions">2.4 Fonctions<a class="headerlink" href="#24-fonctions" title="Permanent link">&para;</a></h3>
+<p>Une <strong>fonction</strong> (ou application) f d\'un ensemble de départ E (le <strong>domaine</strong>) vers un ensemble d\'arrivée F (le <strong>codomaine</strong>) est une relation binaire de E vers F telle que chaque élément de E est associé à <strong>un et un seul</strong> élément de F. On note</p>
+<p>f:E→F.</p>
+<h4 id="injection-surjection-bijection">Injection, Surjection, Bijection<a class="headerlink" href="#injection-surjection-bijection" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>Injection :</strong> Une fonction f:E→F est <strong>injective</strong> (ou une injection) si des éléments distincts du domaine ont toujours des images distinctes dans le codomaine.\
+  ∀x1​,x2​∈E,(f(x1​)=f(x2​)⟹x1​=x2​)\
+  \
+  Cela signifie que tout élément de F a au plus un antécédent.16 Si\
+  E et F sont finis, une injection n\'est possible que si ∣E∣≤∣F∣.</p>
+</li>
+<li>
+<p><strong>Surjection :</strong> Une fonction f:E→F est <strong>surjective</strong> (ou une surjection) si chaque élément du codomaine est l\'image d\'au moins un élément du domaine.\
+  ∀y∈F,∃x∈E,f(x)=y\
+  \
+  Cela signifie que l\'image de la fonction est égale à son codomaine, f(E)=F.16 Si\
+  E et F sont finis, une surjection n\'est possible que si ∣E∣≥∣F∣.</p>
+</li>
+<li>
+<p><strong>Bijection :</strong> Une fonction f:E→F est <strong>bijective</strong> (ou une bijection) si elle est à la fois injective et surjective.\
+  ∀y∈F,∃!x∈E,f(x)=y\
+  \
+  Cela signifie que chaque élément de F a un unique antécédent. Une bijection établit une correspondance un-à-un entre les éléments de E et de F. Si E et F sont finis, une bijection n\'existe que si ∣E∣=∣F∣.45</p>
+</li>
+</ul>
+<h4 id="composition-et-fonction-inverse">Composition et Fonction Inverse<a class="headerlink" href="#composition-et-fonction-inverse" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>Composition :</strong> Étant données deux fonctions f:E→F et g:F→G, leur <strong>composée</strong> est la fonction g∘f:E→G définie par (g∘f)(x)=g(f(x)) pour tout x∈E.</p>
+</li>
+<li>
+<p><strong>Propriété :</strong> La composition préserve l\'injectivité et la surjectivité.</p>
+<ul>
+<li>
+<p>Si f et g sont injectives, alors g∘f est injective.</p>
+</li>
+<li>
+<p>Si f et g sont surjectives, alors g∘f est surjective.</p>
+</li>
+<li>
+<p>Par conséquent, si f et g sont bijectives, g∘f est bijective.</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Démonstration (Injectivité) :Supposons f et g injectives. Soient x1​,x2​∈E tels que (g∘f)(x1​)=(g∘f)(x2​).Cela signifie g(f(x1​))=g(f(x2​)).Comme g est injective, on en déduit f(x1​)=f(x2​).Comme f est injective, on en déduit x1​=x2​.Donc, g∘f est injective.48</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Fonction Inverse :</strong> Une fonction f:E→F est dite <strong>inversible</strong> s\'il existe une fonction g:F→E telle que g∘f=idE​ et f∘g=idF​, où idE​ est la fonction identité sur E.</p>
+</li>
+<li>
+<p><strong>Théorème :</strong> Une fonction f est inversible si et seulement si elle est bijective.</p>
+</li>
+<li>
+<p>Si elle existe, cette fonction g est unique, est appelée la <strong>fonction inverse</strong> (ou réciproque) de f, et est notée f−1.</p>
+</li>
+</ul>
+<p>Démonstration (esquisse) :(⟹) Supposons f bijective. Pour tout y∈F, il existe un unique x∈E tel que f(x)=y. On peut donc définir une fonction g:F→E par g(y)=x. Par construction, g(f(x))=x et f(g(y))=y, ce qui prouve que g est l\'inverse de f.(⟸) Supposons qu\'il existe un inverse g. Pour montrer que f est injective, si f(x1​)=f(x2​), alors g(f(x1​))=g(f(x2​)), ce qui donne x1​=x2​. Pour montrer que f est surjective, pour tout y∈F, posons x=g(y). Alors f(x)=f(g(y))=y, donc y a un antécédent.16</p>
+<h2 id="section-3-lart-du-denombrement-analyse-combinatoire">Section 3 : L\'Art du Dénombrement -- Analyse Combinatoire<a class="headerlink" href="#section-3-lart-du-denombrement-analyse-combinatoire" title="Permanent link">&para;</a></h2>
+<p>L\'analyse combinatoire est la branche des mathématiques qui étudie les configurations d\'objets. Elle cherche à répondre à des questions du type \"Combien y a-t-il de...?\". En informatique, ces questions sont omniprésentes : combien de mots de passe de 8 caractères peut-on former? Combien de chemins existent entre deux nœuds dans un réseau? Combien de comparaisons un algorithme de tri effectue-t-il dans le pire des cas? Le dénombrement est donc essentiel pour l\'analyse de la complexité, la conception de structures de données et le calcul des probabilités.</p>
+<h3 id="31-principes-fondamentaux">3.1 Principes Fondamentaux<a class="headerlink" href="#31-principes-fondamentaux" title="Permanent link">&para;</a></h3>
+<p>Toutes les techniques de dénombrement, même les plus complexes, reposent sur deux principes de base qui relient les opérations sur les ensembles à des opérations arithmétiques.</p>
+<ul>
+<li>
+<p><strong>Principe de la Somme (ou de l\'Addition) :</strong> Si une tâche peut être accomplie de n1​ manières et une seconde tâche de n2​ manières, et que ces deux tâches ne peuvent pas être accomplies simultanément (elles sont mutuellement exclusives), alors il y a n1​+n2​ manières d\'accomplir l\'une ou l\'autre de ces tâches. En termes d\'ensembles, si A et B sont deux ensembles finis <strong>disjoints</strong>, alors ∣A∪B∣=∣A∣+∣B∣.</p>
+</li>
+<li>
+<p><strong>Principe du Produit (ou de la Multiplication) :</strong> Si une procédure peut être décomposée en une séquence de deux tâches, où il y a n1​ manières d\'accomplir la première tâche et, pour chacune de ces manières, n2​ manières d\'accomplir la seconde, alors il y a n1​×n2​ manières d\'accomplir la procédure complète. En termes d\'ensembles, pour deux ensembles finis A et B, le cardinal de leur produit cartésien est ∣A×B∣=∣A∣×∣B∣.</p>
+</li>
+</ul>
+<h3 id="32-permutations-et-arrangements">3.2 Permutations et Arrangements<a class="headerlink" href="#32-permutations-et-arrangements" title="Permanent link">&para;</a></h3>
+<p>Les arrangements et permutations concernent les problèmes de dénombrement où <strong>l\'ordre des éléments est important</strong>. La distinction cruciale entre les différentes formules de dénombrement réside dans deux questions : l\'ordre importe-t-il et les répétitions sont-elles permises?</p>
+<ul>
+<li>
+<p>Arrangements avec répétition (k-uplets) :\
+  Il s\'agit du nombre de manières de choisir k éléments parmi n éléments distincts, avec remise et en tenant compte de l\'ordre. Pour chacun des k choix, il y a n possibilités. Par le principe du produit, le nombre total d\'arrangements est n×n×⋯×n (k fois).\
+  \
+  AR​(n,k)=nk</p>
+</li>
+<li>
+<p><strong>Exemple :</strong> Le nombre de mots de 3 lettres que l\'on peut former avec l\'alphabet {A, B} est 23=8 (AAA, AAB, ABA, BAA, ABB, BAB, BBA, BBB).</p>
+</li>
+<li>
+<p>Arrangements sans répétition (k-permutations) :\
+  Il s\'agit du nombre de manières de choisir et d\'ordonner k éléments parmi n éléments distincts, sans remise. Le premier élément peut être choisi de n manières, le deuxième de n−1 manières,..., et le k-ième de n−k+1 manières. Par le principe du produit, on obtient 54 :\
+  P(n,k)=n×(n−1)×⋯×(n−k+1)\
+  \
+  En utilisant la notation factorielle (n!=n×(n−1)×⋯×1), cette formule se réécrit de manière compacte :\
+  \
+  P(n,k)=(n−k)!n!​</p>
+</li>
+<li>
+<p><strong>Exemple :</strong> Le nombre de podiums possibles (or, argent, bronze) dans une course de 8 athlètes est P(8,3)=8×7×6=336.</p>
+</li>
+<li>
+<p>Permutations :\
+  Une permutation est un arrangement de tous les éléments d\'un ensemble. C\'est un cas particulier d\'arrangement sans répétition où k=n. Le nombre de permutations d\'un ensemble de n éléments est 12 :\
+  P(n,n)=n!</p>
+</li>
+<li>
+<p><strong>Exemple :</strong> Le nombre de manières d\'ordonner les lettres du mot \"MATH\" est 4!=24.</p>
+</li>
+</ul>
+<h3 id="33-combinaisons">3.3 Combinaisons<a class="headerlink" href="#33-combinaisons" title="Permanent link">&para;</a></h3>
+<p>Les combinaisons concernent les problèmes de dénombrement où <strong>l\'ordre des éléments n\'est pas important</strong>. Il s\'agit de choisir un sous-ensemble d\'éléments.</p>
+<ul>
+<li>
+<p>Combinaisons sans répétition :\
+  Il s\'agit du nombre de manières de choisir k éléments parmi n éléments distincts, sans remise et sans tenir compte de l\'ordre. On note ce nombre C(n,k) ou (kn​), et on le lit \"k parmi n\".55\
+  Pour dériver la formule, on peut partir d\'un raisonnement unificateur qui relie arrangements et combinaisons. Un arrangement de k éléments peut être formé en deux étapes :</p>
+</li>
+<li>
+<p>Choisir un sous-ensemble de k éléments (une combinaison). Il y a (kn​) manières de le faire.</p>
+</li>
+<li>
+<p>Ordonner ces k éléments. Il y a k! manières de le faire (une permutation).</p>
+</li>
+</ul>
+<blockquote>
+<p>Par le principe du produit, le nombre d\'arrangements est le produit du nombre de combinaisons par le nombre de permutations de ces dernières : P(n,k)=(kn​)×k!. En isolant le terme qui nous intéresse, on obtient la formule fondamentale des combinaisons  :(kn​)=k!P(n,k)​=k!(n−k)!n!​Cette approche révèle que la distinction entre arrangements et combinaisons est une question de \"division par les symétries\" : on compte d\'abord les objets ordonnés, puis on divise par le nombre de redondances créées par l\'ordre (k!) pour obtenir le nombre d\'objets non ordonnés.</p>
+</blockquote>
+<ul>
+<li><strong>Exemple :</strong> Le nombre de manières de choisir un comité de 3 personnes dans un groupe de 10 est (310​)=3!7!10!​=3×2×110×9×8​=120.</li>
+</ul>
+<hr />
+<div class="highlight"><pre><span></span><code>                    **Ordre important**                           **Ordre non important**
+</code></pre></div>
+<p><strong>Sans répétition</strong>   Arrangement (k-permutation) P(n,k)=(n−k)!n!​   Combinaison (kn​)=k!(n−k)!n!​</p>
+<p><strong>Avec répétition</strong>   k-uplet nk                                    Combinaison avec répétition (kn+k−1​)</p>
+<hr />
+<h3 id="34-le-binome-de-newton">3.4 Le Binôme de Newton<a class="headerlink" href="#34-le-binome-de-newton" title="Permanent link">&para;</a></h3>
+<p>La formule du binôme de Newton est une généralisation des identités remarquables comme (a+b)2=a2+2ab+b2. Elle fournit une expression pour (a+b)n en utilisant les coefficients binomiaux.</p>
+<h4 id="identite-et-triangle-de-pascal">Identité et Triangle de Pascal<a class="headerlink" href="#identite-et-triangle-de-pascal" title="Permanent link">&para;</a></h4>
+<p>Les coefficients binomiaux peuvent être calculés de manière récursive grâce à l\'<strong>identité de Pascal</strong>  :</p>
+<p>(kn+1​)=(k−1n​)+(kn​)</p>
+<p>Démonstration combinatoire :</p>
+<p>Considérons un ensemble E de n+1 éléments. On souhaite compter le nombre de sous-ensembles de E de taille k. On distingue un élément particulier, disons x0​∈E. Un sous-ensemble de E de taille k peut soit contenir x0​, soit ne pas le contenir.</p>
+<ul>
+<li>
+<p><strong>Cas 1 : Le sous-ensemble contient x0​.</strong> Il faut alors choisir les k−1 autres éléments parmi les n éléments restants de E∖{x0​}. Il y a (k−1n​) manières de le faire.</p>
+</li>
+<li>
+<p><strong>Cas 2 : Le sous-ensemble ne contient pas x0​.</strong> Il faut alors choisir les k éléments parmi les n éléments restants de E∖{x0​}. Il y a (kn​) manières de le faire.</p>
+</li>
+</ul>
+<p>Comme ces deux cas sont disjoints, par le principe de la somme, le nombre total de sous-ensembles est (k−1n​)+(kn​), ce qui prouve l\'identité.</p>
+<p>Cette relation est à la base de la construction du <strong>triangle de Pascal</strong>, où chaque nombre est la somme des deux nombres situés juste au-dessus de lui.</p>
+<h4 id="formule-du-binome">Formule du binôme<a class="headerlink" href="#formule-du-binome" title="Permanent link">&para;</a></h4>
+<p>Pour tous nombres a,b (réels ou complexes) et tout entier naturel n, on a :</p>
+<p>(a+b)n=k=0∑n​(kn​)akbn−k</p>
+<p>Le coefficient (kn​) correspond au nombre de fois où le terme akbn−k apparaît lorsqu\'on développe le produit (a+b)(a+b)...(a+b) (n fois). Choisir le terme akbn−k revient à choisir k parenthèses parmi les n desquelles on prendra le terme a (et donc on prendra b dans les n−k autres).61</p>
+<p>Démonstration par récurrence :</p>
+<p>Soit P(n) la proposition (a+b)n=∑k=0n​(kn​)akbn−k.</p>
+<ul>
+<li>
+<p><strong>Initialisation (n=0) :</strong> (a+b)0=1. La somme se réduit à (00​)a0b0=1. P(0) est vraie.</p>
+</li>
+<li>
+<p>Hérédité : Supposons P(n) vraie pour un certain n≥0. Montrons P(n+1).\
+  \begin{align*} (a+b)\^{n+1} &amp;= (a+b)(a+b)\^n \ &amp;= (a+b) \sum_{k=0}\^{n} \binom{n}{k} a\^k b\^{n-k} \quad \text{(par hypothèse de récurrence)} \ &amp;= a \sum_{k=0}\^{n} \binom{n}{k} a\^k b\^{n-k} + b \sum_{k=0}\^{n} \binom{n}{k} a\^k b\^{n-k} \ &amp;= \sum_{k=0}\^{n} \binom{n}{k} a\^{k+1} b\^{n-k} + \sum_{k=0}\^{n} \binom{n}{k} a\^k b\^{n+1-k} \end{align*}\
+  On effectue un changement d\'indice j=k+1 dans la première somme :\
+  $$ (a+b)\^{n+1} = \sum_{j=1}\^{n+1} \binom{n}{j-1} a\^j b\^{n-(j-1)} + \sum_{k=0}\^{n} \binom{n}{k} a\^k b\^{n+1-k} $$\
+  En renommant j par k et en isolant les termes extrêmes (k=n+1 dans la première somme et k=0 dans la seconde), on obtient :\
+  $$ (a+b)\^{n+1} = \binom{n}{n}a\^{n+1}b\^0 + \sum_{k=1}\^{n} \binom{n}{k-1} a\^k b\^{n+1-k} + \binom{n}{0}a\^0b\^{n+1} + \sum_{k=1}\^{n} \binom{n}{k} a\^k b\^{n+1-k} $$\
+  En regroupant les sommes et en utilisant (nn​)=1=(n+1n+1​) et (0n​)=1=(0n+1​) :\
+  $$ (a+b)\^{n+1} = \binom{n+1}{n+1}a\^{n+1} + \binom{n+1}{0}b\^{n+1} + \sum_{k=1}\^{n} \left( \binom{n}{k-1} + \binom{n}{k} \right) a\^k b\^{n+1-k} $$\
+  Grâce à l\'identité de Pascal, le terme entre crochets devient (kn+1​). On peut alors réintégrer les termes extrêmes dans la somme :\
+  \
+  (a+b)n+1=k=0∑n+1​(kn+1​)akbn+1−k\
+  \
+  La proposition P(n+1) est donc vraie. Par le principe de récurrence, la formule est vraie pour tout n∈N.58</p>
+</li>
+</ul>
+<h2 id="section-4-arithmetique-et-algorithmique-les-nombres-au-cur-du-calcul">Section 4 : Arithmétique et Algorithmique -- Les Nombres au Cœur du Calcul<a class="headerlink" href="#section-4-arithmetique-et-algorithmique-les-nombres-au-cur-du-calcul" title="Permanent link">&para;</a></h2>
+<p>L\'arithmétique, l\'étude des propriétés des nombres entiers, est l\'une des plus anciennes branches des mathématiques. En informatique, elle transcende son statut de discipline théorique pour devenir un outil algorithmique fondamental. Les propriétés de la divisibilité, des nombres premiers et des congruences ne sont pas seulement des curiosités abstraites ; elles sont au cœur d\'algorithmes efficaces pour des tâches allant de la génération de nombres pseudo-aléatoires à la sécurisation des communications mondiales.</p>
+<h3 id="41-divisibilite-et-nombres-premiers">4.1 Divisibilité et Nombres Premiers<a class="headerlink" href="#41-divisibilite-et-nombres-premiers" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Division Euclidienne :</strong> Pour deux entiers a (dividende) et b=0 (diviseur), il existe un unique couple d\'entiers (q,r) (quotient et reste) tel que a=bq+r et 0≤r\&lt;∣b∣. Cet algorithme simple est la base de nombreuses opérations en arithmétique.</p>
+</li>
+<li>
+<p><strong>Plus Grand Commun Diviseur (PGCD) :</strong> Le PGCD de deux entiers non nuls a et b, noté pgcd(a,b), est le plus grand entier positif qui divise à la fois a et b. Deux nombres sont dits <strong>premiers entre eux</strong> si leur PGCD est 1.</p>
+</li>
+<li>
+<p><strong>Nombres Premiers :</strong> Un entier p&gt;1 est dit <strong>premier</strong> s\'il n\'admet que deux diviseurs positifs : 1 et lui-même. Les nombres premiers sont les \"atomes\" de l\'arithmétique.</p>
+</li>
+<li>
+<p><strong>Théorème Fondamental de l\'Arithmétique :</strong> Tout entier n&gt;1 peut être écrit de manière <strong>unique</strong> (à l\'ordre des facteurs près) comme un produit de nombres premiers.\
+  n=p1a1​​p2a2​​...pkak​​\
+  \
+  Démonstration (par induction forte) :</p>
+</li>
+<li>
+<p><strong>Cas de base :</strong> n=2 est premier, sa décomposition est unique.</p>
+</li>
+<li>
+<p><strong>Hypothèse d\'induction :</strong> Supposons que tout entier m tel que 2≤m\&lt;n admette une décomposition unique en facteurs premiers.</p>
+</li>
+<li>
+<p><strong>Étape d\'induction :</strong> Considérons l\'entier n.</p>
+<ul>
+<li>
+<p><strong>Existence :</strong> Si n est premier, il est sa propre décomposition. S\'il est composé, n=ab avec 1\&lt;a,b\&lt;n. Par hypothèse d\'induction, a et b ont des décompositions en facteurs premiers. Le produit de ces décompositions donne une décomposition pour n.</p>
+</li>
+<li>
+<p><strong>Unicité :</strong> Supposons que n ait deux décompositions : n=p1​...pr​=q1​...qs​. Le nombre premier p1​ divise le produit q1​...qs​. Par le lemme d\'Euclide (si un premier divise un produit, il divise l\'un des facteurs), p1​ doit diviser l\'un des qj​. Comme les qj​ sont premiers, p1​ doit être égal à ce qj​. En réordonnant les facteurs, on peut supposer p1​=q1​. On peut alors simplifier par p1​ pour obtenir p2​...pr​=q2​...qs​. Ce nombre est strictement inférieur à n. Par hypothèse d\'induction, sa décomposition est unique. Donc, les listes (p2​,...,pr​) et (q2​,...,qs​) sont les mêmes à permutation près. Il en va de même pour les décompositions initiales de n.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="42-arithmetique-modulaire">4.2 Arithmétique Modulaire<a class="headerlink" href="#42-arithmetique-modulaire" title="Permanent link">&para;</a></h3>
+<p>L\'arithmétique modulaire est un système d\'arithmétique pour les entiers où les nombres \"s\'enroulent\" après avoir atteint une certaine valeur, le <strong>module</strong>.</p>
+<ul>
+<li>
+<p><strong>Relation de Congruence :</strong> Deux entiers a et b sont dits <strong>congrus modulo n</strong> si leur différence a−b est un multiple de n. On note a≡b(modn). Cela revient à dire que\
+  a et b ont le même reste dans la division euclidienne par n.\
+  Il s\'agit d\'une relation d\'équivalence : elle est réflexive (a≡a), symétrique (a≡b⟹b≡a) et transitive (a≡b et b≡c⟹a≡c).69 Les classes d\'équivalence sont les ensembles de nombres ayant le même reste, formant l\'ensemble quotient\
+  Z/nZ.</p>
+</li>
+<li>
+<p><strong>Opérations Modulaires :</strong> La congruence est compatible avec l\'addition et la multiplication. Si a≡b(modn) et c≡d(modn), alors :</p>
+</li>
+<li>
+<p>a+c≡b+d(modn)</p>
+</li>
+<li>
+<p>ac≡bd(modn)\
+    Ces propriétés permettent de définir une arithmétique cohérente sur l\'ensemble des restes {0,1,...,n−1}.70</p>
+</li>
+<li>
+<p><strong>Équations de Congruence Linéaire :</strong> Il s\'agit d\'équations de la forme ax≡b(modn).</p>
+</li>
+<li>
+<p><strong>Théorème :</strong> Une solution existe si et seulement si pgcd(a,n) divise b.</p>
+</li>
+<li>
+<p><strong>Cas particulier important :</strong> Si pgcd(a,n)=1, alors a admet un <strong>inverse modulaire</strong> unique modulo n, noté a−1. C\'est un entier tel que a⋅a−1≡1(modn). L\'existence de cet inverse transforme la résolution de l\'équation en une simple multiplication : x≡a−1b(modn).</p>
+</li>
+</ul>
+<h3 id="43-lalgorithme-deuclide-etendu">4.3 L\'Algorithme d\'Euclide Étendu<a class="headerlink" href="#43-lalgorithme-deuclide-etendu" title="Permanent link">&para;</a></h3>
+<p>La question cruciale pour la résolution des congruences linéaires et pour la cryptographie est de savoir comment calculer efficacement le PGCD et l\'inverse modulaire. La réponse est fournie par l\'algorithme d\'Euclide et sa version étendue. C\'est ici que la théorie des nombres passe d\'une collection de théorèmes d\'existence à une boîte à outils algorithmique puissante.</p>
+<ul>
+<li>
+<p><strong>Algorithme d\'Euclide :</strong> Pour calculer pgcd(a,b), on utilise la propriété pgcd(a,b)=pgcd(b,a(modb)). On applique cette réduction de manière itérative jusqu\'à obtenir un reste nul. Le dernier reste non nul est le PGCD. Cet algorithme est extrêmement efficace, son temps d\'exécution est logarithmique en la taille des entrées.</p>
+</li>
+<li>
+<p><strong>Identité de Bézout :</strong> Pour tous entiers a et b, il existe des entiers u et v (appelés coefficients de Bézout) tels que au+bv=pgcd(a,b). Ce théorème garantit, par exemple, l\'existence d\'un inverse modulaire pour\
+  a modulo n si pgcd(a,n)=1, car l\'identité devient au+nv=1, ce qui implique au≡1(modn).</p>
+</li>
+<li>
+<p><strong>Algorithme d\'Euclide Étendu :</strong> Il s\'agit d\'une modification de l\'algorithme d\'Euclide qui, en plus de calculer le PGCD, calcule également les coefficients de Bézout u et v. La méthode la plus courante consiste à maintenir à chaque étape de la division euclidienne une expression du reste comme une combinaison linéaire de\
+  a et b. En partant des égalités triviales\
+  a=1⋅a+0⋅b et b=0⋅a+1⋅b, on peut calculer les coefficients pour chaque reste successif.</p>
+</li>
+</ul>
+<p><strong>Exemple :</strong> Calculer l\'inverse de 8 modulo 35. On cherche u tel que 8u≡1(mod35). On applique l\'algorithme d\'Euclide étendu à 35 et 8.</p>
+<ol>
+<li>
+<p>35=4⋅8+3⟹3=35−4⋅8</p>
+</li>
+<li>
+<p>8=2⋅3+2⟹2=8−2⋅3=8−2(35−4⋅8)=9⋅8−2⋅35</p>
+</li>
+<li>
+<p>3=1⋅2+1⟹1=3−1⋅2=(35−4⋅8)−(9⋅8−2⋅35)=3⋅35−13⋅8\
+    L\'identité de Bézout est 1=3⋅35−13⋅8. En regardant cette équation modulo 35, on obtient −13⋅8≡1(mod35). L\'inverse est donc −13, qui est congruent à 22(mod35).71</p>
+</li>
+</ol>
+<h3 id="44-theoremes-de-fermat-et-deuler">4.4 Théorèmes de Fermat et d\'Euler<a class="headerlink" href="#44-theoremes-de-fermat-et-deuler" title="Permanent link">&para;</a></h3>
+<p>Ces théorèmes sont des résultats fondamentaux de l\'arithmétique modulaire concernant l\'exponentiation.</p>
+<ul>
+<li>
+<p>Petit Théorème de Fermat : Si p est un nombre premier, alors pour tout entier a non divisible par p, on a :\
+  \
+  ap−1≡1(modp)\
+  \
+  Une forme équivalente, valide pour tout entier a, est ap≡a(modp).78</p>
+</li>
+<li>
+<p><strong>Indicatrice d\'Euler :</strong> La fonction indicatrice d\'Euler ϕ(n) (ou totient) compte le nombre d\'entiers positifs inférieurs ou égaux à n qui sont premiers avec n.</p>
+</li>
+<li>
+<p>Si p est premier, ϕ(p)=p−1.</p>
+</li>
+<li>
+<p>Si p et q sont deux premiers distincts, ϕ(pq)=(p−1)(q−1).</p>
+</li>
+<li>
+<p>Théorème d\'Euler : Ce théorème généralise celui de Fermat à un module non premier. Si a et n sont des entiers premiers entre eux, alors :\
+  \
+  aϕ(n)≡1(modn)\
+  \
+  Démonstration :\
+  Soit Un​=(Z/nZ)∗ l\'ensemble des classes d\'équivalence modulo n qui sont inversibles. Cet ensemble forme un groupe multiplicatif d\'ordre ϕ(n). Soit aˉ la classe de a dans Un​. D\'après le théorème de Lagrange, l\'ordre d\'un élément d\'un groupe fini divise l\'ordre du groupe. Donc, l\'ordre de aˉ divise ϕ(n). Cela signifie que aˉϕ(n)=1ˉ, ce qui est équivalent à aϕ(n)≡1(modn).80</p>
+</li>
+</ul>
+<p>Ce théorème est la clé de voûte de l\'algorithme RSA, car il garantit que l\'opération de déchiffrement annule bien celle du chiffrement.</p>
+<h2 id="section-5-concepts-avances-et-applications-aux-systemes-complexes">Section 5 : Concepts Avancés et Applications aux Systèmes Complexes<a class="headerlink" href="#section-5-concepts-avances-et-applications-aux-systemes-complexes" title="Permanent link">&para;</a></h2>
+<p>Cette dernière section explore des concepts qui illustrent la puissance et la portée des mathématiques discrètes, en montrant comment les outils fondamentaux développés précédemment s\'assemblent pour analyser des questions profondes sur la nature du calcul, modéliser des processus dynamiques et construire des systèmes sécurisés. Les idées présentées ici, de la hiérarchie des infinis à l\'analyse probabiliste des algorithmes, forment un pont entre la théorie pure et les défis concrets du génie informatique.</p>
+<h3 id="51-cardinalite-et-calculabilite">5.1 Cardinalité et Calculabilité<a class="headerlink" href="#51-cardinalite-et-calculabilite" title="Permanent link">&para;</a></h3>
+<h4 id="cardinalite-des-ensembles">Cardinalité des ensembles<a class="headerlink" href="#cardinalite-des-ensembles" title="Permanent link">&para;</a></h4>
+<p>La notion de <strong>cardinalité</strong> généralise la notion de \"nombre d\'éléments\" aux ensembles infinis. Deux ensembles A et B ont la même cardinalité, noté ∣A∣=∣B∣, s\'il existe une bijection entre eux.</p>
+<ul>
+<li>
+<p><strong>Ensembles finis et dénombrables :</strong> Un ensemble est <strong>fini</strong> s\'il est en bijection avec {1,2,...,n} pour un certain n∈N. Un ensemble est <strong>dénombrable</strong> s\'il est en bijection avec l\'ensemble des entiers naturels N. Les ensembles\
+  Z (entiers relatifs) et Q (nombres rationnels) sont dénombrables. Le cardinal de\
+  N est noté ℵ0​ (aleph-zéro).</p>
+</li>
+<li>
+<p><strong>Ensembles indénombrables :</strong> Un ensemble infini qui n\'est pas dénombrable est dit <strong>indénombrable</strong>.</p>
+</li>
+</ul>
+<h4 id="largument-de-la-diagonale-de-cantor">L\'argument de la diagonale de Cantor<a class="headerlink" href="#largument-de-la-diagonale-de-cantor" title="Permanent link">&para;</a></h4>
+<p>En 1891, Georg Cantor a démontré de manière révolutionnaire qu\'il existe différentes \"tailles\" d\'infini. Plus précisément, il a prouvé que l\'ensemble des nombres réels R n\'est pas dénombrable. Sa preuve, connue sous le nom d\'<strong>argument de la diagonale</strong>, est une magnifique illustration du raisonnement par l\'absurde.</p>
+<p>Théorème : L\'intervalle $</p>
+<p>2. Construction : Écrivons chaque nombre de cette liste avec son développement décimal (propre, c\'est-à-dire sans suite infinie de 9) :</p>
+<p>\begin{align*} r_1 &amp;= 0,d_{11}d_{12}d_{13}\dots \ r_2 &amp;= 0,d_{21}d_{22}d_{23}\dots \ r_3 &amp;= 0,d_{31}d_{32}d_{33}\dots \ &amp; \vdots \end{align*}</p>
+<p>Nous allons construire un nouveau nombre x∈[ qui ne peut pas figurer dans cette liste. Pour chaque i≥1, définissons la i-ème décimale de x, notée xi​, de la manière suivante :</p>
+<p>xi​={12​si dii​=1si dii​=1​</p>
+<p>Ce nombre x=0,x1​x2​x3​... est bien un réel dans [.</p>
+<p>3. Contradiction : Par construction, le nombre x diffère de chaque nombre rn​ de la liste au moins à la n-ième décimale (xn​=dnn​). Par conséquent, x ne peut être égal à aucun rn​ de la liste.</p>
+<p>4. Conclusion : Nous avons construit un nombre x∈[ qui n\'est pas dans la liste supposée exhaustive de tous les nombres de cet intervalle. C\'est une contradiction. L\'hypothèse initiale est donc fausse : [ n\'est pas dénombrable.86</p>
+<p>Un argument similaire montre que pour tout ensemble S, son ensemble des parties P(S) a une cardinalité strictement supérieure à celle de S (∣S∣\&lt;∣P(S)∣). Cela implique une hiérarchie infinie de cardinalités :</p>
+<p>∣N∣\&lt;∣P(N)∣\&lt;∣P(P(N))∣\&lt;....</p>
+<h4 id="implications-pour-la-calculabilite">Implications pour la calculabilité<a class="headerlink" href="#implications-pour-la-calculabilite" title="Permanent link">&para;</a></h4>
+<p>Cette distinction entre le dénombrable et l\'indénombrable a une conséquence profonde en informatique.</p>
+<ul>
+<li>
+<p>L\'ensemble de tous les programmes informatiques possibles (dans un langage donné) est <strong>dénombrable</strong>. On peut en effet lister tous les programmes par taille croissante, puis par ordre lexicographique.</p>
+</li>
+<li>
+<p>Cependant, l\'ensemble de toutes les fonctions possibles de N dans N est <strong>indénombrable</strong>, car il est en bijection avec P(N×N), qui a la même cardinalité que R.</p>
+</li>
+</ul>
+<p>Puisqu\'il y a \"plus\" de fonctions que de programmes, il doit nécessairement exister des fonctions qui ne peuvent être calculées par aucun programme. Ces fonctions sont dites <strong>non-calculables</strong>.</p>
+<p>L\'exemple le plus célèbre de problème non-calculable (ou indécidable) est le <strong>problème de l\'arrêt</strong> : il n\'existe aucun programme universel capable de déterminer, pour n\'importe quel autre programme et n\'importe quelle entrée, si ce programme finira par s\'arrêter ou s\'il bouclera indéfiniment. La preuve de ce résultat utilise également un argument diagonal.</p>
+<h3 id="52-suites-recurrentes-et-fonctions-generatrices">5.2 Suites Récurrentes et Fonctions Génératrices<a class="headerlink" href="#52-suites-recurrentes-et-fonctions-generatrices" title="Permanent link">&para;</a></h3>
+<p>Les relations de récurrence sont un outil puissant pour modéliser des problèmes dont la solution pour une taille n dépend des solutions pour des tailles plus petites. Elles sont omniprésentes dans l\'analyse d\'algorithmes récursifs.</p>
+<ul>
+<li>
+<p>Relations de Récurrence Linéaires Homogènes à Coefficients Constants :\
+  Une suite (un​) est définie par une telle relation si chaque terme est une combinaison linéaire des termes précédents :\
+  \
+  un​=c1​un−1​+c2​un−2​+⋯+ck​un−k​\
+  \
+  La méthode de résolution consiste à former l\'équation caractéristique associée :\
+  \
+  rk−c1​rk−1−c2​rk−2−⋯−ck​=0\
+  \
+  La solution générale de la récurrence est une combinaison linéaire de termes basés sur les racines de cette équation.94</p>
+</li>
+<li>
+<p><strong>Racines réelles distinctes r1​,...,rk​ :</strong> La solution est de la forme un​=λ1​r1n​+⋯+λk​rkn​.</p>
+</li>
+<li>
+<p><strong>Racine réelle r1​ de multiplicité m :</strong> La solution contient les termes (λ0​+λ1​n+⋯+λm−1​nm−1)r1n​.</p>
+</li>
+<li>
+<p><strong>Racines complexes conjuguées ρe±iθ :</strong> La solution contient des termes de la forme ρn(λ1​cos(nθ)+λ2​sin(nθ)).\
+    \
+    Les constantes λi​ sont déterminées par les conditions initiales de la suite.</p>
+</li>
+<li>
+<p>Fonctions Génératrices :\
+  Une fonction génératrice est un moyen d\'encoder une suite infinie de nombres (an​)n≥0​ comme les coefficients d\'une série formelle.96 La fonction génératrice ordinaire est définie par :\
+  G(x)=n=0∑∞​an​xn\
+  \
+  Cette approche transforme un problème discret (une relation de récurrence sur une suite) en un problème d\'analyse ou d\'algèbre (une équation sur une fonction). Pour résoudre une récurrence, on suit généralement ces étapes 97 :</p>
+</li>
+<li>
+<p>Traduire la relation de récurrence en une équation algébrique pour sa fonction génératrice G(x).</p>
+</li>
+<li>
+<p>Résoudre cette équation pour obtenir une forme close pour G(x).</p>
+</li>
+<li>
+<p>Développer G(x) en série de Taylor pour extraire le coefficient de xn, qui est le terme an​ recherché.\
+      Cette méthode est particulièrement puissante pour des récurrences plus complexes, y compris non homogènes.98</p>
+</li>
+</ul>
+<h3 id="53-introduction-aux-probabilites-discretes">5.3 Introduction aux Probabilités Discrètes<a class="headerlink" href="#53-introduction-aux-probabilites-discretes" title="Permanent link">&para;</a></h3>
+<p>La théorie des probabilités fournit un cadre formel pour raisonner sur l\'incertitude. Dans le contexte discret, elle est essentielle pour l\'analyse en cas moyen des algorithmes, la modélisation de systèmes stochastiques et les fondements de l\'apprentissage automatique.</p>
+<ul>
+<li>
+<p><strong>Espace Probabilisé Discret :</strong> Un espace probabilisé est un triplet (Ω,F,P) où :</p>
+</li>
+<li>
+<p>Ω est l\'<strong>univers</strong>, l\'ensemble (fini ou dénombrable) de tous les résultats possibles d\'une expérience.</p>
+</li>
+<li>
+<p>F est la <strong>tribu</strong> des événements, qui dans le cas discret est généralement l\'ensemble des parties P(Ω).</p>
+</li>
+<li>
+<p>P est une <strong>mesure de probabilité</strong>, une fonction $P: \mathcal{F} \to $ qui assigne une probabilité à chaque événement, telle que P(Ω)=1 et pour toute collection d\'événements disjoints (Ai​), P(∪Ai​)=∑P(Ai​).</p>
+</li>
+<li>
+<p><strong>Probabilité Conditionnelle et Indépendance :</strong></p>
+</li>
+<li>
+<p>La probabilité conditionnelle de l\'événement A sachant que l\'événement B s\'est produit (avec P(B)&gt;0) est définie par :\
+    \
+    P(A∣B)=P(B)P(A∩B)​</p>
+</li>
+<li>
+<p>Deux événements A et B sont <strong>indépendants</strong> si la réalisation de l\'un n\'influence pas la probabilité de l\'autre, c\'est-à-dire P(A∩B)=P(A)P(B). Si P(B)&gt;0, cela équivaut à P(A∣B)=P(A).</p>
+</li>
+<li>
+<p>Théorème de Bayes : Ce théorème fondamental permet d\' \"inverser\" les probabilités conditionnelles et de mettre à jour nos croyances à la lumière de nouvelles données.\
+  \
+  P(A∣B)=P(B)P(B∣A)P(A)​\
+  \
+  En utilisant la formule des probabilités totales pour décomposer P(B), on obtient la forme étendue :\
+  \
+  P(A∣B)=P(B∣A)P(A)+P(B∣¬A)P(¬A)P(B∣A)P(A)​\
+  \
+  Ce théorème est la pierre angulaire de l\'inférence bayésienne.106</p>
+</li>
+<li>
+<p>Variables Aléatoires Discrètes :\
+  Une variable aléatoire X est une fonction de Ω vers R. Elle est discrète si son image X(Ω) est un ensemble fini ou dénombrable.109</p>
+</li>
+<li>
+<p>Espérance : L\'espérance E[X] est la valeur moyenne de X, pondérée par les probabilités.\
+    \
+    E[X]=x∈X(Ω)∑​x⋅P(X=x)\
+    \
+    L\'espérance est linéaire : E=aE[X]+bE.110</p>
+</li>
+<li>
+<p>Variance : La variance V(X) mesure la dispersion de X autour de son espérance.\
+    \
+    V(X)=E[(X−E[X])2]\
+    \
+    La formule de Koenig-Huygens fournit un moyen de calcul pratique : V(X)=E[X2]−(E[X])2.110</p>
+</li>
+<li>
+<p><strong>Analyse en Cas Moyen :</strong> L\'espérance est l\'outil central pour l\'analyse en cas moyen d\'un algorithme. Si C(i) est le coût de l\'algorithme sur une entrée i et que les entrées sont tirées selon une certaine distribution de probabilité, alors le coût moyen est l\'espérance de la variable aléatoire C.</p>
+</li>
+</ul>
+<h3 id="54-etude-de-cas-cryptographie-a-cle-publique-rsa">5.4 Étude de Cas -- Cryptographie à Clé Publique (RSA)<a class="headerlink" href="#54-etude-de-cas-cryptographie-a-cle-publique-rsa" title="Permanent link">&para;</a></h3>
+<p>L\'algorithme de chiffrement RSA est une application spectaculaire qui synthétise de nombreux concepts abordés dans ce chapitre. Il illustre comment des propriétés profondes de la théorie des nombres peuvent être exploitées pour construire un système informatique complexe dont la sécurité est cruciale dans notre monde numérique.</p>
+<ul>
+<li>
+<p><strong>Contexte :</strong> La cryptographie asymétrique (ou à clé publique) utilise une paire de clés : une <strong>clé publique</strong> pour chiffrer les messages, et une <strong>clé privée</strong> pour les déchiffrer. La clé publique peut être partagée librement, tandis que la clé privée doit rester secrète. La sécurité repose sur le fait qu\'il est \"calculatoirement infaisable\" de déduire la clé privée à partir de la clé publique.</p>
+</li>
+<li>
+<p><strong>Génération des Clés :</strong></p>
+</li>
+<li>
+<p>Choisir deux très grands nombres premiers distincts, p et q.</p>
+</li>
+<li>
+<p>Calculer le module n=pq.</p>
+</li>
+<li>
+<p>Calculer l\'indicatrice d\'Euler ϕ(n)=(p−1)(q−1).</p>
+</li>
+<li>
+<p>Choisir un exposant de chiffrement e tel que 1\&lt;e\&lt;ϕ(n) et pgcd(e,ϕ(n))=1.</p>
+</li>
+<li>
+<p>Calculer l\'exposant de déchiffrement d comme l\'inverse modulaire de e modulo ϕ(n), c\'est-à-dire d≡e−1(modϕ(n)). Ce calcul est réalisé efficacement grâce à l\'<strong>algorithme d\'Euclide étendu</strong>.</p>
+</li>
+<li>
+<p><strong>Clé publique :</strong> (n,e).</p>
+</li>
+<li>
+<p><strong>Clé privée :</strong> (n,d).</p>
+</li>
+<li>
+<p>Chiffrement et Déchiffrement :\
+  Un message, représenté par un entier M\&lt;n, est chiffré en calculant :\
+  \
+  C≡Me(modn)\
+  \
+  Le message chiffré C est déchiffré en calculant :\
+  \
+  M′≡Cd(modn)</p>
+</li>
+<li>
+<p>Justification de la Correction : Nous devons montrer que M′=M.\
+  \
+  M′≡Cd≡(Me)d≡Med(modn)\
+  \
+  Par construction de d, on a ed≡1(modϕ(n)), donc il existe un entier k tel que ed=1+kϕ(n).\
+  \
+  Med=M1+kϕ(n)=M⋅(Mϕ(n))k\
+  \
+  D\'après le théorème d\'Euler, si pgcd(M,n)=1, alors Mϕ(n)≡1(modn).\
+  Donc, Med≡M⋅1k≡M(modn).\
+  Le cas où pgcd(M,n)=1 se traite séparément mais mène à la même conclusion.116 Le déchiffrement fonctionne donc correctement.</p>
+</li>
+<li>
+<p><strong>Sécurité :</strong> La sécurité de RSA repose sur l\'hypothèse que la <strong>factorisation</strong> de grands nombres est un problème calculatoirement difficile. Un attaquant qui connaît la clé publique (n,e) pourrait trouver la clé privée d s\'il pouvait calculer ϕ(n)=(p−1)(q−1). Pour cela, il lui faudrait connaître p et q, c\'est-à-dire factoriser n. À ce jour, aucun algorithme classique efficace n\'est connu pour factoriser de très grands nombres.</p>
+</li>
+</ul>
+<p>RSA est ainsi un exemple paradigmatique de la manière dont les structures discrètes (l\'arithmétique modulaire sur Z/nZ), la théorie des nombres (théorème d\'Euler, nombres premiers) et l\'algorithmique (algorithme d\'Euclide étendu, exponentiation modulaire) s\'unissent pour créer un système complexe dont les propriétés (correction, sécurité) peuvent être analysées et prouvées formellement.</p>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>Ce chapitre a parcouru les paysages fondamentaux des mathématiques discrètes, depuis les notions élémentaires d\'ensembles jusqu\'aux applications sophistiquées en cryptographie. Nous avons établi que les structures discrètes ne sont pas une simple collection de sujets disparates, mais un système conceptuel cohérent et profondément interconnecté, formant le socle théorique sur lequel repose l\'informatique moderne.</p>
+<p>La théorie des ensembles nous a fourni un langage universel pour décrire les collections d\'objets, dont les opérations se sont révélées être le reflet direct des opérateurs de la logique booléenne. En structurant ces ensembles avec des relations, nous avons vu émerger des concepts puissants comme l\'équivalence, qui permet de classifier, et l\'ordre, qui permet de hiérarchiser. L\'analyse combinatoire, fondée sur les principes simples de la somme et du produit, nous a donné les moyens de dénombrer des configurations complexes, une compétence essentielle pour évaluer l\'efficacité des algorithmes.</p>
+<p>L\'exploration de l\'arithmétique a démontré que les propriétés des entiers, loin d\'être purement abstraites, sont au cœur d\'algorithmes concrets et efficaces, comme l\'algorithme d\'Euclide étendu, qui transforme des théorèmes d\'existence en outils de calcul pratiques. Enfin, l\'introduction à la cardinalité, à la calculabilité, aux récurrences et aux probabilités discrètes a ouvert la voie à l\'analyse de systèmes complexes, où il ne s\'agit plus seulement de construire des algorithmes, mais de prouver leur correction, d\'analyser leur performance moyenne et de garantir leur sécurité face à des adversaires. L\'étude de cas de l\'algorithme RSA a cristallisé cette synergie, montrant comment un système de sécurité mondial repose sur l\'interaction subtile entre ces différentes briques fondamentales.</p>
+<p>Les concepts développés dans ce chapitre sont des prérequis essentiels pour la suite de cet ouvrage. La théorie des graphes, qui sera abordée prochainement, peut être vue comme l\'étude de relations binaires sur des ensembles finis. La logique formelle et la théorie de la calculabilité approfondiront les liens entre les ensembles, la logique et les limites intrinsèques du calcul. La théorie de l\'information et l\'apprentissage automatique s\'appuieront massivement sur les fondements des probabilités discrètes ici esquissés. Ainsi, les structures discrètes et la combinatoire ne sont pas seulement un chapitre des mathématiques pour l\'informatique ; elles en sont le système d\'exploitation.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/agbruneau/CorpusInformatique" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
