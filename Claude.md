@@ -1,65 +1,58 @@
-# CLAUDE.md
+# CLAUDE.md — CorpusInformatique
 
-Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
+Corpus encyclopédique francophone couvrant les fondements de l'informatique, l'interopérabilité d'entreprise et l'entreprise agentique. Publié via MkDocs Material sur GitHub Pages.
 
-**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
+## Projet
 
-## 1. Think Before Coding
+- **URL** : https://agbruneau.github.io/CorpusInformatique/
+- **Auteur** : André-Guy Bruneau
+- **Langue** : Français exclusivement
+- **Licence** : Tous droits réservés
+- **Contenu** : ~176 fichiers Markdown répartis en 3 sections majeures
 
-**Don't assume. Don't hide confusion. Surface tradeoffs.**
+## Structure
 
-Before implementing:
-- State your assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them - don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop. Name what's confusing. Ask.
-
-## 2. Simplicity First
-
-**Minimum code that solves the problem. Nothing speculative.**
-
-- No features beyond what was asked.
-- No abstractions for single-use code.
-- No "flexibility" or "configurability" that wasn't requested.
-- No error handling for impossible scenarios.
-- If you write 200 lines and it could be 50, rewrite it.
-
-Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
-
-## 3. Surgical Changes
-
-**Touch only what you must. Clean up only your own mess.**
-
-When editing existing code:
-- Don't "improve" adjacent code, comments, or formatting.
-- Don't refactor things that aren't broken.
-- Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it - don't delete it.
-
-When your changes create orphans:
-- Remove imports/variables/functions that YOUR changes made unused.
-- Don't remove pre-existing dead code unless asked.
-
-The test: Every changed line should trace directly to the user's request.
-
-## 4. Goal-Driven Execution
-
-**Define success criteria. Loop until verified.**
-
-Transform tasks into verifiable goals:
-- "Add validation" → "Write tests for invalid inputs, then make them pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
-- "Refactor X" → "Ensure tests pass before and after"
-
-For multi-step tasks, state a brief plan:
 ```
-1. [Step] → verify: [check]
-2. [Step] → verify: [check]
-3. [Step] → verify: [check]
+I - Science et Génie Informatique/    # 80 chapitres (9 volumes) — curriculum CS complet
+II - Interopérabilité/                # 12 chapitres — intégration d'entreprise
+III - Entreprise Agentique/           # 84 fichiers (5 volumes) — systèmes agents distribués
+css/                                  # extra.css (thème personnalisé)
+docs/                                 # Fichiers préparés pour MkDocs (générés)
+site/                                 # Site statique construit
 ```
 
-Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
+## Stack technique
 
----
+- **MkDocs 1.6+** avec Material Theme v9.5
+- **Python 3.12** (CI/CD GitHub Actions)
+- **MathJax 3** pour les notations LaTeX
+- **Mermaid** pour les diagrammes d'architecture (23 diagrammes)
+- **GitHub Actions** → `mkdocs gh-deploy` vers GitHub Pages
 
-**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+## Conventions de contenu
+
+- **Nommage** : `Chapitre_[Section].[N]_[Sujet].md` (ex: `Chapitre_I.1_Fondements_Logiques_Raisonnement.md`)
+- **Structure des chapitres** : Titre numéroté → Séparateurs `---` → Sous-sections imbriquées (##, ###, ####)
+- **Références croisées** : 196 liens inter-chapitres reliant 43 chapitres
+- **Blocs de code** : ~1069 blocs dans 11+ langages (Python, SQL, Java, YAML, JSON, Bash, Go, etc.)
+- **Admonitions** : Blockquotes (`>`) pour définitions et notes stratégiques
+- **Tableaux de synthèse** : Mappent concepts théoriques → applications modernes
+
+## Build et déploiement
+
+```bash
+./build-docs.sh         # Sert localement (http://127.0.0.1:8000)
+./build-docs.sh build   # Génère le site statique
+```
+
+Le script nettoie `docs/`, copie les 3 sections + CSS, puis génère le site.
+
+## Directives pour Claude
+
+1. **Langue** : Toujours rédiger en français. Terminologie technique anglaise acceptée quand consacrée.
+2. **Style académique** : Prose structurée, ton encyclopédique, rigueur des sources.
+3. **Cohérence** : Respecter la numérotation existante (I.1–I.80, II.1–II.12, III par volumes).
+4. **Diagrammes** : Utiliser Mermaid (supporté nativement par MkDocs Material et GitHub).
+5. **Pas de modification structurelle** : Ne pas renommer les fichiers, changer la hiérarchie, ou modifier `mkdocs.yml` sans demande explicite.
+6. **Modifications chirurgicales** : Toucher uniquement ce qui est demandé. Ne pas « améliorer » le contenu adjacent.
+7. **Vérification** : Après toute modification de contenu, valider que les références croisées restent cohérentes.
